@@ -9,11 +9,12 @@
 #define PHANTOMGAME_H_
 
 #include "GameState.h"
+#include <core/Composite.h>
 #include <vector>
 
 namespace phantom {
 
-class PhantomGame {
+class PhantomGame: public Composite {
 public:
 	PhantomGame( const char *configfile );
 	virtual ~PhantomGame();
@@ -22,6 +23,24 @@ public:
 	void popGameState();
 
 	int main( int argc, char *argv[] );
+
+	void update( float elapsed );
+	void render( void *context );
+
+	void exit(int returncode);
+
+    float getHeight() const
+    {
+        return height;
+    }
+
+    float getWidth() const
+    {
+        return width;
+    }
+
+protected:
+    virtual void onExit(int returncode);
 
 private:
 

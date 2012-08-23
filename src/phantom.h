@@ -7,8 +7,13 @@
 #ifndef PHANTOM_H_
 #define PHANTOM_H_
 
-#include "core/Composite.h"
-#include "core/GameState.h"
-#include "core/PhantomGame.h"
+#include <Eigen/Geometry>
+
+#include <core/Composite.h>
+#include <core/Entity.h>
+#include <core/Layer.h>
+#include <core/PhantomGame.h>
+
+#include <graphics/Graphics.h>
 
 #endif /* PHANTOM_H_ */

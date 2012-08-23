@@ -19,8 +19,7 @@
 
 namespace phantom {
 
-PhantomGame::PhantomGame(const char *configfile) {
-	this->fps = 60;
+PhantomGame::PhantomGame(const char *configfile) : width(640), height(480), fps(60){
 }
 
 PhantomGame::~PhantomGame() {
@@ -41,41 +40,59 @@ int PhantomGame::main(int argc, char *argv[] )
 	while(1)
 	{
 		double now = this->time();
-		double diff = now-last;
-		std::cout << diff << std::endl;
-		std::vector<GameState*>::reverse_iterator iter;
-		iter = this->states.rend();
-		while( iter != this->states.rbegin() )
-		{
-			(*iter)->update(diff);
-			if( iter == this->states.rbegin() || !(*iter)->propegateUpdate )
-				break;
-			--iter;
-		}
-		iter = this->states.rend();
-		while( iter != this->states.rbegin() && (*iter)->transparent)
-			--iter;
-		while( iter != this->states.rend() )
-		{
-			(*iter)->render(NULL);
-			++iter;
-		}
-#ifndef WIN32
-		usleep( 9000 );
-#else
-		Sleep( 9 );
-#endif
-		last = now;
+		double elapsed = now-last;
+		std::cout << elapsed << std::endl;
 
-		diff = this->time()-last;
-		if( diff < (1.0/this->fps))
+		this->update(elapsed);
+		this->render(NULL);
+
+		last = now;
+		elapsed = this->time()-last;
+		if( elapsed < (1.0/this->fps))
 #ifndef WIN32
-			usleep( ((1.0/this->fps) - diff) * 1000000 );
+			usleep( ((1.0/this->fps) - elapsed) * 1000000 );
 #else
-			Sleep( ((1.0/this->fps) - diff) * 1000.0f );
+			Sleep( ((1.0/this->fps) - elapsed) * 1000.0f );
 #endif
 	}
 	return 0;
+}
+
+void PhantomGame::update( float elapsed )
+{
+    Composite::update( elapsed );
+    std::vector<GameState*>::reverse_iterator iter;
+    iter = this->states.rend();
+    while( iter != this->states.rbegin() )
+    {
+        (*iter)->update(elapsed);
+        if( iter == this->states.rbegin() || !(*iter)->propegateUpdate )
+            break;
+        --iter;
+    }
+}
+
+void PhantomGame::render( void *context )
+{
+    std::vector<GameState*>::reverse_iterator iter;
+    iter = this->states.rend();
+    while( iter != this->states.rbegin() && (*iter)->transparent)
+        --iter;
+    while( iter != this->states.rend() )
+    {
+        (*iter)->render(NULL);
+        ++iter;
+    }
+}
+
+void PhantomGame::exit( int returncode )
+{
+    this->onExit( returncode );
+    exit( returncode );
+}
+
+void PhantomGame::onExit( int returncode )
+{
 }
 
 double PhantomGame::time()

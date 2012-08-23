@@ -43,14 +43,52 @@ public:
 	virtual bool canCollideWith( Composite *other );
 	virtual void afterCollision( Composite *other );
 
+    template <class T>
+    T* getComponentByType( int nth );
+
+    template <class T>
+    T* findAnsestor();
+
     friend std::ostream& operator<<(std::ostream &s, const Composite *c) {
         return s << "Composite(" << c->components.size() << ")";
     }
 private:
-	Composite* parent;
+	Composite *parent;
 	std::vector<Composite*> components;
 
 };
+
+template <class T>
+T* Composite::getComponentByType( int nth )
+{
+    std::vector<Composite*>::iterator iter;
+    for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+    {
+        T* c = dynamic_cast<T*>( *iter );
+        if( c != NULL )
+        {
+            if( nth == 0 )
+                return c;
+            else
+                --nth;
+        }
+    }
+    return NULL;
+}
+
+template <class T>
+T* Composite::findAnsestor()
+{
+    Composite *c = this->parent;
+    while( c != NULL )
+    {
+        T* tc = dynamic_cast<T*>( c );
+        if( tc != NULL )
+            return tc;
+        c = c->parent;
+    }
+    return NULL;
+}
 
 }
 
