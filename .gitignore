@@ -14,3 +14,4 @@ Release/
 *.lai
 *.la
 *.a
+/nbproject/private/
