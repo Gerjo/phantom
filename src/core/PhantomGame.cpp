@@ -10,6 +10,7 @@
 #include <iostream>
 #include <ctime>
 #include <sys/time.h>
+#include <unistd.h>
 
 namespace phantom {
 
