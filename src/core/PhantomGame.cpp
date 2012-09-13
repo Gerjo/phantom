@@ -18,7 +18,7 @@
 
 namespace phantom {
 
-PhantomGame::PhantomGame(const char *configfile) {
+PhantomGame::PhantomGame(const char *configfile) : height(0), width(0) {
 	this->fps = 60;
 }
 
@@ -88,12 +88,13 @@ double PhantomGame::time()
 
 	return total;
 #else
-	SYSTEMTIME *lpSystemTime;
+	SYSTEMTIME *lpSystemTime = new SYSTEMTIME;
 	GetLocalTime(lpSystemTime);
 
 	double total = lpSystemTime->wSecond;
 	total += lpSystemTime->wMilliseconds / 1000.0;
 
+	delete lpSystemTime;
 	return total;
 #endif
 }

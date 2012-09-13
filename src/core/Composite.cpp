@@ -12,7 +12,7 @@
 namespace phantom {
 
 
-Composite::Composite() {
+Composite::Composite() : flags(0), destroyed(0), parent(0) {
     this->components = std::vector<Composite*>();
 }
 
