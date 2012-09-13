@@ -11,6 +11,7 @@
 #include <ctime>
 #ifndef WIN32
 #include <sys/time.h>
+#include <unistd.h>
 #else
 #include <Windows.h>
 #endif
