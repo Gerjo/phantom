@@ -9,7 +9,11 @@
 
 #include <iostream>
 #include <ctime>
+#ifndef WIN32
 #include <sys/time.h>
+#else
+#include <Windows.h>
+#endif
 
 namespace phantom {
 
@@ -54,19 +58,27 @@ int PhantomGame::main(int argc, char *argv[] )
 			(*iter)->render(NULL);
 			++iter;
 		}
-
+#ifndef WIN32
 		usleep( 9000 );
+#else
+		Sleep( 9 );
+#endif
 		last = now;
 
 		diff = this->time()-last;
 		if( diff < (1.0/this->fps))
+#ifndef WIN32
 			usleep( ((1.0/this->fps) - diff) * 1000000 );
+#else
+			Sleep( ((1.0/this->fps) - diff) * 1000.0f );
+#endif
 	}
 	return 0;
 }
 
 double PhantomGame::time()
 {
+#ifndef WIN32
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
 
@@ -74,6 +86,15 @@ double PhantomGame::time()
 	total += tv.tv_usec / 1000000.0;
 
 	return total;
+#else
+	SYSTEMTIME *lpSystemTime;
+	GetLocalTime(lpSystemTime);
+
+	double total = lpSystemTime->wSecond;
+	total += lpSystemTime->wMilliseconds / 1000.0;
+
+	return total;
+#endif
 }
 
 
