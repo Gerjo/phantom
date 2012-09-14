@@ -2,11 +2,11 @@
  * PhantomGame.cpp
  *
  *  Created on: Aug 22, 2012
- *      Author: koen
+ *      Author: koen & nico & sander & gerjo
  */
 
 #include "PhantomGame.h"
-
+#define SDL_main main
 #include <iostream>
 #include <ctime>
 #ifndef WIN32
@@ -14,11 +14,12 @@
 #include <unistd.h>
 #else
 #include <Windows.h>
+#include <SDL.h>
 #endif
 
 namespace phantom {
 
-PhantomGame::PhantomGame(const char *configfile) : height(0), width(0) {
+PhantomGame::PhantomGame(const char *configfile) {
 	this->fps = 60;
 }
 
@@ -85,18 +86,14 @@ double PhantomGame::time()
 
 	double total = tv.tv_sec;
 	total += tv.tv_usec / 1000000.0;
-
-	return total;
 #else
-	SYSTEMTIME *lpSystemTime = new SYSTEMTIME;
+	SYSTEMTIME *lpSystemTime = new SYSTEMTIME();
 	GetLocalTime(lpSystemTime);
 
 	double total = lpSystemTime->wSecond;
 	total += lpSystemTime->wMilliseconds / 1000.0;
-
-	delete lpSystemTime;
-	return total;
 #endif
+	return total;
 }
 
 
