@@ -74,7 +74,7 @@
             <pElem>/usr/local/include</pElem>
             <pElem>src</pElem>
           </incDir>
-          <commandLine>-lSDL</commandLine>
+          <commandLine>-lSDL -Werror</commandLine>
         </ccTool>
       </compileType>
     </conf>
@@ -94,7 +94,7 @@
             <pElem>/usr/local/include</pElem>
             <pElem>src</pElem>
           </incDir>
-          <commandLine>-lSDL</commandLine>
+          <commandLine>-lSDL -Werror</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
