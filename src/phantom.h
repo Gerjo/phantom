@@ -18,7 +18,7 @@
 #ifdef WIN32
 	#include <Windows.h>
 #else
-#include <sys/time>
+#include <sys/time.h>
 #include <unistd.h>
 #endif
 
