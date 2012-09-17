@@ -14,7 +14,7 @@ public:
 			#ifndef WIN32
 				usleep(timems*1000 );
 			#else
-				Sleep(timems);
+				Sleep(static_cast<DWORD>(timems));
 			#endif
 	}
 };

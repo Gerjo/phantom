@@ -24,5 +24,5 @@ int main( int argc, char *argv[] )
     g->fill();
     g->stroke();
 
-	return game->main(argc, argv);
+	return game->start(argc, argv);
 }

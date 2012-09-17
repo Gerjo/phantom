@@ -17,11 +17,14 @@ SDLGraphics::SDLGraphics()
 
 SDLGraphics::~SDLGraphics()
 {
+	SDL_Quit();
 }
 
 void SDLGraphics::setup( PhantomGame *game )
 {
-    this->game = game;
+	SDL_Init(SDL_INIT_EVERYTHING);
+    
+	this->game = game;
     this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(), 16, SDL_HWSURFACE);
     if ( screen == NULL ) {
         std::cerr << "Unable to set " << game->getWidth() << "x" << game->getHeight() << " video:" << SDL_GetError() << std::endl;

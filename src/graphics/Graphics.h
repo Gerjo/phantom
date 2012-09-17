@@ -18,7 +18,7 @@ namespace phantom {
 class Graphics: public Composite
 {
 public:
-
+	EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
     float lineWidth;
     Eigen::Vector4f strokeColor;
     Eigen::Vector4f fillColor;

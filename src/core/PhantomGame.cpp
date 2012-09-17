@@ -27,7 +27,7 @@ void PhantomGame::popGameState()
 	this->states.pop_back();
 }
 
-int PhantomGame::main(int argc, char *argv[] )
+int PhantomGame::start(int argc, char *argv[] )
 {
 	double last = this->time();
 	while(1)
@@ -36,13 +36,13 @@ int PhantomGame::main(int argc, char *argv[] )
 		double elapsed = now-last;
 		std::cout << elapsed << std::endl;
 
-		this->update(elapsed);
+		this->update(static_cast<float>(elapsed));
 		this->render(NULL);
 
 		last = now;
 		elapsed = this->time()-last;
-		if( elapsed < (1.0/this->fps))
-			PhantomUtil::phantom_sleep(((1.0/this->fps) - elapsed) * 1000.0f);
+		if( elapsed < (1.0f/this->fps))
+			phantom::Util::phantom_sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
 	}
 	return 0;
 }
@@ -77,7 +77,6 @@ void PhantomGame::render( void *context )
 void PhantomGame::exit( int returncode )
 {
     this->onExit( returncode );
-    exit( returncode );
 }
 
 void PhantomGame::onExit( int returncode )

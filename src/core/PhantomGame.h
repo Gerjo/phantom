@@ -22,19 +22,19 @@ public:
 	void pushGameState( GameState *state );
 	void popGameState();
 
-	int main( int argc, char *argv[] );
+	int start( int argc, char *argv[] );
 
 	void update( float elapsed );
 	void render( void *context );
 
 	void exit(int returncode);
 
-    float getHeight() const
+    unsigned int getHeight() const
     {
         return height;
     }
 
-    float getWidth() const
+    unsigned int getWidth() const
     {
         return width;
     }

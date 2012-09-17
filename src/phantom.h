@@ -15,6 +15,9 @@
 #include <core/PhantomGame.h>
 
 #include <graphics/Graphics.h>
+
+#include <utils/util.h>
+
 #ifdef WIN32
 	#include <Windows.h>
 #else
@@ -22,14 +25,4 @@
     #include <unistd.h>
 #endif
 
-class PhantomUtil {
-public:
-static void phantom_sleep(float timems){
-    #ifndef WIN32
-        usleep(timems * 1000);
-    #else
-        Sleep(timems);
-    #endif
-}
-};
 #endif /* PHANTOM_H_ */

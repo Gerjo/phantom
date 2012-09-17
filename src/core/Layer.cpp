@@ -34,9 +34,9 @@ void Layer::onAnsestorChanged()
         if( game != NULL )
         {
             if( this->width == 0 )
-                this->width = game->getWidth();
+                this->width = static_cast<float>(game->getWidth());
             if( this->height == 0 )
-                this->height = game->getHeight();
+                this->height = static_cast<float>(game->getHeight());
         }
     }
 }
