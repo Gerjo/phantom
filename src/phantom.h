@@ -18,16 +18,16 @@
 #ifdef WIN32
 	#include <Windows.h>
 #else
-#include <sys/time.h>
-#include <unistd.h>
+    #include <sys/time.h>
+    #include <unistd.h>
 #endif
 
-	void phantom_sleep(float timems){
-		#ifndef WIN32
-			usleep(timems*1000 );
-		#else
-			Sleep(timems);
-		#endif
-	}
+void phantom_sleep(float timems){
+    #ifndef WIN32
+        usleep(timems * 1000);
+    #else
+        Sleep(timems);
+    #endif
+}
 
 #endif /* PHANTOM_H_ */
