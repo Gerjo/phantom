@@ -11,7 +11,7 @@
 #include "GameState.h"
 #include <core/Composite.h>
 #include <vector>
-
+#define SDL_main main
 namespace phantom {
 
 class PhantomGame: public Composite {
