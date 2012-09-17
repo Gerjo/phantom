@@ -14,7 +14,6 @@
 #include <unistd.h>
 #else
 #include <Windows.h>
-#include <SDL.h>
 #endif
 
 namespace phantom {
