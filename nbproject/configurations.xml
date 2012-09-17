@@ -16,10 +16,30 @@
         <logicalFolder name="core" displayName="core" projectFiles="true">
           <itemPath>src/core/Composite.cpp</itemPath>
           <itemPath>src/core/Composite.h</itemPath>
+          <itemPath>src/core/Entity.cpp</itemPath>
+          <itemPath>src/core/Entity.h</itemPath>
           <itemPath>src/core/GameState.cpp</itemPath>
           <itemPath>src/core/GameState.h</itemPath>
+          <itemPath>src/core/Layer.cpp</itemPath>
+          <itemPath>src/core/Layer.h</itemPath>
           <itemPath>src/core/PhantomGame.cpp</itemPath>
           <itemPath>src/core/PhantomGame.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="graphics" displayName="graphics" projectFiles="true">
+          <itemPath>src/graphics/Graphics.cpp</itemPath>
+          <itemPath>src/graphics/Graphics.h</itemPath>
+          <itemPath>src/graphics/RenderLayer.cpp</itemPath>
+          <itemPath>src/graphics/RenderLayer.h</itemPath>
+          <itemPath>src/graphics/SDLGraphics.cpp</itemPath>
+          <itemPath>src/graphics/SDLGraphics.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="physics" displayName="physics" projectFiles="true">
+          <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
+            <itemPath>src/physics/shapes/Shape.cpp</itemPath>
+            <itemPath>src/physics/shapes/Shape.h</itemPath>
+          </logicalFolder>
+          <itemPath>src/physics/Mover.cpp</itemPath>
+          <itemPath>src/physics/Mover.h</itemPath>
         </logicalFolder>
         <itemPath>src/main.cpp</itemPath>
         <itemPath>src/phantom.h</itemPath>
@@ -48,6 +68,13 @@
         <compilerSet>default</compilerSet>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/usr/local/include</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
       </compileType>
     </conf>
     <conf name="Release" type="1">
