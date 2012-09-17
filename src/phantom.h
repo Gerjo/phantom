@@ -15,5 +15,19 @@
 #include <core/PhantomGame.h>
 
 #include <graphics/Graphics.h>
+#ifdef WIN32
+	#include <Windows.h>
+#else
+#include <sys/time>
+#include <unistd.h>
+#endif
+
+	void phantom_sleep(float timems){
+		#ifndef WIN32
+			usleep(timems*1000 );
+		#else
+			Sleep(timems);
+		#endif
+	}
 
 #endif /* PHANTOM_H_ */

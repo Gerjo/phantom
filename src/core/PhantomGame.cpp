@@ -6,15 +6,9 @@
  */
 
 #include "PhantomGame.h"
-#define SDL_main main
 #include <iostream>
 #include <ctime>
-#ifndef WIN32
-#include <sys/time.h>
-#include <unistd.h>
-#else
-#include <Windows.h>
-#endif
+#include <phantom.h>
 
 namespace phantom {
 
@@ -48,11 +42,7 @@ int PhantomGame::main(int argc, char *argv[] )
 		last = now;
 		elapsed = this->time()-last;
 		if( elapsed < (1.0/this->fps))
-#ifndef WIN32
-			usleep( ((1.0/this->fps) - elapsed) * 1000000 );
-#else
-			Sleep( ((1.0/this->fps) - elapsed) * 1000.0f );
-#endif
+			phantom_sleep(((1.0/this->fps) - elapsed) * 1000.0f);
 	}
 	return 0;
 }
