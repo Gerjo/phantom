@@ -22,12 +22,14 @@
     #include <unistd.h>
 #endif
 
-void phantom_sleep(float timems){
+class PhantomUtil {
+public:
+static void phantom_sleep(float timems){
     #ifndef WIN32
         usleep(timems * 1000);
     #else
         Sleep(timems);
     #endif
 }
-
+};
 #endif /* PHANTOM_H_ */
