@@ -74,6 +74,7 @@
             <pElem>/usr/local/include</pElem>
             <pElem>src</pElem>
           </incDir>
+          <commandLine>-lSDL</commandLine>
         </ccTool>
       </compileType>
     </conf>
@@ -88,6 +89,12 @@
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/usr/local/include</pElem>
+            <pElem>src</pElem>
+          </incDir>
+          <commandLine>-lSDL</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
