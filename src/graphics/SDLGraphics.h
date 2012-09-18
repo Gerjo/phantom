@@ -41,7 +41,9 @@ public:
 
 	virtual void moveTo(float x, float y);
     virtual void lineTo(float x, float y);
-	//virtual void drawLine
+	virtual void drawLine(Vector2f from, Vector2f to);
+	virtual void drawRect(Vector2f xy, Vector2f wh);
+	virtual void drawCircle(Vector2f xy, float radius);
 private:
     PhantomGame *game;
     SDL_Surface *screen;
