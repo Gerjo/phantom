@@ -51,9 +51,6 @@ void SDLGraphics::update( float elapsed )
                 break;
         }
     }
-    
-     Draw_Circle(screen, 10, 10, 10, SDL_MapRGB(screen->format, 255, 100, 100));
-     std::cout << "draw" << std::endl;
 }
 
 void SDLGraphics::save()
