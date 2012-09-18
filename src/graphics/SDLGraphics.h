@@ -11,8 +11,18 @@
 #include <graphics/Graphics.h>
 #include <SDL/SDL.h>
 
-namespace phantom {
+using namespace Eigen;
 
+namespace phantom {
+struct phantomVector{
+	float x;
+	float y;
+public:
+	phantomVector(float x, float y){
+		this->x = x;
+		this->y = y;
+	}
+};
 class SDLGraphics: public Graphics
 {
 public:
@@ -25,15 +35,19 @@ public:
 
     virtual void save();
     virtual void restore();
-
+	
     virtual void fill();
     virtual void stroke();
 
-    virtual void moveTo(float x, float y);
+	virtual void moveTo(float x, float y);
     virtual void lineTo(float x, float y);
+	//virtual void drawLine
 private:
     PhantomGame *game;
     SDL_Surface *screen;
+	std::vector<phantomVector> vectorList;
+	float moveOriginX, moveOriginY;
+	Uint32 color;
 };
 
 } /* namespace phantom */
