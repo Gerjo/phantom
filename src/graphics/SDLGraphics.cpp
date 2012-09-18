@@ -7,6 +7,9 @@
 
 #include "SDLGraphics.h"
 #include <SDL/SDL.h>
+#include <SDL/SDL_draw.h>
+#include <stdlib.h>
+#include <Windows.h>
 #include <iostream>
 #include <SDL/SDL_draw.h>
 namespace phantom {
@@ -23,15 +26,15 @@ SDLGraphics::~SDLGraphics()
 void SDLGraphics::setup( PhantomGame *game )
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-    
 	this->game = game;
-    this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(), 16, SDL_HWSURFACE);
+	this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(),8,SDL_HWSURFACE);
     if ( screen == NULL ) {
         std::cerr << "Unable to set " << game->getWidth() << "x" << game->getHeight() << " video:" << SDL_GetError() << std::endl;
-        exit(1);
+		std::cin.get();
+		exit(1);
     }
-    
-   
+	Draw_FillCircle(screen, 150,150, 100, SDL_MapRGB(screen->format, 255,0,0));
+	SDL_UpdateRect(screen, 0, 0, 0, 0);
 }
 
 void SDLGraphics::update( float elapsed )

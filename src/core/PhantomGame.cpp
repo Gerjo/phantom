@@ -34,7 +34,7 @@ int PhantomGame::start(int argc, char *argv[] )
 	{
 		double now = this->time();
 		double elapsed = now-last;
-		std::cout << elapsed << std::endl;
+		//std::cout << elapsed << std::endl;
 
 		this->update(static_cast<float>(elapsed));
 		this->render(NULL);
