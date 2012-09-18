@@ -8,7 +8,7 @@
 #include "SDLGraphics.h"
 #include <SDL/SDL.h>
 #include <iostream>
-
+#include <SDL/SDL_draw.h>
 namespace phantom {
 
 SDLGraphics::SDLGraphics()
@@ -30,6 +30,8 @@ void SDLGraphics::setup( PhantomGame *game )
         std::cerr << "Unable to set " << game->getWidth() << "x" << game->getHeight() << " video:" << SDL_GetError() << std::endl;
         exit(1);
     }
+    
+   
 }
 
 void SDLGraphics::update( float elapsed )
@@ -46,6 +48,9 @@ void SDLGraphics::update( float elapsed )
                 break;
         }
     }
+    
+     Draw_Circle(screen, 10, 10, 10, SDL_MapRGB(screen->format, 255, 100, 100));
+     std::cout << "draw" << std::endl;
 }
 
 void SDLGraphics::save()
