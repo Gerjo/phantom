@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="80">
+<configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -71,11 +71,19 @@
         <ccTool>
           <incDir>
             <pElem>include</pElem>
-            <pElem>/usr/local/include</pElem>
             <pElem>src</pElem>
           </incDir>
           <commandLine>-lSDL -Werror</commandLine>
         </ccTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom</output>
+          <linkerAddLib>
+            <pElem>/opt/SDL_draw-1.2.13/src/.libs</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibLibItem>SDL_draw</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
     </conf>
     <conf name="Release" type="1">
@@ -91,7 +99,6 @@
           <developmentMode>5</developmentMode>
           <incDir>
             <pElem>include</pElem>
-            <pElem>/usr/local/include</pElem>
             <pElem>src</pElem>
           </incDir>
           <commandLine>-lSDL -Werror</commandLine>
@@ -102,6 +109,15 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom</output>
+          <linkerAddLib>
+            <pElem>/opt/SDL_draw-1.2.13/src/.libs</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibLibItem>SDL_draw</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
     </conf>
   </confs>

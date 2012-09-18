@@ -22,6 +22,7 @@ AS=as
 
 # Macros
 CND_PLATFORM=GNU-Linux-x86
+CND_DLIB_EXT=so
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -61,7 +62,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-L/opt/SDL_draw-1.2.13/src/.libs -lSDL_draw
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -74,57 +75,57 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom: ${OBJECTFILES}
 ${OBJECTDIR}/src/main.o: src/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
 
 ${OBJECTDIR}/src/core/Entity.o: src/core/Entity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Entity.o src/core/Entity.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Entity.o src/core/Entity.cpp
 
 ${OBJECTDIR}/src/core/Composite.o: src/core/Composite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Composite.o src/core/Composite.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Composite.o src/core/Composite.cpp
 
 ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
 
 ${OBJECTDIR}/src/physics/shapes/Shape.o: src/physics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/shapes/Shape.o src/physics/shapes/Shape.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/shapes/Shape.o src/physics/shapes/Shape.cpp
 
 ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
 
 ${OBJECTDIR}/src/core/Layer.o: src/core/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Layer.o src/core/Layer.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Layer.o src/core/Layer.cpp
 
 ${OBJECTDIR}/src/graphics/SDLGraphics.o: src/graphics/SDLGraphics.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/SDLGraphics.o src/graphics/SDLGraphics.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/SDLGraphics.o src/graphics/SDLGraphics.cpp
 
 ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
 
 ${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -I/usr/local/include -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/RenderLayer.o src/graphics/RenderLayer.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/RenderLayer.o src/graphics/RenderLayer.cpp
 
 # Subprojects
 .build-subprojects:
