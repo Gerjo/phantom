@@ -16,7 +16,7 @@ int main( int argc, char *argv[] )
 
 	Graphics *g = new SDLGraphics();
 	game->addComponent(g);
-	g->drawCircle(Vector2f(20,20),40);
+	g->drawCircle(Vector2f(200,200),40);
     g->fill();
     g->stroke();
 
