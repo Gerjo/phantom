@@ -8,8 +8,6 @@
 #include "SDLGraphics.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_draw.h>
-#include <stdlib.h>
-#include <Windows.h>
 #include <iostream>
 #include <SDL/SDL_draw.h>
 namespace phantom {
@@ -33,8 +31,7 @@ void SDLGraphics::setup( PhantomGame *game )
 		std::cin.get();
 		exit(1);
     }
-	Draw_FillCircle(screen, 150,150, 100, SDL_MapRGB(screen->format, 255,0,0));
-	SDL_UpdateRect(screen, 0, 0, 0, 0);
+	
 }
 
 void SDLGraphics::update( float elapsed )
@@ -62,16 +59,20 @@ void SDLGraphics::restore()
 
 void SDLGraphics::fill()
 {
+
 }
 void SDLGraphics::stroke()
 {
+	
 }
 
 void SDLGraphics::moveTo(float x, float y)
 {
+	
 }
 void SDLGraphics::lineTo(float x, float y)
 {
+	
 }
 
 } /* namespace phantom */
