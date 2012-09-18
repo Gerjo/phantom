@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML 5 demo.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script>
+            
+            function init() {
+                var canvas   = document.getElementById("canvas");
+                var graphics = canvas.getContext("2d");
+                
+                
+                graphics.beginPath();
+                graphics.fillStyle = "purple";
+                graphics.lineWidth = 2;
+                
+                graphics.moveTo(100, 100);
+                graphics.lineTo(200, 200);
+                
+                graphics.lineTo(100, 200);
+                
+                graphics.closePath();
+                
+                graphics.fill();
+                graphics.stroke();
+            }
+            
+        </script>
+    </head>
+    <body onload="init();">
+        <canvas id="canvas" width="600" height="300">
+            
+        </canvas>
+    </body>
+</html>
