@@ -15,3 +15,5 @@ Release/
 *.la
 *.a
 /nbproject/private/
+/build/
+/dist/
