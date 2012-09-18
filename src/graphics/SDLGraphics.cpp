@@ -18,8 +18,7 @@ namespace phantom {
 		SDL_Quit();
 	}
 
-	void SDLGraphics::setup( PhantomGame *game )
-	{
+	void SDLGraphics::setup( PhantomGame *game )	{
 		SDL_Init(SDL_INIT_EVERYTHING);
 		this->game = game;
 		this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(),8,SDL_HWSURFACE);
@@ -31,15 +30,12 @@ namespace phantom {
 		color = SDL_MapRGB(screen->format, 255,0,0);
 	}
 
-	void SDLGraphics::update( float elapsed )
-	{
+	void SDLGraphics::update( float elapsed ){
 		Composite::update(elapsed);
 
 		SDL_Event event;
-		while( SDL_PollEvent(&event) )
-		{
-			switch( event.type )
-			{
+		while( SDL_PollEvent(&event) ){
+			switch( event.type ){
 			case SDL_QUIT:
 				this->game->exit(0);
 				break;
@@ -47,8 +43,7 @@ namespace phantom {
 		}
 	}
 
-	void SDLGraphics::save()
-	{
+	void SDLGraphics::save()	{
 	}
 	void SDLGraphics::restore(){
 
@@ -76,21 +71,23 @@ namespace phantom {
 			static_cast<Sint16>(radius),
 			color);
 	}
-	void SDLGraphics::fill()
-	{
+	void SDLGraphics::checkBounds(Sint16 x, Sint16 y){
+
+	}
+
+	void SDLGraphics::fill(){
+		
+	}
+	void SDLGraphics::stroke(){
+
+	}
+	void SDLGraphics::draw(){
 		SDL_UpdateRect(screen,0,0,0,0);
 	}
-	void SDLGraphics::stroke()
-	{
+	void SDLGraphics::moveTo(float x, float y){
 
 	}
-
-	void SDLGraphics::moveTo(float x, float y)
-	{
-
-	}
-	void SDLGraphics::lineTo(float x, float y)
-	{
+	void SDLGraphics::lineTo(float x, float y){
 
 	}
 

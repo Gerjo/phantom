@@ -32,12 +32,15 @@ public:
 	
     virtual void fill();
     virtual void stroke();
+	virtual void draw();
 
 	virtual void moveTo(float x, float y);
     virtual void lineTo(float x, float y);
 	virtual void drawLine(Vector2f from, Vector2f to);
 	virtual void drawRect(Vector2f xy, Vector2f wh);
 	virtual void drawCircle(Vector2f xy, float radius);
+
+	virtual void checkBounds(Sint16 x, Sint16 y);
 private:
     PhantomGame *game;
     SDL_Surface *screen;

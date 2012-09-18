@@ -36,6 +36,7 @@ public:
 
     virtual void fill() = 0;
     virtual void stroke() = 0;
+	virtual void draw() = 0;
 
 	virtual void drawLine(Vector2f from, Vector2f to) = 0;
 	virtual void drawRect(Vector2f xy, Vector2f wh) = 0;
