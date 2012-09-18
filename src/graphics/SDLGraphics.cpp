@@ -6,10 +6,7 @@
 */
 
 #include "SDLGraphics.h"
-#include <SDL/SDL.h>
-#include <SDL/SDL_draw.h>
-#include <iostream>
-#include <SDL/SDL_draw.h>
+
 namespace phantom {
 
 	SDLGraphics::SDLGraphics()

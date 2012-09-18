@@ -10,19 +10,13 @@
 
 #include <graphics/Graphics.h>
 #include <SDL/SDL.h>
+#include <SDL/SDL_draw.h>
+#include <iostream>
 
 using namespace Eigen;
 
 namespace phantom {
-struct phantomVector{
-	float x;
-	float y;
-public:
-	phantomVector(float x, float y){
-		this->x = x;
-		this->y = y;
-	}
-};
+
 class SDLGraphics: public Graphics
 {
 public:
@@ -47,7 +41,7 @@ public:
 private:
     PhantomGame *game;
     SDL_Surface *screen;
-	std::vector<phantomVector> vectorList;
+
 	float moveOriginX, moveOriginY;
 	Uint32 color;
 };
