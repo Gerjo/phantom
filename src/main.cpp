@@ -8,6 +8,8 @@ using namespace std;
 using namespace phantom;
 using namespace Eigen;
 
+#include <SDL/SDL_draw.h>
+
 int main( int argc, char *argv[] )
 {
 	PhantomGame *game = new PhantomGame("phantom.yaml");
