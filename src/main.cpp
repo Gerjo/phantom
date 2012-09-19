@@ -20,10 +20,6 @@ int main( int argc, char *argv[] )
 
 	InputState *s = new SDLInputState();
 	game->addComponent(g);
-	g->drawCircle(Vector2f(200,200),40);
-    g->fill();
-    g->stroke();
 	g->draw();
-
 	return game->start(argc, argv);
 }

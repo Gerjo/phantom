@@ -105,6 +105,7 @@ void Composite::intergrate(float elapsed)
 
 void Composite::render( void *context )
 {
+
 }
 
 unsigned int Composite::handleMessage(const char *msg, void *data)

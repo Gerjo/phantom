@@ -21,7 +21,7 @@ namespace phantom {
 	void SDLGraphics::setup( PhantomGame *game )	{
 		SDL_Init(SDL_INIT_EVERYTHING);
 		this->game = game;
-		this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(),8,SDL_HWSURFACE);
+		this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(),8,SDL_HWSURFACE | SDL_DOUBLEBUF);
 		if ( screen == NULL ) {
 			std::cerr << "Unable to set " << game->getWidth() << "x" << game->getHeight() << " video:" << SDL_GetError() << std::endl;
 			std::cin.get();
@@ -56,8 +56,16 @@ namespace phantom {
 			static_cast<Sint16>(to.y()),
 			color);
 	}
+	void SDLGraphics::drawFilledRect(Eigen::Vector2f xy, Eigen::Vector2f wh){
+		Draw_FillRect(screen,
+			static_cast<Sint16>(xy.x()),
+			static_cast<Sint16>(xy.y()),
+			static_cast<Sint16>(wh.x()),
+			static_cast<Sint16>(wh.y()),
+			color);
+	}
 	void SDLGraphics::drawRect(Eigen::Vector2f xy, Eigen::Vector2f wh){
-		Draw_Rect(screen,
+		Draw_FillRect(screen,
 			static_cast<Sint16>(xy.x()),
 			static_cast<Sint16>(xy.y()),
 			static_cast<Sint16>(wh.x()),
@@ -66,6 +74,13 @@ namespace phantom {
 	}
 	void SDLGraphics::drawCircle(Eigen::Vector2f xy, float radius){
 		Draw_Circle(screen,
+			static_cast<Sint16>(xy.x()),
+			static_cast<Sint16>(xy.y()),
+			static_cast<Sint16>(radius),
+			color);
+	}
+	void SDLGraphics::drawFilledCircle(Eigen::Vector2f xy, float radius){
+		Draw_FillCircle(screen,
 			static_cast<Sint16>(xy.x()),
 			static_cast<Sint16>(xy.y()),
 			static_cast<Sint16>(radius),
