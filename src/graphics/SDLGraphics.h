@@ -41,7 +41,6 @@ public:
 	virtual void drawFilledRect(Vector2f xy, Vector2f wh);
 	virtual void drawCircle(Vector2f xy, float radius);
 	virtual void drawFilledCircle(Vector2f xy, float radius);
-
 	virtual void checkBounds(Sint16 x, Sint16 y);
 private:
     PhantomGame *game;

@@ -42,6 +42,7 @@ public:
 	virtual void drawRect(Vector2f xy, Vector2f wh) = 0;
 	virtual void drawFilledRect(Vector2f xy, Vector2f wh) = 0;
 	virtual void drawCircle(Vector2f xy, float radius) = 0;
+	
 	virtual void drawFilledCircle(Vector2f xy, float radius) = 0;
 
     virtual void moveTo(float x, float y) = 0;

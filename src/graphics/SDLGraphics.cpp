@@ -21,7 +21,7 @@ namespace phantom {
 	void SDLGraphics::setup( PhantomGame *game )	{
 		SDL_Init(SDL_INIT_EVERYTHING);
 		this->game = game;
-		this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(),8,SDL_HWSURFACE);
+		this->screen = SDL_SetVideoMode(game->getWidth(), game->getHeight(),8,SDL_HWSURFACE | SDL_DOUBLEBUF);
 		if ( screen == NULL ) {
 			std::cerr << "Unable to set " << game->getWidth() << "x" << game->getHeight() << " video:" << SDL_GetError() << std::endl;
 			std::cin.get();
