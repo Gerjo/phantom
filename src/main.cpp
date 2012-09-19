@@ -1,6 +1,8 @@
 
 #include "phantom.h"
 #include <graphics/SDLGraphics.h>
+#include <input/InputState.h>
+#include <input/SDLInputState.h>
 
 #include <iostream>
 
@@ -15,10 +17,13 @@ int main( int argc, char *argv[] )
 	PhantomGame *game = new PhantomGame("phantom.yaml");
 
 	Graphics *g = new SDLGraphics();
+
+	InputState *s = new SDLInputState();
 	game->addComponent(g);
 	g->drawCircle(Vector2f(200,200),40);
     g->fill();
     g->stroke();
+	g->draw();
 
 	return game->start(argc, argv);
 }
