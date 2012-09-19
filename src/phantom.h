@@ -14,9 +14,14 @@
 #include <core/Layer.h>
 #include <core/PhantomGame.h>
 
+#include <input/InputState.h>
+
 #include <graphics/Graphics.h>
 
 #include <utils/util.h>
+
+#include <iostream>
+#include <vector>
 
 #ifdef WIN32
 	#include <Windows.h>

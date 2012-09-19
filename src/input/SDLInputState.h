@@ -9,7 +9,7 @@ namespace phantom {
 		SDLInputState() : InputState() { }
 		~SDLInputState() { }
 
-		virtual void handleEvent(void *e);
+		virtual void handleEvent(Event *e);
 	};
 }
 

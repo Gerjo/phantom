@@ -3,6 +3,7 @@
 
 #include <input/KeyboardState.h>
 #include <input/MouseState.h>
+#include <core/EventManager.h>
 
 namespace phantom {
 	class InputState {

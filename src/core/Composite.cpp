@@ -41,6 +41,7 @@ void Composite::addComponent( Composite *component )
     component->onAdd( this );
     component->onAnsestorChanged();
 }
+
 bool Composite::destroyComponent( Composite *component )
 {
 	std::vector<Composite*>::iterator iter;

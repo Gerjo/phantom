@@ -1,8 +1,11 @@
 #include "SDLInputState.h"
 
 namespace phantom {
-	void SDLInputState::handleEvent(void *e)
+	void SDLInputState::handleEvent(Event *e)
 	{
-		// SOME AWESOME EVENT HANDLING OF SDL.
+		if(e->type == "SDL_InputEvent")
+		{
+			// Do some awesome stuff.
+		}
 	}
 }
