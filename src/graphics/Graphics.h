@@ -40,7 +40,9 @@ public:
 
 	virtual void drawLine(Vector2f from, Vector2f to) = 0;
 	virtual void drawRect(Vector2f xy, Vector2f wh) = 0;
+	virtual void drawFilledRect(Vector2f xy, Vector2f wh) = 0;
 	virtual void drawCircle(Vector2f xy, float radius) = 0;
+	virtual void drawFilledCircle(Vector2f xy, float radius) = 0;
 
     virtual void moveTo(float x, float y) = 0;
     virtual void lineTo(float x, float y) = 0;

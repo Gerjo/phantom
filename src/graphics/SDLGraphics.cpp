@@ -56,8 +56,16 @@ namespace phantom {
 			static_cast<Sint16>(to.y()),
 			color);
 	}
+	void SDLGraphics::drawFilledRect(Eigen::Vector2f xy, Eigen::Vector2f wh){
+		Draw_FillRect(screen,
+			static_cast<Sint16>(xy.x()),
+			static_cast<Sint16>(xy.y()),
+			static_cast<Sint16>(wh.x()),
+			static_cast<Sint16>(wh.y()),
+			color);
+	}
 	void SDLGraphics::drawRect(Eigen::Vector2f xy, Eigen::Vector2f wh){
-		Draw_Rect(screen,
+		Draw_FillRect(screen,
 			static_cast<Sint16>(xy.x()),
 			static_cast<Sint16>(xy.y()),
 			static_cast<Sint16>(wh.x()),
@@ -66,6 +74,13 @@ namespace phantom {
 	}
 	void SDLGraphics::drawCircle(Eigen::Vector2f xy, float radius){
 		Draw_Circle(screen,
+			static_cast<Sint16>(xy.x()),
+			static_cast<Sint16>(xy.y()),
+			static_cast<Sint16>(radius),
+			color);
+	}
+	void SDLGraphics::drawFilledCircle(Eigen::Vector2f xy, float radius){
+		Draw_FillCircle(screen,
 			static_cast<Sint16>(xy.x()),
 			static_cast<Sint16>(xy.y()),
 			static_cast<Sint16>(radius),
