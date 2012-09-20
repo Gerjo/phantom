@@ -5,9 +5,10 @@
 #include <gl/glut.h>
 
 namespace phantom {
-	class GLUTInputState : InputState {
+	class GLUTInputState : public InputState {
 	public:
 		virtual void setup();
+		virtual void handleEvent(void *event){ }
 
 	private:
 		static void __cdecl keyboardListener			(unsigned char keycode, int mouseX, int mouseY);
@@ -17,8 +18,6 @@ namespace phantom {
 		static void __cdecl mouseListener				(int button, int state, int mouseX, int mouseY);
 		static void __cdecl mouseMotionListener			(int mouseX, int mouseY);
 	};
-
-	InputState *InputState::_instance = 0;
 }
 
 #endif // GLUTINPUTSTATE_H_
