@@ -43,7 +43,7 @@ int PhantomGame::start(int argc, char *argv[] )
 		last = now;
 		elapsed = this->time()-last;
 		if(elapsed < (1.0f/this->fps))
-			phantom::Util::phantom_sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
+			phantom::Util::sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
 	}
 	return 0;
 }
