@@ -4,13 +4,14 @@
 #include <graphics\Graphics.h>
 #include <GL\freeglut.h>
 
+using namespace Eigen;
+
 namespace phantom{
 
-	class GLGraphics : Graphics{
+	class GLGraphics : public Graphics{
+	public:
 		GLGraphics();
-		virtual ~GLGraphics() {};
-
-		void onAdd(Composite *parent);
+		virtual ~GLGraphics();
 
 		virtual void setup(PhantomGame *game);
 
@@ -30,7 +31,7 @@ namespace phantom{
 
 		virtual void moveTo(float x, float y);
 		virtual void lineTo(float x, float y);
-
+	private:
 	};
 }
 
