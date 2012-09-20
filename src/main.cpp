@@ -1,7 +1,5 @@
 
 #include "phantom.h"
-#include <graphics/SDLGraphics.h>
-
 #include <iostream>
 
 using namespace std;
@@ -14,7 +12,7 @@ int main( int argc, char *argv[] )
 {
 	PhantomGame *game = new PhantomGame("phantom.yaml");
 
-	Graphics *g = new SDLGraphics();
+	Graphics *g ;
 	game->addComponent(g);
 
     g->strokeColor = Vector4f(0, 0, 1, 1);
