@@ -6,7 +6,7 @@
 
 namespace phantom {
 
-	typedef struct Event {
+	typedef struct {
 		void *payload;
 		char *type;
 	} Event;
