@@ -10,7 +10,7 @@
 namespace phantom{
 class Util{
 public:
-	void static phantom_sleep(float timems){
+	void static sleep(float timems){
 			#ifndef WIN32
 				usleep(timems*1000 );
 			#else
