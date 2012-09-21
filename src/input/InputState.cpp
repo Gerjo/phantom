@@ -20,5 +20,9 @@ namespace phantom {
 			std::cout << "Input is already created. Do not call me twice.\n";
 		}
 	}
+
+	void InputState::onAdd(Composite *parent) {
+		this->setup();
+	}
 }
 

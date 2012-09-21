@@ -12,15 +12,16 @@ int main( int argc, char *argv[] )
 	PhantomGame *game = new PhantomGame("phantom.yaml");
 
 	Graphics *g = new GLGraphics();
+	InputState *inputState = new GLUTInputState();
 
-	InputState::createMe(&GLUTInputState());
+	InputState::createMe(inputState);
 
 	EventManager *e;
 
 	game->addComponent(g);
 
+	game->addComponent(InputState::getMe());
 
-	
 	return game->start(argc, argv);
-	delete g; delete e;
+	delete g; delete e; delete inputState;
 }

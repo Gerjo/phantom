@@ -15,6 +15,11 @@ namespace phantom{
 
 		virtual void setup(PhantomGame *game);
 
+		virtual void update(float elapsed)
+		{
+			Composite::update(elapsed);
+			glutMainLoopEvent();
+		}
 		virtual void save();
 		virtual void restore();
 

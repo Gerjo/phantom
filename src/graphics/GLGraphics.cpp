@@ -17,7 +17,7 @@ namespace phantom {
 		glutInitWindowSize(640,480);
 		glutCreateWindow("hello, world");
 
-		glutMainLoop();
+		//glutMainLoop();
 	}
 
 	void GLGraphics::save(){}

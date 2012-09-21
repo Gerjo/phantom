@@ -7,7 +7,7 @@
 #include <iostream>
 
 namespace phantom {
-	class InputState {
+	class InputState : public Composite {
 	public:
 		static void createMe(InputState *me);
 		static InputState *getMe();
@@ -15,6 +15,7 @@ namespace phantom {
 		virtual void setup() = 0;
 
 		virtual void handleEvent(void *e) = 0;
+		virtual void onAdd(Composite *parent);
 
 		KeyboardState *getKeyboardState() { return &_keyboardState; }
 		MouseState    *getMouseState()    { return &_mouseState;    }
