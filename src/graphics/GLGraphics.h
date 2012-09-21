@@ -1,8 +1,8 @@
 #ifndef GLGRAPHICS_H
 #define GLGRAPHICS_H
 
-#include <graphics\Graphics.h>
-#include <GL\freeglut.h>
+#include <graphics/Graphics.h>
+#include <GL/freeglut.h>
 
 using namespace Eigen;
 

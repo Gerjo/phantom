@@ -1,7 +1,7 @@
 #include <phantom.h>
-#include <graphics\GLGraphics.h>
+#include <graphics/GLGraphics.h>
 #include <iostream>
-#include <input\GLUTInputState.h>
+#include <input/GLUTInputState.h>
 
 using namespace std;
 using namespace phantom;
