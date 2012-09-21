@@ -1,8 +1,10 @@
 #ifndef KEYBOARDSTATE_H_
 #define KEYBOARDSTATE_H_
 
+#include <CompileConfig.h>
+
 namespace phantom {
-	class KeyboardState {
+	class LIBEXPORT KeyboardState {
 	public:
 		KeyboardState() { };
 		~KeyboardState() { };

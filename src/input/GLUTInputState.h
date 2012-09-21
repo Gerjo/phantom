@@ -3,9 +3,10 @@
 
 #include <phantom.h>
 #include <gl/glut.h>
+#include <CompileConfig.h>
 
 namespace phantom {
-	class GLUTInputState : public InputState {
+	class LIBEXPORT GLUTInputState : public InputState {
 	public:
 		virtual void setup();
 		virtual void handleEvent(void *event){ }

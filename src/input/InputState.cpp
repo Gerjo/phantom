@@ -13,11 +13,11 @@ namespace phantom {
 		}
 	}
 	
-	void InputState::createMe(InputState *me) {
+	void InputState::setMe(InputState *me) {
 		if(_instance == 0)
 			_instance = me;
 		else {
-			std::cout << "Input is already created. Do not call me twice.\n";
+			std::cout << "Input is already set. Do not call me twice.\n";
 		}
 	}
 

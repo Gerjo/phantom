@@ -5,11 +5,12 @@
 #include <input/MouseState.h>
 #include <core/EventManager.h>
 #include <iostream>
+#include <CompileConfig.h>
 
 namespace phantom {
-	class InputState : public Composite {
+	class LIBEXPORT InputState : public Composite {
 	public:
-		static void createMe(InputState *me);
+		static void setMe(InputState *me);
 		static InputState *getMe();
 
 		virtual void setup() = 0;
