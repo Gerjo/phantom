@@ -41,6 +41,9 @@
           <itemPath>src/physics/Mover.cpp</itemPath>
           <itemPath>src/physics/Mover.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="utils" displayName="utils" projectFiles="true">
+          <itemPath>src/utils/util.h</itemPath>
+        </logicalFolder>
         <itemPath>src/main.cpp</itemPath>
         <itemPath>src/phantom.h</itemPath>
       </logicalFolder>
@@ -59,6 +62,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>../pccs/phantom/src</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

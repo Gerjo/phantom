@@ -11,6 +11,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>../pccs/phantom/src</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
