@@ -22,6 +22,7 @@ namespace phantom {
 	}
 
 	void InputState::onAdd(Composite *parent) {
+		InputState::setMe(this);
 		this->setup();
 	}
 }
