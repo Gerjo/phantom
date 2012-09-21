@@ -78,13 +78,14 @@
           <incDir>
             <pElem>include</pElem>
             <pElem>src</pElem>
+            <pElem>/opt/freeglut-2.8.0/include</pElem>
           </incDir>
           <commandLine>-lSDL -Werror</commandLine>
         </ccTool>
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom</output>
           <linkerAddLib>
-            <pElem>/opt/SDL_draw-1.2.13/src/.libs</pElem>
+            <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>SDL_draw</linkerLibLibItem>
@@ -106,6 +107,7 @@
           <incDir>
             <pElem>include</pElem>
             <pElem>src</pElem>
+            <pElem>/opt/freeglut-2.8.0/include</pElem>
           </incDir>
           <commandLine>-lSDL -Werror</commandLine>
         </ccTool>
@@ -118,7 +120,7 @@
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom</output>
           <linkerAddLib>
-            <pElem>/opt/SDL_draw-1.2.13/src/.libs</pElem>
+            <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>SDL_draw</linkerLibLibItem>
