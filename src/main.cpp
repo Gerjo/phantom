@@ -1,4 +1,4 @@
-#include "phantom.h"
+#include <phantom.h>
 #include <graphics\GLGraphics.h>
 #include <iostream>
 #include <input\GLUTInputState.h>
