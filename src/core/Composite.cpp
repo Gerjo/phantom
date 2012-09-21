@@ -6,7 +6,6 @@
  */
 
 #include "Composite.h"
-
 #include <iostream>
 
 namespace phantom {

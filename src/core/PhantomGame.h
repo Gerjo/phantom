@@ -11,10 +11,11 @@
 #include "GameState.h"
 #include <core/Composite.h>
 #include <vector>
-#define SDL_main main
+#include <CompileConfig.h>
+
 namespace phantom {
 
-class PhantomGame: public Composite {
+class LIBEXPORT PhantomGame : public Composite {
 public:
 	PhantomGame( const char *configfile );
 	virtual ~PhantomGame();
