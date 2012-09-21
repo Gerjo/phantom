@@ -64,7 +64,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-L/opt/freeglut-2.8.0/src/.libs -lSDL_draw
+LDLIBSOPTIONS=-L/opt/freeglut-2.8.0/src/.libs
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}

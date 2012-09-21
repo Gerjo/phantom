@@ -87,9 +87,6 @@
           <linkerAddLib>
             <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
           </linkerAddLib>
-          <linkerLibItems>
-            <linkerLibLibItem>SDL_draw</linkerLibLibItem>
-          </linkerLibItems>
         </linkerTool>
       </compileType>
     </conf>
@@ -122,9 +119,6 @@
           <linkerAddLib>
             <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
           </linkerAddLib>
-          <linkerLibItems>
-            <linkerLibLibItem>SDL_draw</linkerLibLibItem>
-          </linkerLibItems>
         </linkerTool>
       </compileType>
     </conf>
