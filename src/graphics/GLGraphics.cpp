@@ -1,5 +1,5 @@
 
-#include<graphics\GLGraphics.h>
+#include <graphics/GLGraphics.h>
 namespace phantom {
 
 	GLGraphics::GLGraphics(){
