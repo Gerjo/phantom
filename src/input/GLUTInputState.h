@@ -2,7 +2,7 @@
 #define GLUTINPUTSTATE_H_
 
 #include <phantom.h>
-#include <gl/glut.h>
+#include <GL/glu.h>
 #include <CompileConfig.h>
 
 namespace phantom {
