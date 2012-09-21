@@ -12,12 +12,13 @@
 
 #include <core/PhantomGame.h>
 #include <core/Composite.h>
+#include <CompileConfig.h>
 
 using namespace Eigen;
 
 namespace phantom {
 
-class Graphics: public Composite
+class LIBEXPORT Graphics: public Composite
 {
 public:
 	EIGEN_MAKE_ALIGNED_OPERATOR_NEW;

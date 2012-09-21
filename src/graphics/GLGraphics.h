@@ -3,12 +3,13 @@
 
 #include <graphics/Graphics.h>
 #include <GL/freeglut.h>
+#include <CompileConfig.h>
 
 using namespace Eigen;
 
 namespace phantom{
 
-	class GLGraphics : public Graphics{
+	class LIBEXPORT GLGraphics : public Graphics{
 	public:
 		GLGraphics();
 		virtual ~GLGraphics();

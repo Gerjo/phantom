@@ -2,9 +2,10 @@
 #define MOUSESTATE_H_
 
 #include <Eigen/Geometry>
+#include <CompileConfig.h>
 
 namespace phantom {
-	class MouseState {
+	class LIBEXPORT MouseState {
 	public:
 		MouseState() { };
 		~MouseState() { };
