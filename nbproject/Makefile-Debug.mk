@@ -35,16 +35,18 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/main.o \
+	${OBJECTDIR}/src/core/EventManager.o \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/physics/shapes/Shape.o \
+	${OBJECTDIR}/src/input/GLUTInputState.o \
 	${OBJECTDIR}/src/core/GameState.o \
+	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/core/Layer.o \
-	${OBJECTDIR}/src/graphics/SDLGraphics.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
+	${OBJECTDIR}/src/graphics/GLGraphics.o \
 	${OBJECTDIR}/src/graphics/RenderLayer.o
 
 
@@ -72,10 +74,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/src/main.o: src/main.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
+${OBJECTDIR}/src/core/EventManager.o: src/core/EventManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/EventManager.o src/core/EventManager.cpp
 
 ${OBJECTDIR}/src/core/Entity.o: src/core/Entity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
@@ -97,10 +99,20 @@ ${OBJECTDIR}/src/physics/shapes/Shape.o: src/physics/shapes/Shape.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/shapes/Shape.o src/physics/shapes/Shape.cpp
 
+${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/GLUTInputState.o src/input/GLUTInputState.cpp
+
 ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
+
+${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
 
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
@@ -112,15 +124,15 @@ ${OBJECTDIR}/src/core/Layer.o: src/core/Layer.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Layer.o src/core/Layer.cpp
 
-${OBJECTDIR}/src/graphics/SDLGraphics.o: src/graphics/SDLGraphics.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/SDLGraphics.o src/graphics/SDLGraphics.cpp
-
 ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
+
+${OBJECTDIR}/src/graphics/GLGraphics.o: src/graphics/GLGraphics.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLGraphics.o src/graphics/GLGraphics.cpp
 
 ${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics

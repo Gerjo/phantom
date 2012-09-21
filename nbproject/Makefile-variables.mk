@@ -20,8 +20,8 @@ CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
 CND_ARTIFACT_NAME_Release=phantom
 CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/phantom
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=phantom.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/phantom.tar
+CND_PACKAGE_NAME_Release=libphantom.so.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/libphantom.so.tar
 #
 # include compiler specific variables
 #

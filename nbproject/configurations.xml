@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <logicalFolder name="HeaderFiles"
-                   displayName="Header Files"
-                   projectFiles="true">
-    </logicalFolder>
-    <logicalFolder name="ResourceFiles"
-                   displayName="Resource Files"
-                   projectFiles="true">
-    </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
@@ -18,6 +10,8 @@
           <itemPath>src/core/Composite.h</itemPath>
           <itemPath>src/core/Entity.cpp</itemPath>
           <itemPath>src/core/Entity.h</itemPath>
+          <itemPath>src/core/EventManager.cpp</itemPath>
+          <itemPath>src/core/EventManager.h</itemPath>
           <itemPath>src/core/GameState.cpp</itemPath>
           <itemPath>src/core/GameState.h</itemPath>
           <itemPath>src/core/Layer.cpp</itemPath>
@@ -26,12 +20,20 @@
           <itemPath>src/core/PhantomGame.h</itemPath>
         </logicalFolder>
         <logicalFolder name="graphics" displayName="graphics" projectFiles="true">
+          <itemPath>src/graphics/GLGraphics.cpp</itemPath>
+          <itemPath>src/graphics/GLGraphics.h</itemPath>
           <itemPath>src/graphics/Graphics.cpp</itemPath>
           <itemPath>src/graphics/Graphics.h</itemPath>
           <itemPath>src/graphics/RenderLayer.cpp</itemPath>
           <itemPath>src/graphics/RenderLayer.h</itemPath>
-          <itemPath>src/graphics/SDLGraphics.cpp</itemPath>
-          <itemPath>src/graphics/SDLGraphics.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="input" displayName="input" projectFiles="true">
+          <itemPath>src/input/GLUTInputState.cpp</itemPath>
+          <itemPath>src/input/GLUTInputState.h</itemPath>
+          <itemPath>src/input/InputState.cpp</itemPath>
+          <itemPath>src/input/InputState.h</itemPath>
+          <itemPath>src/input/KeyboardState.h</itemPath>
+          <itemPath>src/input/MouseState.h</itemPath>
         </logicalFolder>
         <logicalFolder name="physics" displayName="physics" projectFiles="true">
           <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
@@ -44,7 +46,7 @@
         <logicalFolder name="utils" displayName="utils" projectFiles="true">
           <itemPath>src/utils/util.h</itemPath>
         </logicalFolder>
-        <itemPath>src/main.cpp</itemPath>
+        <itemPath>src/CompileConfig.h</itemPath>
         <itemPath>src/phantom.h</itemPath>
       </logicalFolder>
     </logicalFolder>
@@ -90,7 +92,7 @@
         </linkerTool>
       </compileType>
     </conf>
-    <conf name="Release" type="1">
+    <conf name="Release" type="2">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
