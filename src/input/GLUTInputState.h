@@ -3,6 +3,7 @@
 
 #include <phantom.h>
 #include <GL/glu.h>
+#include <GL//glut.h>
 #include <CompileConfig.h>
 
 namespace phantom {
