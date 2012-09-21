@@ -34,15 +34,16 @@ int PhantomGame::start(int argc, char *argv[] )
 	{
 		double now = this->time();
 		double elapsed = now-last;
-		//std::cout << elapsed << std::endl;
 
+        //std::cout << elapsed << std::endl;
+		
 		this->update(static_cast<float>(elapsed));
 		this->render(NULL);
 
 		last = now;
 		elapsed = this->time()-last;
-		if( elapsed < (1.0f/this->fps))
-			phantom::Util::phantom_sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
+		if(elapsed < (1.0f/this->fps))
+			phantom::Util::sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
 	}
 	return 0;
 }
@@ -97,6 +98,8 @@ double PhantomGame::time()
 
 	double total = lpSystemTime->wSecond;
 	total += lpSystemTime->wMilliseconds / 1000.0;
+
+	delete lpSystemTime;
 #endif
 	return total;
 }

@@ -14,10 +14,11 @@
 
 #include <sstream>
 #include <vector>
+#include <CompileConfig.h>
 
 namespace phantom {
 
-class Composite {
+class LIBEXPORT Composite {
 public:
 
 	unsigned int flags;

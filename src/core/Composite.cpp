@@ -6,7 +6,6 @@
  */
 
 #include "Composite.h"
-
 #include <iostream>
 
 namespace phantom {
@@ -41,6 +40,7 @@ void Composite::addComponent( Composite *component )
     component->onAdd( this );
     component->onAnsestorChanged();
 }
+
 bool Composite::destroyComponent( Composite *component )
 {
 	std::vector<Composite*>::iterator iter;
@@ -105,6 +105,7 @@ void Composite::intergrate(float elapsed)
 
 void Composite::render( void *context )
 {
+
 }
 
 unsigned int Composite::handleMessage(const char *msg, void *data)
