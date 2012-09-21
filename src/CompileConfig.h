@@ -7,5 +7,6 @@
 #		define LIBEXPORT __declspec(dllimport)
 #	endif
 #else
+#   define __cdecl
 #	define LIBEXPORT
 #endif
