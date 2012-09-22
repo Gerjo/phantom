@@ -3,7 +3,7 @@
 
 #include <phantom.h>
 #include <GL/glu.h>
-#include <GL//glut.h>
+#include <GL/glut.h>
 #include <CompileConfig.h>
 
 namespace phantom {
@@ -13,12 +13,12 @@ namespace phantom {
 		virtual void handleEvent(void *event){ }
 
 	private:
-		static void __cdecl keyboardListener			(unsigned char keycode, int mouseX, int mouseY);
-		static void __cdecl keyboardUpListener			(unsigned char keycode, int mouseX, int mouseY);
-		static void __cdecl keyboardSpecialListener		(int code, int mouseX, int mouseY);
-		static void __cdecl keyboardSpecialUpListener	(int code, int mouseX, int mouseY);
-		static void __cdecl mouseListener				(int button, int state, int mouseX, int mouseY);
-		static void __cdecl mouseMotionListener			(int mouseX, int mouseY);
+		static void keyboardListener			(unsigned char keycode, int mouseX, int mouseY);
+		static void keyboardUpListener			(unsigned char keycode, int mouseX, int mouseY);
+		static void keyboardSpecialListener		(int code, int mouseX, int mouseY);
+		static void keyboardSpecialUpListener	(int code, int mouseX, int mouseY);
+		static void mouseListener				(int button, int state, int mouseX, int mouseY);
+		static void mouseMotionListener			(int mouseX, int mouseY);
 	};
 }
 
