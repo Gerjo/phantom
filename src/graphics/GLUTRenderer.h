@@ -12,6 +12,8 @@ namespace phantom {
 		virtual ~GLUTRenderer();
 		
 		virtual void renderLoop();
+	private:
+		int _windowID;
 	};
 }
 #endif // GLUTRENDERER_H
