@@ -8,7 +8,7 @@
 #ifndef PHANTOMGAME_H_
 #define PHANTOMGAME_H_
 
-#include "GameState.h"
+#include <GameState.h>
 #include <core/Composite.h>
 #include <vector>
 #include <CompileConfig.h>
