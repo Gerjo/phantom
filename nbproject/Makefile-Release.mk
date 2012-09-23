@@ -39,14 +39,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
-	${OBJECTDIR}/src/physics/shapes/Shape.o \
 	${OBJECTDIR}/src/input/GLUTInputState.o \
 	${OBJECTDIR}/src/core/GameState.o \
-	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/physics/Mover.o \
+	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/core/Layer.o \
+	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
-	${OBJECTDIR}/src/graphics/GLGraphics.o \
 	${OBJECTDIR}/src/graphics/RenderLayer.o
 
 
@@ -94,11 +93,6 @@ ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
 
-${OBJECTDIR}/src/physics/shapes/Shape.o: src/physics/shapes/Shape.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics/shapes
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/shapes/Shape.o src/physics/shapes/Shape.cpp
-
 ${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
@@ -109,30 +103,30 @@ ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
-${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
-
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+
+${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
 
 ${OBJECTDIR}/src/core/Layer.o: src/core/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Layer.o src/core/Layer.cpp
 
+${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Shape.o src/graphics/shapes/Shape.cpp
+
 ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
-
-${OBJECTDIR}/src/graphics/GLGraphics.o: src/graphics/GLGraphics.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLGraphics.o src/graphics/GLGraphics.cpp
 
 ${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics

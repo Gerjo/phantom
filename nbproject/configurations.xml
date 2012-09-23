@@ -20,8 +20,10 @@
           <itemPath>src/core/PhantomGame.h</itemPath>
         </logicalFolder>
         <logicalFolder name="graphics" displayName="graphics" projectFiles="true">
-          <itemPath>src/graphics/GLGraphics.cpp</itemPath>
-          <itemPath>src/graphics/GLGraphics.h</itemPath>
+          <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
+            <itemPath>src/graphics/shapes/Shape.cpp</itemPath>
+            <itemPath>src/graphics/shapes/Shape.h</itemPath>
+          </logicalFolder>
           <itemPath>src/graphics/Graphics.cpp</itemPath>
           <itemPath>src/graphics/Graphics.h</itemPath>
           <itemPath>src/graphics/RenderLayer.cpp</itemPath>
@@ -37,8 +39,6 @@
         </logicalFolder>
         <logicalFolder name="physics" displayName="physics" projectFiles="true">
           <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
-            <itemPath>src/physics/shapes/Shape.cpp</itemPath>
-            <itemPath>src/physics/shapes/Shape.h</itemPath>
           </logicalFolder>
           <itemPath>src/physics/Mover.cpp</itemPath>
           <itemPath>src/physics/Mover.h</itemPath>

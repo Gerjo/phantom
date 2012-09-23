@@ -11,7 +11,7 @@
 #include <Eigen/Geometry>
 
 #include <physics/Mover.h>
-#include <physics/shapes/Shape.h>
+#include <graphics/shapes/Shape.h>
 #include <core/Composite.h>
 
 namespace phantom {
