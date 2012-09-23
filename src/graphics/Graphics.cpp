@@ -28,7 +28,6 @@ void Graphics::beginPath() {
 
         // We're only setting the color at the latest possible moment, in order
         // to comply with the HTML 5 API.
-
         shape->setLineColor(_lineColor);
         shape->setFillColor(_fillColor);
 
@@ -50,6 +49,22 @@ void Graphics::fill() {
 
 void Graphics::stroke() {
 
+}
+
+void Graphics::rect(float x, float y, float width, float height) {
+    Rectangle* rectangle = new Rectangle(x, y, width, height);
+
+    addShape(rectangle);
+}
+
+void Graphics::arc(float x, float y, float radius, float start, float end) {
+    Arc* arc = new Arc(x, y, radius, start, end);
+
+    addShape(arc);
+}
+
+void Graphics::addShape(Shape* whom) {
+    _workspaceShapes.push_back(whom);
 }
 
 } /* namespace phantom */

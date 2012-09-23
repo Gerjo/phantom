@@ -7,6 +7,8 @@
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>
 #include <graphics/shapes/Shape.h>
+#include <graphics/shapes/Rectangle.h>
+#include <graphics/shapes/Arc.h>
 
 using namespace std;
 
@@ -26,11 +28,17 @@ public:
 
     void setFillStyle(Color color);
     void setLineStyle(Color color);
+
+    void rect(float x, float y, float width, float height);
+    void arc(float x, float y, float radius, float start, float end);
+
 private:
     Shapes _finalizedShapes;
     Shapes _workspaceShapes;
     Color _fillColor;
     Color _lineColor;
+
+    void addShape(Shape* shape);
 };
 
 } /* namespace phantom */
