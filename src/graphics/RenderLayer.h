@@ -9,10 +9,11 @@
 #define RENDERLAYER_H_
 
 #include <core/Layer.h>
+#include <CompileConfig.h>
 
 namespace phantom {
 
-class RenderLayer: public phantom::Layer
+class LIBEXPORT RenderLayer: public phantom::Layer
 {
 public:
     RenderLayer();
