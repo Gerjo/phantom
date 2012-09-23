@@ -10,6 +10,7 @@
 #include <graphics/shapes/Rectangle.h>
 #include <graphics/shapes/Arc.h>
 #include <graphics/shapes/Line.h>
+#include <graphics/shapes/Polygon.h>
 
 using namespace std;
 
@@ -43,10 +44,14 @@ private:
     Color _fillColor;
     Color _lineColor;
 
-    void addShape(Shape* shape);
+    Polygon* _polygonBuffer;
 
-    float _moveToX;
-    float _moveToY;
+    void addShape(Shape* shape);
+    void finalizePolygon();
+    void initializePolygon();
+
+    float _polygonLastX;
+    float _polygonLastY;
 };
 
 } /* namespace phantom */

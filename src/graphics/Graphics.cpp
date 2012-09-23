@@ -4,8 +4,8 @@
 
 namespace phantom {
 
-Graphics::Graphics(void) : _moveToX(0), _moveToY(0) {
-
+Graphics::Graphics(void) : _polygonLastX(0), _polygonLastY(0) {
+    _polygonBuffer = 0;
 }
 
 Graphics::~Graphics(void) {
@@ -49,10 +49,12 @@ Graphics& Graphics::setLineStyle(Color color) {
 }
 
 Graphics& Graphics::fill() {
+    finalizePolygon();
     return *this;
 }
 
 Graphics& Graphics::stroke() {
+    finalizePolygon();
     return *this;
 }
 
@@ -78,22 +80,40 @@ Graphics& Graphics::line(float startX, float startY, float endX, float endY) {
 }
 
 Graphics& Graphics::moveTo(float x, float y) {
-    _moveToX = x;
-    _moveToY = y;
+    finalizePolygon();
+
+    _polygonLastX = x;
+    _polygonLastY = y;
+
+    initializePolygon();
+
     return *this;
 }
 
 Graphics& Graphics::lineTo(float x, float y) {
-    Line* line = new Line(_moveToX, _moveToY, x, y);
+    initializePolygon();
+    _polygonBuffer->addPoint(x, y);
 
-    addShape(line);
-
-    moveTo(x, y);
     return *this;
 }
 
 void Graphics::addShape(Shape* whom) {
     _workspaceShapes.push_back(whom);
 }
+
+void Graphics::finalizePolygon() {
+    if(_polygonBuffer != 0) {
+        addShape(_polygonBuffer);
+        _polygonBuffer = 0;
+    }
+}
+
+void Graphics::initializePolygon() {
+    if(_polygonBuffer == 0) {
+        _polygonBuffer = new Polygon();
+        _polygonBuffer->addPoint(_polygonLastX, _polygonLastY);
+    }
+}
+
 
 } /* namespace phantom */
