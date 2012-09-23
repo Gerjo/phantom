@@ -21,7 +21,7 @@ Graphics::~Graphics(void) {
     }
 }
 
-void Graphics::beginPath() {
+Graphics& Graphics::beginPath() {
     // Move all shapes from the workspace to the finalized collection.
     while(_workspaceShapes.size() > 0) {
         Shape* shape = _workspaceShapes.front();
@@ -34,57 +34,66 @@ void Graphics::beginPath() {
 
         _finalizedShapes.push_back(shape);
     }
+
+    return *this;
 }
 
-void Graphics::setFillStyle(Color color) {
+Graphics& Graphics::setFillStyle(Color color) {
     _fillColor = color;
+    return *this;
 }
 
-void Graphics::setLineStyle(Color color) {
+Graphics& Graphics::setLineStyle(Color color) {
     _lineColor = color;
+    return *this;
 }
 
-void Graphics::fill() {
-
+Graphics& Graphics::fill() {
+    return *this;
 }
 
-void Graphics::stroke() {
-
+Graphics& Graphics::stroke() {
+    return *this;
 }
 
-void Graphics::rect(float x, float y, float width, float height) {
+Graphics& Graphics::rect(float x, float y, float width, float height) {
     Rectangle* rectangle = new Rectangle(x, y, width, height);
 
     addShape(rectangle);
+    return *this;
 }
 
-void Graphics::arc(float x, float y, float radius, float start, float end) {
+Graphics& Graphics::arc(float x, float y, float radius, float start, float end) {
     Arc* arc = new Arc(x, y, radius, start, end);
 
     addShape(arc);
+    return *this;
 }
 
-void Graphics::addShape(Shape* whom) {
-    _workspaceShapes.push_back(whom);
-}
-
-void Graphics::line(float startX, float startY, float endX, float endY) {
+Graphics& Graphics::line(float startX, float startY, float endX, float endY) {
     Line* line = new Line(startX, startY, endX, endY);
 
     addShape(line);
+    return *this;
 }
 
-void Graphics::moveTo(float x, float y) {
+Graphics& Graphics::moveTo(float x, float y) {
     _moveToX = x;
     _moveToY = y;
+    return *this;
 }
 
-void Graphics::lineTo(float x, float y) {
+Graphics& Graphics::lineTo(float x, float y) {
     Line* line = new Line(_moveToX, _moveToY, x, y);
 
     addShape(line);
 
     moveTo(x, y);
+    return *this;
+}
+
+void Graphics::addShape(Shape* whom) {
+    _workspaceShapes.push_back(whom);
 }
 
 } /* namespace phantom */
