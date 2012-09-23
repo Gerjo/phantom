@@ -6,8 +6,9 @@
 
 #include <CompileConfig.h>
 
-#include "shapes/Shape.h"
-
+#include <graphics/Graphics.h>
+#include <graphics/Color.h>
+#include <graphics/shapes/Shape.h>
 
 using namespace std;
 
@@ -21,16 +22,17 @@ public:
     Graphics(void);
     ~Graphics(void);
 
-private:
-    Shapes _finalizedShapes;
-    Shapes _workspaceShapes;
-
     void beginPath();
     void fill();
     void stroke();
 
     void setFillStyle();
     void setLineStyle();
+private:
+    Shapes _finalizedShapes;
+    Shapes _workspaceShapes;
+    Color _fillColor;
+    Color _lineColor;
 };
 
 } /* namespace phantom */
