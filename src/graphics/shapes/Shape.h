@@ -1,10 +1,3 @@
-/*
- * Shape.h
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #ifndef SHAPE_H_
 #define SHAPE_H_
 
