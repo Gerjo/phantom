@@ -26,19 +26,22 @@ void Graphics::beginPath() {
         Shape* shape = _workspaceShapes.front();
         _workspaceShapes.pop_front();
 
-        // Apply the colors:
-        //shape.setLineColor();
-        //shape.setFillColor();
+        // We're only setting the color at the latest possible moment, in order
+        // to comply with the HTML 5 API.
+
+        shape->setLineColor(_lineColor);
+        shape->setFillColor(_fillColor);
+
         _finalizedShapes.push_back(shape);
     }
 }
 
-void Graphics::setFillStyle() {
-
+void Graphics::setFillStyle(Color color) {
+    _fillColor = color;
 }
 
-void Graphics::setLineStyle() {
-
+void Graphics::setLineStyle(Color color) {
+    _lineColor = color;
 }
 
 void Graphics::fill() {

@@ -10,8 +10,13 @@ namespace phantom {
 		float x, y;
 		Color strokeColour;
 		Color fillColor;
+    Color lineColor;
 		Shape();
 		virtual ~Shape();
+
+    void setFillColor(Color color);
+    void setLineColor(Color color);
+
 	};
 } /* namespace phantom */
 #endif /* SHAPE_H_ */
