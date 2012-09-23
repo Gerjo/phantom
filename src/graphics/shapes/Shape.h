@@ -8,7 +8,7 @@ namespace phantom {
 	class LIBEXPORT Shape {
 	public:
 		float x, y;
-		Color strokeColour;
+		Color lineColor;
 		Color fillColor;
     Color lineColor;
 		Shape();
