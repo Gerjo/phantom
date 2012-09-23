@@ -6,6 +6,7 @@
 namespace phantom{
 	class LIBEXPORT Line: public Shape{
 		float toX, toY;
+    public:
 		Line(float x, float y, float toX, float toY);
 	};
 } /* namespace phantom */

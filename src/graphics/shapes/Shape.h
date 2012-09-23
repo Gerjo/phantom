@@ -14,8 +14,8 @@ namespace phantom {
 		Shape();
 		virtual ~Shape();
 
-    void setFillColor(Color color);
-    void setLineColor(Color color);
+        void setFillColor(Color color);
+        void setLineColor(Color color);
 
 	};
 } /* namespace phantom */
