@@ -7,13 +7,13 @@
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>
 #include <graphics/shapes/Shape.h>
+#include <graphics/shapes/Rectangle.h>
+#include <graphics/shapes/Arc.h>
 
 using namespace std;
 
 namespace phantom {
 
-typedef deque<Shape*> Shapes;
-typedef Shapes::iterator ShapeIterator;
 
 class LIBEXPORT Graphics {
 public:
@@ -24,14 +24,19 @@ public:
     void fill();
     void stroke();
 
-    void setFillStyle();
-    void setLineStyle();
+    void setFillStyle(Color color);
+    void setLineStyle(Color color);
+
+    void rect(float x, float y, float width, float height);
+    void arc(float x, float y, float radius, float start, float end);
 
 private:
-    Shapes _finalizedShapes;
-    Shapes _workspaceShapes;
+    deque<Shape*> _finalizedShapes;
+    deque<Shape*> _workspaceShapes;
     Color _fillColor;
     Color _lineColor;
+
+    void addShape(Shape* shape);
 };
 
 } /* namespace phantom */

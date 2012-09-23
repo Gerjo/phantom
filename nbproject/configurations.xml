@@ -21,10 +21,18 @@
         </logicalFolder>
         <logicalFolder name="graphics" displayName="graphics" projectFiles="true">
           <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
+            <itemPath>src/graphics/shapes/Arc.cpp</itemPath>
+            <itemPath>src/graphics/shapes/Arc.h</itemPath>
+            <itemPath>src/graphics/shapes/Line.cpp</itemPath>
+            <itemPath>src/graphics/shapes/Line.h</itemPath>
+            <itemPath>src/graphics/shapes/Rectangle.cpp</itemPath>
+            <itemPath>src/graphics/shapes/Rectangle.h</itemPath>
             <itemPath>src/graphics/shapes/Shape.cpp</itemPath>
             <itemPath>src/graphics/shapes/Shape.h</itemPath>
           </logicalFolder>
           <itemPath>src/graphics/Color.h</itemPath>
+          <itemPath>src/graphics/GLUTGraphics.cpp</itemPath>
+          <itemPath>src/graphics/GLUTGraphics.h</itemPath>
           <itemPath>src/graphics/Graphics.cpp</itemPath>
           <itemPath>src/graphics/Graphics.h</itemPath>
           <itemPath>src/graphics/RenderLayer.cpp</itemPath>
