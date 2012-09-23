@@ -39,6 +39,7 @@ int PhantomGame::start(int argc, char *argv[] )
 
 		this->update(static_cast<float>(elapsed));
 		this->render(NULL);
+		renderer->renderLoop();
 
 		last = now;
 		elapsed = this->time()-last;
