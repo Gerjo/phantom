@@ -3,9 +3,7 @@
 
 #include <deque>
 
-
 #include <CompileConfig.h>
-
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>
 #include <graphics/shapes/Shape.h>
