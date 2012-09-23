@@ -8,7 +8,7 @@ namespace phantom {
 	class LIBEXPORT GLUTRenderer : public Renderer
 	{
 	public:
-		GLUTRenderer();
+		GLUTRenderer(int width, int height);
 		virtual ~GLUTRenderer();
 		
 		virtual void renderLoop();

@@ -4,13 +4,11 @@
 
 namespace phantom {
 
-	GLUTRenderer::GLUTRenderer() {
-	#ifdef _DEBUG
+	GLUTRenderer::GLUTRenderer(int width, int height) : Renderer(width, height) {
 		std::cout << "Initializing GLUT renderer..." << std::endl;
-	#endif
 		int i = 0;
 		glutInit(&i, 0);
-		glutInitWindowSize(800, 600);
+		glutInitWindowSize(width, height);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 
 		glClearColor(0.5f, 0.5f, 0.5f, 0.0);
@@ -18,7 +16,6 @@ namespace phantom {
 	
 		glutCreateWindow("Elephantom");
 	}
-
 
 	GLUTRenderer::~GLUTRenderer() {
 	}
