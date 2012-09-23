@@ -38,12 +38,13 @@ void Graphics::setFillStyle() {
 }
 
 void Graphics::setLineStyle() {
-    
+
 }
 
 void Graphics::fill() {
 
 }
+
 void Graphics::stroke() {
 
 }
