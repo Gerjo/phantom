@@ -105,8 +105,4 @@ double PhantomGame::time()
 }
 
 
-SpriteRegistry PhantomGame::getSpriteRegistry() {
-    return _spriteRegistry;
-}
-
 } /* namespace phantom */

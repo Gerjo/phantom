@@ -1,15 +1,14 @@
 #ifndef SHAPE_H_
 #define SHAPE_H_
 
-#include <core/Composite.h>
 #include <graphics/Color.h>
 namespace phantom {
 
-class Shape: public phantom::Composite
+class Shape
 {
 public:
 	float x, y;
-	color fillColor;	
+	color fillColor;
     Shape();
     virtual ~Shape();
 };
