@@ -11,6 +11,7 @@
 #include <core/GameState.h>
 #include <core/Composite.h>
 #include <vector>
+#include <graphics/Renderer.h>
 #include <CompileConfig.h>
 
 namespace phantom {
@@ -40,6 +41,11 @@ public:
         return width;
     }
 
+	void setRenderer(Renderer *renderer)
+	{
+		this->renderer = renderer;
+	}
+
 protected:
     virtual void onExit(int returncode);
 
@@ -49,6 +55,8 @@ private:
 	unsigned int height;
 
 	unsigned int fps;
+
+	Renderer *renderer;
 
 	std::vector<GameState*> states;
 
