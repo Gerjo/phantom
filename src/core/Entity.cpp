@@ -30,13 +30,14 @@ void Entity::addComponent( Composite *component )
             this->destroyComponent(this->mover);
         this->mover = m;
     }
+    /*
     Shape *s = dynamic_cast<Shape*>(component);
     if( s != NULL )
     {
         if( this->shape != NULL )
             this->destroyComponent(this->shape);
         this->shape = s;
-    }
+    }*/
 }
 
 } /* namespace phantom */
