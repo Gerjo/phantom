@@ -36,7 +36,7 @@ int PhantomGame::start(int argc, char *argv[] )
 		double elapsed = now-last;
 
         //std::cout << elapsed << std::endl;
-		
+
 		this->update(static_cast<float>(elapsed));
 		this->render(NULL);
 
@@ -104,5 +104,9 @@ double PhantomGame::time()
 	return total;
 }
 
+
+SpriteRegistry PhantomGame::getSpriteRegistry() {
+    return _spriteRegistry;
+}
 
 } /* namespace phantom */
