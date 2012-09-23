@@ -6,10 +6,13 @@
 namespace phantom {
 	class LIBEXPORT Renderer {
 	public:
-		Renderer() { };
-		virtual ~Renderer() { };
+		int width;
+		int height;
 
-		virtual void renderLoop() { };
+		Renderer(int width, int height) { this->width = width; this->height = height; }
+		virtual ~Renderer() { }
+
+		virtual void renderLoop() { }
 	};
 }
 

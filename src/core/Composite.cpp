@@ -35,8 +35,7 @@ void Composite::onAnsestorChanged()
 
 void Composite::addComponent( Composite *component )
 {
-	std::cout << "added " << component << std::endl;
-    this->components.push_back(component);
+	this->components.push_back(component);
     component->onAdd( this );
     component->onAnsestorChanged();
 }
