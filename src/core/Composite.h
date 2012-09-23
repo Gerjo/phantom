@@ -12,9 +12,13 @@
 #define PHANTOM_MESSAGE_HANDLED  1
 #define PHANTOM_MESSAGE_CONSUMED 2
 
+#include <graphics/Graphics.h>
+
 #include <sstream>
 #include <vector>
 #include <CompileConfig.h>
+
+
 
 namespace phantom {
 
@@ -56,7 +60,7 @@ public:
 private:
 	Composite *parent;
 	std::vector<Composite*> components;
-
+    Graphics graphics;
 };
 
 template <class T>

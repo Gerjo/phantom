@@ -9,8 +9,6 @@
 #include "shapes/Shape.h"
 
 
-
-
 using namespace std;
 
 namespace phantom {
