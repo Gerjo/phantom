@@ -9,8 +9,13 @@ class Shape
 public:
 	float x, y;
 	Color fillColor;
+    Color lineColor;
     Shape();
     virtual ~Shape();
+
+    void setFillColor(Color color);
+    void setLineColor(Color color);
+
 };
 
 } /* namespace phantom */

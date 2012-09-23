@@ -24,8 +24,8 @@ public:
     void fill();
     void stroke();
 
-    void setFillStyle();
-    void setLineStyle();
+    void setFillStyle(Color color);
+    void setLineStyle(Color color);
 private:
     Shapes _finalizedShapes;
     Shapes _workspaceShapes;
