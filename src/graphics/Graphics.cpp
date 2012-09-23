@@ -9,11 +9,12 @@ Graphics::Graphics(void) {
 }
 
 Graphics::~Graphics(void) {
-    Shapes& handle = _finalizedShapes;
+    deque<Shape*>::iterator shIt;
+    deque<Shape*>& handle = _finalizedShapes;
 
     for(int i = 0; i < 2; ++i) {
-        for(ShapeIterator it = handle.begin(); it != handle.end(); ++it) {
-            delete *it;
+        for(shIt = handle.begin(); shIt != handle.end(); ++shIt) {
+            delete *shIt;
         }
 
         handle = _workspaceShapes;

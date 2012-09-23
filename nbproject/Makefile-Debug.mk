@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
+	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/input/GLUTInputState.o \
 	${OBJECTDIR}/src/graphics/GLUTGraphics.o \
 	${OBJECTDIR}/src/core/GameState.o \
@@ -95,6 +96,11 @@ ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
 
 ${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input

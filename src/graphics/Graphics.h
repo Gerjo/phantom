@@ -14,8 +14,6 @@ using namespace std;
 
 namespace phantom {
 
-typedef deque<Shape*> Shapes;
-typedef Shapes::iterator ShapeIterator;
 
 class LIBEXPORT Graphics {
 public:
@@ -33,8 +31,8 @@ public:
     void arc(float x, float y, float radius, float start, float end);
 
 private:
-    Shapes _finalizedShapes;
-    Shapes _workspaceShapes;
+    deque<Shape*> _finalizedShapes;
+    deque<Shape*> _workspaceShapes;
     Color _fillColor;
     Color _lineColor;
 

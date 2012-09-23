@@ -10,7 +10,7 @@ namespace phantom {
 		float x, y;
 		Color lineColor;
 		Color fillColor;
-    Color lineColor;
+
 		Shape();
 		virtual ~Shape();
 
