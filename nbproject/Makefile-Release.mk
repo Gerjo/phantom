@@ -41,8 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/input/GLUTInputState.o \
 	${OBJECTDIR}/src/core/GameState.o \
-	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/input/InputState.o \
+	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/core/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
@@ -103,15 +103,15 @@ ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
-${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
-
 ${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
+
+${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
 
 ${OBJECTDIR}/src/core/Layer.o: src/core/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core

@@ -8,7 +8,7 @@ class Shape
 {
 public:
 	float x, y;
-	color fillColor;
+	Color fillColor;
     Shape();
     virtual ~Shape();
 };
