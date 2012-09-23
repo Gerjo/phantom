@@ -3,13 +3,8 @@
 
 #include <deque>
 
-
 #include <CompileConfig.h>
-
 #include "shapes/Shape.h"
-
-
-
 
 using namespace std;
 
