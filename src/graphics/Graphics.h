@@ -16,8 +16,13 @@ class LIBEXPORT Graphics {
 public:
     Graphics(void);
 
+
+
+
 private:
     vector<Shape> _shapes;
+    
+
 };
 
 } /* namespace phantom */

@@ -28,6 +28,8 @@
           <itemPath>src/graphics/Graphics.h</itemPath>
           <itemPath>src/graphics/RenderLayer.cpp</itemPath>
           <itemPath>src/graphics/RenderLayer.h</itemPath>
+          <itemPath>src/graphics/Sprite.cpp</itemPath>
+          <itemPath>src/graphics/Sprite.h</itemPath>
         </logicalFolder>
         <logicalFolder name="input" displayName="input" projectFiles="true">
           <itemPath>src/input/GLUTInputState.cpp</itemPath>
