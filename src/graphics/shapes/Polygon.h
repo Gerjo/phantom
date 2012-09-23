@@ -4,9 +4,12 @@
 #include "Shape.h"
 
 namespace phantom{
-	class LIBEXPORT Polygon: public Shape{
+	class LIBEXPORT Polygon: public Shape {
 	public:
 		Polygon();
+
+        void addPoint(float x, float y);
+
 	};
 }/*namespace phantom*/
 
