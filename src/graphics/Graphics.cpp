@@ -4,7 +4,7 @@
 
 namespace phantom {
 
-Graphics::Graphics(void) {
+Graphics::Graphics(void) : _moveToX(0), _moveToY(0) {
 
 }
 
@@ -66,6 +66,25 @@ void Graphics::arc(float x, float y, float radius, float start, float end) {
 
 void Graphics::addShape(Shape* whom) {
     _workspaceShapes.push_back(whom);
+}
+
+void Graphics::line(float startX, float startY, float endX, float endY) {
+    Line* line = new Line(startX, startY, endX, endY);
+
+    addShape(line);
+}
+
+void Graphics::moveTo(float x, float y) {
+    _moveToX = x;
+    _moveToY = y;
+}
+
+void Graphics::lineTo(float x, float y) {
+    Line* line = new Line(_moveToX, _moveToY, x, y);
+
+    addShape(line);
+
+    moveTo(x, y);
 }
 
 } /* namespace phantom */

@@ -41,7 +41,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/input/GLUTInputState.o \
-	${OBJECTDIR}/src/graphics/GLUTGraphics.o \
 	${OBJECTDIR}/src/core/GameState.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
 	${OBJECTDIR}/src/input/InputState.o \
@@ -50,7 +49,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
-	${OBJECTDIR}/src/graphics/RenderLayer.o
+	${OBJECTDIR}/src/graphics/GLUTRenderer.o \
+	${OBJECTDIR}/src/graphics/RenderLayer.o \
+	${OBJECTDIR}/src/graphics/shapes/Polygon.o
 
 
 # C Compiler Flags
@@ -107,11 +108,6 @@ ${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/GLUTInputState.o src/input/GLUTInputState.cpp
 
-${OBJECTDIR}/src/graphics/GLUTGraphics.o: src/graphics/GLUTGraphics.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTGraphics.o src/graphics/GLUTGraphics.cpp
-
 ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
@@ -152,10 +148,20 @@ ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
 
+${OBJECTDIR}/src/graphics/GLUTRenderer.o: src/graphics/GLUTRenderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTRenderer.o src/graphics/GLUTRenderer.cpp
+
 ${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/RenderLayer.o src/graphics/RenderLayer.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
 
 # Subprojects
 .build-subprojects:
