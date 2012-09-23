@@ -14,7 +14,7 @@ public:
     SpriteRegistry();
 private:
     void add(Sprite* sprite);
-
+    Sprites _sprites;
 };
 
 }
