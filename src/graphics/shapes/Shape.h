@@ -2,21 +2,21 @@
 #define SHAPE_H_
 
 #include <graphics/Color.h>
+#include <CompileConfig.h>
 namespace phantom {
 
-class Shape
-{
-public:
-	float x, y;
-	Color fillColor;
+	class LIBEXPORT Shape {
+	public:
+		float x, y;
+		Color lineColor;
+		Color fillColor;
     Color lineColor;
-    Shape();
-    virtual ~Shape();
+		Shape();
+		virtual ~Shape();
 
     void setFillColor(Color color);
     void setLineColor(Color color);
 
-};
-
+	};
 } /* namespace phantom */
 #endif /* SHAPE_H_ */
