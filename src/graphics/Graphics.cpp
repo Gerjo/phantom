@@ -21,7 +21,7 @@ Graphics::~Graphics(void) {
 }
 
 void Graphics::beginPath() {
-    // Move all shapes from the work space to the finalized collection.
+    // Move all shapes from the workspace to the finalized collection.
     while(_workspaceShapes.size() > 0) {
         Shape* shape = _workspaceShapes.front();
         _workspaceShapes.pop_front();

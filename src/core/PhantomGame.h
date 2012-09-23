@@ -8,7 +8,7 @@
 #ifndef PHANTOMGAME_H_
 #define PHANTOMGAME_H_
 
-#include "GameState.h"
+#include <core/GameState.h>
 #include <core/Composite.h>
 #include <vector>
 #include <CompileConfig.h>
@@ -53,7 +53,6 @@ private:
 	std::vector<GameState*> states;
 
 	double time();
-
 };
 
 } /* namespace phantom */

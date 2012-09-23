@@ -46,8 +46,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
-	${OBJECTDIR}/src/graphics/RenderLayer.o \
-	${OBJECTDIR}/src/graphics/Sprite.o
+	${OBJECTDIR}/src/graphics/RenderLayer.o
 
 
 # C Compiler Flags
@@ -133,11 +132,6 @@ ${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/RenderLayer.o src/graphics/RenderLayer.cpp
-
-${OBJECTDIR}/src/graphics/Sprite.o: src/graphics/Sprite.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/opt/freeglut-2.8.0/include -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Sprite.o src/graphics/Sprite.cpp
 
 # Subprojects
 .build-subprojects:
