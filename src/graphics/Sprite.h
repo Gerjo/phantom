@@ -6,7 +6,7 @@
 
 namespace phantom {
 
-class Sprite : public Composite {
+class LIBEXPORT Sprite : public Composite {
 public:
     Sprite(void);
 

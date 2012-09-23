@@ -40,8 +40,6 @@
           <itemPath>src/input/MouseState.h</itemPath>
         </logicalFolder>
         <logicalFolder name="physics" displayName="physics" projectFiles="true">
-          <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
-          </logicalFolder>
           <itemPath>src/physics/Mover.cpp</itemPath>
           <itemPath>src/physics/Mover.h</itemPath>
         </logicalFolder>
