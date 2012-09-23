@@ -5,12 +5,23 @@
 
 namespace phantom{
 
+    // NB: using local typedef, makes the code readable.
+    typedef unsigned char byte;
+
 	struct LIBEXPORT Color {
-        Color() : a(0), r(0), g(0), b(0) {
+        Color() : r(0), g(0), b(0), a(0) {
 
         }
 
-		unsigned char a, r, g ,b;
+        Color(byte r, byte g, byte b) : r(r), g(g), b(b), a(0) {
+
+        }
+
+        Color(byte r, byte g, byte b, byte a) : r(r), g(g), b(b), a(a)  {
+
+        }
+
+		byte r, g ,b, a;
 	};
 }
 
