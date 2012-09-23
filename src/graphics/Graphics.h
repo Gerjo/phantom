@@ -26,6 +26,7 @@ public:
 
     void setFillStyle();
     void setLineStyle();
+
 private:
     Shapes _finalizedShapes;
     Shapes _workspaceShapes;
