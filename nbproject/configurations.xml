@@ -18,6 +18,8 @@
           <itemPath>src/core/Layer.h</itemPath>
           <itemPath>src/core/PhantomGame.cpp</itemPath>
           <itemPath>src/core/PhantomGame.h</itemPath>
+          <itemPath>src/core/SpriteRegistry.cpp</itemPath>
+          <itemPath>src/core/SpriteRegistry.h</itemPath>
         </logicalFolder>
         <logicalFolder name="graphics" displayName="graphics" projectFiles="true">
           <logicalFolder name="shapes" displayName="shapes" projectFiles="true">

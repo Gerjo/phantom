@@ -8,10 +8,11 @@
 #ifndef PHANTOMGAME_H_
 #define PHANTOMGAME_H_
 
-#include "GameState.h"
+#include <core/GameState.h>
 #include <core/Composite.h>
 #include <vector>
 #include <CompileConfig.h>
+#include <core/SpriteRegistry.h>
 
 namespace phantom {
 
@@ -29,6 +30,8 @@ public:
 	void render( void *context );
 
 	void exit(int returncode);
+
+    SpriteRegistry getSpriteRegistry();
 
     unsigned int getHeight() const
     {
@@ -54,6 +57,7 @@ private:
 
 	double time();
 
+    SpriteRegistry _spriteRegistry;
 };
 
 } /* namespace phantom */
