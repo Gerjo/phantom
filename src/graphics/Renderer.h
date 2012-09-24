@@ -2,6 +2,8 @@
 #define RENDERER_H
 
 #include <CompileConfig.h>
+#include <vector>
+#include <core/GameState.h>
 
 namespace phantom {
 	class LIBEXPORT Renderer {
@@ -12,7 +14,8 @@ namespace phantom {
 		Renderer(int width, int height) { this->width = width; this->height = height; }
 		virtual ~Renderer() { }
 
-		virtual void renderLoop() { }
+		virtual void drawLoop(std::vector<Composite*> *components) { }
+		virtual void renderLoop(std::vector<GameState*> *states) { }
 	};
 }
 

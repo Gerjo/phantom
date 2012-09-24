@@ -18,6 +18,8 @@ namespace phantom {
 
 class LIBEXPORT Graphics {
 public:
+	friend class GLUTRenderer;
+
     Graphics(void);
     ~Graphics(void);
 
@@ -44,6 +46,7 @@ private:
     Color _lineColor;
 
     void addShape(Shape* shape);
+	deque<Shape*> *getShapes() { return &_finalizedShapes; };
 
     float _moveToX;
     float _moveToY;

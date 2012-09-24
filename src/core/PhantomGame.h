@@ -27,7 +27,6 @@ public:
 	int start( int argc, char *argv[] );
 
 	void update( float elapsed );
-	void render( void *context );
 
 	void exit(int returncode);
 

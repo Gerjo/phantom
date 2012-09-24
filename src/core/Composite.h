@@ -43,13 +43,16 @@ public:
 
 	virtual void update( float elapsed );
 	virtual void intergrate( float elapsed );
-	virtual void render( void* context );
 
 	virtual bool canCollideWith( Composite *other );
 	virtual void afterCollision( Composite *other );
 
     template <class T>
     T* getComponentByType( int nth );
+
+	std::vector<Composite *> *getComponents() { return &components; };
+
+	Graphics *getGraphics() { return &graphics; }
 
     template <class T>
     T* findAnsestor();

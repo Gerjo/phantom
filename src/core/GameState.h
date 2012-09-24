@@ -12,7 +12,7 @@
 
 namespace phantom {
 
-class GameState: public Composite {
+class GameState : public Composite {
 public:
 
 	bool transparent;

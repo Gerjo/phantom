@@ -38,8 +38,7 @@ int PhantomGame::start(int argc, char *argv[] )
         //std::cout << elapsed << std::endl;
 
 		this->update(static_cast<float>(elapsed));
-		this->render(NULL);
-		renderer->renderLoop();
+		renderer->renderLoop(&states);
 
 		last = now;
 		elapsed = this->time()-last;
@@ -60,19 +59,6 @@ void PhantomGame::update( float elapsed )
         if( iter == this->states.rbegin() || !(*iter)->propegateUpdate )
             break;
         --iter;
-    }
-}
-
-void PhantomGame::render( void *context )
-{
-    std::vector<GameState*>::reverse_iterator iter;
-    iter = this->states.rend();
-    while( iter != this->states.rbegin() && (*iter)->transparent)
-        --iter;
-    while( iter != this->states.rend() )
-    {
-        (*iter)->render(NULL);
-        ++iter;
     }
 }
 

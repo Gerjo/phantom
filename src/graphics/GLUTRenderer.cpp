@@ -1,6 +1,7 @@
 #include "GLUTRenderer.h"
 #include <iostream>
 #include <GL/freeglut.h>
+#include <graphics/Graphics.h>
 
 namespace phantom {
 
@@ -20,11 +21,27 @@ namespace phantom {
 		glutDestroyWindow(_windowID);
 	}
 
-	void GLUTRenderer::renderLoop() {
+	void GLUTRenderer::drawLoop(std::vector<Composite*> *components) {
+	}
+
+	void GLUTRenderer::renderLoop(std::vector<GameState*> *states) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		
-		glutSolidTeapot(0.1f);
+		std::vector<GameState*>::reverse_iterator iter;
+		iter = states->rend();
+		while(iter != states->rbegin()) {
+			if(iter == states->rbegin() || (*iter)->transparent)
+				break;
+
+			std::vector<Composite*> *components = (*iter)->getComponents();
+			std::vector<Composite*>::iterator compIt;
+			while(compIt != components->end()) {
+				deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
+			}
+
+			--iter;
+		}
 		
 		glutSwapBuffers();
 		glutMainLoopEvent();
