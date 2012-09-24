@@ -10,6 +10,7 @@
 #include <graphics/shapes/Rectangle.h>
 #include <graphics/shapes/Arc.h>
 #include <graphics/shapes/Line.h>
+#include <graphics/shapes/Polygon.h>
 
 using namespace std;
 
@@ -23,21 +24,21 @@ public:
     Graphics(void);
     ~Graphics(void);
 
-    void beginPath();
-    void fill();
-    void stroke();
+    Graphics& beginPath();
+    Graphics& fill();
+    Graphics& stroke();
 
-    void setFillStyle(Color color);
-    void setLineStyle(Color color);
+    Graphics& setFillStyle(Color color);
+    Graphics& setLineStyle(Color color);
 
-    void line(float startX, float startY, float endX, float endY);
-    void rect(float x, float y, float width, float height);
-    void arc(float x, float y, float radius, float start, float end);
+    Graphics& line(float startX, float startY, float endX, float endY);
+    Graphics& rect(float x, float y, float width, float height);
+    Graphics& arc(float x, float y, float radius, float start, float end);
 
 
 
-    void moveTo(float x, float y);
-    void lineTo(float x, float y);
+    Graphics& moveTo(float x, float y);
+    Graphics& lineTo(float x, float y);
 
 private:
     deque<Shape*> _finalizedShapes;
@@ -45,11 +46,16 @@ private:
     Color _fillColor;
     Color _lineColor;
 
-    void addShape(Shape* shape);
-	deque<Shape*> *getShapes() { return &_finalizedShapes; };
+    Polygon* _polygonBuffer;
 
-    float _moveToX;
-    float _moveToY;
+    void addShape(Shape* shape);
+    void finalizePolygon();
+    void initializePolygon();
+    deque<Shape*> *getShapes() { return &_finalizedShapes; };
+
+
+    float _polygonLastX;
+    float _polygonLastY;
 };
 
 } /* namespace phantom */
