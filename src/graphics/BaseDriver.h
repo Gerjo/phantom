@@ -1,9 +1,9 @@
 #ifndef BASEDRIVER_H
 #define BASEDRIVER_H
 
-#include <core\PhantomGame.h>
+#include <core/PhantomGame.h>
 #include <CompileConfig.h>
-#include <input\InputState.h>
+#include <input/InputState.h>
 #include "Renderer.h"
 
 namespace phantom{
