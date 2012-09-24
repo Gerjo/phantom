@@ -17,3 +17,5 @@ Release/
 /nbproject/private/
 /build/
 /dist/
+/netbeans/build/
+/netbeans/dist/

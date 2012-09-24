@@ -69,8 +69,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>.</Elem>
-    <Elem>../pccs/phantom/src</Elem>
+    <Elem>src</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -84,16 +83,8 @@
           <incDir>
             <pElem>include</pElem>
             <pElem>src</pElem>
-            <pElem>/opt/freeglut-2.8.0/include</pElem>
           </incDir>
-          <commandLine>-Werror</commandLine>
         </ccTool>
-        <linkerTool>
-          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom</output>
-          <linkerAddLib>
-            <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
-          </linkerAddLib>
-        </linkerTool>
       </compileType>
     </conf>
     <conf name="Release" type="2">
@@ -107,12 +98,6 @@
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
-          <incDir>
-            <pElem>include</pElem>
-            <pElem>src</pElem>
-            <pElem>/opt/freeglut-2.8.0/include</pElem>
-          </incDir>
-          <commandLine>-Werror</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -120,12 +105,6 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
-        <linkerTool>
-          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/phantom</output>
-          <linkerAddLib>
-            <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
-          </linkerAddLib>
-        </linkerTool>
       </compileType>
     </conf>
   </confs>
