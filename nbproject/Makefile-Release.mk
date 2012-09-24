@@ -40,16 +40,16 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/325940660/Shape.o \
 	${OBJECTDIR}/_ext/325940660/Line.o \
 	${OBJECTDIR}/_ext/325940660/Polygon.o \
-	${OBJECTDIR}/_ext/1923082125/GLUTDriver.o \
 	${OBJECTDIR}/_ext/1923082125/RenderLayer.o \
+	${OBJECTDIR}/_ext/1923082125/GLUTDriver.o \
 	${OBJECTDIR}/_ext/1416150433/GameState.o \
 	${OBJECTDIR}/_ext/1416150433/Composite.o \
 	${OBJECTDIR}/_ext/1923082125/Graphics.o \
 	${OBJECTDIR}/_ext/1416150433/EventManager.o \
 	${OBJECTDIR}/_ext/956500488/InputState.o \
 	${OBJECTDIR}/_ext/956500488/GLUTInputState.o \
-	${OBJECTDIR}/_ext/1416150433/Entity.o \
 	${OBJECTDIR}/_ext/1923082125/GLUTRenderer.o \
+	${OBJECTDIR}/_ext/1416150433/Entity.o \
 	${OBJECTDIR}/_ext/325940660/Rectangle.o \
 	${OBJECTDIR}/_ext/325940660/Arc.o \
 	${OBJECTDIR}/_ext/1827995909/Mover.o
@@ -104,15 +104,15 @@ ${OBJECTDIR}/_ext/325940660/Polygon.o: /home/gerjo/pccs/phantom/src/graphics/sha
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/325940660/Polygon.o /home/gerjo/pccs/phantom/src/graphics/shapes/Polygon.cpp
 
-${OBJECTDIR}/_ext/1923082125/GLUTDriver.o: /home/gerjo/pccs/phantom/src/graphics/GLUTDriver.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/GLUTDriver.o /home/gerjo/pccs/phantom/src/graphics/GLUTDriver.cpp
-
 ${OBJECTDIR}/_ext/1923082125/RenderLayer.o: /home/gerjo/pccs/phantom/src/graphics/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/RenderLayer.o /home/gerjo/pccs/phantom/src/graphics/RenderLayer.cpp
+
+${OBJECTDIR}/_ext/1923082125/GLUTDriver.o: /home/gerjo/pccs/phantom/src/graphics/GLUTDriver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/GLUTDriver.o /home/gerjo/pccs/phantom/src/graphics/GLUTDriver.cpp
 
 ${OBJECTDIR}/_ext/1416150433/GameState.o: /home/gerjo/pccs/phantom/src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
@@ -144,15 +144,15 @@ ${OBJECTDIR}/_ext/956500488/GLUTInputState.o: /home/gerjo/pccs/phantom/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/956500488/GLUTInputState.o /home/gerjo/pccs/phantom/src/input/GLUTInputState.cpp
 
-${OBJECTDIR}/_ext/1416150433/Entity.o: /home/gerjo/pccs/phantom/src/core/Entity.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/Entity.o /home/gerjo/pccs/phantom/src/core/Entity.cpp
-
 ${OBJECTDIR}/_ext/1923082125/GLUTRenderer.o: /home/gerjo/pccs/phantom/src/graphics/GLUTRenderer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/GLUTRenderer.o /home/gerjo/pccs/phantom/src/graphics/GLUTRenderer.cpp
+
+${OBJECTDIR}/_ext/1416150433/Entity.o: /home/gerjo/pccs/phantom/src/core/Entity.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/Entity.o /home/gerjo/pccs/phantom/src/core/Entity.cpp
 
 ${OBJECTDIR}/_ext/325940660/Rectangle.o: /home/gerjo/pccs/phantom/src/graphics/shapes/Rectangle.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/325940660

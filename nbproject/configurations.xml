@@ -124,7 +124,7 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lphantom -lglut</commandLine>
+          <commandLine>-Werror -lglut</commandLine>
         </linkerTool>
       </compileType>
     </conf>
