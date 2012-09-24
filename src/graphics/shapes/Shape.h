@@ -11,6 +11,9 @@ namespace phantom {
 	public:
 		std::vector<Eigen::Vector2f> vertices;
 
+		float x;
+		float y;
+
 		Color lineColor;
 		Color fillColor;
 
