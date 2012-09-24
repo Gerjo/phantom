@@ -22,28 +22,42 @@ namespace phantom {
 	}
 
 	void GLUTRenderer::drawLoop(std::vector<Composite*> *components) {
+		// Get the iterator and start iterating.
 		std::vector<Composite*>::iterator compIt = components->begin();
 		while(compIt != components->end()) {
+
+			// Get the shapes and start iterating.
+			deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
+			deque<Shape*>::iterator itShape = shapes->begin();
+			while(itShape != shapes->end())	{
+				// Load the identity matrix so all coördinates go to the position they belong.
+				glLoadIdentity();
+
+				// Begin drawing our shape.
+				glBegin(GL_TRIANGLES);
+				
+				// Change the color of our shape.
+				glColor4b((*itShape)->fillColor.r, (*itShape)->fillColor.g, (*itShape)->fillColor.b, (*itShape)->fillColor.a);
+				
+				// Iterate through all the points located in our shape.
+				vector<Eigen::Vector2f>::iterator itVert = (*itShape)->vertices.begin();
+				while(itVert != (*itShape)->vertices.end()) {
+					glVertex2f((*itShape)->x + (*itVert).x(), (*itShape)->y + (*itVert).y());
+				}
+
+				// End of drawing our shape.
+				glEnd();
+
+				// Move on to the next shape.
+				itShape++;
+			}
+
+			// If the component has other components attached to it, draw them aswell.
 			if((*compIt)->getComponents()->size() > 0) {
 				drawLoop((*compIt)->getComponents());
 			}
 
-			deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
-			deque<Shape*>::iterator itShape = shapes->begin();
-			while(itShape != shapes->end())	{
-				glLoadIdentity();
-				glBegin(GL_TRIANGLES);
-				vector<Eigen::Vector2f>::iterator itVert = (*itShape)->vertices.begin();
-				glColor4b((*itShape)->fillColor.r, (*itShape)->fillColor.g, (*itShape)->fillColor.b, (*itShape)->fillColor.a);
-				while(itVert != (*itShape)->vertices.end()) {
-					glVertex2f((*itVert).x(), (*itVert).y());
-				}
-
-				glEnd();
-
-				itShape++;
-			}
-
+			// Move on to the next component.
 			compIt++;
 		}
 	}
