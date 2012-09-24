@@ -54,13 +54,13 @@ namespace phantom {
     {
         Composite::update( elapsed );
         std::vector<GameState*>::reverse_iterator iter;
-        iter = this->states.rend();
-        while( iter != this->states.rbegin() )
+        iter = this->states.rbegin();
+        while( iter != this->states.rend() )
         {
             (*iter)->update(elapsed);
-            if( iter == this->states.rbegin() || !(*iter)->propegateUpdate )
+            if( iter == this->states.rend() || !(*iter)->propegateUpdate )
                 break;
-            --iter;
+            ++iter;
         }
     }
 
