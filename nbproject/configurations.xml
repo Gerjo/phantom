@@ -72,7 +72,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>src</Elem>
+    <Elem>/home/gerjo/pccs/phantom/src</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -90,12 +90,10 @@
         </ccTool>
         <linkerTool>
           <output>../dist/libphantom.${CND_DLIB_EXT}</output>
-          <linkerAddLib>
-            <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
-          </linkerAddLib>
-          <linkerLibItems>
-            <linkerLibLibItem>glut</linkerLibLibItem>
-          </linkerLibItems>
+          <linkerDynSerch>
+            <pElem>.</pElem>
+          </linkerDynSerch>
+          <commandLine>-Werror -lglut</commandLine>
         </linkerTool>
       </compileType>
     </conf>
@@ -123,12 +121,10 @@
         </asmTool>
         <linkerTool>
           <output>../dist/libphantom.${CND_DLIB_EXT}</output>
-          <linkerAddLib>
-            <pElem>/opt/freeglut-2.8.0/src/.libs</pElem>
-          </linkerAddLib>
-          <linkerLibItems>
-            <linkerLibLibItem>glut</linkerLibLibItem>
-          </linkerLibItems>
+          <linkerDynSerch>
+            <pElem>.</pElem>
+          </linkerDynSerch>
+          <commandLine>-Werror -lphantom -lglut</commandLine>
         </linkerTool>
       </compileType>
     </conf>
