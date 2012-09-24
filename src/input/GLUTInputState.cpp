@@ -4,6 +4,7 @@
 namespace phantom {
 	void GLUTInputState::setup() {
 		std::cout << "Initializing GLUT InputState handler..." << std::endl;
+
 		glutKeyboardFunc(phantom::GLUTInputState::keyboardListener);
 		glutKeyboardUpFunc(phantom::GLUTInputState::keyboardUpListener);
 		glutSpecialFunc(phantom::GLUTInputState::keyboardSpecialListener);

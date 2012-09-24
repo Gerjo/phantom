@@ -11,8 +11,8 @@ namespace phantom {
 		glutInit(&i, 0);
 		glutInitWindowSize(width, height);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-
-		glClearColor(1.0f, 1.0f, 1.0f, 0.5f);
+		glEnable(GL_TEXTURE_2D);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 		
 		_windowID = glutCreateWindow("Elephantom");
 	}
@@ -33,9 +33,8 @@ namespace phantom {
 			while(itShape != shapes->end())	{
 				glLoadIdentity();
 				glBegin(GL_TRIANGLES);
-
 				vector<Eigen::Vector2f>::iterator itVert = (*itShape)->vertices.begin();
-				
+				glColor4b((*itShape)->fillColor.r, (*itShape)->fillColor.g, (*itShape)->fillColor.b, (*itShape)->fillColor.a);
 				while(itVert != (*itShape)->vertices.end()) {
 					glVertex2f((*itVert).x(), (*itVert).y());
 				}
