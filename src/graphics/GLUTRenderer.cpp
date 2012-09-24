@@ -22,6 +22,31 @@ namespace phantom {
 	}
 
 	void GLUTRenderer::drawLoop(std::vector<Composite*> *components) {
+		std::vector<Composite*>::iterator compIt = components->begin();
+		while(compIt != components->end()) {
+			if((*compIt)->getComponents()->size() > 0) {
+				drawLoop((*compIt)->getComponents());
+			}
+
+			deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
+			deque<Shape*>::iterator itShape = shapes->begin();
+			while(itShape != shapes->end())	{
+				glLoadIdentity();
+				glBegin(GL_TRIANGLES);
+
+				vector<Eigen::Vector2f>::iterator itVert = (*itShape)->vertices.begin();
+				
+				while(itVert != (*itShape)->vertices.end()) {
+					glVertex2f((*itVert).x(), (*itVert).y());
+				}
+
+				glEnd();
+
+				itShape++;
+			}
+
+			compIt++;
+		}
 	}
 
 	void GLUTRenderer::renderLoop(std::vector<GameState*> *states) {
@@ -34,12 +59,7 @@ namespace phantom {
 			if(iter == states->rbegin() || (*iter)->transparent)
 				break;
 
-			std::vector<Composite*> *components = (*iter)->getComponents();
-			std::vector<Composite*>::iterator compIt;
-			while(compIt != components->end()) {
-				deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
-			}
-
+			drawLoop((*iter)->getComponents());
 			--iter;
 		}
 		
