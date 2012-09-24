@@ -8,17 +8,17 @@ CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
+CND_ARTIFACT_DIR_Debug=../dist
 CND_ARTIFACT_NAME_Debug=libphantom.so
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/libphantom.so
+CND_ARTIFACT_PATH_Debug=../dist/libphantom.so
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Debug=libphantom.so.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/libphantom.so.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
-CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
+CND_ARTIFACT_DIR_Release=../dist
 CND_ARTIFACT_NAME_Release=libphantom.so
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/libphantom.so
+CND_ARTIFACT_PATH_Release=../dist/libphantom.so
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Release=libphantom.so.tar
 CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/libphantom.so.tar

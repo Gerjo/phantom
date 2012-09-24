@@ -35,23 +35,24 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/core/EventManager.o \
-	${OBJECTDIR}/src/core/Entity.o \
-	${OBJECTDIR}/src/core/Composite.o \
-	${OBJECTDIR}/src/core/PhantomGame.o \
-	${OBJECTDIR}/src/graphics/shapes/Line.o \
-	${OBJECTDIR}/src/input/GLUTInputState.o \
-	${OBJECTDIR}/src/core/GameState.o \
-	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
-	${OBJECTDIR}/src/input/InputState.o \
-	${OBJECTDIR}/src/physics/Mover.o \
-	${OBJECTDIR}/src/core/Layer.o \
-	${OBJECTDIR}/src/graphics/shapes/Arc.o \
-	${OBJECTDIR}/src/graphics/shapes/Shape.o \
-	${OBJECTDIR}/src/graphics/Graphics.o \
-	${OBJECTDIR}/src/graphics/GLUTRenderer.o \
-	${OBJECTDIR}/src/graphics/RenderLayer.o \
-	${OBJECTDIR}/src/graphics/shapes/Polygon.o
+	${OBJECTDIR}/_ext/1416150433/Layer.o \
+	${OBJECTDIR}/_ext/1416150433/PhantomGame.o \
+	${OBJECTDIR}/_ext/325940660/Shape.o \
+	${OBJECTDIR}/_ext/325940660/Line.o \
+	${OBJECTDIR}/_ext/325940660/Polygon.o \
+	${OBJECTDIR}/_ext/1923082125/GLUTDriver.o \
+	${OBJECTDIR}/_ext/1923082125/RenderLayer.o \
+	${OBJECTDIR}/_ext/1416150433/GameState.o \
+	${OBJECTDIR}/_ext/1416150433/Composite.o \
+	${OBJECTDIR}/_ext/1923082125/Graphics.o \
+	${OBJECTDIR}/_ext/1416150433/EventManager.o \
+	${OBJECTDIR}/_ext/956500488/InputState.o \
+	${OBJECTDIR}/_ext/956500488/GLUTInputState.o \
+	${OBJECTDIR}/_ext/1416150433/Entity.o \
+	${OBJECTDIR}/_ext/1923082125/GLUTRenderer.o \
+	${OBJECTDIR}/_ext/325940660/Rectangle.o \
+	${OBJECTDIR}/_ext/325940660/Arc.o \
+	${OBJECTDIR}/_ext/1827995909/Mover.o
 
 
 # C Compiler Flags
@@ -68,100 +69,105 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-L/opt/freeglut-2.8.0/src/.libs -lglut
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphantom.${CND_DLIB_EXT}
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ../dist/libphantom.${CND_DLIB_EXT}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphantom.${CND_DLIB_EXT}: ${OBJECTFILES}
-	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -shared -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphantom.${CND_DLIB_EXT} -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+../dist/libphantom.${CND_DLIB_EXT}: ${OBJECTFILES}
+	${MKDIR} -p ../dist
+	${LINK.cc} -shared -o ../dist/libphantom.${CND_DLIB_EXT} -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/src/core/EventManager.o: src/core/EventManager.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
+${OBJECTDIR}/_ext/1416150433/Layer.o: /home/gerjo/pccs/phantom/src/core/Layer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/EventManager.o src/core/EventManager.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/Layer.o /home/gerjo/pccs/phantom/src/core/Layer.cpp
 
-${OBJECTDIR}/src/core/Entity.o: src/core/Entity.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
+${OBJECTDIR}/_ext/1416150433/PhantomGame.o: /home/gerjo/pccs/phantom/src/core/PhantomGame.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Entity.o src/core/Entity.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/PhantomGame.o /home/gerjo/pccs/phantom/src/core/PhantomGame.cpp
 
-${OBJECTDIR}/src/core/Composite.o: src/core/Composite.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
+${OBJECTDIR}/_ext/325940660/Shape.o: /home/gerjo/pccs/phantom/src/graphics/shapes/Shape.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/325940660
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Composite.o src/core/Composite.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/325940660/Shape.o /home/gerjo/pccs/phantom/src/graphics/shapes/Shape.cpp
 
-${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
+${OBJECTDIR}/_ext/325940660/Line.o: /home/gerjo/pccs/phantom/src/graphics/shapes/Line.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/325940660
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/325940660/Line.o /home/gerjo/pccs/phantom/src/graphics/shapes/Line.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+${OBJECTDIR}/_ext/325940660/Polygon.o: /home/gerjo/pccs/phantom/src/graphics/shapes/Polygon.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/325940660
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/325940660/Polygon.o /home/gerjo/pccs/phantom/src/graphics/shapes/Polygon.cpp
 
-${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
+${OBJECTDIR}/_ext/1923082125/GLUTDriver.o: /home/gerjo/pccs/phantom/src/graphics/GLUTDriver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/GLUTInputState.o src/input/GLUTInputState.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/GLUTDriver.o /home/gerjo/pccs/phantom/src/graphics/GLUTDriver.cpp
 
-${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
+${OBJECTDIR}/_ext/1923082125/RenderLayer.o: /home/gerjo/pccs/phantom/src/graphics/RenderLayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/RenderLayer.o /home/gerjo/pccs/phantom/src/graphics/RenderLayer.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+${OBJECTDIR}/_ext/1416150433/GameState.o: /home/gerjo/pccs/phantom/src/core/GameState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/GameState.o /home/gerjo/pccs/phantom/src/core/GameState.cpp
 
-${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
+${OBJECTDIR}/_ext/1416150433/Composite.o: /home/gerjo/pccs/phantom/src/core/Composite.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/Composite.o /home/gerjo/pccs/phantom/src/core/Composite.cpp
 
-${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
+${OBJECTDIR}/_ext/1923082125/Graphics.o: /home/gerjo/pccs/phantom/src/graphics/Graphics.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/Graphics.o /home/gerjo/pccs/phantom/src/graphics/Graphics.cpp
 
-${OBJECTDIR}/src/core/Layer.o: src/core/Layer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
+${OBJECTDIR}/_ext/1416150433/EventManager.o: /home/gerjo/pccs/phantom/src/core/EventManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Layer.o src/core/Layer.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/EventManager.o /home/gerjo/pccs/phantom/src/core/EventManager.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+${OBJECTDIR}/_ext/956500488/InputState.o: /home/gerjo/pccs/phantom/src/input/InputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/956500488
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/956500488/InputState.o /home/gerjo/pccs/phantom/src/input/InputState.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+${OBJECTDIR}/_ext/956500488/GLUTInputState.o: /home/gerjo/pccs/phantom/src/input/GLUTInputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/956500488
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Shape.o src/graphics/shapes/Shape.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/956500488/GLUTInputState.o /home/gerjo/pccs/phantom/src/input/GLUTInputState.cpp
 
-${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
+${OBJECTDIR}/_ext/1416150433/Entity.o: /home/gerjo/pccs/phantom/src/core/Entity.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1416150433/Entity.o /home/gerjo/pccs/phantom/src/core/Entity.cpp
 
-${OBJECTDIR}/src/graphics/GLUTRenderer.o: src/graphics/GLUTRenderer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
+${OBJECTDIR}/_ext/1923082125/GLUTRenderer.o: /home/gerjo/pccs/phantom/src/graphics/GLUTRenderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1923082125
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTRenderer.o src/graphics/GLUTRenderer.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1923082125/GLUTRenderer.o /home/gerjo/pccs/phantom/src/graphics/GLUTRenderer.cpp
 
-${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
+${OBJECTDIR}/_ext/325940660/Rectangle.o: /home/gerjo/pccs/phantom/src/graphics/shapes/Rectangle.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/325940660
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/RenderLayer.o src/graphics/RenderLayer.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/325940660/Rectangle.o /home/gerjo/pccs/phantom/src/graphics/shapes/Rectangle.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+${OBJECTDIR}/_ext/325940660/Arc.o: /home/gerjo/pccs/phantom/src/graphics/shapes/Arc.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/325940660
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/325940660/Arc.o /home/gerjo/pccs/phantom/src/graphics/shapes/Arc.cpp
+
+${OBJECTDIR}/_ext/1827995909/Mover.o: /home/gerjo/pccs/phantom/src/physics/Mover.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/1827995909
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/_ext/1827995909/Mover.o /home/gerjo/pccs/phantom/src/physics/Mover.cpp
 
 # Subprojects
 .build-subprojects:
@@ -169,7 +175,7 @@ ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libphantom.${CND_DLIB_EXT}
+	${RM} ../dist/libphantom.${CND_DLIB_EXT}
 
 # Subprojects
 .clean-subprojects:
