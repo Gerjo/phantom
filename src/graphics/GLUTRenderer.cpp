@@ -11,16 +11,22 @@ namespace phantom {
 		glutInitWindowSize(width, height);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 
-		glClearColor(0.5f, 0.5f, 0.5f, 0.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-	
-		glutCreateWindow("Elephantom");
+		glClearColor(1.0f, 1.0f, 1.0f, 0.5f);
+		
+		_windowID = glutCreateWindow("Elephantom");
 	}
 
 	GLUTRenderer::~GLUTRenderer() {
+		glutDestroyWindow(_windowID);
 	}
 
 	void GLUTRenderer::renderLoop() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glLoadIdentity();
+		
+		glutSolidTeapot(0.1f);
+		
+		glutSwapBuffers();
 		glutMainLoopEvent();
 	}
 
