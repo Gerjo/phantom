@@ -2,7 +2,7 @@
 #define GLUTDRIVER_H
 
 #include "BaseDriver.h"
-#include <core\PhantomGame.h>
+#include <core/PhantomGame.h>
 
 namespace phantom{
     

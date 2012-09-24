@@ -1,6 +1,6 @@
 #include "GLUTDriver.h"
 #include "GLUTRenderer.h"
-#include <input\GLUTInputState.h>
+#include <input/GLUTInputState.h>
 namespace phantom{
    
     GLUTDriver::GLUTDriver(){
