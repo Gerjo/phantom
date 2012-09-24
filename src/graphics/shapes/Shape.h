@@ -7,22 +7,24 @@
 
 namespace phantom {
 
-	class LIBEXPORT Shape {
-	public:
-		std::vector<Eigen::Vector2f> vertices;
+    class LIBEXPORT Shape {
+    public:
+        std::vector<Eigen::Vector2f> vertices;
 
-		float x;
-		float y;
+        float x;
+        float y;
 
-		Color lineColor;
-		Color fillColor;
+        Color lineColor;
+        Color fillColor;
 
-		Shape();
-		virtual ~Shape();
+        Shape();
+        virtual ~Shape();
 
         void setFillColor(Color color);
         void setLineColor(Color color);
-		
-	};
+
+        void addVertex(float x, float y);
+
+    };
 } /* namespace phantom */
 #endif /* SHAPE_H_ */

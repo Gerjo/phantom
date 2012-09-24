@@ -1,30 +1,30 @@
 /*
- * GameState.h
- *
- *  Created on: Aug 22, 2012
- *      Author: koen
- */
+* GameState.h
+*
+*  Created on: Aug 22, 2012
+*      Author: koen
+*/
 
 #ifndef GAMESTATE_H_
 #define GAMESTATE_H_
 
 #include "Composite.h"
-
+#include <CompileConfig.h>
 namespace phantom {
 
-class GameState : public Composite {
-public:
+    class LIBEXPORT GameState : public Composite {
+    public:
 
-	bool transparent;
-	bool propegateUpdate;
+        bool transparent;
+        bool propegateUpdate;
 
-	GameState();
-	virtual ~GameState();
+        GameState();
+        virtual ~GameState();
 
-private:
+    private:
 
-	Composite *camera;
-};
+        Composite *camera;
+    };
 
 }
 
