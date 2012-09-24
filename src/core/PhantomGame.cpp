@@ -6,11 +6,10 @@
 */
 
 #include "PhantomGame.h"
-#include <graphics\GLUTDriver.h>
 #include <iostream>
 #include <ctime>
 #include <phantom.h>
-
+#include <graphics/BaseDriver.h>
 
 namespace phantom {
 
