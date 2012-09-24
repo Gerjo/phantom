@@ -51,7 +51,7 @@ namespace phantom {
 				// Iterate through all the points located in our shape.
 				vector<Eigen::Vector2f>::iterator itVert = (*itShape)->vertices.begin();
 				while(itVert != (*itShape)->vertices.end()) {
-					glVertex2f((*itShape)->x + (*itVert).x(), (*itShape)->y + (*itVert).y());
+					glVertex3f((*itShape)->x + itVert->x(), (*itShape)->y + itVert->y(), 0.0f);
                     ++itVert;
 				}
 
@@ -59,7 +59,7 @@ namespace phantom {
 				glEnd();
 
 				// Move on to the next shape.
-				itShape++;
+				++itShape;
 			}
 
 			// If the component has other components attached to it, draw them aswell.
@@ -73,7 +73,7 @@ namespace phantom {
 	}
 
 	void GLUTRenderer::renderLoop(std::vector<GameState*> *states) {
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		setOrtho();
 		
 		std::vector<GameState*>::reverse_iterator iter;
@@ -86,7 +86,6 @@ namespace phantom {
 			++iter;
 		}
 
-		glutSolidTeapot(500.0f);
 		glutSwapBuffers();
 		glutMainLoopEvent();
 	}
