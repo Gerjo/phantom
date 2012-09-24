@@ -14,8 +14,10 @@
 #include <graphics/Renderer.h>
 #include <CompileConfig.h>
 
-namespace phantom {
 
+
+namespace phantom {
+    class BaseDriver;
 class LIBEXPORT PhantomGame : public Composite {
 public:
 	PhantomGame( const char *configfile );
@@ -24,7 +26,7 @@ public:
 	void pushGameState( GameState *state );
 	void popGameState();
 
-	int start( int argc, char *argv[] );
+    int start( int argc, char *argv[], BaseDriver* driver );
 
 	void update( float elapsed );
 
@@ -56,7 +58,7 @@ private:
 	unsigned int fps;
 
 	Renderer *renderer;
-
+    BaseDriver *driver;
 	std::vector<GameState*> states;
 
 	double time();
