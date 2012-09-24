@@ -13,7 +13,7 @@
 
 namespace phantom {
 
-    PhantomGame::PhantomGame(const char *configfile) : width(1280), height(800), fps(60){
+    PhantomGame::PhantomGame(const char *configfile) : width(1280), height(720), fps(60){
         
     }
 
