@@ -12,13 +12,22 @@ namespace phantom {
 		glutInitWindowSize(width, height);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 		glEnable(GL_TEXTURE_2D);
+		
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		//gluOrtho2D(0, width, height, 0); 
 		_windowID = glutCreateWindow("Elephantom");
 	}
 
 	GLUTRenderer::~GLUTRenderer() {
 		glutDestroyWindow(_windowID);
+	}
+
+	void GLUTRenderer::setOrtho() {
+		glViewport(0,0,width,height);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, width, -height, 0, -1000000, 1000000);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 	}
 
 	void GLUTRenderer::drawLoop(std::vector<Composite*> *components) {
@@ -64,8 +73,8 @@ namespace phantom {
 	}
 
 	void GLUTRenderer::renderLoop(std::vector<GameState*> *states) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glLoadIdentity();
+		glClear(GL_COLOR_BUFFER_BIT);
+		setOrtho();
 		
 		std::vector<GameState*>::reverse_iterator iter;
         iter = states->rbegin();
@@ -76,9 +85,8 @@ namespace phantom {
 			drawLoop((*iter)->getComponents());
 			++iter;
 		}
-        glLoadIdentity();
-        glColor4f(1.0,1.0,1.0,1.0);
-        glutSolidTeapot(100);
+
+		glutSolidTeapot(500.0f);
 		glutSwapBuffers();
 		glutMainLoopEvent();
 	}

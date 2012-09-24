@@ -17,6 +17,8 @@ namespace phantom {
 		virtual void renderLoop(std::vector<GameState*> *states);
 	private:
 		int _windowID;
+
+		void setOrtho();
 	};
 }
 #endif // GLUTRENDERER_H
