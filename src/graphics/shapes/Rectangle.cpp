@@ -15,10 +15,5 @@ namespace phantom{
         addVertex(width, height);
         addVertex(width, 0.0f);
     }
-    void Rectangle::addVertex(float x, float y){
-        Eigen::Vector2f v(x, y);
-        vertices.push_back(v);
-    }
-
 
 }

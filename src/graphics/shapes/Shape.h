@@ -23,7 +23,7 @@ namespace phantom {
         void setFillColor(Color color);
         void setLineColor(Color color);
 
-        void addVertex(float x, float y);
+        virtual void addVertex(float x, float y);
 
     };
 } /* namespace phantom */

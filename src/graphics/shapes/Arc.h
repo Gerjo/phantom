@@ -8,6 +8,8 @@ namespace phantom{
 	public:
 		float radius, start, end;
 		Arc(float x, float y, float radius, float start, float end);
+    private:
+        void drawArc();
 	};
 } /* namespace phantom */
 
