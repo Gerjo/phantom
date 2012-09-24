@@ -38,9 +38,6 @@ namespace phantom {
             double now = this->time();
             double elapsed = now-last;
 
-            //std::cout << elapsed << std::endl;
-
-            //this->update(static_cast<float>(elapsed));
             driver->onUpdate(static_cast<float>(elapsed));
             renderer->renderLoop(&states);
 
@@ -48,6 +45,7 @@ namespace phantom {
             elapsed = this->time()-last;
             if(elapsed < (1.0f/this->fps))
                 phantom::Util::sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
+
         }
         return 0;
     }

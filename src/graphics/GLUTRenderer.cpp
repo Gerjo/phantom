@@ -13,7 +13,7 @@ namespace phantom {
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 		glEnable(GL_TEXTURE_2D);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
-		
+		gluOrtho2D(0, 1280, 720, 0); 
 		_windowID = glutCreateWindow("Elephantom");
 	}
 
