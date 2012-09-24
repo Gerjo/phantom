@@ -7,13 +7,13 @@ namespace phantom{
         this->y = y;
         this->width = width;
         this->height = height;
-        addVertex(x,y);
-        addVertex(x+width, y);
-        addVertex(x, y+height);
+        addVertex(0.0f, 0.0f);
+        addVertex(width, 0.0f);
+        addVertex(0.0f, height);
 
-        addVertex(x, y+height);
-        addVertex(x+width, y + height);
-        addVertex(x+width, y);
+        addVertex(0.0f, height);
+        addVertex(width, height);
+        addVertex(width, 0.0f);
     }
     void Rectangle::addVertex(float x, float y){
         Eigen::Vector2f v(x, y);
