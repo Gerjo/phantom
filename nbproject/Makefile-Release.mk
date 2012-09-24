@@ -77,7 +77,7 @@ LDLIBSOPTIONS=-Wl,-rpath,.
 
 ../dist/libphantom.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ../dist
-	${LINK.cc} -Werror -lphantom -lglut -shared -o ../dist/libphantom.${CND_DLIB_EXT} -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -Werror -lglut -shared -o ../dist/libphantom.${CND_DLIB_EXT} -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
 ${OBJECTDIR}/_ext/1416150433/Layer.o: /home/gerjo/pccs/phantom/src/core/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/1416150433
