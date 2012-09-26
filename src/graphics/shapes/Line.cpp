@@ -8,6 +8,10 @@ namespace phantom{
         this->toX = toX;
         this->toY = toY;
         
+		drawLine(x, y, toX, toY);
+    }
+
+	void Line::drawLine(float x, float y, float toX, float toY) {
 		float x0, x1, x2, x3;
 		float y0, y1, y2, y3;
 		float length;
@@ -34,6 +38,6 @@ namespace phantom{
 		addVertex(x2, y2);
 		addVertex(x3, y3);
 		addVertex(x1, y1);
+	}
 
-    }
 } /* namespace phantom */

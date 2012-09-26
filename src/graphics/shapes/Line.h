@@ -3,11 +3,15 @@
 
 #include "Shape.h"
 #include <stdio.h>
+#include <CompileConfig.h>
+
 namespace phantom{
-	class LIBEXPORT Line: public Shape{
+	class LIBEXPORT Line : public Shape{
 		float toX, toY;
     public:
 		Line(float x, float y, float toX, float toY);
+
+		virtual void drawLine(float x, float y, float toX, float toY);
 	};
 } /* namespace phantom */
 
