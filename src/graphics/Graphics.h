@@ -4,12 +4,8 @@
 #include <deque>
 
 #include <CompileConfig.h>
-#include <graphics/Graphics.h>
 #include <graphics/Color.h>
 #include <graphics/shapes/Shape.h>
-#include <graphics/shapes/Rectangle.h>
-#include <graphics/shapes/Arc.h>
-#include <graphics/shapes/Line.h>
 #include <graphics/shapes/Polygon.h>
 
 using namespace std;

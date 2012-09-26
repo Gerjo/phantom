@@ -51,7 +51,7 @@ namespace phantom {
 				// Iterate through all the points located in our shape.
 				vector<Eigen::Vector2f>::iterator itVert = (*itShape)->vertices.begin();
 				while(itVert != (*itShape)->vertices.end()) {
-					glVertex3f((*itShape)->x + itVert->x(), (*itShape)->y + itVert->y(), 0.0f);
+					glVertex2f((*itShape)->x + itVert->x(), (*itShape)->y + itVert->y());
                     ++itVert;
 				}
 

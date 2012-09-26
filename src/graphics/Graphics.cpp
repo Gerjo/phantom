@@ -1,6 +1,8 @@
 #include <graphics/Graphics.h>
 #include <core/PhantomGame.h>
 #include <iostream>
+#include <graphics/shapes/Rectangle.h>
+#include <graphics/shapes/Arc.h>
 
 namespace phantom {
 
