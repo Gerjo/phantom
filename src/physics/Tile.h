@@ -6,6 +6,7 @@
 #include <core/Entity.h>
 
 using namespace std;
+
 namespace phantom{
 
     class Tile {
