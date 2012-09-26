@@ -8,14 +8,14 @@ namespace phantom{
         this->toX = toX;
         this->toY = toY;
         
-		drawLine(x, y, toX, toY);
+		drawLine(x, y, toX, toY, 0, 0);
     }
 
-	void Line::drawLine(float x, float y, float toX, float toY) {
+	void Line::drawLine(float x, float y, float toX, float toY, float offsetX, float offsetY) {
 		float x0, x1, x2, x3;
 		float y0, y1, y2, y3;
 		float length;
-		float thickness = 5.0f;
+		float thickness = 1.0f;
 
 		x0 = 0.0f;
 		y0 = 0.0f;
@@ -31,13 +31,13 @@ namespace phantom{
 		x3 = x2 + x1;
 		y3 = y2 + y1;
 
-		addVertex(x0, y0);
-		addVertex(x1, y1);
-		addVertex(x2, y2);
+		addVertex(x0 + offsetX, y0 + offsetY);
+		addVertex(x1 + offsetX, y1 + offsetY);
+		addVertex(x2 + offsetX, y2 + offsetY);
 		
-		addVertex(x2, y2);
-		addVertex(x3, y3);
-		addVertex(x1, y1);
+		addVertex(x2 + offsetX, y2 + offsetY);
+		addVertex(x3 + offsetX, y3 + offsetY);
+		addVertex(x1 + offsetX, y1 + offsetY);
 	}
 
 } /* namespace phantom */

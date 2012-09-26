@@ -19,12 +19,12 @@ namespace phantom{
         ang1 = end;
 
         for(angle = ang0; angle <= ang1; angle+= STEPSIZE){
-            vx = x + radius*cos(angle);
-            vy = y + radius*sin(angle);
-            vx1 = x + (radius - 5.0f)*cos(angle + STEPSIZE);
-            vy1 =  y + (radius - 5.0f)*sin(angle + STEPSIZE);
+            vx = radius*cos(angle);
+            vy = radius*sin(angle);
+            vx1 = radius*cos(angle + STEPSIZE);
+            vy1 = radius*sin(angle + STEPSIZE);
 
-            Line::drawLine(vx, vy, vx1, vy1);
+			Line::drawLine(vx1, vy1, vx, vy, vx1, vy1);
         }
     }
 } /* namespace Phantom */ 
