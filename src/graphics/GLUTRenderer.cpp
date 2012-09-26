@@ -2,6 +2,7 @@
 #include <iostream>
 #include <GL/freeglut.h>
 #include <graphics/Graphics.h>
+#include <graphics/VerticeData.h>
 
 namespace phantom {
 
@@ -49,9 +50,10 @@ namespace phantom {
 				glColor4b((*itShape)->fillColor.r, (*itShape)->fillColor.g, (*itShape)->fillColor.b, (*itShape)->fillColor.a);
 				
 				// Iterate through all the points located in our shape.
-				vector<Eigen::Vector2f>::iterator itVert = (*itShape)->vertices.begin();
+				vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
 				while(itVert != (*itShape)->vertices.end()) {
-					glVertex2f((*itShape)->x + itVert->x(), (*itShape)->y + itVert->y());
+					glTexCoord2f(itVert->texX, itVert->texY);
+					glVertex2f((*itShape)->x + itVert->x, (*itShape)->y + itVert->y);
                     ++itVert;
 				}
 

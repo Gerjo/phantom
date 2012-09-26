@@ -36,7 +36,7 @@ namespace phantom {
 
 			setjmp(png_jmpbuf(_png));
 			_img = (png_bytep*) malloc(sizeof(png_bytep) * height);
-			for (int y = 0; y < height; y++)
+			for (int y = 0; y < height; ++y)
 					_img[y] = (png_byte*) malloc(png_get_rowbytes(_png, _info));
 
 			png_read_image(_png, _img);

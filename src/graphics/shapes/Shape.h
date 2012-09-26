@@ -4,12 +4,13 @@
 #include <graphics/Color.h>
 #include <CompileConfig.h>
 #include <vector>
+#include <graphics/VerticeData.h>
 
 namespace phantom {
 
     class LIBEXPORT Shape {
     public:
-        std::vector<Eigen::Vector2f> vertices;
+		std::vector<VerticeData> vertices;
 
         float x;
         float y;
@@ -23,7 +24,7 @@ namespace phantom {
         void setFillColor(Color color);
         void setLineColor(Color color);
 
-        virtual void addVertex(float x, float y);
+        virtual void addVertex(float x, float y, float texX = 0.0f, float texY = 0.0f);
 
     };
 } /* namespace phantom */
