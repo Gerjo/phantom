@@ -1,10 +1,3 @@
-/*
- * Composite.cpp
- *
- *  Created on: Aug 22, 2012
- *      Author: koen
- */
-
 #include "Composite.h"
 #include <iostream>
 

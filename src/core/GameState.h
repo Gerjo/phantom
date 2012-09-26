@@ -1,10 +1,3 @@
-/*
-* GameState.h
-*
-*  Created on: Aug 22, 2012
-*      Author: koen
-*/
-
 #ifndef GAMESTATE_H_
 #define GAMESTATE_H_
 

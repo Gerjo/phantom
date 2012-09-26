@@ -1,10 +1,3 @@
-/*
-* PhantomGame.cpp
-*
-*  Created on: Aug 22, 2012
-*      Author: koen & nico & sander & gerjo
-*/
-
 #include "PhantomGame.h"
 #include <iostream>
 #include <ctime>

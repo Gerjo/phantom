@@ -1,10 +1,3 @@
-/*
- * Layer.cpp
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #include "Layer.h"
 
 #include <core/PhantomGame.h>

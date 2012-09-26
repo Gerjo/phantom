@@ -1,10 +1,3 @@
-/*
- * Composite.h
- *
- *  Created on: Aug 22, 2012
- *      Author: koen
- */
-
 #ifndef COMPOSITE_H_
 #define COMPOSITE_H_
 

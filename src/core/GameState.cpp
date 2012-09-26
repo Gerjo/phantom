@@ -1,10 +1,3 @@
-/*
- * GameState.cpp
- *
- *  Created on: Aug 22, 2012
- *      Author: koen
- */
-
 #include "GameState.h"
 
 namespace phantom {

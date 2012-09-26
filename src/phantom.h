@@ -1,9 +1,3 @@
-/*
- * phantom.h
- *
- *  Created on: Aug 22, 2012
- *      Author: koen
- */
 #ifndef PHANTOM_H_
 #define PHANTOM_H_
 
