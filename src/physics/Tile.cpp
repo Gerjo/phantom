@@ -1,10 +1,13 @@
 #include "Tile.h"
-namespace phantom{
-    Tile::Tile(){
+namespace phantom {
+
+    Tile::Tile() {
     }
-    Tile::~Tile(){
+
+    Tile::~Tile() {
     }
-    void Tile::addEntity(phantom::Entity* entity){
+
+    void Tile::addEntity(phantom::Entity* entity) {
         objectList.push_back(entity);
     }
 }

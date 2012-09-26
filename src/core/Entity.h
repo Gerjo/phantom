@@ -7,6 +7,8 @@
 #include <graphics/shapes/Shape.h>
 #include <core/Composite.h>
 
+class Tile;
+
 namespace phantom {
 
 class Entity: public phantom::Composite
@@ -21,6 +23,7 @@ protected:
     Eigen::Vector3f position;
     Mover *mover;
     Shape *shape;
+    Tile* _tile;
 };
 
 } /* namespace phantom */

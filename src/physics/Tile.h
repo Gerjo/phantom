@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace phantom{
+namespace phantom {
 
     class Tile {
     public: //variables
