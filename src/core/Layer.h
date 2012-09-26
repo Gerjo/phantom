@@ -1,10 +1,3 @@
-/*
- * Layer.h
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #ifndef LAYER_H_
 #define LAYER_H_
 

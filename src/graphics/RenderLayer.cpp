@@ -1,10 +1,3 @@
-/*
- * RenderLayer.cpp
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #include "RenderLayer.h"
 
 namespace phantom {

@@ -1,10 +1,3 @@
-/*
- * Mover.h
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #ifndef MOVER_H_
 #define MOVER_H_
 

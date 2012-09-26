@@ -1,10 +1,3 @@
-/*
- * PhantomGame.h
- *
- *  Created on: Aug 22, 2012
- *      Author: koen
- */
-
 #ifndef PHANTOMGAME_H_
 #define PHANTOMGAME_H_
 

@@ -1,10 +1,3 @@
-/*
- * RenderLayer.h
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #ifndef RENDERLAYER_H_
 #define RENDERLAYER_H_
 

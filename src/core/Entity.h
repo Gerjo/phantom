@@ -1,10 +1,3 @@
-/*
- * Entity.h
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #ifndef ENTITY_H_
 #define ENTITY_H_
 

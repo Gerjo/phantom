@@ -1,10 +1,3 @@
-/*
- * Mover.cpp
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #include "Mover.h"
 
 namespace phantom {

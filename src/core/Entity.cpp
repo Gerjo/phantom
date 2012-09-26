@@ -1,10 +1,3 @@
-/*
- * Entity.cpp
- *
- *  Created on: Aug 23, 2012
- *      Author: koen
- */
-
 #include "Entity.h"
 
 namespace phantom {
