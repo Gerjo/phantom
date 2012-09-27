@@ -19,7 +19,7 @@ namespace phantom {
         void addEntity(phantom::Entity* entity);
         void removeEntity(phantom::Entity* entity);
 
-
+        void onEntityChange(Entity* entity);
     };
 }
 

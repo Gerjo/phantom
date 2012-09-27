@@ -18,10 +18,16 @@ namespace phantom {
 
         virtual void addComponent(Composite *component);
 
+        void setX(float x);
+        void setY(float y);
+
+        bool hasTile();
+
     protected:
         Mover *mover;
         Shape *shape;
         Tile* _tile;
+
     };
 
 } /* namespace phantom */
