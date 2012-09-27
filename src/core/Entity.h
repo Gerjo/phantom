@@ -11,10 +11,10 @@ namespace phantom {
     class Mover;
     class Shape;
 
-    class Entity : public Composite {
+    class LIBEXPORT Entity : public Composite {
     public:
-        ObjectLayer* objectLayer;
         Entity();
+        ObjectLayer* objectLayer;
 
         virtual void addComponent(Composite *component);
 
