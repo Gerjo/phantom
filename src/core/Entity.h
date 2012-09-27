@@ -13,7 +13,6 @@ namespace phantom {
 
     class Entity : public Composite {
     public:
-        Eigen::Vector3f position;
         ObjectLayer* objectLayer;
         Entity();
 
