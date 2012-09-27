@@ -4,7 +4,7 @@
 namespace phantom {
 
 
-Composite::Composite() : flags(0), destroyed(false), parent(0), position(0, 0, 0) {
+Composite::Composite() : flags(0), destroyed(false), parent(0), _position(0, 0, 0) {
 
 }
 
@@ -121,7 +121,7 @@ bool Composite::canCollideWith( Composite *other )
 }
 
 const Eigen::Vector3f& Composite::getPosition() {
-    return position;
+    return this->_position;
 }
 
 } /* namespace phantom */

@@ -59,7 +59,7 @@ namespace phantom {
         }
 
     public:
-        Eigen::Vector3f position;
+        Eigen::Vector3f _position;
 
         const Eigen::Vector3f& getPosition();
 
