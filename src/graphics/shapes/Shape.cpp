@@ -4,6 +4,7 @@ namespace phantom {
 
 	Shape::Shape()
 	{
+        _imgRows = 0;
 	}
 
 	Shape::~Shape()

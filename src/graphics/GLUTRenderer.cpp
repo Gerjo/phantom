@@ -3,6 +3,8 @@
 #include <GL/freeglut.h>
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>
+#include <graphics/shapes/PNGImage.h>
+#include <png.h>
 
 namespace phantom {
 
@@ -13,7 +15,6 @@ namespace phantom {
 		glutInitWindowSize(width, height);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 		glEnable(GL_TEXTURE_2D);
-
 
 		_windowID = glutCreateWindow("Elephantom");
 	}
@@ -49,9 +50,25 @@ namespace phantom {
 				// Change the color of our shape.
 				glColor4b((*itShape)->fillColor.r, (*itShape)->fillColor.g, (*itShape)->fillColor.b, (*itShape)->fillColor.a);
 
-				// Iterate through all the points located in our shape.
+                // Add the texture.
+                if((*itShape)->_imgRows != 0)
+                {
+                    PNGImage *img = static_cast<PNGImage *>((*itShape));
+                    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+                    glTexImage2D(GL_TEXTURE_2D, 0, 4, img->getImgWidth(), img->getImgHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, *(*img)._imgRows);
+                    cout << *(*img)._imgRows[0];
+                    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP); 
+                    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP); 
+                    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
+                    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
+                    glEnable(GL_TEXTURE_2D); 
+                    glShadeModel(GL_FLAT); 
+                }
+                
+                // Iterate through all the points located in our shape.
 				vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
 				while(itVert != (*itShape)->vertices.end()) {
+                    
 					glTexCoord2f(itVert->texX, itVert->texY);
 					glVertex2f((*itShape)->x + itVert->x, (*itShape)->y + itVert->y);
                     ++itVert;

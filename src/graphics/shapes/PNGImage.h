@@ -8,13 +8,17 @@ namespace phantom {
 		PNGImage(char *fileName, float x, float y, float width, float height);
 		~PNGImage();
 
+        int getImgWidth() { return _pngW; }
+        int getImgHeight() { return _pngH; }
 	private:
-		png_structp _png;
-		png_infop   _info;
-		float		_width;
-		float		_height;
+        float _width;
+        float _height;
+        int _pngW;
+        int _pngH;
 
-		void readPNG(char* fileName);
+        bool validate(std::istream& source);
+		void createPNG(std::istream& source);
+        static void readPNG(png_structp png, png_bytep data, png_size_t length);
 		void createRectangle();
 	};
 }
