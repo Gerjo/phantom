@@ -7,20 +7,20 @@
 
 namespace phantom {
 
-class LIBEXPORT Layer: public phantom::Composite
-{
-public:
-    Layer(float width=0, float height=0);
-    virtual ~Layer();
+    class LIBEXPORT Layer: public Composite
+    {
+    public:
+        Layer(float width=0, float height=0);
+        virtual ~Layer();
 
-    virtual void onAdd( Composite *parent );
-    virtual void onAnsestorChanged();
+        virtual void onAdd( Composite *parent );
+        virtual void onAnsestorChanged();
 
-protected:
-    GameState *state;
-    float width;
-    float height;
-};
+    protected:
+        GameState *state;
+        float width;
+        float height;
+    };
 
 } /* namespace phantom */
 #endif /* LAYER_H_ */

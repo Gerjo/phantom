@@ -2,29 +2,33 @@
 #define ENTITY_H_
 
 #include <Eigen/Geometry>
-
-#include <physics/Mover.h>
-#include <graphics/shapes/Shape.h>
 #include <core/Composite.h>
 
-class Tile;
 
 namespace phantom {
+    class Tile;
+    class ObjectLayer;
+    class Mover;
+    class Shape;
 
-class Entity: public phantom::Composite
-{
-public:
-    Entity();
-    virtual ~Entity();
+    class LIBEXPORT Entity : public Composite {
+    public:
+        Entity();
+        ObjectLayer* objectLayer;
 
-    virtual void addComponent( Composite *component );
+        virtual void addComponent(Composite *component);
 
-protected:
-    Eigen::Vector3f position;
-    Mover *mover;
-    Shape *shape;
-    Tile* _tile;
-};
+        void setX(float x);
+        void setY(float y);
+
+        bool hasTile();
+
+    protected:
+        Mover *mover;
+        Shape *shape;
+        Tile* _tile;
+
+    };
 
 } /* namespace phantom */
 #endif /* ENTITY_H_ */

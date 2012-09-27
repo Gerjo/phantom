@@ -4,8 +4,8 @@
 namespace phantom {
 
 
-Composite::Composite() : flags(0), destroyed(0), parent(0) {
-    
+Composite::Composite() : flags(0), destroyed(false), parent(0), _position(0, 0, 0) {
+
 }
 
 Composite::~Composite() {
@@ -72,7 +72,7 @@ bool Composite::removeComponent( Composite *component )
     return false;
 }
 
-void Composite::update(float elapsed)
+void Composite::update(const float& elapsed)
 {
 	std::vector<Composite*>::iterator iter;
 	for( iter = this->components.begin(); iter != this->components.end(); ++iter )
@@ -118,6 +118,10 @@ void Composite::afterCollision( Composite *other )
 bool Composite::canCollideWith( Composite *other )
 {
 	return true;
+}
+
+const Eigen::Vector3f& Composite::getPosition() {
+    return this->_position;
 }
 
 } /* namespace phantom */

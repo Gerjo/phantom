@@ -4,8 +4,11 @@
 #include <vector>
 #include <phantom.h>
 #include <core/Entity.h>
+#include <iostream>
+#include <layer/TiledObjectLayer.h>
 
 using namespace std;
+
 
 namespace phantom {
 
@@ -13,13 +16,13 @@ namespace phantom {
     public: //variables
         std::vector<phantom::Entity*> objectList;
         int index, tileX, tileY;
+        TiledObjectLayer* layer;
     public: //functions
-        Tile();
-        virtual ~Tile();
+        Tile(TiledObjectLayer* layer);
         void addEntity(phantom::Entity* entity);
         void removeEntity(phantom::Entity* entity);
 
-
+        void onEntityChange(Entity* entity);
     };
 }
 

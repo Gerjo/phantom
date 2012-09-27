@@ -32,10 +32,13 @@ namespace phantom {
 		glLoadIdentity();
 	}
 
-	void GLUTRenderer::drawLoop(std::vector<Composite*> *components) {
+	void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Eigen::Vector3f offset) {
+
 		// Get the iterator and start iterating.
 		std::vector<Composite*>::iterator compIt = components->begin();
 		while(compIt != components->end()) {
+
+            offset += (*compIt)->getPosition();
 
 			// Get the shapes and start iterating.
 			deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
@@ -70,7 +73,11 @@ namespace phantom {
 				while(itVert != (*itShape)->vertices.end()) {
                     
 					glTexCoord2f(itVert->texX, itVert->texY);
-					glVertex2f((*itShape)->x + itVert->x, (*itShape)->y + itVert->y);
+
+                    int offsetX = (int) offset.x();
+                    int offsetY = (int) offset.y();
+
+					glVertex2f((*itShape)->x + itVert->x + offsetX, (*itShape)->y + itVert->y + offsetY);
                     ++itVert;
 				}
 
@@ -83,7 +90,7 @@ namespace phantom {
 
 			// If the component has other components attached to it, draw them as well.
 			if((*compIt)->getComponents()->size() > 0) {
-				drawLoop((*compIt)->getComponents());
+				drawLoop((*compIt)->getComponents(), offset);
 			}
 
 			// Move on to the next component.
@@ -101,10 +108,11 @@ namespace phantom {
             if(!(*iter)->transparent)
                 break;
 
-            drawLoop((*iter)->getComponents());
+            Eigen::Vector3f initialOffset(0, 0, 0);
+
+            drawLoop((*iter)->getComponents(), initialOffset);
             ++iter;
         }
-
 
 		glutSwapBuffers();
 		glutMainLoopEvent();
