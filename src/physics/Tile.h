@@ -4,8 +4,8 @@
 #include <vector>
 #include <phantom.h>
 #include <core/Entity.h>
-#include <layer/TiledObjectLayer>
 #include <iostream>
+#include <layer/TiledObjectLayer.h>
 
 using namespace std;
 
