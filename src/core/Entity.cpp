@@ -5,18 +5,14 @@
 namespace phantom {
 
     Entity::Entity() {
-        
-    }
-
-    Entity::~Entity() {
 
     }
 
-    void Entity::addComponent(Composite *component) {
+    void Entity::addComponent(Composite* component) {
         Composite::addComponent(component);
-        Mover *m = dynamic_cast<Mover*> (component);
-        if (m != NULL) {
-            if (this->mover != NULL)
+        Mover* m = dynamic_cast<Mover*> (component);
+        if (m != 0) {
+            if (this->mover != 0)
                 this->destroyComponent(this->mover);
             this->mover = m;
         }

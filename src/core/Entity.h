@@ -11,19 +11,16 @@ class Tile;
 
 namespace phantom {
 
-class Entity: public phantom::Composite
-{
-public:
-    Entity();
-    virtual ~Entity();
+    class Entity : public Composite {
+    public:
+        Entity();
+        virtual void addComponent(Composite *component);
 
-    virtual void addComponent( Composite *component );
-
-protected:
-    Mover *mover;
-    Shape *shape;
-    Tile* _tile;
-};
+    protected:
+        Mover *mover;
+        Shape *shape;
+        Tile* _tile;
+    };
 
 } /* namespace phantom */
 #endif /* ENTITY_H_ */
