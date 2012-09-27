@@ -14,7 +14,7 @@ namespace phantom {
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 		glEnable(GL_TEXTURE_2D);
 
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.392f, 0.584f, 0.929f, 1.0f );
 		_windowID = glutCreateWindow("Elephantom");
 	}
 
@@ -75,8 +75,6 @@ namespace phantom {
 	}
 
 	void GLUTRenderer::renderLoop(std::vector<GameState*> *states) {
-        glClearColor(0.392f, 0.584f, 0.929f, 1.0f );
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		setOrtho();
 
