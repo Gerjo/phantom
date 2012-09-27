@@ -31,7 +31,7 @@ public:
     Graphics& rect(float x, float y, float width, float height);
     Graphics& arc(float x, float y, float radius, float start, float end);
 
-
+    Graphics& image(char *fileName, float x, float y, float width, float height);
 
     Graphics& moveTo(float x, float y);
     Graphics& lineTo(float x, float y);

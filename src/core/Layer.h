@@ -3,10 +3,11 @@
 
 #include <core/GameState.h>
 #include <core/Composite.h>
+#include <CompileConfig.h>
 
 namespace phantom {
 
-class Layer: public phantom::Composite
+class LIBEXPORT Layer: public phantom::Composite
 {
 public:
     Layer(float width=0, float height=0);
