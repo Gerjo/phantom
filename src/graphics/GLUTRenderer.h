@@ -5,6 +5,7 @@
 #include <CompileConfig.h>
 #include <core/GameState.h>
 #include <core/Composite.h>
+#include <deque>
 
 namespace phantom {
 	class LIBEXPORT GLUTRenderer : public Renderer
@@ -12,9 +13,9 @@ namespace phantom {
 	public:
 		GLUTRenderer(int width, int height);
 		virtual ~GLUTRenderer();
-		
+
 		virtual void drawLoop(std::vector<Composite*> *components);
-		virtual void renderLoop(std::vector<GameState*> *states);
+		virtual void renderLoop(std::deque<GameState*> *states);
 	private:
 		int _windowID;
 

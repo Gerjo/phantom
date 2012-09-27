@@ -3,7 +3,7 @@
 
 #include <core/GameState.h>
 #include <core/Composite.h>
-#include <vector>
+#include <deque>
 #include <graphics/Renderer.h>
 #include <CompileConfig.h>
 
@@ -52,7 +52,7 @@ private:
 
 	Renderer *renderer;
     BaseDriver *driver;
-	std::vector<GameState*> states;
+	std::deque<GameState*> states;
 
 	double time();
 };

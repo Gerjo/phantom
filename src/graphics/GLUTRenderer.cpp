@@ -74,16 +74,18 @@ namespace phantom {
 		}
 	}
 
-	void GLUTRenderer::renderLoop(std::vector<GameState*> *states) {
+	void GLUTRenderer::renderLoop(std::deque<GameState*> *states) {
         glClearColor(0.392f, 0.584f, 0.929f, 1.0f );
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		setOrtho();
 
-		std::vector<GameState*>::reverse_iterator it;
-        for(it = states->rbegin(); it != states->rend(); ++it) {
-            if(!(*it)->transparent) {
-                drawLoop((*it)->getComponents());
-            }
+        std::deque<GameState*>::reverse_iterator iter = states->rbegin();
+        while(iter != states->rend()) {
+            if(!(*iter)->transparent)
+                break;
+
+            drawLoop((*iter)->getComponents());
+            ++iter;
         }
 
 

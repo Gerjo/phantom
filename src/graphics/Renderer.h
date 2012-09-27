@@ -2,7 +2,7 @@
 #define RENDERER_H
 
 #include <CompileConfig.h>
-#include <vector>
+#include <deque>
 #include <core/GameState.h>
 
 namespace phantom {
@@ -15,7 +15,7 @@ namespace phantom {
 		virtual ~Renderer() { }
 
 		virtual void drawLoop(std::vector<Composite*> *components) { }
-		virtual void renderLoop(std::vector<GameState*> *states) { }
+		virtual void renderLoop(std::deque<GameState*> *states) { }
 	};
 }
 

@@ -7,7 +7,7 @@
 namespace phantom {
 
     PhantomGame::PhantomGame(const char *configfile) : width(1280), height(720), fps(60){
-        
+
     }
 
     PhantomGame::~PhantomGame() {
@@ -46,7 +46,7 @@ namespace phantom {
     void PhantomGame::update( float elapsed )
     {
         Composite::update( elapsed );
-        std::vector<GameState*>::reverse_iterator iter;
+        std::deque<GameState*>::reverse_iterator iter;
         iter = this->states.rbegin();
         while( iter != this->states.rend() )
         {
