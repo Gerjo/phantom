@@ -2,7 +2,7 @@
 
 namespace phantom {
 
-GameState::GameState() {
+GameState::GameState() : transparent(true), propegateUpdate(true) {
 	// TODO Auto-generated constructor stub
 
 }
