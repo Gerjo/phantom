@@ -72,7 +72,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>/home/gerjo/pccs/phantom/src</Elem>
+    <Elem>src</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -93,7 +93,7 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut</commandLine>
+          <commandLine>-Werror -lglut -lGL -lGLU</commandLine>
         </linkerTool>
       </compileType>
     </conf>
@@ -124,7 +124,7 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut</commandLine>
+          <commandLine>-Werror -lglut -lGL -lGLU</commandLine>
         </linkerTool>
       </compileType>
     </conf>
