@@ -4,34 +4,34 @@
 
 namespace phantom {
 
-Layer::Layer(float width, float height) : width(width), height(height)
-{
-}
-
-Layer::~Layer()
-{
-}
-
-void Layer::onAdd( Composite *parent )
-{
-    Composite::onAdd(parent);
-    this->state = dynamic_cast<GameState*>(parent);
-}
-
-void Layer::onAnsestorChanged()
-{
-    Composite::onAnsestorChanged();
-    if( this->width == 0 || this->height == 0 )
+    Layer::Layer(float width, float height) : width(width), height(height)
     {
-        PhantomGame *game = this->findAnsestor<PhantomGame>();
-        if( game != NULL )
+    }
+
+    Layer::~Layer()
+    {
+    }
+
+    void Layer::onAdd( Composite *parent )
+    {
+        Composite::onAdd(parent);
+        this->state = dynamic_cast<GameState*>(parent);
+    }
+
+    void Layer::onAnsestorChanged()
+    {
+        Composite::onAnsestorChanged();
+        if( this->width == 0 || this->height == 0 )
         {
-            if( this->width == 0 )
-                this->width = static_cast<float>(game->getWidth());
-            if( this->height == 0 )
-                this->height = static_cast<float>(game->getHeight());
+            PhantomGame *game = this->findAnsestor<PhantomGame>();
+            if( game != NULL )
+            {
+                if( this->width == 0 )
+                    this->width = static_cast<float>(game->getWidth());
+                if( this->height == 0 )
+                    this->height = static_cast<float>(game->getHeight());
+            }
         }
     }
-}
 
 } /* namespace phantom */

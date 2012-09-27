@@ -13,7 +13,7 @@ namespace phantom
 	}
 
 	PNGImage::~PNGImage() {
-		for (int y = 0; y < png_get_image_height(_png, _info); ++y)
+		for (unsigned int y = 0; y < png_get_image_height(_png, _info); ++y)
 			free(_img[y]);
 		free(_img);
 	}
