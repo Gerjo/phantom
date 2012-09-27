@@ -13,7 +13,7 @@ namespace phantom {
 		glutInitWindowSize(width, height);
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 		glEnable(GL_TEXTURE_2D);
-		
+
 		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 		_windowID = glutCreateWindow("Elephantom");
 	}
@@ -40,15 +40,15 @@ namespace phantom {
 			deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
 			deque<Shape*>::iterator itShape = shapes->begin();
 			while(itShape != shapes->end())	{
-				// Load the identity matrix so all coördinates go to the position they belong.
+				// Load the identity matrix so all coordinates go to the position they belong.
 				glLoadIdentity();
 
 				// Begin drawing our shape.
 				glBegin(GL_TRIANGLES);
-				
+
 				// Change the color of our shape.
 				glColor4b((*itShape)->fillColor.r, (*itShape)->fillColor.g, (*itShape)->fillColor.b, (*itShape)->fillColor.a);
-				
+
 				// Iterate through all the points located in our shape.
 				vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
 				while(itVert != (*itShape)->vertices.end()) {
@@ -64,7 +64,7 @@ namespace phantom {
 				++itShape;
 			}
 
-			// If the component has other components attached to it, draw them aswell.
+			// If the component has other components attached to it, draw them as well.
 			if((*compIt)->getComponents()->size() > 0) {
 				drawLoop((*compIt)->getComponents());
 			}
@@ -77,7 +77,7 @@ namespace phantom {
 	void GLUTRenderer::renderLoop(std::vector<GameState*> *states) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		setOrtho();
-		
+
 		std::vector<GameState*>::reverse_iterator iter;
         iter = states->rbegin();
 		while(iter != states->rend()) {
