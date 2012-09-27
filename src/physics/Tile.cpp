@@ -12,6 +12,6 @@ namespace phantom {
     }
 
     void Tile::onEntityChange(Entity* entity) {
-
+        cout << "Updating entity position" << endl;
     }
 }

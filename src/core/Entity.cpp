@@ -1,6 +1,9 @@
 #include "Entity.h"
 
 #include <physics/Tile.h>
+#include <physics/Mover.h>
+#include <graphics/shapes/Shape.h>
+
 
 namespace phantom {
 
@@ -18,15 +21,19 @@ namespace phantom {
         }
     }
 
-    void Entity::setX(float n) {
+    void Entity::setX(float x) {
+        _position.x() = x;
+
         if(hasTile()) {
-            //_tile->onEntityChange(this);
+            _tile->onEntityChange(this);
         }
     }
 
     void Entity::setY(float y) {
+        _position.y() = y;
+
         if(hasTile()) {
-           // _tile->onEntityChange(this);
+            _tile->onEntityChange(this);
         }
     }
 

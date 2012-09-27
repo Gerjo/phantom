@@ -2,14 +2,14 @@
 #define ENTITY_H_
 
 #include <Eigen/Geometry>
-
-#include <physics/Mover.h>
-#include <graphics/shapes/Shape.h>
 #include <core/Composite.h>
 
-class Tile;
-class ObjectLayer;
+
 namespace phantom {
+    class Tile;
+    class ObjectLayer;
+    class Mover;
+    class Shape;
 
     class Entity : public Composite {
     public:

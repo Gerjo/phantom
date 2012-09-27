@@ -4,6 +4,7 @@
 #include <vector>
 #include <phantom.h>
 #include <core/Entity.h>
+#include <iostream>
 
 using namespace std;
 
