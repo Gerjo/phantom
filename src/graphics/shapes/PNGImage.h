@@ -11,7 +11,6 @@ namespace phantom {
 	private:
 		png_structp _png;
 		png_infop   _info;
-		png_bytep*  _img;
 		float		_width;
 		float		_height;
 
