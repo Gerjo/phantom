@@ -11,10 +11,9 @@ class Tile;
 class ObjectLayer;
 namespace phantom {
 
-    class Entity : public Composite {
+    class LIBEXPORT Entity : public Composite {
     public:
         ObjectLayer* objectLayer;
-        Entity();
 
         virtual void addComponent(Composite *component);
 

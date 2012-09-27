@@ -4,10 +4,6 @@
 
 namespace phantom {
 
-    Entity::Entity() {
-
-    }
-
     void Entity::addComponent(Composite* component) {
         Composite::addComponent(component);
         Mover* m = dynamic_cast<Mover*> (component);
