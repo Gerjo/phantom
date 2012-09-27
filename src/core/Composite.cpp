@@ -4,7 +4,7 @@
 namespace phantom {
 
 
-Composite::Composite() : flags(0), destroyed(0), parent(0) {
+Composite::Composite() : flags(0), destroyed(false), parent(0) {
 
 }
 
