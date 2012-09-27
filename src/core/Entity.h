@@ -16,7 +16,6 @@ namespace phantom {
         Eigen::Vector3f position;
         ObjectLayer* objectLayer;
         Entity();
-        virtual ~Entity();
 
         virtual void addComponent(Composite *component);
 
