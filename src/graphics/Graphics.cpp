@@ -126,5 +126,15 @@ namespace phantom {
         }
     }
 
+    Graphics& Graphics::clear() {
+        _finalizedShapes.clear();
+        _workspaceShapes.clear();
+
+        if(_polygonBuffer != 0) {
+            delete _polygonBuffer;
+            _polygonBuffer = 0;
+        }
+    }
+
 
 } /* namespace phantom */
