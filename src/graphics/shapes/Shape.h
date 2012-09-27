@@ -11,7 +11,7 @@ namespace phantom {
     class LIBEXPORT Shape {
     public:
 		std::vector<VerticeData> vertices;
-        unsigned char** _imgRows;
+        unsigned char* imageData;
 
         float x;
         float y;
