@@ -93,6 +93,9 @@
             <pElem>src</pElem>
           </incDir>
         </ccTool>
+        <asmTool>
+          <commandlineTool>as</commandlineTool>
+        </asmTool>
         <linkerTool>
           <output>../dist/libphantom.${CND_DLIB_EXT}</output>
           <linkerDynSerch>

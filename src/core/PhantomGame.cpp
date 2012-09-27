@@ -32,6 +32,9 @@ namespace phantom {
             double elapsed = now-last;
 
             driver->onUpdate(static_cast<float>(elapsed));
+
+            Eigen::Vector3f offset(0, 0, 0);
+
             renderer->renderLoop(&states);
 
             last = now;

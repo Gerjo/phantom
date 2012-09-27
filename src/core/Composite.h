@@ -57,8 +57,11 @@ namespace phantom {
         friend std::ostream& operator<<(std::ostream &s, const Composite *c) {
             return s << "Composite(" << c->components.size() << ")";
         }
-    protected:
+
+    public:
         Eigen::Vector3f position;
+
+        const Eigen::Vector3f& getPosition();
 
     private:
         Composite *parent;

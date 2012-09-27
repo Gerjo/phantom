@@ -43,8 +43,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/input/GLUTInputState.o \
 	${OBJECTDIR}/src/core/GameState.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
-	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/physics/Mover.o \
+	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/core/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
@@ -52,8 +52,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/physics/Tile.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/graphics/GLUTRenderer.o \
-	${OBJECTDIR}/src/graphics/GLUTDriver.o \
 	${OBJECTDIR}/src/graphics/RenderLayer.o \
+	${OBJECTDIR}/src/graphics/GLUTDriver.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o
 
 
@@ -121,15 +121,15 @@ ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
 
-${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
-
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+
+${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
 
 ${OBJECTDIR}/src/core/Layer.o: src/core/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
@@ -166,15 +166,15 @@ ${OBJECTDIR}/src/graphics/GLUTRenderer.o: src/graphics/GLUTRenderer.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTRenderer.o src/graphics/GLUTRenderer.cpp
 
-${OBJECTDIR}/src/graphics/GLUTDriver.o: src/graphics/GLUTDriver.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTDriver.o src/graphics/GLUTDriver.cpp
-
 ${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/RenderLayer.o src/graphics/RenderLayer.cpp
+
+${OBJECTDIR}/src/graphics/GLUTDriver.o: src/graphics/GLUTDriver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTDriver.o src/graphics/GLUTDriver.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes

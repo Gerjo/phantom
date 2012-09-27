@@ -14,7 +14,7 @@ namespace phantom {
 		GLUTRenderer(int width, int height);
 		virtual ~GLUTRenderer();
 
-		virtual void drawLoop(std::vector<Composite*> *components);
+		virtual void drawLoop(std::vector<Composite*> *components, Eigen::Vector3f offset);
 		virtual void renderLoop(std::deque<GameState*> *states);
 	private:
 		int _windowID;
