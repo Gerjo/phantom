@@ -135,6 +135,7 @@ namespace phantom {
             delete _polygonBuffer;
             _polygonBuffer = 0;
         }
+        return *this;
     }
 
 

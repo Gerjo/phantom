@@ -8,12 +8,16 @@
 #include <core/Composite.h>
 
 class Tile;
-
+class ObjectLayer;
 namespace phantom {
 
     class Entity : public Composite {
     public:
+        Eigen::Vector3f position;
+        ObjectLayer* objectLayer;
         Entity();
+        virtual ~Entity();
+
         virtual void addComponent(Composite *component);
 
     protected:
