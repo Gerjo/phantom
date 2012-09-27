@@ -1,12 +1,9 @@
 #include "Tile.h"
 namespace phantom {
 
-    Tile::Tile() {
+    Tile::Tile(TiledObjectLayer* layer) {
+        this->layer = layer;
     }
-
-    Tile::~Tile() {
-    }
-
     void Tile::addEntity(phantom::Entity* entity) {
         objectList.push_back(entity);
     }
