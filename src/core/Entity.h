@@ -20,7 +20,6 @@ public:
     virtual void addComponent( Composite *component );
 
 protected:
-    Eigen::Vector3f position;
     Mover *mover;
     Shape *shape;
     Tile* _tile;

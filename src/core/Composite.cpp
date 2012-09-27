@@ -5,7 +5,7 @@ namespace phantom {
 
 
 Composite::Composite() : flags(0), destroyed(0), parent(0) {
-    
+
 }
 
 Composite::~Composite() {
@@ -72,7 +72,7 @@ bool Composite::removeComponent( Composite *component )
     return false;
 }
 
-void Composite::update(float elapsed)
+void Composite::update(const float& elapsed)
 {
 	std::vector<Composite*>::iterator iter;
 	for( iter = this->components.begin(); iter != this->components.end(); ++iter )
