@@ -36,6 +36,7 @@ public:
     Graphics& moveTo(float x, float y);
     Graphics& lineTo(float x, float y);
 
+    Graphics& clear();
 private:
     deque<Shape*> _finalizedShapes;
     deque<Shape*> _workspaceShapes;

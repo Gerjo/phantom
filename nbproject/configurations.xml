@@ -3,61 +3,66 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="src" displayName="src" projectFiles="true">
       <logicalFolder name="core" displayName="core" projectFiles="true">
-        <itemPath>/home/gerjo/pccs/phantom/src/core/Composite.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/Composite.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/Entity.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/Entity.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/EventManager.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/EventManager.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/GameState.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/GameState.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/Layer.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/Layer.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/PhantomGame.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/core/PhantomGame.h</itemPath>
+        <itemPath>src/core/Composite.cpp</itemPath>
+        <itemPath>src/core/Composite.h</itemPath>
+        <itemPath>src/core/Entity.cpp</itemPath>
+        <itemPath>src/core/Entity.h</itemPath>
+        <itemPath>src/core/EventManager.cpp</itemPath>
+        <itemPath>src/core/EventManager.h</itemPath>
+        <itemPath>src/core/GameState.cpp</itemPath>
+        <itemPath>src/core/GameState.h</itemPath>
+        <itemPath>src/core/Layer.cpp</itemPath>
+        <itemPath>src/core/Layer.h</itemPath>
+        <itemPath>src/core/PhantomGame.cpp</itemPath>
+        <itemPath>src/core/PhantomGame.h</itemPath>
       </logicalFolder>
       <logicalFolder name="graphics" displayName="graphics" projectFiles="true">
         <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Arc.cpp</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Arc.h</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Line.cpp</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Line.h</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Polygon.cpp</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Polygon.h</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Rectangle.cpp</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Rectangle.h</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Shape.cpp</itemPath>
-          <itemPath>/home/gerjo/pccs/phantom/src/graphics/shapes/Shape.h</itemPath>
+          <itemPath>src/graphics/shapes/Arc.cpp</itemPath>
+          <itemPath>src/graphics/shapes/Arc.h</itemPath>
+          <itemPath>src/graphics/shapes/Line.cpp</itemPath>
+          <itemPath>src/graphics/shapes/Line.h</itemPath>
+          <itemPath>src/graphics/shapes/PNGImage.cpp</itemPath>
+          <itemPath>src/graphics/shapes/PNGImage.h</itemPath>
+          <itemPath>src/graphics/shapes/Polygon.cpp</itemPath>
+          <itemPath>src/graphics/shapes/Polygon.h</itemPath>
+          <itemPath>src/graphics/shapes/Rectangle.cpp</itemPath>
+          <itemPath>src/graphics/shapes/Rectangle.h</itemPath>
+          <itemPath>src/graphics/shapes/Shape.cpp</itemPath>
+          <itemPath>src/graphics/shapes/Shape.h</itemPath>
         </logicalFolder>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/BaseDriver.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/Color.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/GLUTDriver.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/GLUTDriver.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/GLUTRenderer.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/GLUTRenderer.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/Graphics.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/Graphics.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/RenderLayer.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/RenderLayer.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/graphics/Renderer.h</itemPath>
+        <itemPath>src/graphics/BaseDriver.h</itemPath>
+        <itemPath>src/graphics/Color.h</itemPath>
+        <itemPath>src/graphics/GLUTDriver.cpp</itemPath>
+        <itemPath>src/graphics/GLUTDriver.h</itemPath>
+        <itemPath>src/graphics/GLUTRenderer.cpp</itemPath>
+        <itemPath>src/graphics/GLUTRenderer.h</itemPath>
+        <itemPath>src/graphics/Graphics.cpp</itemPath>
+        <itemPath>src/graphics/Graphics.h</itemPath>
+        <itemPath>src/graphics/RenderLayer.cpp</itemPath>
+        <itemPath>src/graphics/RenderLayer.h</itemPath>
+        <itemPath>src/graphics/Renderer.h</itemPath>
+        <itemPath>src/graphics/VerticeData.h</itemPath>
       </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
-        <itemPath>/home/gerjo/pccs/phantom/src/input/GLUTInputState.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/input/GLUTInputState.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/input/InputState.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/input/InputState.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/input/KeyboardState.h</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/input/MouseState.h</itemPath>
+        <itemPath>src/input/GLUTInputState.cpp</itemPath>
+        <itemPath>src/input/GLUTInputState.h</itemPath>
+        <itemPath>src/input/InputState.cpp</itemPath>
+        <itemPath>src/input/InputState.h</itemPath>
+        <itemPath>src/input/KeyboardState.h</itemPath>
+        <itemPath>src/input/MouseState.h</itemPath>
       </logicalFolder>
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
-        <itemPath>/home/gerjo/pccs/phantom/src/physics/Mover.cpp</itemPath>
-        <itemPath>/home/gerjo/pccs/phantom/src/physics/Mover.h</itemPath>
+        <itemPath>src/physics/Mover.cpp</itemPath>
+        <itemPath>src/physics/Mover.h</itemPath>
+        <itemPath>src/physics/Tile.cpp</itemPath>
+        <itemPath>src/physics/Tile.h</itemPath>
       </logicalFolder>
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
-        <itemPath>/home/gerjo/pccs/phantom/src/utils/util.h</itemPath>
+        <itemPath>src/utils/util.h</itemPath>
       </logicalFolder>
-      <itemPath>/home/gerjo/pccs/phantom/src/CompileConfig.h</itemPath>
-      <itemPath>/home/gerjo/pccs/phantom/src/phantom.h</itemPath>
+      <itemPath>src/CompileConfig.h</itemPath>
+      <itemPath>src/phantom.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -93,7 +98,7 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut -lGL -lGLU</commandLine>
+          <commandLine>-Werror -lglut -lGL -lGLU -lpng15</commandLine>
         </linkerTool>
       </compileType>
     </conf>
@@ -124,7 +129,7 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut -lGL -lGLU</commandLine>
+          <commandLine>-Werror -lglut -lGL -lGLU -lpng15</commandLine>
         </linkerTool>
       </compileType>
     </conf>

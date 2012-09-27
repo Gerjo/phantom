@@ -1,5 +1,5 @@
 #include <CompileConfig.h>
-#include <graphics\shapes\Shape.h>
+#include <graphics/shapes/Shape.h>
 #include <png.h>
 
 namespace phantom {

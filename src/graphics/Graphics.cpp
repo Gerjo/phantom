@@ -12,16 +12,7 @@ namespace phantom {
     }
 
     Graphics::~Graphics(void) {
-        deque<Shape*>::iterator shIt;
-        deque<Shape*>& handle = _finalizedShapes;
-
-        for(int i = 0; i < 2; ++i) {
-            for(shIt = handle.begin(); shIt != handle.end(); ++shIt) {
-                delete *shIt;
-            }
-
-            handle = _workspaceShapes;
-        }
+        this->clear();
     }
 
     Graphics& Graphics::beginPath() {
@@ -123,6 +114,26 @@ namespace phantom {
         if(_polygonBuffer == 0) {
             _polygonBuffer = new Polygon();
             _polygonBuffer->addPoint(_polygonLastX, _polygonLastY);
+        }
+    }
+
+    Graphics& Graphics::clear() {
+
+        deque<Shape*>::iterator shIt;
+        deque<Shape*>& handle = _finalizedShapes;
+
+        for(int i = 0; i < 2; ++i) {
+            for(shIt = handle.begin(); shIt != handle.end(); ++shIt) {
+                delete *shIt;
+            }
+
+            handle.clear();
+            handle = _workspaceShapes;
+        }
+
+        if(_polygonBuffer != 0) {
+            delete _polygonBuffer;
+            _polygonBuffer = 0;
         }
     }
 
