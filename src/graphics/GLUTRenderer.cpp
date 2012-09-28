@@ -45,11 +45,17 @@ namespace phantom {
                 // Load the identity matrix so all coordinates go to the position they belong.
                 glLoadIdentity();
 
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                glEnable(GL_BLEND);
+                glDisable(GL_COLOR_MATERIAL);
+
                 // Add the texture.
                 if((*itShape)->imageData != 0)
                 {
                     glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     glEnable(GL_TEXTURE_2D);
+
+
                     PNGImage *img = static_cast<PNGImage *>((*itShape));
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->getImgWidth(), img->getImgHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
