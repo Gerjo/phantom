@@ -11,7 +11,7 @@ namespace phantom{
     }
 
     void Arc::drawArc(){
-		float stepsize = static_cast<float>(M_PI/180);
+		float stepsize = static_cast<float>(M_PI/13);
         float vx, vy, vx1,vy1;
         float angle, ang0, ang1;
 
