@@ -36,12 +36,11 @@ namespace phantom {
         // Get the iterator and start iterating.
         std::vector<Composite*>::iterator compIt = components->begin();
         while(compIt != components->end()) {
-
-            offset += (*compIt)->getPosition();
-
             // Get the shapes and start iterating.
             deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
             deque<Shape*>::iterator itShape = shapes->begin();
+            Eigen::Vector3f offsetRecalculated;
+
             while(itShape != shapes->end())	{
                 // Load the identity matrix so all coordinates go to the position they belong.
                 glLoadIdentity();
@@ -50,13 +49,9 @@ namespace phantom {
                 if((*itShape)->imageData != 0)
                 {
                     glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
                     glEnable(GL_TEXTURE_2D);
                     PNGImage *img = static_cast<PNGImage *>((*itShape));
-                    GLuint texture;
-                    glGenTextures(1, &texture);
-                    glBindTexture(GL_TEXTURE_2D, texture);
-                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->getImgWidth(), img->getImgHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*) img->imageData);
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->getImgWidth(), img->getImgHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
                     glNormal3f(0.0, 0.0, 1.0);
                 }
@@ -69,14 +64,12 @@ namespace phantom {
 
                 // Iterate through all the points located in our shape.
                 vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
+
+                offsetRecalculated = offset + (*compIt)->getPosition();
+
                 while(itVert != (*itShape)->vertices.end()) {
-
                     glTexCoord2f(itVert->texX, itVert->texY);
-
-                    int offsetX = (int) offset.x();
-                    int offsetY = (int) offset.y();
-
-                    glVertex2f((*itShape)->x + itVert->x + offsetX, (*itShape)->y + itVert->y + offsetY);
+                    glVertex2f((*itShape)->x + itVert->x + offsetRecalculated.x(), (*itShape)->y + itVert->y + offsetRecalculated.y());
                     ++itVert;
                 }
 
@@ -95,7 +88,7 @@ namespace phantom {
 
             // If the component has other components attached to it, draw them as well.
             if((*compIt)->getComponents()->size() > 0) {
-                drawLoop((*compIt)->getComponents(), offset);
+                drawLoop((*compIt)->getComponents(), offsetRecalculated);
             }
 
             // Move on to the next component.
@@ -119,6 +112,7 @@ namespace phantom {
             ++iter;
         }
 
+        glFlush();
         glutSwapBuffers();
         glutMainLoopEvent();
     }

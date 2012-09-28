@@ -19,18 +19,19 @@ namespace phantom
     }
 
     PNGImage::~PNGImage() {
+        Shape::~Shape();
         delete[] imageData;
         delete[] row_pointers;
     }
 
     void PNGImage::createRectangle() {
-        addVertex(0.0f, 0.0f, 1.0f, 1.0f);
-        addVertex(_width, 0.0f, 0.0f, 1.0f);
-        addVertex(0.0f, _height, 1.0f, 0.0f);
+        addVertex(0.0f, 0.0f, 0.0f, 0.0f);
+        addVertex(_width, 0.0f, 1.0f, 0.0f);
+        addVertex(0.0f, _height, 0.0f, 1.0f);
 
-        addVertex(0.0f, _height, 1.0f, 0.0f);
-        addVertex(_width, _height, 0.0f, 0.0f);
-        addVertex(_width, 0.0f, 0.0f, 1.0f);
+        addVertex(0.0f, _height, 0.0f, 1.0f);
+        addVertex(_width, _height, 1.0f, 1.0f);
+        addVertex(_width, 0.0f, 1.0f, 0.0f);
     }
 
     void PNGImage::createPNG(std::string filename) {
