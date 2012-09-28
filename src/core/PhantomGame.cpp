@@ -39,8 +39,8 @@ namespace phantom {
 
             last = now;
             elapsed = this->time()-last;
-            if(elapsed < (1.0f/this->fps))
-                phantom::Util::sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
+            //if(elapsed < (1.0f/this->fps))
+            //    phantom::Util::sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
 
         }
         return 0;
