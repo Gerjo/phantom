@@ -39,7 +39,7 @@ namespace phantom {
             // Get the shapes and start iterating.
             deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
             deque<Shape*>::iterator itShape = shapes->begin();
-            Eigen::Vector3f offsetRecalculated;
+            Eigen::Vector3f offsetRecalculated = offset + (*compIt)->getPosition();
 
             while(itShape != shapes->end())	{
                 // Load the identity matrix so all coordinates go to the position they belong.
@@ -64,8 +64,6 @@ namespace phantom {
 
                 // Iterate through all the points located in our shape.
                 vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
-
-                offsetRecalculated = offset + (*compIt)->getPosition();
 
                 while(itVert != (*itShape)->vertices.end()) {
                     glTexCoord2f(itVert->texX, itVert->texY);
