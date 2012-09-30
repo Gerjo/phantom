@@ -12,10 +12,10 @@ namespace phantom{
         int t = x*y;
         _tileList = new Tile*[_tilesY];
         for(y = 0; y < _tilesY; ++y){
+            _tileList[y] = new Tile[_tilesX];
             for(x = 0; x < _tilesX; ++x){
                 _tileList[y][x] = Tile(this);
             }
         }
-
     }
 }

@@ -18,6 +18,7 @@ namespace phantom {
         int index, tileX, tileY;
         TiledObjectLayer* layer;
     public: //functions
+        Tile();
         Tile(TiledObjectLayer* layer);
         void addEntity(phantom::Entity* entity);
         void removeEntity(phantom::Entity* entity);

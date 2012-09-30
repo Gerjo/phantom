@@ -14,6 +14,9 @@
 
 #include <utils/util.h>
 
+#include <layer/ObjectLayer.h>
+#include <layer/TiledObjectLayer.h>
+
 #include <iostream>
 #include <vector>
 

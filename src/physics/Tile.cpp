@@ -1,6 +1,6 @@
 #include "Tile.h"
 namespace phantom {
-
+    Tile::Tile(){}
     Tile::Tile(TiledObjectLayer* layer) {
         this->layer = layer;
     }
