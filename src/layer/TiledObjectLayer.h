@@ -10,6 +10,7 @@ namespace phantom{
     class LIBEXPORT TiledObjectLayer: public ObjectLayer{
     public:
         void createTiles(unsigned int tileSize, unsigned int x, unsigned int y);
+        Tile* getTileAt(Eigen::Vector2f position);
     private: 
         unsigned int _tileSize, _tilesX, _tilesY;
         Tile** _tileList;
