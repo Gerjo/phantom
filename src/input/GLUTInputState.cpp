@@ -30,7 +30,7 @@ namespace phantom {
 	}
 
 	void GLUTInputState::mouseListener(int button, int state, int mouseX, int mouseY) {
-		InputState::getMe()->getMouseState()->handleEvent(button, state);
+		InputState::getMe()->getMouseState()->handleEvent(button, 1 - state);
 	}
 
 	void GLUTInputState::mouseMotionListener(int mouseX, int mouseY) {
