@@ -1,6 +1,6 @@
 #include "TiledObjectLayer.h"
 #include <physics/Tile.h>
-
+#include <utils/PhantomException.h>
 using namespace std;
 
 namespace phantom{
@@ -40,7 +40,7 @@ namespace phantom{
         Composite::addComponent(entity);
         Tile* t = getTileAt(entity->getPosition());
         if(t == 0){
-            cout << "tile does not exist!" << endl;
+            throw PhantomException("muhahaha");
             return;
         }
         t->addEntity(entity);
