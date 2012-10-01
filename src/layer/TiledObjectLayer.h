@@ -3,6 +3,7 @@
 
 #include <deque>
 #include <vector>
+#include <cmath>
 #include "ObjectLayer.h"
 
 class Tile;
@@ -16,7 +17,7 @@ namespace phantom{
         int getRowSize();
         int getColumnSize();
         int getSize();
-    private: 
+    private:
         unsigned int _tileSize, _tilesX, _tilesY;
         Tile** _tileList;
     };

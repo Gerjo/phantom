@@ -27,8 +27,8 @@ namespace phantom{
         }
     }
     Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position){
-        int x = max(0, min(_tilesX -1, floorf(position.x() / _tileSize)));
-        int y = max(0, min(_tilesY -1, floorf(position.y() / _tileSize)));
+        int x = fmax(0, fmin(_tilesX -1, floorf(position.x() / _tileSize)));
+        int y = fmax(0, fmin(_tilesY -1, floorf(position.y() / _tileSize)));
         if(_tileList == 0){
             cout << "tiles not initialized!" << endl;
             return 0;
