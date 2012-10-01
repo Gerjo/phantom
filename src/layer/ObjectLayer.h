@@ -2,7 +2,7 @@
 #define OBJECTLAYER_H
 
 #include <core/Entity.h>
-#include <core/Layer.h>
+#include <layer/Layer.h>
 #include <CompileConfig.h>
 #include <Eigen/Geometry>
 

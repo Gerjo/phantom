@@ -5,7 +5,7 @@
 
 #include <core/Composite.h>
 #include <core/Entity.h>
-#include <core/Layer.h>
+#include <layer/Layer.h>
 #include <core/PhantomGame.h>
 
 #include <input/InputState.h>
@@ -21,7 +21,7 @@
 #include <vector>
 
 #ifdef WIN32
-	#define WIN32_LEAN_AND_MEAN 
+	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
 #else
     #include <sys/time.h>
