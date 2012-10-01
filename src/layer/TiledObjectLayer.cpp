@@ -18,7 +18,6 @@ namespace phantom{
         this->width = static_cast<float>(x * _tilesX);
         this->height = static_cast<float>(y* _tilesY);
 
-        int t = x*y;
         _tileList = new Tile*[_tilesY];
         for(y = 0; y < _tilesY; ++y){
             _tileList[y] = new Tile[_tilesX];
