@@ -1,7 +1,7 @@
 #ifndef RENDERLAYER_H_
 #define RENDERLAYER_H_
 
-#include <core/Layer.h>
+#include <layer/Layer.h>
 #include <CompileConfig.h>
 
 namespace phantom {

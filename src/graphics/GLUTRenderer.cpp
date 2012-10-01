@@ -23,10 +23,10 @@ namespace phantom {
     }
 
     void GLUTRenderer::setOrtho() {
-        glViewport(0,0,width,height);
+        glViewport(0, 0, width, height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, width, height, 0, -1000000, 1000000);
+        glOrtho(0, 1280, 720, 0, -1000000, 1000000);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
     }

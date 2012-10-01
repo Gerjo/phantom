@@ -40,13 +40,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
+	${OBJECTDIR}/src/layer/ObjectLayer.o \
 	${OBJECTDIR}/src/input/GLUTInputState.o \
 	${OBJECTDIR}/src/core/GameState.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
-	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/input/InputState.o \
-	${OBJECTDIR}/src/core/Layer.o \
+	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
+	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/physics/Tile.o \
@@ -54,7 +55,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/GLUTRenderer.o \
 	${OBJECTDIR}/src/graphics/RenderLayer.o \
 	${OBJECTDIR}/src/graphics/GLUTDriver.o \
-	${OBJECTDIR}/src/graphics/shapes/Polygon.o
+	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
+	${OBJECTDIR}/src/layer/TiledObjectLayer.o
 
 
 # C Compiler Flags
@@ -106,6 +108,11 @@ ${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
 
+${OBJECTDIR}/src/layer/ObjectLayer.o: src/layer/ObjectLayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/ObjectLayer.o src/layer/ObjectLayer.cpp
+
 ${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
@@ -121,25 +128,25 @@ ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
 
-${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
-
 ${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
 
-${OBJECTDIR}/src/core/Layer.o: src/core/Layer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
+${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Layer.o src/core/Layer.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
+
+${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/PNGImage.o: src/graphics/shapes/PNGImage.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -180,6 +187,11 @@ ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
+
+${OBJECTDIR}/src/layer/TiledObjectLayer.o: src/layer/TiledObjectLayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/TiledObjectLayer.o src/layer/TiledObjectLayer.cpp
 
 # Subprojects
 .build-subprojects:
