@@ -62,7 +62,7 @@ namespace phantom {
                 }
 
                 // Add the rotation.
-                glRotatef((*compIt)->getGraphics()->getRotation(), 0.0f, 0.0f, 1.0f);
+                glRotatef((*compIt)->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
 
                 // Begin drawing our shape.
                 glBegin(GL_TRIANGLES);
