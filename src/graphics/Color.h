@@ -9,11 +9,11 @@ namespace phantom{
     typedef unsigned char byte;
 
 	struct LIBEXPORT Color {
-        Color() : r(0), g(0), b(0), a(0) {
+        Color() : r(0), g(0), b(0), a(127) {
 
         }
 
-        Color(byte r, byte g, byte b) : r(r), g(g), b(b), a(0) {
+        Color(byte r, byte g, byte b) : r(r), g(g), b(b), a(127) {
 
         }
 
