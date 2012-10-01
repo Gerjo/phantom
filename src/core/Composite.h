@@ -59,9 +59,10 @@ namespace phantom {
         }
 
     public:
-        Eigen::Vector3f _position;
-
         const Eigen::Vector3f& getPosition();
+    
+    protected:
+        Eigen::Vector3f _position;
 
     private:
         Composite *parent;
