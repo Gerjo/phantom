@@ -6,6 +6,7 @@ namespace phantom {
     }
     void Tile::addEntity(phantom::Entity* entity) {
         objectList.push_back(entity);
+        entity->setTile(this);
     }
 
     void Tile::onEntityChange(Entity* entity) {
