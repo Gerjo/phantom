@@ -26,7 +26,7 @@ namespace phantom {
         glViewport(0, 0, width, height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, 1280, 720, 0, -1000000, 1000000);
+        glOrtho(0, 1280, 720, 0, -100, 100);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
     }
@@ -55,12 +55,15 @@ namespace phantom {
                     glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     glEnable(GL_TEXTURE_2D);
 
-
                     PNGImage *img = static_cast<PNGImage *>((*itShape));
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->getImgWidth(), img->getImgHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
                     glNormal3f(0.0, 0.0, 1.0);
                 }
+
+                // Add the rotation.
+                float rotation = (*compIt)->getGraphics()->getRotation();
+                glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 
                 // Begin drawing our shape.
                 glBegin(GL_TRIANGLES);

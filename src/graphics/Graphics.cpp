@@ -7,7 +7,7 @@
 
 namespace phantom {
 
-    Graphics::Graphics(void) : _polygonLastX(0), _polygonLastY(0) {
+    Graphics::Graphics(void) : _polygonLastX(0), _polygonLastY(0), _rotation(0) {
         _polygonBuffer = 0;
     }
 
@@ -70,6 +70,12 @@ namespace phantom {
         PNGImage* image = new PNGImage(fileName, x, y, width, height);
 
         addShape(image);
+        return *this;
+    }
+
+    Graphics& Graphics::rotate(float angle) {
+        _rotation = angle;
+
         return *this;
     }
 
