@@ -10,17 +10,11 @@ using namespace std;
 namespace phantom{
     class LIBEXPORT PhantomException: public exception {
     public:
-        PhantomException(const string error) {
-            _error = error;
-        }
+        PhantomException(const string error);
 
-        const char* what() const throw(...) {
-            return _error.c_str();
-        }
+        const char* what() const throw();
 
-        virtual ~PhantomException() throw(...) {
-            
-        }
+        virtual ~PhantomException() throw() {}
 
     private:
         string _error;

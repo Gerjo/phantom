@@ -43,9 +43,6 @@ namespace phantom{
             t->addEntity(entity);
         }catch(PhantomException e){
             cout << e.what() << endl;
-            __asm {
-                 int 3
-            }
             return;
         }
     }
