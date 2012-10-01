@@ -14,11 +14,11 @@ namespace phantom{
             _error = error;
         }
 
-        const char* what() const throw() {
-            return "mehmeh";
+        const char* what() const throw(...) {
+            return _error.c_str();
         }
 
-        virtual ~PhantomException() throw() {
+        virtual ~PhantomException() throw(...) {
             
         }
 

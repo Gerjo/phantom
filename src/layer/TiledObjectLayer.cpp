@@ -27,23 +27,27 @@ namespace phantom{
             }
         }
     }
-    Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position){
+    Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position) throw(...){
         int x = max<float>(0, min<float>(_tilesX -1, floorf(position.x() / _tileSize)));
         int y = max<float>(0, min<float>(_tilesY -1, floorf(position.y() / _tileSize)));
         if(_tileList == 0){
-            cout << "tiles not initialized!" << endl;
-            return 0;
+            throw PhantomException("Tiles do not exist. Did you call TiledObjectLayer::createTile()?");
+
         }
         return &_tileList[y][x];
     }
     void TiledObjectLayer::addComponent(Entity* entity){
         Composite::addComponent(entity);
-        Tile* t = getTileAt(entity->getPosition());
-        if(t == 0){
-            throw PhantomException("muhahaha");
+        try{
+            Tile* t = getTileAt(entity->getPosition());
+            t->addEntity(entity);
+        }catch(PhantomException e){
+            cout << e.what() << endl;
+            __asm {
+                 int 3
+            }
             return;
         }
-        t->addEntity(entity);
     }
     int TiledObjectLayer::getRowSize(){
         return _tilesX;
