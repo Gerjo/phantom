@@ -5,14 +5,23 @@
 #include <string>
 #include <exception>
 
-using namespace std; 
+using namespace std;
 
 namespace phantom{
-    class LIBEXPORT PhantomException: public exception{
+    class LIBEXPORT PhantomException: public exception {
     public:
-        
-        PhantomException(const string error);
-        const char* what();
+        PhantomException(const string error) {
+            _error = error;
+        }
+
+        const char* what() const throw() {
+            return "mehmeh";
+        }
+
+        virtual ~PhantomException() throw() {
+            
+        }
+
     private:
         string _error;
     };

@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/utils/PhantomException.o \
 	${OBJECTDIR}/src/core/EventManager.o \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
@@ -82,6 +83,11 @@ LDLIBSOPTIONS=-Wl,-rpath,.
 ../dist/libphantom.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ../dist
 	${LINK.cc} -Werror -lglut -lGL -lGLU -lpng15 -shared -o ../dist/libphantom.${CND_DLIB_EXT} -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+
+${OBJECTDIR}/src/utils/PhantomException.o: src/utils/PhantomException.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/utils
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/PhantomException.o src/utils/PhantomException.cpp
 
 ${OBJECTDIR}/src/core/EventManager.o: src/core/EventManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core

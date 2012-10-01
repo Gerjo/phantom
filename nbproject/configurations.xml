@@ -65,6 +65,8 @@
         <itemPath>src/physics/Tile.h</itemPath>
       </logicalFolder>
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>src/utils/PhantomException.cpp</itemPath>
+        <itemPath>src/utils/PhantomException.h</itemPath>
         <itemPath>src/utils/util.h</itemPath>
       </logicalFolder>
       <itemPath>src/CompileConfig.h</itemPath>
