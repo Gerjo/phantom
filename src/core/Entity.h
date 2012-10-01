@@ -20,7 +20,7 @@ namespace phantom {
 
         void setX(float x);
         void setY(float y);
-
+        void setTile(Tile* tile);
         bool hasTile();
 
     protected:

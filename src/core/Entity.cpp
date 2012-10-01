@@ -36,7 +36,9 @@ namespace phantom {
             _tile->onEntityChange(this);
         }
     }
-
+    void Entity::setTile(Tile* tile){
+        _tile = tile;
+    }
     bool Entity::hasTile() {
         return _tile != 0;
     }
