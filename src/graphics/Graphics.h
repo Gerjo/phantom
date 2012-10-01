@@ -20,6 +20,7 @@ public:
 	friend class GLUTRenderer;
 
     Graphics(void);
+
     ~Graphics(void);
 
     Graphics& beginPath();
@@ -45,6 +46,10 @@ public:
     float getRotation() { return _rotation; }
 
 private:
+    Graphics(Graphics& orig) {
+
+    }
+
     deque<Shape*> _finalizedShapes;
     deque<Shape*> _workspaceShapes;
     Color _fillColor;

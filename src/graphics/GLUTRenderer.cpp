@@ -14,7 +14,7 @@ namespace phantom {
         glutInit(&i, 0);
         glutInitWindowSize(width, height);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-        
+
         _windowID = glutCreateWindow("Elephantom");
     }
 
@@ -37,7 +37,7 @@ namespace phantom {
         std::vector<Composite*>::iterator compIt = components->begin();
         while(compIt != components->end()) {
             // Get the shapes and start iterating.
-            deque<Shape*> *shapes = (*compIt)->getGraphics()->getShapes();
+            deque<Shape*> *shapes = (*compIt)->getGraphics().getShapes();
             deque<Shape*>::iterator itShape = shapes->begin();
             Eigen::Vector3f offsetRecalculated = offset + (*compIt)->getPosition();
 
@@ -82,7 +82,7 @@ namespace phantom {
 
                 // End of drawing our shape.
                 glEnd();
-                
+
                 // Disable the texturing again afterwards.
                 if((*itShape)->imageData != 0) {
                     glDisable(GL_TEXTURE_2D);
