@@ -19,6 +19,7 @@ public:
 	friend class GLUTRenderer;
 
     Graphics(void);
+
     ~Graphics(void);
 
     Graphics& beginPath();
@@ -39,6 +40,10 @@ public:
 
     Graphics& clear();
 private:
+    Graphics(Graphics& orig) {
+
+    }
+
     deque<Shape*> _finalizedShapes;
     deque<Shape*> _workspaceShapes;
     Color _fillColor;
