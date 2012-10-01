@@ -18,7 +18,7 @@ namespace phantom{
         ang0 = start;
         ang1 = end;
 
-        for(angle = ang0; angle <= ang1; angle+= stepsize){
+        for(angle = ang0; angle <= ang1; angle+= stepsize) {
             vx = radius*cos(angle);
             vy = radius*sin(angle);
             vx1 = radius*cos(angle + stepsize);

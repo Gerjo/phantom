@@ -19,7 +19,6 @@ namespace phantom
     }
 
     PNGImage::~PNGImage() {
-        Shape::~Shape();
         delete[] imageData;
         delete[] row_pointers;
     }

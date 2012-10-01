@@ -2,6 +2,7 @@
 #define GRAPHICS_H_
 
 #include <deque>
+#include <string>
 
 #include <CompileConfig.h>
 #include <graphics/Color.h>
@@ -31,7 +32,7 @@ public:
     Graphics& rect(float x, float y, float width, float height);
     Graphics& arc(float x, float y, float radius, float start, float end);
 
-    Graphics& image(char *fileName, float x, float y, float width, float height);
+    Graphics& image(string fileName, float x, float y, float width, float height);
 
     Graphics& moveTo(float x, float y);
     Graphics& lineTo(float x, float y);
