@@ -27,7 +27,7 @@ namespace phantom{
             }
         }
     }
-    Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position) throw(...){
+    Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position) throw(){
         int x = max<float>(0, min<float>(_tilesX -1, floorf(position.x() / _tileSize)));
         int y = max<float>(0, min<float>(_tilesY -1, floorf(position.y() / _tileSize)));
         if(_tileList == 0){
