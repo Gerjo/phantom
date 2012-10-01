@@ -4,6 +4,7 @@ namespace phantom {
 
 	Shape::Shape()
 	{
+        imageData = 0;
 	}
 
 	Shape::~Shape()
