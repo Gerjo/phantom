@@ -3,6 +3,9 @@
 using namespace std;
 
 namespace phantom{
+    TiledObjectLayer::TiledObjectLayer():_tileSize(0), _tilesX(0),_tilesY(0){
+        _tileList = 0;
+    }
     void TiledObjectLayer::createTiles(unsigned int tileSize, unsigned int x, unsigned int y){
         _tileSize = tileSize;
         _tilesX = x;
@@ -23,9 +26,22 @@ namespace phantom{
             }
         }
     }
-    Tile* TiledObjectLayer::getTileAt(Eigen::Vector2f position){
-        int x = max(0, min(_tilesX -1, floorf(position.x / _tileSize)));
-        int y = max(0, min(_tilesY -1, floorf(position.y / _tileSize)));
+    Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position){
+        int x = max(0, min(_tilesX -1, floorf(position.x() / _tileSize)));
+        int y = max(0, min(_tilesY -1, floorf(position.y() / _tileSize)));
+        if(_tileList == 0){
+            cout << "tiles not initialized!" << endl;
+            return 0;
+        }
         return &_tileList[y][x];
+    }
+    void TiledObjectLayer::addComponent(Entity* entity){
+        Composite::addComponent(entity);
+        Tile* t = getTileAt(entity->getPosition());
+        if(t == 0){
+            cout << "tile does not exist!" << endl;
+            return;
+        }
+        t->addEntity(entity);
     }
 }
