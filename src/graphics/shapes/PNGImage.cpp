@@ -3,12 +3,12 @@
 
 namespace phantom
 {
-	PNGImage::PNGImage(char *fileName, float x, float y, float width, float height) {
+	PNGImage::PNGImage(string fileName, float x, float y, float width, float height) {
 		this->x = x;
 		this->y = y;
 		this->_width = width;
 		this->_height = height;
-		readPNG(fileName);
+		readPNG(fileName.c_str());
 		createRectangle();
 	}
 
@@ -28,14 +28,14 @@ namespace phantom
         addVertex(_width, 0.0f, 1.0f, 0.0f);
 	}
 
-	void PNGImage::readPNG(char *fileName) {
+	void PNGImage::readPNG(const char *fileName) {
 		char header[8];
 
 		FILE *fp = fopen(fileName, "rb");
 		fread(header, 1, 8, fp);
 		_png = png_create_read_struct(PNG_LIBPNG_VER_STRING, 0, 0, 0);
 		_info = png_create_info_struct(_png);
-			
+
 		setjmp(png_jmpbuf(_png));
 		png_init_io(_png, fp);
 		png_set_sig_bytes(_png, 8);

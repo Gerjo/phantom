@@ -66,13 +66,12 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::image(char *fileName, float x, float y, float width, float height) {
+    Graphics& Graphics::image(string fileName, float x, float y, float width, float height) {
         PNGImage* image = new PNGImage(fileName, x, y, width, height);
 
         addShape(image);
         return *this;
     }
-
 
     Graphics& Graphics::line(float startX, float startY, float endX, float endY) {
         Line* line = new Line(startX, startY, endX, endY);
