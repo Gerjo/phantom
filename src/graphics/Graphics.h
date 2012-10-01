@@ -5,6 +5,7 @@
 #include <string>
 
 #include <CompileConfig.h>
+#include <Eigen/Geometry>
 #include <graphics/Color.h>
 #include <graphics/shapes/Shape.h>
 #include <graphics/shapes/Polygon.h>
@@ -35,10 +36,15 @@ public:
 
     Graphics& image(string fileName, float x, float y, float width, float height);
 
+    Graphics& rotate(float angle);
+
     Graphics& moveTo(float x, float y);
     Graphics& lineTo(float x, float y);
 
     Graphics& clear();
+
+    float getRotation() { return _rotation; }
+
 private:
     Graphics(Graphics& orig) {
 
@@ -56,6 +62,7 @@ private:
     void initializePolygon();
     deque<Shape*> *getShapes() { return &_finalizedShapes; };
 
+    float _rotation;
 
     float _polygonLastX;
     float _polygonLastY;
