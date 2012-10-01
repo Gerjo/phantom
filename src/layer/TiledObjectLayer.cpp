@@ -44,4 +44,13 @@ namespace phantom{
         }
         t->addEntity(entity);
     }
+    int TiledObjectLayer::getRowSize(){
+        return _tilesX;
+    }
+    int TiledObjectLayer::getColumnSize(){
+        return _tilesY;
+    }
+    int TiledObjectLayer::getSize(){
+        return (_tilesX * _tilesY);
+    }
 }
