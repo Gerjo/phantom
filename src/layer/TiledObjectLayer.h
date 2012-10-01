@@ -4,6 +4,8 @@
 #include <deque>
 #include <vector>
 #include <cmath>
+#include <math.h>
+#include <algorithm>
 #include "ObjectLayer.h"
 
 class Tile;

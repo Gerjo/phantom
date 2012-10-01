@@ -1,5 +1,6 @@
 #include "TiledObjectLayer.h"
 #include <physics/Tile.h>
+
 using namespace std;
 
 namespace phantom{
@@ -27,8 +28,8 @@ namespace phantom{
         }
     }
     Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position){
-        int x = fmax(0, fmin(_tilesX -1, floorf(position.x() / _tileSize)));
-        int y = fmax(0, fmin(_tilesY -1, floorf(position.y() / _tileSize)));
+        int x = max<float>(0, min<float>(_tilesX -1, floorf(position.x() / _tileSize)));
+        int y = max<float>(0, min<float>(_tilesY -1, floorf(position.y() / _tileSize)));
         if(_tileList == 0){
             cout << "tiles not initialized!" << endl;
             return 0;
