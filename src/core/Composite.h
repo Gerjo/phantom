@@ -47,8 +47,8 @@ namespace phantom {
             return &components;
         };
 
-        Graphics *getGraphics() {
-            return &graphics;
+        Graphics& getGraphics() {
+            return graphics;
         }
 
         template <class T>
@@ -60,7 +60,7 @@ namespace phantom {
 
     public:
         const Eigen::Vector3f& getPosition();
-    
+
     protected:
         Eigen::Vector3f _position;
 
