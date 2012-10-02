@@ -46,7 +46,7 @@ public:
 
 private:
     Graphics(Graphics& orig) {
-
+        // Thou shalt not copy.
     }
 
     deque<Shape*> _finalizedShapes;
@@ -64,7 +64,6 @@ private:
     void addShape(Shape* shape);
     void finalizePolygon();
     void initializePolygon();
-    deque<Shape*> *getShapes() { return &_finalizedShapes; };
 
     deque<Shape*>& getFinalizedShapes();
     deque<Shape*>& getBufferedShapes();
