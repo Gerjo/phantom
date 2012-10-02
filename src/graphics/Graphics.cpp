@@ -16,18 +16,12 @@ namespace phantom {
     }
 
     Graphics& Graphics::beginPath() {
-        // Move all shapes from the workspace to the finalized collection.
-        while(_workspaceShapes.size() > 0) {
-            Shape* shape = _workspaceShapes.front();
-            _workspaceShapes.pop_front();
+        // Workspace contains non filled or stroked shapes. Destory!
+        deleteShapes(_workspaceShapes);
 
-            // We're only setting the color at the latest possible moment, in order
-            // to comply with the HTML 5 API.
-            shape->setLineColor(_lineColor);
-            shape->setFillColor(_fillColor);
-
-            _finalizedShapes.push_back(shape);
-        }
+        // The buffer is moved to the finalized collection. At this point
+        // their color can no longer be changed.
+        moveShapes(_bufferedShapes, _finalizedShapes);
 
         return *this;
     }
@@ -42,13 +36,15 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::fill() {
+    Graphics& Graphics::fill(void) {
         finalizePolygon();
+        moveShapes(_workspaceShapes, _bufferedShapes);
         return *this;
     }
 
-    Graphics& Graphics::stroke() {
+    Graphics& Graphics::stroke(void) {
         finalizePolygon();
+        moveShapes(_workspaceShapes, _bufferedShapes);
         return *this;
     }
 
@@ -124,17 +120,9 @@ namespace phantom {
 
     Graphics& Graphics::clear() {
 
-        deque<Shape*>::iterator shIt;
-        deque<Shape*>& handle = _finalizedShapes;
-
-        for(int i = 0; i < 2; ++i) {
-            for(shIt = handle.begin(); shIt != handle.end(); ++shIt) {
-                delete *shIt;
-            }
-
-            handle.clear();
-            handle = _workspaceShapes;
-        }
+        deleteShapes(_finalizedShapes);
+        deleteShapes(_workspaceShapes);
+        deleteShapes(_bufferedShapes);
 
         if(_polygonBuffer != 0) {
             delete _polygonBuffer;
@@ -143,5 +131,38 @@ namespace phantom {
         return *this;
     }
 
+
+    void Graphics::moveShapes(deque<Shape*>& source, deque<Shape*>& target) {
+        while(source.size() > 0) {
+            Shape* shape = source.front();
+
+            source.pop_front();
+
+            // We're only setting the color at the latest possible moment, in order
+            // to comply with the HTML 5 API.
+            shape->setLineColor(_lineColor);
+            shape->setFillColor(_fillColor);
+
+            target.push_back(shape);
+        }
+    }
+
+    void Graphics::deleteShapes(deque<Shape*>& source) {
+        deque<Shape*>::iterator shIt;
+
+        for(shIt = source.begin(); shIt != source.end(); ++shIt) {
+            delete *shIt;
+        }
+
+        source.clear();
+    }
+
+    deque<Shape*>& Graphics::getFinalizedShapes() {
+        return _finalizedShapes;
+    }
+
+    deque<Shape*>& Graphics::getBufferedShapes() {
+        return _bufferedShapes;
+    }
 
 } /* namespace phantom */
