@@ -3,6 +3,11 @@
 
 #include <Eigen/Geometry>
 #include <CompileConfig.h>
+#include <deque>
+#include <iostream>
+
+#include <GL/freeglut.h>
+#include <vector>
 
 namespace phantom {
 	class LIBEXPORT MouseState {
@@ -10,17 +15,21 @@ namespace phantom {
 		MouseState() { };
 		~MouseState() { };
 
-		void handleEvent(Eigen::Vector2f newValue){ _mousePos = newValue;        }
-		void handleEvent(char id, char newValue)  { _mouseButton[id] = newValue; }
-		
-		Eigen::Vector2f *getMousePosition() { return &_mousePos; }
-		
-		bool isButtonDown(char id) { if(_mouseButton[id] == 1) return true; else return false; }
-		bool isButtonUp  (char id) { if(_mouseButton[id] == 0) return true; else return false; }
+		void handleEvent(Eigen::Vector3f newValue){ _mousePos = newValue;    }
+		void handleEvent(char id, char newValue)  { _buttons[id] = newValue; }
 
+		const Eigen::Vector3f& getMousePosition() { return _mousePos; }
+
+		bool isButtonDown(char id) { return _buttons[id] == 1; }
+		bool isButtonUp  (char id) { return !isButtonDown(id); }
+
+        // TODO: remove glut stuff:
+        static const int BUTTON_LEFT   = GLUT_LEFT_BUTTON;
+        static const int BUTTON_MIDDLE = GLUT_MIDDLE_BUTTON;
+        static const int BUTTON_RIGHT  = GLUT_RIGHT_BUTTON;
 	private:
-		Eigen::Vector2f _mousePos;
-		char _mouseButton[16];
+		Eigen::Vector3f   _mousePos;
+        std::vector<char> _buttons;
 	};
 }
 

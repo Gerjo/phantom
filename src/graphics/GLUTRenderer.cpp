@@ -26,7 +26,7 @@ namespace phantom {
         glViewport(0, 0, width, height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, 1280, 720, 0, -100, 100);
+        glOrtho(0, width, height, 0, -100, 100);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
     }
