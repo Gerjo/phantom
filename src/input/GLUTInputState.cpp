@@ -24,7 +24,7 @@ namespace phantom {
 	void GLUTInputState::keyboardSpecialListener(int code, int mouseX, int mouseY) {
 		InputState::getMe()->getKeyboardState()->handleEvent(static_cast<unsigned char>(code), 1);
 	}
-	
+
 	void GLUTInputState::keyboardSpecialUpListener(int code, int mouseX, int mouseY) {
 		InputState::getMe()->getKeyboardState()->handleEvent(static_cast<unsigned char>(code), 0);
 	}
@@ -34,6 +34,6 @@ namespace phantom {
 	}
 
 	void GLUTInputState::mouseMotionListener(int mouseX, int mouseY) {
-		InputState::getMe()->getMouseState()->handleEvent(Eigen::Vector2f(static_cast<float>(mouseX), static_cast<float>(mouseY)));
+		InputState::getMe()->getMouseState()->handleEvent(Eigen::Vector3f(static_cast<float>(mouseX), static_cast<float>(mouseY), 1));
 	}
 }
