@@ -15,8 +15,8 @@ namespace phantom {
 
 		const Eigen::Vector3f& getMousePosition() { return _mousePos; }
 
-		bool isButtonDown(char id) { if(_mouseButton[id] == 1) return true; else return false; }
-		bool isButtonUp  (char id) { if(_mouseButton[id] == 0) return true; else return false; }
+		bool isButtonDown(char id) { return _mouseButton[id] == 1; }
+		bool isButtonUp  (char id) { return !isButtonDown(id); }
 
 	private:
 		Eigen::Vector3f _mousePos;
