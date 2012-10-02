@@ -10,16 +10,16 @@ namespace phantom {
 		MouseState() { };
 		~MouseState() { };
 
-		void handleEvent(Eigen::Vector2f newValue){ _mousePos = newValue;        }
+		void handleEvent(Eigen::Vector3f newValue){ _mousePos = newValue;        }
 		void handleEvent(char id, char newValue)  { _mouseButton[id] = newValue; }
 
-		const Eigen::Vector2f& getMousePosition() { return _mousePos; }
+		const Eigen::Vector3f& getMousePosition() { return _mousePos; }
 
 		bool isButtonDown(char id) { if(_mouseButton[id] == 1) return true; else return false; }
 		bool isButtonUp  (char id) { if(_mouseButton[id] == 0) return true; else return false; }
 
 	private:
-		Eigen::Vector2f _mousePos;
+		Eigen::Vector3f _mousePos;
 		char _mouseButton[16];
 	};
 }
