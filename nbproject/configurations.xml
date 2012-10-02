@@ -30,6 +30,7 @@
           <itemPath>src/graphics/shapes/Shape.h</itemPath>
         </logicalFolder>
         <itemPath>src/graphics/BaseDriver.h</itemPath>
+        <itemPath>src/graphics/Color.cpp</itemPath>
         <itemPath>src/graphics/Color.h</itemPath>
         <itemPath>src/graphics/GLUTDriver.cpp</itemPath>
         <itemPath>src/graphics/GLUTDriver.h</itemPath>

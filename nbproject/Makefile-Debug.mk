@@ -54,6 +54,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/physics/Tile.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/graphics/GLUTRenderer.o \
+	${OBJECTDIR}/src/graphics/Color.o \
 	${OBJECTDIR}/src/graphics/RenderLayer.o \
 	${OBJECTDIR}/src/graphics/GLUTDriver.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
@@ -178,6 +179,11 @@ ${OBJECTDIR}/src/graphics/GLUTRenderer.o: src/graphics/GLUTRenderer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTRenderer.o src/graphics/GLUTRenderer.cpp
+
+${OBJECTDIR}/src/graphics/Color.o: src/graphics/Color.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Color.o src/graphics/Color.cpp
 
 ${OBJECTDIR}/src/graphics/RenderLayer.o: src/graphics/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
