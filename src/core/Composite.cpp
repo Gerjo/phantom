@@ -88,7 +88,7 @@ void Composite::update(const float& elapsed)
 	}
 }
 
-void Composite::intergrate(float elapsed)
+void Composite::intergrate(const float& elapsed)
 {
 	std::vector<Composite*>::iterator iter;
 	for( iter = this->components.begin(); iter != this->components.end(); ++iter )
