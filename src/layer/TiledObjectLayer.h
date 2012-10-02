@@ -14,7 +14,7 @@ namespace phantom{
     public:
         TiledObjectLayer();
         void createTiles(unsigned int tileSize, unsigned int x, unsigned int y);
-        Tile* getTileAt(Eigen::Vector3f position) throw();
+        Tile* getTileAt(Eigen::Vector3f position);
         virtual void addComponent(Entity* composite);
         int getRowSize();
         int getColumnSize();

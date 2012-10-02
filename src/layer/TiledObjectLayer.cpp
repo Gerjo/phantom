@@ -27,12 +27,11 @@ namespace phantom{
             }
         }
     }
-    Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position) throw(){
+    Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position) {
         int x = static_cast<int>(max<float>(0, min<float>(static_cast<int>(_tilesX) - 1.0f, floorf(position.x() / _tileSize))));
         int y = static_cast<int>(max<float>(0, min<float>(static_cast<int>(_tilesY) - 1.0f, floorf(position.y() / _tileSize))));
         if(_tileList == 0){
             throw PhantomException("Tiles do not exist. Did you call TiledObjectLayer::createTile()?");
-
         }
         return &_tileList[y][x];
     }

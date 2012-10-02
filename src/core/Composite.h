@@ -27,15 +27,15 @@ namespace phantom {
         virtual void onAdd(Composite *parent);
         virtual void onAnsestorChanged();
 
-        virtual void addComponent(Composite *component);
-        virtual bool removeComponent(Composite *component);
-        virtual bool destroyComponent(Composite *component);
+        virtual void addComponent      (Composite *component);
+        virtual bool removeComponent   (Composite *component);
+        virtual bool destroyComponent  (Composite *component);
         virtual bool destroyComponentAt(size_t index);
 
         virtual unsigned int handleMessage(const char *message, void *data);
 
-        virtual void update(const float& elapsed);
-        virtual void intergrate(float elapsed);
+        virtual void update    (const float& elapsed);
+        virtual void intergrate(const float& elapsed);
 
         virtual bool canCollideWith(Composite *other);
         virtual void afterCollision(Composite *other);
