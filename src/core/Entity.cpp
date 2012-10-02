@@ -3,7 +3,7 @@
 #include <physics/Tile.h>
 #include <physics/Mover.h>
 #include <graphics/shapes/Shape.h>
-
+#include <utils/PhantomException.h>
 
 namespace phantom {
 
@@ -38,6 +38,12 @@ namespace phantom {
     }
     void Entity::setTile(Tile* tile){
         _tile = tile;
+    }
+    Tile* Entity::getTile(){
+        if(hasTile()){
+            return _tile;
+        }
+        throw PhantomException("Entity not on a tile!");
     }
     bool Entity::hasTile() {
         return _tile != 0;
