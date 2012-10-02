@@ -45,6 +45,8 @@ namespace phantom {
                 deque<Shape*>::iterator itShape = shapes->begin();
 
                 while(itShape != shapes->end())	{
+                    Shape& shape = **itShape;
+
                     // Load the identity matrix so all coordinates go to the position they belong.
                     glLoadIdentity();
 
@@ -53,7 +55,7 @@ namespace phantom {
                     glDisable(GL_COLOR_MATERIAL);
 
                     // Add the texture.
-                    if((*itShape)->imageData != 0) {
+                    if(shape.imageData != 0) {
                         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                         glEnable(GL_TEXTURE_2D);
 
@@ -69,15 +71,16 @@ namespace phantom {
                     // Begin drawing our shape.
                     glBegin(GL_TRIANGLES);
 
-                    // Change the color of our shape.
-                    glColor4b((*itShape)->fillColor.r, (*itShape)->fillColor.g, (*itShape)->fillColor.b, (*itShape)->fillColor.a);
+                    // Colorize!
+                    const Color& fillColor = shape.getFillColor();
+                    glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
                     // Iterate through all the points located in our shape.
-                    vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
+                    vector<VerticeData>::iterator itVert = shape.vertices.begin();
 
-                    while(itVert != (*itShape)->vertices.end()) {
+                    while(itVert != shape.vertices.end()) {
                         glTexCoord2f(itVert->texX, itVert->texY);
-                        glVertex2f((*itShape)->x + itVert->x + offsetRecalculated.x(), (*itShape)->y + itVert->y + offsetRecalculated.y());
+                        glVertex2f(shape.x + itVert->x + offsetRecalculated.x(), shape.y + itVert->y + offsetRecalculated.y());
                         ++itVert;
                     }
 

@@ -12,12 +12,12 @@ namespace phantom {
     }
 
     void Shape::setFillColor(Color color) {
-        fillColor     = color;
+        _fillColor    = color;
         _hasFillColor = true;
     }
 
     void Shape::setLineColor(Color color) {
-        lineColor     = color;
+        _lineColor    = color;
         _hasLineColor = true;
     }
 
@@ -36,6 +36,14 @@ namespace phantom {
 
     bool Shape::hasLineColor(void) {
         return _hasLineColor;
+    }
+
+    const Color& Shape::getLineColor() {
+        return _lineColor;
+    }
+
+    const Color& Shape::getFillColor() {
+        return _fillColor;
     }
 
 } /* namespace phantom */
