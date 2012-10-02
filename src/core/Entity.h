@@ -21,6 +21,7 @@ namespace phantom {
         void setX(float x);
         void setY(float y);
         void setTile(Tile* tile);
+        void removeTile();
         Tile* getTile();
         bool hasTile();
 
