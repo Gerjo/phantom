@@ -6,19 +6,19 @@
 namespace phantom {
 	class LIBEXPORT PNGImage : public Shape {
 	public:
-		PNGImage(std::string filename, float x, float y, float width, float height);
+		PNGImage(const std::string filename, float x, float y, float width, float height);
 		~PNGImage();
 
-        int getImgWidth() { return _pngWidth; }
+        int getImgWidth()  { return _pngWidth; }
         int getImgHeight() { return _pngHeight; }
 	private:
-        float _width;
-        float _height;
-        int _pngWidth;
-        int _pngHeight;
-        png_bytep *row_pointers;
+        float           _width;
+        float           _height;
+        unsigned int    _pngWidth;
+        unsigned int    _pngHeight;
+        png_bytep       *row_pointers;
 		
-        void createPNG(std::string filename);
+        void createPNG(const std::string filename);
 		void createRectangle();
 	};
 }
