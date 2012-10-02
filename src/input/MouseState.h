@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include <GL/freeglut.h>
+#include <vector>
 
 namespace phantom {
 	class LIBEXPORT MouseState {
@@ -27,8 +28,8 @@ namespace phantom {
         static const int BUTTON_MIDDLE = GLUT_MIDDLE_BUTTON;
         static const int BUTTON_RIGHT  = GLUT_RIGHT_BUTTON;
 	private:
-		Eigen::Vector3f _mousePos;
-        std::deque<char> _buttons;
+		Eigen::Vector3f   _mousePos;
+        std::vector<char> _buttons;
 	};
 }
 
