@@ -12,7 +12,7 @@ namespace phantom {
         glutSpecialUpFunc(phantom::GLUTInputState::keyboardSpecialUpListener);
         glutMouseFunc(phantom::GLUTInputState::mouseListener);
         glutMotionFunc(phantom::GLUTInputState::mouseMotionListener);
-        glutPassiveMotionFunc(phantom::GLUTInputState::glutPassiveMotionFunc);
+        glutPassiveMotionFunc(phantom::GLUTInputState::mouseMotionListener);
     }
 
     void GLUTInputState::keyboardListener(unsigned char keycode, int mouseX, int mouseY) {
