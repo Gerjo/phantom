@@ -88,7 +88,7 @@ namespace phantom {
                     glEnd();
 
                     // Disable the texturing again afterwards.
-                    if((*itShape)->imageData != 0) {
+                    if(shape.imageData != 0) {
                         glDisable(GL_TEXTURE_2D);
                         glPopAttrib();
                     }
