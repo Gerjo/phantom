@@ -27,6 +27,12 @@ namespace phantom {
 
         virtual void addVertex(float x, float y, float texX = 0.0f, float texY = 0.0f);
 
+        bool hasFillColor(void);
+        bool hasLineColor(void);
+
+    private:
+        bool _hasFillColor;
+        bool _hasLineColor;
     };
 } /* namespace phantom */
 #endif /* SHAPE_H_ */
