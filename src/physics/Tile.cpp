@@ -6,10 +6,27 @@ namespace phantom {
     }
     void Tile::addEntity(phantom::Entity* entity) {
         objectList.push_back(entity);
+        cout << "addEntity! adding tile" << endl;
         entity->setTile(this);
+    }
+    void Tile::removeEntity(Entity* entity){
+        std::vector<Entity*>::iterator it =  objectList.begin();
+        while(it != objectList.end()){
+            if((*it) == entity){
+                objectList.erase(it);
+                entity->removeTile();
+                return;
+            }
+            ++it;
+        }
     }
 
     void Tile::onEntityChange(Entity* entity) {
-        cout << "Updating entity position" << endl;
+        Tile* t = layer->getTileAt(entity->getPosition());
+        if( t != this){
+            cout << "OnEntityChange! removing tile" << endl;
+            removeEntity(entity);
+            t->addEntity(entity);
+        }
     }
 }

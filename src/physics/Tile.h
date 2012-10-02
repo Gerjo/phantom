@@ -15,7 +15,6 @@ namespace phantom {
     class Tile {
     public: //variables
         std::vector<phantom::Entity*> objectList;
-        int index, tileX, tileY;
         TiledObjectLayer* layer;
     public: //functions
         Tile();

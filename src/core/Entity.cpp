@@ -45,6 +45,13 @@ namespace phantom {
         }
         throw PhantomException("Entity not on a tile!");
     }
+    void Entity::removeTile(){
+        if(hasTile()){
+            _tile = 0;
+        } else{
+            throw PhantomException("Entity did not have a tile. How can we remove it?");
+        }
+    }
     bool Entity::hasTile() {
         return _tile != 0;
     }

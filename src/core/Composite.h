@@ -14,6 +14,7 @@
 
 
 namespace phantom {
+    class Entity;
 
     class LIBEXPORT Composite {
     public:
@@ -68,6 +69,7 @@ namespace phantom {
         Composite *parent;
         std::vector<Composite*> components;
         Graphics graphics;
+        Entity* _entity;
     };
 
     template <class T>

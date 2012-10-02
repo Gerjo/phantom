@@ -8,7 +8,8 @@ namespace phantom{
     // NB: using local typedef, makes the code readable.
     typedef unsigned char byte;
 
-	struct LIBEXPORT Color {
+
+    struct LIBEXPORT Color {
     public:
         Color() : r(0), g(0), b(0), a(127) {
 
@@ -22,7 +23,7 @@ namespace phantom{
 
         }
 
-		byte r, g ,b, a;
+        byte r, g ,b, a;
 
         static Color RED;
         static Color GREEN;
@@ -32,7 +33,7 @@ namespace phantom{
         static Color CORNFLOWER;
         static Color BROWN;
         static Color HOTPINK;
-	};
+    };
 }
 
 #endif
