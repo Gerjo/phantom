@@ -3,6 +3,7 @@
 
 #include <Eigen/Geometry>
 #include <CompileConfig.h>
+#include <deque>
 
 namespace phantom {
 	class LIBEXPORT MouseState {
@@ -11,16 +12,16 @@ namespace phantom {
 		~MouseState() { };
 
 		void handleEvent(Eigen::Vector3f newValue){ _mousePos = newValue;        }
-		void handleEvent(char id, char newValue)  { _mouseButton[id] = newValue; }
+		void handleEvent(char id, char newValue)  { _buttons[id] = newValue; }
 
 		const Eigen::Vector3f& getMousePosition() { return _mousePos; }
 
-		bool isButtonDown(char id) { return _mouseButton[id] == 1; }
+		bool isButtonDown(char id) { return _buttons[id] == 1; }
 		bool isButtonUp  (char id) { return !isButtonDown(id); }
 
 	private:
 		Eigen::Vector3f _mousePos;
-		char _mouseButton[16];
+        std::deque<char> _buttons;
 	};
 }
 
