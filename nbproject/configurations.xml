@@ -38,8 +38,6 @@
         <itemPath>src/graphics/GLUTRenderer.h</itemPath>
         <itemPath>src/graphics/Graphics.cpp</itemPath>
         <itemPath>src/graphics/Graphics.h</itemPath>
-        <itemPath>src/graphics/RenderLayer.cpp</itemPath>
-        <itemPath>src/graphics/RenderLayer.h</itemPath>
         <itemPath>src/graphics/Renderer.h</itemPath>
         <itemPath>src/graphics/VerticeData.h</itemPath>
       </logicalFolder>
@@ -56,6 +54,8 @@
         <itemPath>src/layer/Layer.h</itemPath>
         <itemPath>src/layer/ObjectLayer.cpp</itemPath>
         <itemPath>src/layer/ObjectLayer.h</itemPath>
+        <itemPath>src/layer/RenderLayer.cpp</itemPath>
+        <itemPath>src/layer/RenderLayer.h</itemPath>
         <itemPath>src/layer/TiledObjectLayer.cpp</itemPath>
         <itemPath>src/layer/TiledObjectLayer.h</itemPath>
       </logicalFolder>
