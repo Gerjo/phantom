@@ -40,13 +40,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
-	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/layer/ObjectLayer.o \
+	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/input/GLUTInputState.o \
 	${OBJECTDIR}/src/core/GameState.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
-	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/physics/Mover.o \
+	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
@@ -110,15 +110,15 @@ ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
-
 ${OBJECTDIR}/src/layer/ObjectLayer.o: src/layer/ObjectLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/ObjectLayer.o src/layer/ObjectLayer.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
 
 ${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
@@ -135,15 +135,15 @@ ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
 
-${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
-
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+
+${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
