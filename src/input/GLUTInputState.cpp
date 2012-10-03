@@ -33,9 +33,11 @@ namespace phantom {
 
     void GLUTInputState::mouseListener(int button, int state, int mouseX, int mouseY) {
         InputState::getMe()->getMouseState()->handleEvent(button, 1 - state);
+        cout << "mouse is doing something" << endl;
     }
 
     void GLUTInputState::mouseMotionListener(int mouseX, int mouseY) {
+        cout << "mouse is in motion!" << endl;
         InputState::getMe()->getMouseState()->handleEvent(Eigen::Vector3f(static_cast<float> (mouseX), static_cast<float> (mouseY), 1));
     }
 }
