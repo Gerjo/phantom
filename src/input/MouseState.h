@@ -23,10 +23,6 @@ namespace phantom {
         bool isButtonDown(char id) { return _buttons.at(id) == 1; }
 		bool isButtonUp  (char id) { return !isButtonDown(id); }
 
-        // TODO: remove glut stuff:
-        static const int BUTTON_LEFT   = GLUT_LEFT_BUTTON;
-        static const int BUTTON_MIDDLE = GLUT_MIDDLE_BUTTON;
-        static const int BUTTON_RIGHT  = GLUT_RIGHT_BUTTON;
 	private:
 		Eigen::Vector3f   _mousePos;
         std::vector<char> _buttons;

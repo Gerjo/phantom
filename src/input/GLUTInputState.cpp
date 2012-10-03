@@ -6,13 +6,17 @@ namespace phantom {
     void GLUTInputState::setup() {
         std::cout << "Initializing GLUT InputState handler..." << std::endl;
 
-        glutKeyboardFunc(phantom::GLUTInputState::keyboardListener);
-        glutKeyboardUpFunc(phantom::GLUTInputState::keyboardUpListener);
-        glutSpecialFunc(phantom::GLUTInputState::keyboardSpecialListener);
-        glutSpecialUpFunc(phantom::GLUTInputState::keyboardSpecialUpListener);
-        glutMouseFunc(phantom::GLUTInputState::mouseListener);
-        glutMotionFunc(phantom::GLUTInputState::mouseMotionListener);
-        glutPassiveMotionFunc(phantom::GLUTInputState::mouseMotionListener);
+        _inputMap[Buttons::LEFT_MOUSE] = GLUT_LEFT_BUTTON;
+        _inputMap[Buttons::MIDDLE_MOUSE] = GLUT_MIDDLE_BUTTON;
+        _inputMap[Buttons::RIGHT_MOUSE] = GLUT_RIGHT_BUTTON;
+
+        glutKeyboardFunc        (phantom::GLUTInputState::keyboardListener);
+        glutKeyboardUpFunc      (phantom::GLUTInputState::keyboardUpListener);
+        glutSpecialFunc         (phantom::GLUTInputState::keyboardSpecialListener);
+        glutSpecialUpFunc       (phantom::GLUTInputState::keyboardSpecialUpListener);
+        glutMouseFunc           (phantom::GLUTInputState::mouseListener);
+        glutMotionFunc          (phantom::GLUTInputState::mouseMotionListener);
+        glutPassiveMotionFunc   (phantom::GLUTInputState::mouseMotionListener);
     }
 
     void GLUTInputState::keyboardListener(unsigned char keycode, int mouseX, int mouseY) {

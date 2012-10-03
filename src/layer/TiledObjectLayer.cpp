@@ -34,7 +34,7 @@ namespace phantom{
         }
         int x = floorf(position.x() / _tileSize);
         int y = floorf(position.y() / _tileSize);
-        cout << "tile (x, y): " << x << " " << y << endl;
+        //cout << "tile (x, y): " << x << " " << y << endl;
         if(x >= _tilesX  || y >= _tilesY){
             throw PhantomException("Tile array index out of bounds.");
         }
