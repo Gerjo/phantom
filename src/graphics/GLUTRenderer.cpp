@@ -31,6 +31,10 @@ namespace phantom {
         glLoadIdentity();
     }
 
+    void GLUTRenderer::setWindowTitle(std::string title) {
+        glutSetWindowTitle(title.c_str());
+    }
+
     void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Eigen::Vector3f offset) {
 
         // Get the iterator and start iterating.
@@ -130,7 +134,6 @@ namespace phantom {
             ++iter;
         }
 
-        glFlush();
         glutSwapBuffers();
         glutMainLoopEvent();
     }

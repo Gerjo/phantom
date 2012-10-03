@@ -6,7 +6,7 @@
 
 namespace phantom {
 
-    PhantomGame::PhantomGame(const char *configfile) : width(800), height(450), fps(60){
+    PhantomGame::PhantomGame(const char *configfile) : width(800), height(450), fps(63){
 
     }
 
@@ -25,31 +25,34 @@ namespace phantom {
     int PhantomGame::start(int argc, char *argv[], BaseDriver *driver )
     {
         driver->setGame(this);
-        double last = this->time();
-        double total = 0;
+        float last = this->time();
+        float total = 0.0f;
+        float fpscount = 0.0f;
+
         while(1)
         {
-            double now = this->time();
-            double elapsed = now-last;
+            float now = this->time();
+            float elapsed = now-last;
 
-            driver->onUpdate(static_cast<float>(elapsed));
-
-            Eigen::Vector3f offset(0, 0, 0);
-
+            driver->onUpdate(elapsed);
             renderer->renderLoop(&states);
-
-            last = now;
-            elapsed = this->time()-last;
+            
+            if(elapsed < (1.0f/this->fps)) {
+                phantom::Util::sleep(ceil(((1.0f/this->fps) - elapsed) * 1000.0f));
+            }
 
             total += elapsed;
-            if(total >= 1) {
-                total = 0;
-                printf("%f9 fps\n", 1 / elapsed);
-            }
-            
-            //if(elapsed < (1.0f/this->fps))
-            //    phantom::Util::sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
+            fpscount++;
 
+            if(total >= 1) {
+                stringstream stream;
+                stream << "Phantom [Avg FPS: " << fpscount << " Cur FPS: " << 1/elapsed << "]" << endl;
+                renderer->setWindowTitle(stream.str());
+                fpscount = 0;
+                total = 0;
+            }
+
+            last = now;
         }
         return 0;
     }
