@@ -23,9 +23,10 @@ public:
 
     ~Graphics(void);
 
-    Graphics& beginPath();
-    Graphics& fill();
-    Graphics& stroke();
+    Graphics& clear(void);
+    Graphics& beginPath(void);
+    Graphics& fill(void);
+    Graphics& stroke(void);
 
     Graphics& setFillStyle(Color color);
     Graphics& setLineStyle(Color color);
@@ -41,26 +42,31 @@ public:
     Graphics& moveTo(float x, float y);
     Graphics& lineTo(float x, float y);
 
-    Graphics& clear();
-
     float getRotation() { return _rotation; }
 
 private:
     Graphics(Graphics& orig) {
-
+        // Thou shalt not copy.
     }
 
     deque<Shape*> _finalizedShapes;
     deque<Shape*> _workspaceShapes;
+    deque<Shape*> _bufferedShapes;
+
+
     Color _fillColor;
     Color _lineColor;
 
     Polygon* _polygonBuffer;
 
+    void deleteShapes(deque<Shape*>& source);
+    void moveShapes(deque<Shape*>& source, deque<Shape*>& target);
     void addShape(Shape* shape);
     void finalizePolygon();
     void initializePolygon();
-    deque<Shape*> *getShapes() { return &_finalizedShapes; };
+
+    deque<Shape*>& getFinalizedShapes();
+    deque<Shape*>& getBufferedShapes();
 
     float _rotation;
 

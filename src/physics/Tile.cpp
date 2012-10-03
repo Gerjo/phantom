@@ -6,6 +6,7 @@ namespace phantom {
     }
     void Tile::addEntity(phantom::Entity* entity) {
         objectList.push_back(entity);
+        //cout << "addEntity! adding tile" << endl;
         entity->setTile(this);
     }
     void Tile::removeEntity(Entity* entity){
@@ -23,7 +24,7 @@ namespace phantom {
     void Tile::onEntityChange(Entity* entity) {
         Tile* t = layer->getTileAt(entity->getPosition());
         if( t != this){
-            cout << "OnEntityChange! removing tile" << endl;
+            //cout << "OnEntityChange! removing tile" << endl;
             removeEntity(entity);
             t->addEntity(entity);
         }

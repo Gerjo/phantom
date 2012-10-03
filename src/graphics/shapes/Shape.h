@@ -10,23 +10,32 @@ namespace phantom {
 
     class LIBEXPORT Shape {
     public:
+        Shape();
+        virtual ~Shape();
+
+
 		std::vector<VerticeData> vertices;
         unsigned char* imageData;
 
         float x;
         float y;
 
-        Color lineColor;
-        Color fillColor;
-
-        Shape();
-        virtual ~Shape();
-
         void setFillColor(Color color);
         void setLineColor(Color color);
 
         virtual void addVertex(float x, float y, float texX = 0.0f, float texY = 0.0f);
 
+        bool hasFillColor(void);
+        bool hasLineColor(void);
+
+        const Color& getLineColor();
+        const Color& getFillColor();
+
+    private:
+        bool _hasFillColor;
+        bool _hasLineColor;
+        Color _lineColor;
+        Color _fillColor;
     };
 } /* namespace phantom */
 #endif /* SHAPE_H_ */

@@ -14,6 +14,7 @@
 #include <graphics/Color.h>
 #include <utils/util.h>
 
+#include <layer/RenderLayer.h>
 #include <layer/ObjectLayer.h>
 #include <layer/TiledObjectLayer.h>
 
