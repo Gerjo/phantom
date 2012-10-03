@@ -72,7 +72,7 @@ namespace phantom {
     double PhantomGame::time()
     {
 #ifndef WIN32
-        struct timeval tv;
+        timeval tv;
         gettimeofday(&tv, NULL);
 
         double total = tv.tv_sec;
