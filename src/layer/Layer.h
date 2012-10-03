@@ -15,7 +15,8 @@ namespace phantom {
 
         virtual void onAdd( Composite *parent );
         virtual void onAnsestorChanged();
-
+        virtual float getWidth();
+        virtual float getHeight();
     protected:
         GameState *state;
         float width;

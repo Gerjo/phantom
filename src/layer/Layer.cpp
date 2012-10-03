@@ -33,5 +33,11 @@ namespace phantom {
             }
         }
     }
+    float Layer::getWidth(){
+        return width;
+    }
+    float Layer::getHeight(){
+        return height;
+    }
 
 } /* namespace phantom */
