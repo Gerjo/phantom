@@ -35,6 +35,7 @@ namespace phantom {
             float elapsed = now-last;
 
             driver->onUpdate(elapsed);
+            camera->update(elapsed);
             renderer->renderLoop(&states);
             
             if(elapsed < (1.0f/this->fps)) {

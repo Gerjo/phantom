@@ -3,6 +3,7 @@
 
 #include <core/PhantomGame.h>
 #include <CompileConfig.h>
+#include <core/Camera.h>
 #include <input/InputState.h>
 #include "Renderer.h"
 
@@ -18,6 +19,7 @@ namespace phantom{
         virtual void onRender() = 0;
 
         PhantomGame* game;
+        Camera* camera;
         Renderer* renderer;
         InputState* inputState;
     protected: 

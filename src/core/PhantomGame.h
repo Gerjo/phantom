@@ -3,11 +3,10 @@
 
 #include <core/GameState.h>
 #include <core/Composite.h>
+#include <core/Camera.h>
 #include <deque>
 #include <graphics/Renderer.h>
 #include <CompileConfig.h>
-
-
 
 namespace phantom {
     class BaseDriver;
@@ -40,6 +39,11 @@ public:
 		this->renderer = renderer;
 	}
 
+    void setCamera(Camera *camera)
+    {
+        this->camera = camera;
+    }
+
 protected:
     virtual void onExit(int returncode);
 
@@ -51,6 +55,7 @@ private:
 	unsigned int fps;
 
 	Renderer *renderer;
+    Camera *camera;
     BaseDriver *driver;
 	std::deque<GameState*> states;
 
