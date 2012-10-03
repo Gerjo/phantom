@@ -6,7 +6,6 @@
 
 
 namespace phantom {
-    class Tile;
     class ObjectLayer;
     class Mover;
     class Shape;
@@ -18,18 +17,11 @@ namespace phantom {
 
         virtual void addComponent(Composite *component);
 
-        void setX(float x);
-        void setY(float y);
-        void setTile(Tile* tile);
-        void removeTile();
-        Tile* getTile();
-        bool hasTile();
-
+        virtual void setX(float x);
+        virtual void setY(float y);
     protected:
         Mover *mover;
         Shape *shape;
-        Tile* _tile;
-
     };
 
 } /* namespace phantom */

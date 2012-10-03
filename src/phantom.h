@@ -16,7 +16,6 @@
 
 #include <layer/RenderLayer.h>
 #include <layer/ObjectLayer.h>
-#include <layer/TiledObjectLayer.h>
 
 #include <iostream>
 #include <vector>
