@@ -23,7 +23,7 @@ namespace phantom {
         }
 
         bool isActive() {
-            return _active;
+            return _isActive;
         }
 
         virtual Eigen::Vector3f getViewCoordinates(Eigen::Vector3f *worldCoordinate) = 0;
