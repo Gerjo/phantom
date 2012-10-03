@@ -27,10 +27,16 @@ namespace phantom{
         }
     }
     Tile* TiledObjectLayer::getTileAt(Eigen::Vector3f position) {
-        int x = static_cast<int>(max<float>(0, min<float>(static_cast<int>(_tilesX) - 1.0f, floorf(position.x() / _tileSize))));
-        int y = static_cast<int>(max<float>(0, min<float>(static_cast<int>(_tilesY) - 1.0f, floorf(position.y() / _tileSize))));
+        //int x = static_cast<int>(max<float>(0, min<float>(static_cast<int>(_tilesX) - 1.0f, floorf(position.x() / _tileSize))));
+        //int y = static_cast<int>(max<float>(0, min<float>(static_cast<int>(_tilesY) - 1.0f, floorf(position.y() / _tileSize))));
         if(_tileList == 0){
             throw PhantomException("Tiles do not exist. Did you call TiledObjectLayer::createTiles()?");
+        }
+        int x = floorf(position.x() / _tileSize);
+        int y = floorf(position.y() / _tileSize);
+        cout << "tile (x, y): " << x << " " << y << endl;
+        if(x >= _tilesX  || y >= _tilesY){
+            throw PhantomException("Tile array index out of bounds.");
         }
         return &_tileList[y][x];
     }
