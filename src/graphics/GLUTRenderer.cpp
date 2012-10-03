@@ -41,57 +41,12 @@ namespace phantom {
 
             Eigen::Vector3f offsetRecalculated = offset + (*compIt)->getPosition();
 
+            // Gerjo's double buffer!
             for(int i = 0; i < 2; ++i) {
                 deque<Shape*>::iterator itShape = shapes->begin();
 
                 while(itShape != shapes->end())	{
-                    Shape& shape = **itShape;
-
-                    // Load the identity matrix so all coordinates go to the position they belong.
-                    glLoadIdentity();
-
-                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                    glEnable(GL_BLEND);
-                    glDisable(GL_COLOR_MATERIAL);
-
-                    // Add the texture.
-                    if(shape.imageData != 0) {
-                        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                        glEnable(GL_TEXTURE_2D);
-
-                        PNGImage *img = static_cast<PNGImage *>((*itShape));
-                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->getImgWidth(), img->getImgHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-                        glNormal3f(0.0, 0.0, 1.0);
-                    }
-
-                    // Add the rotation.
-                    glRotatef((*compIt)->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
-
-                    // Begin drawing our shape.
-                    glBegin(GL_TRIANGLES);
-
-                    // Colorize!
-                    const Color& fillColor = shape.getFillColor();
-                    glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
-
-                    // Iterate through all the points located in our shape.
-                    vector<VerticeData>::iterator itVert = shape.vertices.begin();
-
-                    while(itVert != shape.vertices.end()) {
-                        glTexCoord2f(itVert->texX, itVert->texY);
-                        glVertex2f(shape.x + itVert->x + offsetRecalculated.x(), shape.y + itVert->y + offsetRecalculated.y());
-                        ++itVert;
-                    }
-
-                    // End of drawing our shape.
-                    glEnd();
-
-                    // Disable the texturing again afterwards.
-                    if(shape.imageData != 0) {
-                        glDisable(GL_TEXTURE_2D);
-                        glPopAttrib();
-                    }
+                    drawShape(*itShape, *compIt, offsetRecalculated.x(), offsetRecalculated.y());
 
                     // Move on to the next shape.
                     ++itShape;
@@ -108,6 +63,54 @@ namespace phantom {
 
             // Move on to the next component.
             compIt++;
+        }
+    }
+
+    void GLUTRenderer::drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset) {
+        // Load the identity matrix so all coordinates go to the position they belong.
+        glLoadIdentity();
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDisable(GL_COLOR_MATERIAL);
+
+        // Add the texture.
+        if(shape->imageData != 0) {
+            glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glEnable(GL_TEXTURE_2D);
+
+            PNGImage *img = static_cast<PNGImage *>(shape);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->getImgWidth(), img->getImgHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glNormal3f(0.0, 0.0, 1.0);
+        }
+
+        // Add the rotation.
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
+
+        // Begin drawing our shape.
+        glBegin(GL_TRIANGLES);
+
+        // Colorize!
+        const Color& fillColor = shape->getFillColor();
+        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+
+        // Iterate through all the points located in our shape.
+        vector<VerticeData>::iterator itVert = shape->vertices.begin();
+
+        while(itVert != shape->vertices.end()) {
+            glTexCoord2f(itVert->texX, itVert->texY);
+            glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
+            ++itVert;
+        }
+
+        // End of drawing our shape.
+        glEnd();
+
+        // Disable the texturing again afterwards.
+        if(shape->imageData != 0) {
+            glDisable(GL_TEXTURE_2D);
+            glPopAttrib();
         }
     }
 
