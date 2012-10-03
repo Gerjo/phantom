@@ -6,9 +6,9 @@ namespace phantom {
     void GLUTInputState::setup() {
         std::cout << "Initializing GLUT InputState handler..." << std::endl;
 
-        _inputMap[Buttons::LEFT_MOUSE] = GLUT_LEFT_BUTTON;
-        _inputMap[Buttons::MIDDLE_MOUSE] = GLUT_MIDDLE_BUTTON;
-        _inputMap[Buttons::RIGHT_MOUSE] = GLUT_RIGHT_BUTTON;
+        Buttons::LEFT_MOUSE   = GLUT_LEFT_BUTTON;
+        Buttons::MIDDLE_MOUSE = GLUT_MIDDLE_BUTTON;
+        Buttons::RIGHT_MOUSE  = GLUT_RIGHT_BUTTON;
 
         glutKeyboardFunc        (phantom::GLUTInputState::keyboardListener);
         glutKeyboardUpFunc      (phantom::GLUTInputState::keyboardUpListener);
@@ -37,11 +37,9 @@ namespace phantom {
 
     void GLUTInputState::mouseListener(int button, int state, int mouseX, int mouseY) {
         InputState::getMe()->getMouseState()->handleEvent(button, 1 - state);
-        cout << "mouse is doing something" << endl;
     }
 
     void GLUTInputState::mouseMotionListener(int mouseX, int mouseY) {
-        cout << "mouse is in motion!" << endl;
         InputState::getMe()->getMouseState()->handleEvent(Eigen::Vector3f(static_cast<float> (mouseX), static_cast<float> (mouseY), 1));
     }
 }

@@ -9,21 +9,14 @@
 
 namespace phantom {
     namespace Buttons {
-        enum BUTTONS {
-            LEFT_MOUSE,
-            MIDDLE_MOUSE,
-            RIGHT_MOUSE,
-            // Must remain bottom.
-            SIZEOF
-        };
+        static unsigned char LEFT_MOUSE = 0;
+        static unsigned char MIDDLE_MOUSE = 1;
+        static unsigned char RIGHT_MOUSE = 2;
     }
 
 	class LIBEXPORT InputState : public Composite {
 	public:
-        InputState() {
-            for(unsigned int i = 0; i < Buttons::SIZEOF; ++i)
-                _inputMap.push_back(char());
-        }
+        InputState() { }
 
 		static void setMe(InputState *me);
 		static InputState *getMe();
@@ -33,13 +26,8 @@ namespace phantom {
 		virtual void handleEvent(void *e) = 0;
 		virtual void onAdd(Composite *parent);
 
-        std::vector<unsigned char> getMap(Buttons::BUTTONS id) { return _inputMap; } 
-
 		KeyboardState *getKeyboardState() { return &_keyboardState; }
 		MouseState    *getMouseState()    { return &_mouseState;    }
-
-    protected:
-        std::vector<unsigned char>  _inputMap;
 
 	private:
 		KeyboardState		        _keyboardState;
