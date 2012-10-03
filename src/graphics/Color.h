@@ -24,16 +24,18 @@ namespace phantom{
         }
 
         byte r, g ,b, a;
-
-        static Color RED;
-        static Color GREEN;
-        static Color BLUE;
-        static Color WHITE;
-        static Color BLACK;
-        static Color CORNFLOWER;
-        static Color BROWN;
-        static Color HOTPINK;
     };
+
+    namespace Colors {
+        static Color RED(127, 0, 0);
+        static Color GREEN(0, 127, 0);
+        static Color BLUE(0, 0, 127);
+        static Color WHITE(127, 127, 127);
+        static Color BLACK(0, 0, 0);
+        static Color CORNFLOWER(-27, 22, 110);
+        static Color BROWN(32, 12, -15);
+        static Color HOTPINK(127, -107, 20);
+    }
 }
 
 #endif
