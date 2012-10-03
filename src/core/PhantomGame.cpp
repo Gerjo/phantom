@@ -26,6 +26,7 @@ namespace phantom {
     {
         driver->setGame(this);
         double last = this->time();
+        double total = 0;
         while(1)
         {
             double now = this->time();
@@ -39,6 +40,13 @@ namespace phantom {
 
             last = now;
             elapsed = this->time()-last;
+
+            total += elapsed;
+            if(total >= 1) {
+                total = 0;
+                printf("%f9 fps\n", 1 / elapsed);
+            }
+            
             //if(elapsed < (1.0f/this->fps))
             //    phantom::Util::sleep(((1.0f/this->fps) - static_cast<float>(elapsed)) * 1000.0f);
 
