@@ -31,7 +31,7 @@ namespace phantom {
         glLoadIdentity();
     }
 
-    void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Eigen::Vector3f offset) {
+    void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Eigen::Vector3f& offset) {
 
         // Get the iterator and start iterating.
         std::vector<Composite*>::iterator compIt = components->begin();
