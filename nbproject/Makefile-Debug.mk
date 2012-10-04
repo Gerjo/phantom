@@ -55,8 +55,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/glut/GLUTRenderer.o \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
-	${OBJECTDIR}/src/layer/RenderLayer.o \
 	${OBJECTDIR}/src/graphics/Color.o \
+	${OBJECTDIR}/src/layer/RenderLayer.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o
 
 
@@ -184,15 +184,15 @@ ${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
 
-${OBJECTDIR}/src/layer/RenderLayer.o: src/layer/RenderLayer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/layer
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/RenderLayer.o src/layer/RenderLayer.cpp
-
 ${OBJECTDIR}/src/graphics/Color.o: src/graphics/Color.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Color.o src/graphics/Color.cpp
+
+${OBJECTDIR}/src/layer/RenderLayer.o: src/layer/RenderLayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/RenderLayer.o src/layer/RenderLayer.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes

@@ -8,7 +8,7 @@
 #include <core/Renderer.h>
 
 namespace phantom{
-
+    class InputState;
     class LIBEXPORT Driver{
     public:
         Driver(){}
