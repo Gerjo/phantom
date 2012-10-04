@@ -5,6 +5,7 @@
 #include <input/MouseState.h>
 #include <iostream>
 #include <CompileConfig.h>
+#include <core/Composite.h>
 
 namespace phantom {
     namespace Buttons {
