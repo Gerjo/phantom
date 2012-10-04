@@ -35,13 +35,13 @@ namespace phantom {
 
     private:
 
-        unsigned int width;
-        unsigned int height;
+        unsigned int _width;
+        unsigned int _height;
 
-        unsigned int fps;
+        unsigned int _fps;
 
         Driver* _driver;
-        std::deque<GameState*> states;
+        std::deque<GameState*> _states;
 
         double time();
     };

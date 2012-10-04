@@ -6,7 +6,7 @@
 
 namespace phantom {
 
-    PhantomGame::PhantomGame(const char *configfile) : width(800), height(450), fps(63){
+    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(63){
 
     }
 
@@ -15,11 +15,11 @@ namespace phantom {
 
     void PhantomGame::pushGameState(GameState *state)
     {
-        this->states.push_back(state);
+        this->_states.push_back(state);
     }
     void PhantomGame::popGameState()
     {
-        this->states.pop_back();
+        this->_states.pop_back();
     }
 
     int PhantomGame::start(int argc, char *argv[])
@@ -35,8 +35,8 @@ namespace phantom {
 
             _driver->onUpdate(elapsed);
 
-            if(elapsed < (1.0f/this->fps)) {
-                Util::sleep(ceil(((1.0f/this->fps) - elapsed) * 1000.0f));
+            if(elapsed < (1.0f/this->_fps)) {
+                Util::sleep(ceil(((1.0f/this->_fps) - elapsed) * 1000.0f));
             }
 
             total += elapsed;
@@ -59,11 +59,11 @@ namespace phantom {
     {
         Composite::update( elapsed );
         std::deque<GameState*>::reverse_iterator iter;
-        iter = this->states.rbegin();
-        while( iter != this->states.rend() )
+        iter = this->_states.rbegin();
+        while( iter != this->_states.rend() )
         {
             (*iter)->update(elapsed);
-            if( iter == this->states.rend() || !(*iter)->propegateUpdate )
+            if( iter == this->_states.rend() || !(*iter)->propegateUpdate )
                 break;
             ++iter;
         }
@@ -108,15 +108,15 @@ namespace phantom {
     }
 
     deque<GameState*>& PhantomGame::getGameStates() {
-        return states;
+        return _states;
     }
 
     unsigned int PhantomGame::getHeight() const {
-        return height;
+        return _height;
     }
 
     unsigned int PhantomGame::getWidth() const {
-        return width;
+        return _width;
     }
 
 } /* namespace phantom */
