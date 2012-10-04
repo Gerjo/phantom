@@ -2,7 +2,11 @@
 
 namespace phantom {
 
+    GLUTInput* GLUTInput::INSTANCE = 0;
+
     GLUTInput::GLUTInput() {
+        GLUTInput::INSTANCE = this;
+
         glutKeyboardFunc        (GLUTInput::keyboardListener);
         glutKeyboardUpFunc      (GLUTInput::keyboardUpListener);
         glutSpecialFunc         (GLUTInput::keyboardSpecialListener);
@@ -10,38 +14,40 @@ namespace phantom {
         glutMouseFunc           (GLUTInput::mouseListener);
         glutMotionFunc          (GLUTInput::mouseMotionListener);
         glutPassiveMotionFunc   (GLUTInput::mouseMotionListener);
+
+        _keyboardState = new KeyboardState();
+        _mouseState    = new MouseState();
     }
 
-    void GLUTInput::getKeyboardState() {
-        return;
+    KeyboardState* GLUTInput::getKeyboardState() {
+        return _keyboardState;
     }
 
-    void GLUTInput::getMouseState() {
-        return;
+    MouseState* GLUTInput::getMouseState() {
+        return _mouseState;
     }
-
 
     void GLUTInput::keyboardListener(unsigned char keycode, int mouseX, int mouseY) {
-        //InputState::getMe()->getKeyboardState()->handleEvent(keycode, 1);
+        GLUTInput::INSTANCE->_keyboardState->handleEvent(keycode, 1);
     }
 
     void GLUTInput::keyboardUpListener(unsigned char keycode, int mouseX, int mouseY) {
-        //InputState::getMe()->getKeyboardState()->handleEvent(keycode, 0);
+        GLUTInput::INSTANCE->_keyboardState->handleEvent(keycode, 0);
     }
 
     void GLUTInput::keyboardSpecialListener(int code, int mouseX, int mouseY) {
-        //InputState::getMe()->getKeyboardState()->handleEvent(static_cast<unsigned char> (code), 1);
+        GLUTInput::INSTANCE->_keyboardState->handleEvent(static_cast<unsigned char> (code), 1);
     }
 
     void GLUTInput::keyboardSpecialUpListener(int code, int mouseX, int mouseY) {
-        //InputState::getMe()->getKeyboardState()->handleEvent(static_cast<unsigned char> (code), 0);
+        GLUTInput::INSTANCE->_keyboardState->handleEvent(static_cast<unsigned char> (code), 0);
     }
 
     void GLUTInput::mouseListener(int button, int state, int mouseX, int mouseY) {
-        //InputState::getMe()->getMouseState()->handleEvent(button, 1 - state);
+        GLUTInput::INSTANCE->_mouseState->handleEvent(button, 1 - state);
     }
 
     void GLUTInput::mouseMotionListener(int mouseX, int mouseY) {
-        //InputState::getMe()->getMouseState()->handleEvent(Eigen::Vector3f(static_cast<float> (mouseX), static_cast<float> (mouseY), 1));
+        GLUTInput::INSTANCE->_mouseState->handleEvent(Eigen::Vector3f(static_cast<float> (mouseX), static_cast<float> (mouseY), 1));
     }
 }

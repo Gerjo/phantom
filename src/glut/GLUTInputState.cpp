@@ -41,5 +41,7 @@ namespace phantom {
 
     void GLUTInputState::mouseMotionListener(int mouseX, int mouseY) {
         InputState::getMe()->getMouseState()->handleEvent(Eigen::Vector3f(static_cast<float> (mouseX), static_cast<float> (mouseY), 1));
+
+        cout << "teehee" << endl;
     }
 }

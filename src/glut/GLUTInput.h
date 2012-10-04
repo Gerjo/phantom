@@ -3,14 +3,15 @@
 
 #include <input/Input.h>
 #include <GL/freeglut.h>
+#include <Eigen/Eigen>
 
 namespace phantom {
     class GLUTInput : public Input {
     public:
         GLUTInput();
 
-        virtual void getKeyboardState();
-        virtual void getMouseState();
+        virtual KeyboardState* getKeyboardState();
+        virtual MouseState* getMouseState();
 
 
     private:
@@ -20,6 +21,11 @@ namespace phantom {
 		static void keyboardSpecialUpListener	(int code, int mouseX, int mouseY);
 		static void mouseListener				(int button, int state, int mouseX, int mouseY);
 		static void mouseMotionListener			(int mouseX, int mouseY);
+
+        static GLUTInput* INSTANCE;
+
+        MouseState* _mouseState;
+        KeyboardState* _keyboardState;
 
     };
 }
