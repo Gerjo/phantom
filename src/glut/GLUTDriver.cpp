@@ -18,8 +18,6 @@ namespace phantom{
     }
 
     void GLUTDriver::setGame(){
-        //this->game = game;
-
 
         //inputState = new GLUTInputState();
         //camera = new GLUTCamera(0);
@@ -32,6 +30,9 @@ namespace phantom{
 
     void GLUTDriver::onUpdate(float elapsed){
         _game->update(elapsed);
+
+        camera->update(elapsed);
+        renderer->renderLoop(&_game->getGameStates());
     }
 
     void GLUTDriver::onRender() {

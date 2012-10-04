@@ -35,9 +35,6 @@ namespace phantom {
 
             _driver->onUpdate(elapsed);
 
-            camera->update(elapsed);
-            renderer->renderLoop(&states);
-
             if(elapsed < (1.0f/this->fps)) {
                 Util::sleep(ceil(((1.0f/this->fps) - elapsed) * 1000.0f));
             }
@@ -108,6 +105,10 @@ namespace phantom {
 
     void PhantomGame::setDriver(Driver* driver) {
         _driver = driver;
+    }
+
+    std::deque<GameState*>& PhantomGame::getGameStates() {
+        return states;
     }
 
 } /* namespace phantom */

@@ -38,6 +38,7 @@ namespace phantom {
             this->camera = camera;
         }
 
+        std::deque<GameState*>& getGameStates();
 
         Driver* getDriver();
         void setDriver(Driver* driver);
