@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
+	${OBJECTDIR}/src/input/Input.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/layer/ObjectLayer.o \
 	${OBJECTDIR}/src/core/GameState.o \
@@ -102,6 +103,11 @@ ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
+
+${OBJECTDIR}/src/input/Input.o: src/input/Input.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/Input.o src/input/Input.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes

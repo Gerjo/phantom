@@ -6,6 +6,7 @@
 #include <core/Camera.h>
 #include <input/InputState.h>
 #include <core/Renderer.h>
+#include <input/Input.h>
 
 namespace phantom{
     class InputState;
@@ -17,13 +18,13 @@ namespace phantom{
         virtual void onUpdate(float elapsed) = 0;
         virtual void onRender() = 0;
 
-        InputState* getInput() { return _inputState; }
+        Input* getInput() { return _input; }
 
         virtual Camera* createCamera(void) = 0;
 
     protected:
         Renderer* _renderer;
-        InputState* _inputState;
+        Input* _input;
         PhantomGame* _game;
     };
 } /* namespace phantom */
