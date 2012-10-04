@@ -59,7 +59,6 @@ namespace phantom {
             return s << "Composite(" << c->components.size() << ")";
         }
 
-    public:
         const Eigen::Vector3f& getPosition();
 
     protected:
