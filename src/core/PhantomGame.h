@@ -18,7 +18,7 @@ namespace phantom {
 
         void pushGameState(GameState *state);
         void popGameState();
-        int start(int argc, char *argv[], Driver* driver);
+        int start(int argc, char *argv[]);
         void update(float elapsed);
         void exit(int returncode);
 
@@ -38,6 +38,9 @@ namespace phantom {
             this->camera = camera;
         }
 
+
+        Driver& getDriver();
+        void setDriver(Driver* driver);
     protected:
         virtual void onExit(int returncode);
 
@@ -50,7 +53,7 @@ namespace phantom {
 
         Renderer *renderer;
         Camera *camera;
-        Driver *driver;
+        Driver* _driver;
         std::deque<GameState*> states;
 
         double time();

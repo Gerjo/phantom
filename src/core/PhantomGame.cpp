@@ -22,8 +22,9 @@ namespace phantom {
         this->states.pop_back();
     }
 
-    int PhantomGame::start(int argc, char *argv[], Driver *driver )
+    int PhantomGame::start(int argc, char *argv[])
     {
+        Driver* driver = &getDriver();
         driver->setGame(this);
         double last = this->time();
         float total = 0.0f;
@@ -100,5 +101,13 @@ namespace phantom {
         return total;
     }
 
+
+    Driver& PhantomGame::getDriver() {
+        return *_driver;
+    }
+
+    void PhantomGame::setDriver(Driver* driver) {
+        _driver = driver;
+    }
 
 } /* namespace phantom */
