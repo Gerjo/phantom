@@ -40,25 +40,24 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
-	${OBJECTDIR}/src/layer/ObjectLayer.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
-	${OBJECTDIR}/src/input/GLUTInputState.o \
+	${OBJECTDIR}/src/layer/ObjectLayer.o \
 	${OBJECTDIR}/src/core/GameState.o \
+	${OBJECTDIR}/src/glut/GLUTInputState.o \
+	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
-	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/input/InputState.o \
+	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
-	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
+	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
-	${OBJECTDIR}/src/physics/Tile.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
-	${OBJECTDIR}/src/graphics/GLUTRenderer.o \
-	${OBJECTDIR}/src/graphics/Color.o \
+	${OBJECTDIR}/src/glut/GLUTRenderer.o \
+	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/layer/RenderLayer.o \
-	${OBJECTDIR}/src/graphics/GLUTDriver.o \
-	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
-	${OBJECTDIR}/src/layer/TiledObjectLayer.o
+	${OBJECTDIR}/src/graphics/Color.o \
+	${OBJECTDIR}/src/graphics/shapes/Polygon.o
 
 
 # C Compiler Flags
@@ -110,100 +109,95 @@ ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
 
-${OBJECTDIR}/src/layer/ObjectLayer.o: src/layer/ObjectLayer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/layer
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/ObjectLayer.o src/layer/ObjectLayer.cpp
-
 ${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
 
-${OBJECTDIR}/src/input/GLUTInputState.o: src/input/GLUTInputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
+${OBJECTDIR}/src/layer/ObjectLayer.o: src/layer/ObjectLayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/GLUTInputState.o src/input/GLUTInputState.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/ObjectLayer.o src/layer/ObjectLayer.cpp
 
 ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
+${OBJECTDIR}/src/glut/GLUTInputState.o: src/glut/GLUTInputState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInputState.o src/glut/GLUTInputState.cpp
+
+${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
+
 ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
-
-${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
 
 ${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
 
+${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+
 ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
-
-${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/layer
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/PNGImage.o: src/graphics/shapes/PNGImage.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/PNGImage.o src/graphics/shapes/PNGImage.cpp
 
+${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
+
 ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Shape.o src/graphics/shapes/Shape.cpp
-
-${OBJECTDIR}/src/physics/Tile.o: src/physics/Tile.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Tile.o src/physics/Tile.cpp
 
 ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
 
-${OBJECTDIR}/src/graphics/GLUTRenderer.o: src/graphics/GLUTRenderer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
+${OBJECTDIR}/src/glut/GLUTRenderer.o: src/glut/GLUTRenderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTRenderer.o src/graphics/GLUTRenderer.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTRenderer.o src/glut/GLUTRenderer.cpp
 
-${OBJECTDIR}/src/graphics/Color.o: src/graphics/Color.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
+${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Color.o src/graphics/Color.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
 
 ${OBJECTDIR}/src/layer/RenderLayer.o: src/layer/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/RenderLayer.o src/layer/RenderLayer.cpp
 
-${OBJECTDIR}/src/graphics/GLUTDriver.o: src/graphics/GLUTDriver.cpp 
+${OBJECTDIR}/src/graphics/Color.o: src/graphics/Color.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/GLUTDriver.o src/graphics/GLUTDriver.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Color.o src/graphics/Color.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
-
-${OBJECTDIR}/src/layer/TiledObjectLayer.o: src/layer/TiledObjectLayer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/layer
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/TiledObjectLayer.o src/layer/TiledObjectLayer.cpp
 
 # Subprojects
 .build-subprojects:

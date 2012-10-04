@@ -1,7 +1,7 @@
 #ifndef GLUTCAMERA_H_
 #define GLUTCAMERA_H_
 
-#include "Camera.h"
+#include <core/Camera.h>
 
 namespace phantom {
     class GLUTCamera : public Camera

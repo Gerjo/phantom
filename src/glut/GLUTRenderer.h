@@ -1,7 +1,7 @@
 #ifndef GLUTRENDERER_H
 #define GLUTRENDERER_H
 
-#include <graphics/Renderer.h>
+#include <core/Renderer.h>
 #include <CompileConfig.h>
 #include <core/GameState.h>
 #include <core/Composite.h>

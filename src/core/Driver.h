@@ -5,14 +5,14 @@
 #include <CompileConfig.h>
 #include <core/Camera.h>
 #include <input/InputState.h>
-#include "Renderer.h"
+#include <core/Renderer.h>
 
 namespace phantom{
 
-    class LIBEXPORT BaseDriver{
+    class LIBEXPORT Driver{
     public:
-        BaseDriver(){}
-        virtual ~BaseDriver(){}
+        Driver(){}
+        virtual ~Driver(){}
 
         virtual void setGame(PhantomGame* game) = 0;
         virtual void onUpdate(float elapsed) = 0;
@@ -22,7 +22,7 @@ namespace phantom{
         Camera* camera;
         Renderer* renderer;
         InputState* inputState;
-    protected: 
+    protected:
 
     };
 } /* namespace phantom */

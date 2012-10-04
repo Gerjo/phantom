@@ -12,10 +12,11 @@ namespace phantom {
         Camera(int id) :
             _cameraID(id),
             _isActive(true),
-            _position(0.0f, 0.0f, 0.0f),
+            _position(200.0f, 20.0f, 0.0f),
             _rotation(0.0f, 0.0f, 0.0f),
             _viewPort(0.0f, 0.0f, 0.0f)
         {
+
         }
 
         virtual ~Camera() {
@@ -32,14 +33,14 @@ namespace phantom {
         virtual Eigen::Vector3f getViewCoordinates(Eigen::Vector3f *worldCoordinate) = 0;
         virtual Eigen::Vector3f getWorldCoordinates(Eigen::Vector3f *viewCoordinate) = 0;
 
-        Eigen::Vector3f getViewPort() {
+        const Eigen::Vector3f& getViewPort() {
             return _viewPort;
         }
 
-        Eigen::Vector3f getPosition() { 
+        const Eigen::Vector3f& getPosition() {
             return _position;
         }
-        Eigen::Vector3f getRotation() {
+        const Eigen::Vector3f& getRotation() {
             return _rotation;
         }
 

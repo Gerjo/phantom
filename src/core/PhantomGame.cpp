@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include <phantom.h>
-#include <graphics/BaseDriver.h>
+#include <core/Driver.h>
 
 namespace phantom {
 
@@ -22,7 +22,7 @@ namespace phantom {
         this->states.pop_back();
     }
 
-    int PhantomGame::start(int argc, char *argv[], BaseDriver *driver )
+    int PhantomGame::start(int argc, char *argv[], Driver *driver )
     {
         driver->setGame(this);
         double last = this->time();

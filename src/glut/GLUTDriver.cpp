@@ -1,9 +1,9 @@
 #include "GLUTDriver.h"
 #include "GLUTRenderer.h"
-#include <core/GLUTCamera.h>
-#include <input/GLUTInputState.h>
+#include <glut/GLUTCamera.h>
+#include <glut/GLUTInputState.h>
 namespace phantom{
-   
+
     GLUTDriver::GLUTDriver(){
 
     }

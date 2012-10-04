@@ -5,11 +5,11 @@
 #include <core/Composite.h>
 #include <core/Camera.h>
 #include <deque>
-#include <graphics/Renderer.h>
+#include <core/Renderer.h>
 #include <CompileConfig.h>
 
 namespace phantom {
-    class BaseDriver;
+    class Driver;
 class LIBEXPORT PhantomGame : public Composite {
 public:
 	PhantomGame( const char *configfile );
@@ -18,7 +18,7 @@ public:
 	void pushGameState( GameState *state );
 	void popGameState();
 
-    int start( int argc, char *argv[], BaseDriver* driver );
+    int start( int argc, char *argv[], Driver* driver );
 
 	void update( float elapsed );
 
@@ -56,7 +56,7 @@ private:
 
 	Renderer *renderer;
     Camera *camera;
-    BaseDriver *driver;
+    Driver *driver;
 	std::deque<GameState*> states;
 
 	double time();
