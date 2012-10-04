@@ -24,8 +24,7 @@ namespace phantom {
 
     int PhantomGame::start(int argc, char *argv[])
     {
-        Driver* driver = &getDriver();
-        driver->setGame(this);
+
         double last = this->time();
         float total = 0.0f;
         float fpscount = 0.0f;
@@ -34,7 +33,8 @@ namespace phantom {
             double now     = this->time();
             double elapsed = now - last;
 
-            driver->onUpdate(elapsed);
+            _driver->onUpdate(elapsed);
+
             camera->update(elapsed);
             renderer->renderLoop(&states);
 
@@ -48,7 +48,7 @@ namespace phantom {
             if(total >= 1) {
                 stringstream stream;
                 stream << "Phantom [Avg FPS: " << fpscount << " Cur FPS: " << 1/elapsed << "]" << endl;
-                renderer->setWindowTitle(stream.str());
+                //renderer->setWindowTitle(stream.str());
                 fpscount = 0;
                 total = 0;
             }
@@ -102,8 +102,8 @@ namespace phantom {
     }
 
 
-    Driver& PhantomGame::getDriver() {
-        return *_driver;
+    Driver* PhantomGame::getDriver() {
+        return _driver;
     }
 
     void PhantomGame::setDriver(Driver* driver) {

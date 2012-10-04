@@ -11,21 +11,21 @@ namespace phantom{
     class InputState;
     class LIBEXPORT Driver{
     public:
-        Driver(PhantomGame& game) : _game(game) {}
+        Driver(PhantomGame* game) : _game(game) {}
         virtual ~Driver(){}
 
-        virtual void setGame(PhantomGame* game) = 0;
+        virtual void setGame() = 0;
         virtual void onUpdate(float elapsed) = 0;
         virtual void onRender() = 0;
 
-        InputState* getInput() { return inputState; }
+        InputState* getInput() { return _inputState; }
 
-        PhantomGame* game;
         Camera* camera;
         Renderer* renderer;
-        InputState* inputState;
+
     protected:
-        PhantomGame& _game;
+        PhantomGame* _game;
+        InputState* _inputState;
     };
 } /* namespace phantom */
 

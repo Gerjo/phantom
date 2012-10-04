@@ -4,27 +4,38 @@
 #include <glut/GLUTInputState.h>
 namespace phantom{
 
-    GLUTDriver::GLUTDriver(PhantomGame& game) : Driver(game) {
+    GLUTDriver::GLUTDriver(PhantomGame* game) : Driver(game) {
+        renderer = new GLUTRenderer(_game->getWidth(), _game->getHeight());
+        _game->setRenderer(renderer);
 
+        camera = new GLUTCamera(0);
+        camera->setViewPort(Eigen::Vector3f((float)game->getWidth(), (float)game->getHeight(), 0.0f));
+        _game->setCamera(camera);
     }
+
     GLUTDriver::~GLUTDriver(){
 
     }
-    void GLUTDriver::setGame(PhantomGame* game){
-        this->game = game;
-        renderer = new GLUTRenderer(game->getWidth(), game->getHeight());
-        inputState = new GLUTInputState();
-        camera = new GLUTCamera(0);
-        camera->setViewPort(Eigen::Vector3f((float)game->getWidth(), (float)game->getHeight(), 0.0f));
 
-        game->setCamera(camera);
-        game->setRenderer(renderer);
-        game->addComponent(inputState);
+    void GLUTDriver::setGame(){
+        //this->game = game;
+
+
+        //inputState = new GLUTInputState();
+        //camera = new GLUTCamera(0);
+        //camera->setViewPort(Eigen::Vector3f((float)game->getWidth(), (float)game->getHeight(), 0.0f));
+
+        //_game->setCamera(camera);
+        _game->setRenderer(renderer);
+        //_game->addComponent(inputState);
     }
+
     void GLUTDriver::onUpdate(float elapsed){
-        game->update(elapsed);
+        _game->update(elapsed);
     }
-    void GLUTDriver::onRender(){
+
+    void GLUTDriver::onRender() {
+
     }
 
 } /* namespace phantom */

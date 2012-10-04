@@ -9,8 +9,6 @@
         <itemPath>src/core/Driver.h</itemPath>
         <itemPath>src/core/Entity.cpp</itemPath>
         <itemPath>src/core/Entity.h</itemPath>
-        <itemPath>src/core/EventManager.cpp</itemPath>
-        <itemPath>src/core/EventManager.h</itemPath>
         <itemPath>src/core/GameState.cpp</itemPath>
         <itemPath>src/core/GameState.h</itemPath>
         <itemPath>src/core/PhantomGame.cpp</itemPath>

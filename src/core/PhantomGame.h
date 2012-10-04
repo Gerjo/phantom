@@ -39,7 +39,7 @@ namespace phantom {
         }
 
 
-        Driver& getDriver();
+        Driver* getDriver();
         void setDriver(Driver* driver);
     protected:
         virtual void onExit(int returncode);
