@@ -107,8 +107,16 @@ namespace phantom {
         _driver = driver;
     }
 
-    std::deque<GameState*>& PhantomGame::getGameStates() {
+    deque<GameState*>& PhantomGame::getGameStates() {
         return states;
+    }
+
+    unsigned int PhantomGame::getHeight() const {
+        return height;
+    }
+
+    unsigned int PhantomGame::getWidth() const {
+        return width;
     }
 
 } /* namespace phantom */

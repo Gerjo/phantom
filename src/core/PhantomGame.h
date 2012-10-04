@@ -24,13 +24,8 @@ namespace phantom {
         void update(float elapsed);
         void exit(int returncode);
 
-        unsigned int getHeight() const {
-            return height;
-        }
-
-        unsigned int getWidth() const {
-            return width;
-        }
+        unsigned int getHeight() const;
+        unsigned int getWidth() const;
 
         deque<GameState*>& getGameStates();
         Driver* getDriver();
