@@ -10,57 +10,51 @@
 
 namespace phantom {
     class Driver;
-class LIBEXPORT PhantomGame : public Composite {
-public:
-	PhantomGame( const char *configfile );
-	virtual ~PhantomGame();
 
-	void pushGameState( GameState *state );
-	void popGameState();
+    class LIBEXPORT PhantomGame : public Composite {
+    public:
+        PhantomGame(const char *configfile);
+        virtual ~PhantomGame();
 
-    int start( int argc, char *argv[], Driver* driver );
+        void pushGameState(GameState *state);
+        void popGameState();
+        int start(int argc, char *argv[], Driver* driver);
+        void update(float elapsed);
+        void exit(int returncode);
 
-	void update( float elapsed );
+        unsigned int getHeight() const {
+            return height;
+        }
 
-	void exit(int returncode);
+        unsigned int getWidth() const {
+            return width;
+        }
 
-    unsigned int getHeight() const
-    {
-        return height;
-    }
+        void setRenderer(Renderer *renderer) {
+            this->renderer = renderer;
+        }
 
-    unsigned int getWidth() const
-    {
-        return width;
-    }
+        void setCamera(Camera *camera) {
+            this->camera = camera;
+        }
 
-	void setRenderer(Renderer *renderer)
-	{
-		this->renderer = renderer;
-	}
+    protected:
+        virtual void onExit(int returncode);
 
-    void setCamera(Camera *camera)
-    {
-        this->camera = camera;
-    }
+    private:
 
-protected:
-    virtual void onExit(int returncode);
+        unsigned int width;
+        unsigned int height;
 
-private:
+        unsigned int fps;
 
-	unsigned int width;
-	unsigned int height;
+        Renderer *renderer;
+        Camera *camera;
+        Driver *driver;
+        std::deque<GameState*> states;
 
-	unsigned int fps;
-
-	Renderer *renderer;
-    Camera *camera;
-    Driver *driver;
-	std::deque<GameState*> states;
-
-	double time();
-};
+        double time();
+    };
 
 } /* namespace phantom */
 #endif /* PHANTOMGAME_H_ */

@@ -38,7 +38,7 @@ namespace phantom {
             renderer->renderLoop(&states);
 
             if(elapsed < (1.0f/this->fps)) {
-                phantom::Util::sleep(ceil(((1.0f/this->fps) - elapsed) * 1000.0f));
+                Util::sleep(ceil(((1.0f/this->fps) - elapsed) * 1000.0f));
             }
 
             total += elapsed;
