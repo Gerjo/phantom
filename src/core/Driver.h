@@ -4,7 +4,6 @@
 #include <core/PhantomGame.h>
 #include <CompileConfig.h>
 #include <core/Camera.h>
-#include <input/InputState.h>
 #include <core/Renderer.h>
 #include <input/Input.h>
 

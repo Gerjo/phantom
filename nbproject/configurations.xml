@@ -22,8 +22,6 @@
         <itemPath>src/glut/GLUTDriver.h</itemPath>
         <itemPath>src/glut/GLUTInput.cpp</itemPath>
         <itemPath>src/glut/GLUTInput.h</itemPath>
-        <itemPath>src/glut/GLUTInputState.cpp</itemPath>
-        <itemPath>src/glut/GLUTInputState.h</itemPath>
         <itemPath>src/glut/GLUTRenderer.cpp</itemPath>
         <itemPath>src/glut/GLUTRenderer.h</itemPath>
       </logicalFolder>
@@ -50,8 +48,6 @@
       </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
         <itemPath>src/input/Input.h</itemPath>
-        <itemPath>src/input/InputState.cpp</itemPath>
-        <itemPath>src/input/InputState.h</itemPath>
         <itemPath>src/input/KeyboardState.h</itemPath>
         <itemPath>src/input/MouseState.h</itemPath>
       </logicalFolder>

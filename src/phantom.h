@@ -9,8 +9,6 @@
 #include <core/PhantomGame.h>
 #include <core/Driver.h>
 
-#include <input/InputState.h>
-
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>
 #include <utils/util.h>

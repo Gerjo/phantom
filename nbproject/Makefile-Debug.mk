@@ -42,10 +42,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/layer/ObjectLayer.o \
 	${OBJECTDIR}/src/core/GameState.o \
-	${OBJECTDIR}/src/glut/GLUTInputState.o \
 	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
-	${OBJECTDIR}/src/input/InputState.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
@@ -119,11 +117,6 @@ ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
-${OBJECTDIR}/src/glut/GLUTInputState.o: src/glut/GLUTInputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInputState.o src/glut/GLUTInputState.cpp
-
 ${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
@@ -133,11 +126,6 @@ ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
-
-${OBJECTDIR}/src/input/InputState.o: src/input/InputState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/InputState.o src/input/InputState.cpp
 
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
