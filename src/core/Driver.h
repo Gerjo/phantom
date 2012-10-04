@@ -8,7 +8,6 @@
 #include <input/Input.h>
 
 namespace phantom{
-    class InputState;
     class LIBEXPORT Driver{
     public:
         Driver(PhantomGame* game) : _game(game) {}
