@@ -14,8 +14,6 @@ namespace phantom{
 
     void GLUTDriver::onUpdate(float elapsed){
         _game->update(elapsed);
-
-        //_camera->update(elapsed);
         _renderer->renderLoop(&_game->getGameStates());
     }
 
