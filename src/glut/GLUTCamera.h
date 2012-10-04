@@ -4,7 +4,7 @@
 #include <core/Camera.h>
 
 namespace phantom {
-    class GLUTCamera : public Camera
+    class LIBEXPORT GLUTCamera : public Camera
     {
     public:
         GLUTCamera(int id);

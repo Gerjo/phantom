@@ -10,7 +10,7 @@ using namespace std;
 
 namespace phantom {
 
-    class Input {
+    class LIBEXPORT Input {
     public:
         Input() {}
         virtual KeyboardState* getKeyboardState() = 0;

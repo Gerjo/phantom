@@ -6,7 +6,7 @@
 #include <Eigen/Eigen>
 
 namespace phantom {
-    class GLUTInput : public Input {
+    class LIBEXPORT GLUTInput : public Input {
     public:
         GLUTInput();
 
