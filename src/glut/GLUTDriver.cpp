@@ -5,10 +5,10 @@
 namespace phantom{
 
     GLUTDriver::GLUTDriver(PhantomGame* game) : Driver(game) {
-        renderer = new GLUTRenderer(_game->getWidth(), _game->getHeight());
+        _renderer = new GLUTRenderer(_game->getWidth(), _game->getHeight());
 
-        camera = new GLUTCamera(0);
-        camera->setViewPort(Eigen::Vector3f((float)game->getWidth(), (float)game->getHeight(), 0.0f));
+        _camera = new GLUTCamera(0);
+        _camera->setViewPort(Eigen::Vector3f((float)game->getWidth(), (float)game->getHeight(), 0.0f));
     }
 
     GLUTDriver::~GLUTDriver(){
@@ -18,8 +18,8 @@ namespace phantom{
     void GLUTDriver::onUpdate(float elapsed){
         _game->update(elapsed);
 
-        camera->update(elapsed);
-        renderer->renderLoop(&_game->getGameStates());
+        _camera->update(elapsed);
+        _renderer->renderLoop(&_game->getGameStates());
     }
 
     void GLUTDriver::onRender() {
