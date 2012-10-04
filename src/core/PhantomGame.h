@@ -47,9 +47,6 @@ namespace phantom {
         Driver* _driver;
         std::deque<GameState*> _states;
 
-        double time();
-
-
     };
 
 } /* namespace phantom */

@@ -27,12 +27,12 @@ namespace phantom {
 
     int PhantomGame::start(int argc, char *argv[]) {
 
-        double last = this->time();
+        double last = Util::getTime();
         float total = 0.0f;
         float fpscount = 0.0f;
 
         while (1) {
-            double now = this->time();
+            double now = Util::getTime();
             double elapsed = now - last;
 
             _driver->onUpdate(elapsed);
@@ -74,25 +74,6 @@ namespace phantom {
     }
 
     void PhantomGame::onExit(int returncode) {
-    }
-
-    double PhantomGame::time() {
-#ifndef WIN32
-        timeval tv;
-        gettimeofday(&tv, NULL);
-
-        double total = tv.tv_sec;
-        total += tv.tv_usec / 1000000.0;
-#else
-        SYSTEMTIME *lpSystemTime = new SYSTEMTIME();
-        GetLocalTime(lpSystemTime);
-
-        double total = lpSystemTime->wSecond;
-        total += lpSystemTime->wMilliseconds / 1000.0;
-
-        delete lpSystemTime;
-#endif
-        return total;
     }
 
     Driver* PhantomGame::getDriver() {
