@@ -39,7 +39,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
-	${OBJECTDIR}/src/input/Input.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/layer/ObjectLayer.o \
 	${OBJECTDIR}/src/core/GameState.o \
@@ -57,6 +56,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/graphics/Color.o \
 	${OBJECTDIR}/src/layer/RenderLayer.o \
+	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o
 
 
@@ -103,11 +103,6 @@ ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
-
-${OBJECTDIR}/src/input/Input.o: src/input/Input.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/Input.o src/input/Input.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -193,6 +188,11 @@ ${OBJECTDIR}/src/layer/RenderLayer.o: src/layer/RenderLayer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/RenderLayer.o src/layer/RenderLayer.cpp
+
+${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInput.o src/glut/GLUTInput.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes

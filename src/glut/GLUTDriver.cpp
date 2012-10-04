@@ -1,15 +1,18 @@
 #include "GLUTDriver.h"
 #include "GLUTRenderer.h"
 #include <glut/GLUTCamera.h>
-#include <glut/GLUTInputState.h>
+#include <glut/GLUTInput.h>
+
 namespace phantom{
 
     GLUTDriver::GLUTDriver(PhantomGame* game) : Driver(game) {
         _renderer = new GLUTRenderer(_game->getWidth(), _game->getHeight());
+        _input    = new GLUTInput();
     }
 
     GLUTDriver::~GLUTDriver(){
-
+        delete _input;
+        delete _renderer;
     }
 
     void GLUTDriver::onUpdate(float elapsed){
