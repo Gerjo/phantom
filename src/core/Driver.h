@@ -14,7 +14,6 @@ namespace phantom{
         Driver(PhantomGame* game) : _game(game) {}
         virtual ~Driver(){}
 
-        virtual void setGame() = 0;
         virtual void onUpdate(float elapsed) = 0;
         virtual void onRender() = 0;
 

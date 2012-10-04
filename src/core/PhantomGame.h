@@ -8,6 +8,8 @@
 #include <core/Renderer.h>
 #include <CompileConfig.h>
 
+using namespace std;
+
 namespace phantom {
     class Driver;
 
@@ -30,16 +32,7 @@ namespace phantom {
             return width;
         }
 
-        void setRenderer(Renderer *renderer) {
-            this->renderer = renderer;
-        }
-
-        void setCamera(Camera *camera) {
-            this->camera = camera;
-        }
-
-        std::deque<GameState*>& getGameStates();
-
+        deque<GameState*>& getGameStates();
         Driver* getDriver();
         void setDriver(Driver* driver);
     protected:
@@ -52,8 +45,6 @@ namespace phantom {
 
         unsigned int fps;
 
-        Renderer *renderer;
-        Camera *camera;
         Driver* _driver;
         std::deque<GameState*> states;
 
