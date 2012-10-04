@@ -18,6 +18,8 @@ namespace phantom{
         virtual void onUpdate(float elapsed) = 0;
         virtual void onRender() = 0;
 
+        InputState* getInput() { return inputState; }
+
         PhantomGame* game;
         Camera* camera;
         Renderer* renderer;
