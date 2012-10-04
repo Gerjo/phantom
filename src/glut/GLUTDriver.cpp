@@ -4,7 +4,7 @@
 #include <glut/GLUTInputState.h>
 namespace phantom{
 
-    GLUTDriver::GLUTDriver(){
+    GLUTDriver::GLUTDriver(PhantomGame& game) : Driver(game) {
 
     }
     GLUTDriver::~GLUTDriver(){

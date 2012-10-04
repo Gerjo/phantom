@@ -8,7 +8,7 @@ namespace phantom{
 
     class LIBEXPORT GLUTDriver: public Driver {
 	public:
-		GLUTDriver();
+		GLUTDriver(PhantomGame& game);
 		virtual ~GLUTDriver();
 
 		virtual void setGame(PhantomGame* game);

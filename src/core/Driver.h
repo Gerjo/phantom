@@ -11,7 +11,7 @@ namespace phantom{
     class InputState;
     class LIBEXPORT Driver{
     public:
-        Driver(){}
+        Driver(PhantomGame& game) : _game(game) {}
         virtual ~Driver(){}
 
         virtual void setGame(PhantomGame* game) = 0;
@@ -25,7 +25,7 @@ namespace phantom{
         Renderer* renderer;
         InputState* inputState;
     protected:
-
+        PhantomGame& _game;
     };
 } /* namespace phantom */
 
