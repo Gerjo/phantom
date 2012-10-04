@@ -6,45 +6,44 @@
 
 namespace phantom {
 
-    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(63){
+    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(63) {
 
     }
 
     PhantomGame::~PhantomGame() {
+        delete _driver;
     }
 
-    void PhantomGame::pushGameState(GameState *state)
-    {
-        this->_states.push_back(state);
-    }
-    void PhantomGame::popGameState()
-    {
-        this->_states.pop_back();
+    void PhantomGame::pushGameState(GameState *state) {
+        _states.push_back(state);
     }
 
-    int PhantomGame::start(int argc, char *argv[])
-    {
+    void PhantomGame::popGameState() {
+        _states.pop_back();
+    }
+
+    int PhantomGame::start(int argc, char *argv[]) {
 
         double last = this->time();
         float total = 0.0f;
         float fpscount = 0.0f;
 
-        while(1) {
-            double now     = this->time();
+        while (1) {
+            double now = this->time();
             double elapsed = now - last;
 
             _driver->onUpdate(elapsed);
 
-            if(elapsed < (1.0f/this->_fps)) {
-                Util::sleep(ceil(((1.0f/this->_fps) - elapsed) * 1000.0f));
+            if (elapsed < (1.0f / this->_fps)) {
+                Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
             }
 
             total += elapsed;
             fpscount++;
 
-            if(total >= 1) {
+            if (total >= 1) {
                 stringstream stream;
-                stream << "Phantom [Avg FPS: " << fpscount << " Cur FPS: " << 1/elapsed << "]" << endl;
+                stream << "Phantom [Avg FPS: " << fpscount << " Cur FPS: " << 1 / elapsed << "]" << endl;
                 //renderer->setWindowTitle(stream.str());
                 fpscount = 0;
                 total = 0;
@@ -55,31 +54,26 @@ namespace phantom {
         return 0;
     }
 
-    void PhantomGame::update( float elapsed )
-    {
-        Composite::update( elapsed );
+    void PhantomGame::update(float elapsed) {
+        Composite::update(elapsed);
         std::deque<GameState*>::reverse_iterator iter;
         iter = this->_states.rbegin();
-        while( iter != this->_states.rend() )
-        {
+        while (iter != this->_states.rend()) {
             (*iter)->update(elapsed);
-            if( iter == this->_states.rend() || !(*iter)->propegateUpdate )
+            if (iter == this->_states.rend() || !(*iter)->propegateUpdate)
                 break;
             ++iter;
         }
     }
 
-    void PhantomGame::exit( int returncode )
-    {
-        this->onExit( returncode );
+    void PhantomGame::exit(int returncode) {
+        onExit(returncode);
     }
 
-    void PhantomGame::onExit( int returncode )
-    {
+    void PhantomGame::onExit(int returncode) {
     }
 
-    double PhantomGame::time()
-    {
+    double PhantomGame::time() {
 #ifndef WIN32
         timeval tv;
         gettimeofday(&tv, NULL);
@@ -97,7 +91,6 @@ namespace phantom {
 #endif
         return total;
     }
-
 
     Driver* PhantomGame::getDriver() {
         return _driver;
