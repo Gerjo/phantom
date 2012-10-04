@@ -8,6 +8,12 @@
 #include <CompileConfig.h>
 
 namespace phantom {
+    namespace Buttons {
+        static unsigned char LEFT_MOUSE = 0;
+        static unsigned char MIDDLE_MOUSE = 1;
+        static unsigned char RIGHT_MOUSE = 2;
+    }
+
     class LIBEXPORT MouseState {
     public:
         MouseState() : _buttonCount(5) {
