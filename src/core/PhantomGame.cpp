@@ -25,19 +25,18 @@ namespace phantom {
     int PhantomGame::start(int argc, char *argv[], BaseDriver *driver )
     {
         driver->setGame(this);
-        float last = this->time();
+        double last = this->time();
         float total = 0.0f;
         float fpscount = 0.0f;
 
-        while(1)
-        {
-            float now = this->time();
-            float elapsed = now-last;
+        while(1) {
+            double now     = this->time();
+            double elapsed = now - last;
 
             driver->onUpdate(elapsed);
             camera->update(elapsed);
             renderer->renderLoop(&states);
-            
+
             if(elapsed < (1.0f/this->fps)) {
                 phantom::Util::sleep(ceil(((1.0f/this->fps) - elapsed) * 1000.0f));
             }
