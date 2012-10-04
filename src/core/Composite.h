@@ -55,10 +55,6 @@ namespace phantom {
         template <class T>
         T* findAnsestor();
 
-        friend std::ostream& operator<<(std::ostream &s, const Composite *c) {
-            return s << "Composite(" << c->components.size() << ")";
-        }
-
         const Eigen::Vector3f& getPosition();
 
     protected:
