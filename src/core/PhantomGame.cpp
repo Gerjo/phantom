@@ -47,7 +47,7 @@ namespace phantom {
             if (total >= 1) {
                 stringstream stream;
                 stream << "Phantom [Avg FPS: " << fpscount << " Cur FPS: " << 1 / elapsed << "]" << endl;
-                //renderer->setWindowTitle(stream.str());
+                getDriver()->setWindowTitle(stream.str());
                 fpscount = 0;
                 total = 0;
             }

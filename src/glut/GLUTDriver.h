@@ -13,7 +13,7 @@ namespace phantom{
 
 		virtual void onUpdate(float elapsed);
 		virtual void onRender();
-
+        virtual void setWindowTitle(string title);
         virtual Camera* createCamera(void);
 	};
 

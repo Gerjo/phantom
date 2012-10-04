@@ -16,7 +16,6 @@ namespace phantom {
 
 		virtual void drawLoop(std::vector<Composite*> *components, Eigen::Vector3f offset) = 0;
 		virtual void renderLoop(std::deque<GameState*> *states) = 0;
-        virtual void setWindowTitle(std::string title) = 0;
 	};
 }
 
