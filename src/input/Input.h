@@ -5,6 +5,7 @@ namespace phantom {
 
     class Input {
     public:
+        Input() {}
         virtual void getKeyboardState() = 0;
         virtual void getMouseState() = 0;
 
