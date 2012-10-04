@@ -3,7 +3,6 @@
 
 #include <input/KeyboardState.h>
 #include <input/MouseState.h>
-#include <core/EventManager.h>
 #include <iostream>
 #include <CompileConfig.h>
 

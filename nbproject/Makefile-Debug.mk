@@ -36,7 +36,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/utils/PhantomException.o \
-	${OBJECTDIR}/src/core/EventManager.o \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
@@ -88,11 +87,6 @@ ${OBJECTDIR}/src/utils/PhantomException.o: src/utils/PhantomException.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/utils
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/PhantomException.o src/utils/PhantomException.cpp
-
-${OBJECTDIR}/src/core/EventManager.o: src/core/EventManager.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/core
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/EventManager.o src/core/EventManager.cpp
 
 ${OBJECTDIR}/src/core/Entity.o: src/core/Entity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
