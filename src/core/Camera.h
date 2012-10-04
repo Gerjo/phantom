@@ -6,6 +6,9 @@
 
 #include <core/Composite.h>
 
+#include <iostream>
+using namespace std;
+
 namespace phantom {
     class LIBEXPORT Camera : public Composite {
     public:

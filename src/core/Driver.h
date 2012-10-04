@@ -19,13 +19,12 @@ namespace phantom{
 
         InputState* getInput() { return _inputState; }
 
-    protected:
-        Camera* _camera;
-        Renderer* _renderer;
+        virtual Camera* createCamera(void) = 0;
 
-        PhantomGame* _game;
+    protected:
+        Renderer* _renderer;
         InputState* _inputState;
-        
+        PhantomGame* _game;
     };
 } /* namespace phantom */
 

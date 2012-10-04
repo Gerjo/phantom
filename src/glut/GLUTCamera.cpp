@@ -18,6 +18,7 @@ namespace phantom {
 
     void GLUTCamera::update(const float &elapsed) {
         Composite::update(elapsed);
+
         if(isActive()) {
             const Eigen::Vector3f& pos = getPosition();
 

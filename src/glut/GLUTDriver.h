@@ -13,6 +13,8 @@ namespace phantom{
 
 		virtual void onUpdate(float elapsed);
 		virtual void onRender();
+
+        virtual Camera* createCamera(void);
 	};
 
 } /* namespace phantom */
