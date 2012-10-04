@@ -8,7 +8,13 @@ namespace phantom {
 
 
     Composite::Composite() : flags(0), destroyed(false), parent(0), _position(0, 0, 0) {
+
         if(phantom::PhantomGame::INSTANCE == 0) {
+            if(phantom::PhantomGame::GERJO_HACK_NEEDS_REFACTOR == 0) {
+                phantom::PhantomGame::GERJO_HACK_NEEDS_REFACTOR++;
+                cout << "Applied hack, see: composite constructor." << endl;
+                return;
+            }
 
             throw PhantomException(
                         "Due to some (arguable) worthless coding (written by "
