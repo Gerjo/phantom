@@ -12,9 +12,9 @@
 #include <CompileConfig.h>
 
 
-
 namespace phantom {
     class Entity;
+    class PhantomGame;
 
     class LIBEXPORT Composite {
     public:
@@ -59,12 +59,15 @@ namespace phantom {
 
     protected:
         Eigen::Vector3f _position;
-
+        PhantomGame* getGame(void);
     private:
         Composite *parent;
         std::vector<Composite*> components;
         Graphics graphics;
         Entity* _entity;
+
+
+
     };
 
     template <class T>

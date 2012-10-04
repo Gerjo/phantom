@@ -6,8 +6,10 @@
 
 namespace phantom {
 
-    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(63) {
+    PhantomGame* PhantomGame::INSTANCE = 0;
 
+    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(63) {
+        PhantomGame::INSTANCE = this;
     }
 
     PhantomGame::~PhantomGame() {

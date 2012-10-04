@@ -1,18 +1,32 @@
 #include "Composite.h"
 #include <iostream>
 #include "Entity.h"
+#include "PhantomGame.h"
+#include "utils/PhantomException.h"
 
 namespace phantom {
 
 
     Composite::Composite() : flags(0), destroyed(false), parent(0), _position(0, 0, 0) {
+        if(phantom::PhantomGame::INSTANCE == 0) {
 
+            throw PhantomException(
+                        "Due to some (arguable) worthless coding (written by "
+                        "gerjo), composites cannot be constructed prior to the "
+                        "game being initialized. Yes we use global statics. Yes "
+                        "I feel guilty, and so should you."
+                    );
+        }
     }
 
     Composite::~Composite() {
         std::vector<Composite*>::iterator iter;
         for( iter = this->components.begin(); iter != this->components.end(); ++iter )
             delete *iter;
+    }
+
+    PhantomGame* Composite::getGame(void) {
+        return phantom::PhantomGame::INSTANCE;
     }
 
     void Composite::onAdd( Composite *parent )

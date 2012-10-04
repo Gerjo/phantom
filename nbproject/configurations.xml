@@ -40,7 +40,6 @@
           <itemPath>src/graphics/shapes/Shape.cpp</itemPath>
           <itemPath>src/graphics/shapes/Shape.h</itemPath>
         </logicalFolder>
-        <itemPath>src/graphics/Color.cpp</itemPath>
         <itemPath>src/graphics/Color.h</itemPath>
         <itemPath>src/graphics/Graphics.cpp</itemPath>
         <itemPath>src/graphics/Graphics.h</itemPath>

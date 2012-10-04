@@ -39,20 +39,19 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
-	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/layer/ObjectLayer.o \
+	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/core/GameState.o \
-	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
+	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
-	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
 	${OBJECTDIR}/src/layer/Layer.o \
+	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/glut/GLUTRenderer.o \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
-	${OBJECTDIR}/src/graphics/Color.o \
 	${OBJECTDIR}/src/layer/RenderLayer.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o
@@ -102,30 +101,30 @@ ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
-
 ${OBJECTDIR}/src/layer/ObjectLayer.o: src/layer/ObjectLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/ObjectLayer.o src/layer/ObjectLayer.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
 
 ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
-${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
-
 ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
+
+${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
 
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
@@ -137,15 +136,15 @@ ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
 
-${OBJECTDIR}/src/graphics/shapes/PNGImage.o: src/graphics/shapes/PNGImage.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/PNGImage.o src/graphics/shapes/PNGImage.cpp
-
 ${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
+
+${OBJECTDIR}/src/graphics/shapes/PNGImage.o: src/graphics/shapes/PNGImage.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/PNGImage.o src/graphics/shapes/PNGImage.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -166,11 +165,6 @@ ${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
-
-${OBJECTDIR}/src/graphics/Color.o: src/graphics/Color.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Color.o src/graphics/Color.cpp
 
 ${OBJECTDIR}/src/layer/RenderLayer.o: src/layer/RenderLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer

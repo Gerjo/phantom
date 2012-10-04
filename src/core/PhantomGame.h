@@ -30,10 +30,14 @@ namespace phantom {
         deque<GameState*>& getGameStates();
         Driver* getDriver();
         void setDriver(Driver* driver);
+
+        friend class Composite;
     protected:
         virtual void onExit(int returncode);
 
     private:
+        static PhantomGame* INSTANCE;
+
 
         unsigned int _width;
         unsigned int _height;
@@ -44,6 +48,8 @@ namespace phantom {
         std::deque<GameState*> _states;
 
         double time();
+
+
     };
 
 } /* namespace phantom */
