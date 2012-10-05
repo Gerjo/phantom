@@ -13,7 +13,7 @@ namespace phantom {
 
     Composite::~Composite() {
         std::vector<Composite*>::iterator iter;
-        for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             delete *iter;
     }
 
@@ -39,13 +39,13 @@ namespace phantom {
     void Composite::onAnsestorChanged()
     {
         std::vector<Composite*>::iterator iter;
-        for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             (*iter)->onAnsestorChanged();
     }
 
     void Composite::addComponent( Composite *component )
     {
-        this->components.push_back(component);
+        this->_components.push_back(component);
         component->onAdd( this );
         component->onAnsestorChanged();
     }
@@ -53,12 +53,12 @@ namespace phantom {
     bool Composite::destroyComponent( Composite *component )
     {
         std::vector<Composite*>::iterator iter;
-        for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
         {
             if( *iter == component )
             {
                 delete *iter;
-                this->components.erase(iter);
+                this->_components.erase(iter);
                 return true;
             }
         }
@@ -66,23 +66,23 @@ namespace phantom {
     }
     bool Composite::destroyComponentAt( size_t index )
     {
-        if( index < 0 || index >= this->components.size() )
+        if( index < 0 || index >= this->_components.size() )
             return false;
         std::vector<Composite*>::iterator iter;
-        iter = this->components.begin() + index;
+        iter = this->_components.begin() + index;
         delete *iter;
-        this->components.erase( iter );
+        this->_components.erase( iter );
         return true;
     }
 
     bool Composite::removeComponent( Composite *component )
     {
         std::vector<Composite*>::iterator iter;
-        for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
         {
             if( *iter == component )
             {
-                this->components.erase(iter);
+                this->_components.erase(iter);
                 return true;
             }
         }
@@ -92,13 +92,13 @@ namespace phantom {
     void Composite::update(const float& elapsed)
     {
         std::vector<Composite*>::iterator iter;
-        for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             (*iter)->update(elapsed);
 
         // Remove destroyed components:
-        for( int i = this->components.size()-1; i >= 0; --i )
+        for( int i = this->_components.size()-1; i >= 0; --i )
         {
-            if( this->components[i]->destroyed )
+            if( this->_components[i]->destroyed )
             {
                 this->destroyComponentAt(i);
             }
@@ -108,7 +108,7 @@ namespace phantom {
     void Composite::intergrate(const float& elapsed)
     {
         std::vector<Composite*>::iterator iter;
-        for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             (*iter)->intergrate(elapsed);
     }
 
@@ -117,7 +117,7 @@ namespace phantom {
         int r;
         int result = PHANTOM_MESSAGE_IGNORED;
         std::vector<Composite*>::iterator iter;
-        for( iter = this->components.begin(); iter != this->components.end(); ++iter )
+        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
         {
             r = (*iter)->handleMessage(msg, data);
             if( r == PHANTOM_MESSAGE_HANDLED)
@@ -128,8 +128,9 @@ namespace phantom {
         return result;
     }
 
-    void Composite::afterCollision( Composite *other )
+    void Composite::onCollision( Composite *other )
     {
+
     }
 
     bool Composite::canCollideWith( Composite *other )

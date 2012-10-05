@@ -41,13 +41,13 @@ namespace phantom {
         virtual void intergrate(const float& elapsed);
 
         virtual bool canCollideWith(Composite *other);
-        virtual void afterCollision(Composite *other);
+        virtual void onCollision(Composite *other);
 
         template <class T>
         T* getComponentByType(int nth);
 
-        std::vector<Composite *> *getComponents() {
-            return &components;
+        std::vector<Composite*>& getComponents() {
+            return _components;
         };
 
         Graphics& getGraphics() {
@@ -66,18 +66,16 @@ namespace phantom {
 
     private:
         Composite *parent;
-        std::vector<Composite*> components;
+        std::vector<Composite*> _components;
         Graphics graphics;
         Entity* _entity;
-
-
 
     };
 
     template <class T>
     T* Composite::getComponentByType(int nth) {
         std::vector<Composite*>::iterator iter;
-        for (iter = this->components.begin(); iter != this->components.end(); ++iter) {
+        for (iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
             T* c = dynamic_cast<T*> (*iter);
             if (c != NULL) {
                 if (nth == 0)
