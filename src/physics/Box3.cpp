@@ -43,12 +43,6 @@ namespace phantom{
          float box1_right = this->origin.x + this->size.x;
          float box2_right = other.origin.x + other.size.y;
 
-         unsigned int collisionCount = 0;
-         if(box2_left > box1_right) collisionCount++;
-         if(box2_right < box1_left) collisionCount++;
-         if(box2_top > box1_bottom) collisionCount++;
-         if(box2_bottom < box1_top) collisionCount++;
-
-         return (collisionCount >= 2);
+         return ((box2_left > box1_right || box2_right < box1_left) && (box2_top > box1_bottom || box2_bottom < box1_top));
      }
 }
