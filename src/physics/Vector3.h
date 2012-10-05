@@ -9,7 +9,8 @@ namespace phantom{
     public: //variables
         float x,y,z;
     public:
-        Vector3(float x, float y, float z);
+        Vector3();
+        Vector3(float x, float y = 0, float z = 0);
     };
 
 } /* namespace phantom */
