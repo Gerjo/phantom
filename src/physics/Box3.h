@@ -7,13 +7,11 @@
 namespace phantom{
     class LIBEXPORT Box3{
     public: //variables
-        Vector3 min;
-        Vector3 max;
+        Vector3 origin;
+        Vector3 size;
     public:
-        Box3(Vector3 min, Vector3 max);
-        bool intersect(Box3& other){
-
-        }
+        Box3(Vector3 origin, Vector3 size);
+        bool intersect(Box3& other);
     };
 
 } /* namespace phantom */
