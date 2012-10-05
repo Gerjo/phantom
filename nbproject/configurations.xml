@@ -51,10 +51,10 @@
         <itemPath>src/input/MouseState.h</itemPath>
       </logicalFolder>
       <logicalFolder name="layer" displayName="layer" projectFiles="true">
+        <itemPath>src/layer/EntityLayer.cpp</itemPath>
+        <itemPath>src/layer/EntityLayer.h</itemPath>
         <itemPath>src/layer/Layer.cpp</itemPath>
         <itemPath>src/layer/Layer.h</itemPath>
-        <itemPath>src/layer/ObjectLayer.cpp</itemPath>
-        <itemPath>src/layer/ObjectLayer.h</itemPath>
         <itemPath>src/layer/RenderLayer.cpp</itemPath>
         <itemPath>src/layer/RenderLayer.h</itemPath>
       </logicalFolder>

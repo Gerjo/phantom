@@ -12,7 +12,7 @@
 #include <utils/util.h>
 
 #include <layer/RenderLayer.h>
-#include <layer/ObjectLayer.h>
+#include <layer/EntityLayer.h>
 
 #include <physics/Vector3.h>
 #include <physics/Box3.h>

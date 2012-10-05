@@ -1,18 +1,18 @@
-#include "ObjectLayer.h"
+#include "EntityLayer.h"
 #include <iostream>
 
 namespace phantom{
-    void ObjectLayer::addEntity(Entity* entity, Vector3 position){
+    void EntityLayer::addEntity(Entity* entity, Vector3 position){
         addComponent(entity);
     }
-    void ObjectLayer::removeEntity(Entity* entity){
+    void EntityLayer::removeEntity(Entity* entity){
         removeComponent(entity);
     }
-    void ObjectLayer::collideWith(ObjectLayer* layer){
+    void EntityLayer::collideWith(EntityLayer* layer){
         collisionList.push_back(layer);
 
     }
-    void ObjectLayer::collision(ObjectLayer* other){
+    void EntityLayer::collision(EntityLayer* other){
         std::vector<Composite*>::iterator it;
         std::vector<Composite*>::iterator it2;
         std::vector<Composite*>* compList = getComponents();
@@ -28,10 +28,10 @@ namespace phantom{
             }
         }
     }
-    void ObjectLayer::update(const float &elapsed){
+    void EntityLayer::update(const float &elapsed){
         Composite::update(elapsed);
         if(collisionList.size() > 0){
-            std::vector<ObjectLayer*>::iterator it;
+            std::vector<EntityLayer*>::iterator it;
             it = collisionList.begin();
             while(it != collisionList.end()){
                 collision((*it));

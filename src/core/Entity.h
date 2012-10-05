@@ -5,14 +5,14 @@
 
 
 namespace phantom {
-    class ObjectLayer;
+    class EntityLayer;
     class Mover;
     class Shape;
 
     class LIBEXPORT Entity : public Composite {
     public:
         Entity();
-        ObjectLayer* objectLayer;
+        EntityLayer* objectLayer;
 
         virtual void addComponent(Composite *component);
 

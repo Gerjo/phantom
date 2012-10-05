@@ -40,11 +40,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/Composite.o \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
-	${OBJECTDIR}/src/layer/ObjectLayer.o \
 	${OBJECTDIR}/src/core/GameState.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
 	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
+	${OBJECTDIR}/src/layer/EntityLayer.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
 	${OBJECTDIR}/src/layer/Layer.o \
@@ -108,11 +108,6 @@ ${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
 
-${OBJECTDIR}/src/layer/ObjectLayer.o: src/layer/ObjectLayer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/layer
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/ObjectLayer.o src/layer/ObjectLayer.cpp
-
 ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
@@ -132,6 +127,11 @@ ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+
+${OBJECTDIR}/src/layer/EntityLayer.o: src/layer/EntityLayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/EntityLayer.o src/layer/EntityLayer.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
