@@ -48,4 +48,12 @@ namespace phantom{
     //bool operator!= (Vector3* a, Vector3* b) {
     //    return !(a == b);
     //}
+
+    std::string Vector3::toString() {
+        stringstream ss;
+
+        ss << "phantom::Vector3 (x: " << x << ", y: " << y << ", z: " << z << ".)";
+
+        return ss.str();
+    }
 }

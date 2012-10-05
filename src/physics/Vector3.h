@@ -2,6 +2,7 @@
 #define VECTOR3_H
 
 #include <CompileConfig.h>
+#include <sstream>
 
 namespace phantom{
 
@@ -24,6 +25,8 @@ namespace phantom{
 
         //friend bool operator== (Vector3* a, Vector3* b);
         //friend bool operator!= (Vector3* a, Vector3* b);
+
+        std::string toString();
     };
 
 } /* namespace phantom */
