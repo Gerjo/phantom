@@ -2,7 +2,8 @@
 #include <iostream>
 #include "Entity.h"
 #include "PhantomGame.h"
-#include "utils/PhantomException.h"
+#include <utils/PhantomException.h>
+#include <core/Driver.h>
 
 namespace phantom {
 
@@ -33,6 +34,10 @@ namespace phantom {
 
     PhantomGame* Composite::getGame(void) {
         return phantom::PhantomGame::INSTANCE;
+    }
+
+    Driver* Composite::getDriver(void) {
+        return getGame()->getDriver();
     }
 
     void Composite::onAdd( Composite *parent )
