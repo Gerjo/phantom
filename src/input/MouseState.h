@@ -25,7 +25,7 @@ namespace phantom {
         void handleEvent(Vector3 newValue){ _mousePos = newValue;    }
         void handleEvent(char id, char newValue)  { _buttons[id] = newValue; }
 
-        const Vector3 getMousePosition() { return _mousePos; }
+        Vector3 getMousePosition() { return _mousePos; }
         bool isButtonDown(char id) {
             if(id <= _buttonCount) {
                 return _buttons[id] == 1;
