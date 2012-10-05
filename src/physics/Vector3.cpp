@@ -1,7 +1,7 @@
 #include "Vector3.h"
 #include "utils/PhantomException.h"
 namespace phantom{
-    Vector3::Vector3(): x(0.0f), y(0.0f), z(0.0f) {
+    Vector3::Vector3(int x, int y, int z): x(static_cast<float>(x)), y(static_cast<float>(y)), z(static_cast<float>(z)){
 
     }
 
