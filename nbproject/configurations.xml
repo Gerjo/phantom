@@ -59,8 +59,12 @@
         <itemPath>src/layer/RenderLayer.h</itemPath>
       </logicalFolder>
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
+        <itemPath>src/physics/Box3.cpp</itemPath>
+        <itemPath>src/physics/Box3.h</itemPath>
         <itemPath>src/physics/Mover.cpp</itemPath>
         <itemPath>src/physics/Mover.h</itemPath>
+        <itemPath>src/physics/Vector3.cpp</itemPath>
+        <itemPath>src/physics/Vector3.h</itemPath>
       </logicalFolder>
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
         <itemPath>src/utils/PhantomException.cpp</itemPath>
