@@ -13,10 +13,6 @@ namespace phantom {
 
         GameState();
         virtual ~GameState();
-
-    private:
-
-        Composite *camera;
     };
 
 }
