@@ -36,14 +36,14 @@ namespace phantom {
         virtual Vector3 getViewCoordinates(Vector3 *worldCoordinate) = 0;
         virtual Vector3 getWorldCoordinates(Vector3 *viewCoordinate) = 0;
 
-        const Vector3& getViewPort() {
+        Vector3& getViewPort() {
             return _viewPort;
         }
 
-        const Vector3& getPosition() {
+        Vector3& getPosition() {
             return _position;
         }
-        const Vector3& getRotation() {
+        Vector3& getRotation() {
             return _rotation;
         }
 
