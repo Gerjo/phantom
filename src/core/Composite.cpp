@@ -9,21 +9,6 @@ namespace phantom {
 
 
     Composite::Composite() : flags(0), destroyed(false), parent(0), _position(0, 0, 0) {
-
-        if(phantom::PhantomGame::INSTANCE == 0) {
-            if(phantom::PhantomGame::GERJO_HACK_NEEDS_REFACTOR == 0) {
-                phantom::PhantomGame::GERJO_HACK_NEEDS_REFACTOR++;
-                cout << "Applied hack, see: composite constructor." << endl;
-                return;
-            }
-
-            throw PhantomException(
-                        "Due to some (arguable) worthless coding (written by "
-                        "gerjo), composites cannot be constructed prior to the "
-                        "game being initialized. Yes we use global statics. Yes "
-                        "I feel guilty, and so should you."
-                    );
-        }
     }
 
     Composite::~Composite() {
@@ -33,7 +18,13 @@ namespace phantom {
     }
 
     PhantomGame* Composite::getGame(void) {
-        return phantom::PhantomGame::INSTANCE;
+        if(PhantomGame::INSTANCE == 0) { 
+            throw PhantomException("Did you forget to create PhantomGame?");
+            return 0;
+        }
+        else {
+            return phantom::PhantomGame::INSTANCE;
+        }
     }
 
     Driver* Composite::getDriver(void) {

@@ -37,7 +37,6 @@ namespace phantom {
 
     private:
         static PhantomGame* INSTANCE;
-        static int GERJO_HACK_NEEDS_REFACTOR;
 
         unsigned int _width;
         unsigned int _height;

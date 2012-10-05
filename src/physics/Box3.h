@@ -14,7 +14,7 @@ namespace phantom{
         Box3(float x, float y, float width, float height);
 
         Box3(Vector3 origin, Vector3 size);
-        bool intersect(Box3& other);
+        bool intersect(const Box3& other);
         bool contains(const Vector3& other);
         bool contains(const Vector3* other);
     };
