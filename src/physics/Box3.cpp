@@ -18,11 +18,11 @@ namespace phantom{
     bool Box3::contains(const Vector3& other) {
 
         return
-            other.z > origin.z && other.z < origin.z + size.z
+            other.x >= origin.x && other.x <= origin.x + size.x
             &&
-            other.y > origin.y && other.y < origin.y + size.y
+            other.y >= origin.y && other.y <= origin.y + size.y
             &&
-            other.x > origin.x && other.x < origin.x + size.x;
+            other.z >= origin.z && other.z <= origin.z + size.z;
     }
 
      bool Box3::contains(const Vector3* other) {
