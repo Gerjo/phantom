@@ -24,8 +24,8 @@ namespace phantom{
 
         Vector3 operator*(float f);
 
-        friend bool operator== (const Vector3& a, const Vector3& b);
-        friend bool operator!= (const Vector3& a, const Vector3& b);
+        bool operator== (const Vector3& v) const;
+        bool operator!= (const Vector3& v) const;
 
         //friend bool operator== (Vector3* a, Vector3* b);
         //friend bool operator!= (Vector3* a, Vector3* b);

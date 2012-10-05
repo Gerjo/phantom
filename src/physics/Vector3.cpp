@@ -39,12 +39,12 @@ namespace phantom{
         return Vector3(x * f, y * f, z * f);
     }
 
-    bool operator== (const Vector3& a, const Vector3& b) {
-        return a.x == b.x && a.y == b.y && a.z == b.z;
+    bool Vector3::operator== (const Vector3& v) const {
+        return this->x == v.x && this->y == v.y && this->z == v.z;
     }
 
-    bool operator!= (const Vector3& a, const Vector3& b) {
-        return !(a == b);
+    bool Vector3::operator!= (const Vector3& v) const {
+        return !(*this == v);
     }
 
     //bool operator== (Vector3* a, Vector3* b) {
