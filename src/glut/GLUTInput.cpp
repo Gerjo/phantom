@@ -48,6 +48,6 @@ namespace phantom {
     }
 
     void GLUTInput::mouseMotionListener(int mouseX, int mouseY) {
-        GLUTInput::INSTANCE->_mouseState->handleEvent(Vector3(static_cast<float> (mouseX), static_cast<float> (mouseY), 1));
+        GLUTInput::INSTANCE->_mouseState->handleEvent(Vector3(mouseX, mouseY));
     }
 }
