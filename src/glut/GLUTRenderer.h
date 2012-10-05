@@ -20,7 +20,6 @@ namespace phantom {
 		int _windowID;
 
         void drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset);
-		void setOrtho();
 	};
 }
 #endif // GLUTRENDERER_H

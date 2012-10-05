@@ -9,7 +9,7 @@ namespace phantom {
     int PhantomGame::GERJO_HACK_NEEDS_REFACTOR = 0;
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(63) {
+    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(60) {
         PhantomGame::INSTANCE = this;
     }
 
@@ -37,9 +37,9 @@ namespace phantom {
 
             _driver->onUpdate(elapsed);
 
-            if (elapsed < (1.0f / this->_fps)) {
-                Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
-            }
+            //if (elapsed < (1.0f / this->_fps)) {
+            //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
+            //}
 
             total += elapsed;
             fpscount++;

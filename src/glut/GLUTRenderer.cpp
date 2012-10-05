@@ -22,15 +22,6 @@ namespace phantom {
         glutDestroyWindow(_windowID);
     }
 
-    void GLUTRenderer::setOrtho() {
-        glViewport(0, 0, width, height);
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(0, width, height, 0, -100, 100);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-    }
-
     void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Eigen::Vector3f& offset) {
 
         // Get the iterator and start iterating.
