@@ -7,8 +7,7 @@
 #include <core/Entity.h>
 #include <layer/Layer.h>
 #include <core/PhantomGame.h>
-
-#include <input/InputState.h>
+#include <core/Driver.h>
 
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>
