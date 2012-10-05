@@ -16,8 +16,7 @@
 #include <layer/RenderLayer.h>
 #include <layer/ObjectLayer.h>
 
-#include <iostream>
-#include <vector>
+
 
 #ifdef WIN32
 #   ifndef WIN32_LEAN_AND_MEAN
