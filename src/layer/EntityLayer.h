@@ -4,17 +4,16 @@
 #include <core/Entity.h>
 #include <layer/Layer.h>
 #include <CompileConfig.h>
+#include <physics/Box3.h>
 
 namespace phantom{
     class LIBEXPORT EntityLayer: public Layer {
     public:
-        void addEntity(Entity* entity, Vector3 yomamma);
-        void removeEntity(Entity* entity);
-        virtual void collideWith(EntityLayer* layer);
         virtual void update(const float &elapsed);
+        virtual void addComponent(Composite* component);
+
     protected:
-        virtual void collision(EntityLayer* layer);
-        std::vector<EntityLayer*> collisionList;
+        bool calculateCollision(Entity* a, Entity* b);
     };
 }
 #endif /*ENTITYLAYER_H*/

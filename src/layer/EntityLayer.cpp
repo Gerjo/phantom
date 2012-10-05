@@ -2,41 +2,58 @@
 #include <iostream>
 
 namespace phantom{
-    void EntityLayer::addEntity(Entity* entity, Vector3 position){
-        addComponent(entity);
-    }
-    void EntityLayer::removeEntity(Entity* entity){
-        removeComponent(entity);
-    }
-    void EntityLayer::collideWith(EntityLayer* layer){
-        collisionList.push_back(layer);
+    void EntityLayer::update(const float &elapsed){
+        Composite::update(elapsed);
 
-    }
-    void EntityLayer::collision(EntityLayer* other){
-        std::vector<Composite*>::iterator it;
-        std::vector<Composite*>::iterator it2;
-        std::vector<Composite*>* compList = getComponents();
-        std::vector<Composite*>* otherList = other->getComponents();
+        vector<Composite*>& entities = getComponents();
+        vector<Composite*>::iterator itA;
 
-        for (it = compList->begin(); it != compList->end(); ++it){
-            for (it2 = otherList->begin(); it2 != otherList->end(); ++it2){
-                if((*it) != (*it2)){
-                    if((*it)->canCollideWith((*it2))){
-                        (*it)->afterCollision((*it2));
+        // A premature halt, should avoid odd errors later on in case an
+        // EntityLayer only contains 1 entity.
+        if(entities.size() < 2) {
+            return;
+        }
+
+        int offset = 1;
+
+        for(itA = entities.begin(); itA != entities.end(); ++itA, ++offset) {
+            Entity* entityA = static_cast<Entity*>(*itA);
+
+            vector<Composite*>& subEntities = getComponents();
+            vector<Composite*>::iterator itB = subEntities.begin();
+
+            // If we have tested A against B, there is no need
+            // to test B against A, henceforth this offset.
+            std::advance(itB, offset);
+
+            for(; itB != subEntities.end(); ++itB) {
+                Entity* entityB = static_cast<Entity*>(*itB);
+
+                if(entityA->canCollideWith(entityB)) {
+                    if(calculateCollision(entityA, entityB)) {
+                        entityA->onCollision(*itB);
+                        entityB->onCollision(*itA);
                     }
                 }
             }
         }
+
     }
-    void EntityLayer::update(const float &elapsed){
-        Composite::update(elapsed);
-        if(collisionList.size() > 0){
-            std::vector<EntityLayer*>::iterator it;
-            it = collisionList.begin();
-            while(it != collisionList.end()){
-                collision((*it));
-                ++it;
-            }
+
+    bool EntityLayer::calculateCollision(Entity* a, Entity* b) {
+        // TODO: fancier shape testing, please!
+        return a->getBoundingBox().intersect(b->getBoundingBox());;
+    }
+
+    void EntityLayer::addComponent(Composite* component) {
+        if(dynamic_cast<Entity*>(component) == 0) {
+            throw PhantomException(
+                    "Only phantom::Entity derivatives "
+                    "can be added to an entitylayer."
+            );
         }
+
+        Layer::addComponent(component);
     }
+
 }/*namespace phantom*/
