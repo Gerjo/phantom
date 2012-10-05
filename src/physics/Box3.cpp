@@ -16,7 +16,7 @@ namespace phantom{
     }
 
     bool Box3::contains(const Vector3& other) {
-
+        // Note: see note at "testBounds".
         return
             other.x >= origin.x && other.x <= origin.x + size.x
             &&
@@ -29,20 +29,27 @@ namespace phantom{
          return contains(*other);
      }
 
+     bool Box3::testBounds(float aMin, float bMin, float aMax, float bMax) {
+
+         // Note: we're testing for equality, too. This helps fix the "zero z width"
+         // incase of a 2D box. I've done the same with the Vector3 detection. We
+         // should have a discussion if this is actually desired. -- Gerjo
+
+         // Two tests, a may bit in b, or b may fit in a.
+         return
+                 aMin >= bMin && aMin <= bMax
+                 ||
+                 bMin >= aMin && bMin <= aMax;
+     }
+
      bool Box3::intersect(const Box3& other) {
-         // Made these vars so in the future we can return a new box instead of just true/false.
-         float box1_top = this->origin.y;
-         float box2_top = other.origin.y;
-
-         float box1_bottom = this->origin.y + this->size.y;
-         float box2_bottom = other.origin.y + other.size.y;
-
-         float box1_left = this->origin.x;
-         float box2_left = other.origin.y;
-
-         float box1_right = this->origin.x + this->size.x;
-         float box2_right = other.origin.x + other.size.y;
-
-         return ((box2_left > box1_right || box2_right < box1_left) && (box2_top > box1_bottom || box2_bottom < box1_top));
+         // Test each dimension:
+         return
+            testBounds(origin.x, other.origin.x, origin.x + size.x, other.origin.x + other.size.x)
+            &&
+            testBounds(origin.y, other.origin.y, origin.y + size.y, other.origin.y + other.size.y)
+            &&
+            testBounds(origin.z, other.origin.z, origin.z + size.z, other.origin.z + other.size.z)
+         ;
      }
 }
