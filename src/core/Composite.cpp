@@ -18,7 +18,7 @@ namespace phantom {
     }
 
     PhantomGame* Composite::getGame(void) {
-        if(PhantomGame::INSTANCE == 0) { 
+        if(PhantomGame::INSTANCE == 0) {
             throw PhantomException("Did you forget to create PhantomGame?");
             return 0;
         }
@@ -138,8 +138,19 @@ namespace phantom {
         return true;
     }
 
-    const Vector3& Composite::getPosition() {
-        return this->_position;
+    Vector3 Composite::getPosition() {
+        return _position;
     }
 
+    void Composite::setPosition(Vector3 position) {
+        _position = position;
+    }
+
+    void Composite::addPosition(const Vector3& add) {
+        _position += add;
+    }
+
+    void Composite::removePosition(const Vector3& subtract) {
+        _position -= subtract;
+    }
 } /* namespace phantom */

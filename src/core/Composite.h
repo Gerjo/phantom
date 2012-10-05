@@ -57,8 +57,10 @@ namespace phantom {
         template <class T>
         T* findAnsestor();
 
-        const Vector3& getPosition();
-
+        Vector3 getPosition();
+        void setPosition(Vector3 position);
+        void addPosition(const Vector3& add);
+        void removePosition(const Vector3& subtract);
     protected:
         Vector3 _position;
         PhantomGame* getGame(void);
