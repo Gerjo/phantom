@@ -3,14 +3,18 @@
 #include <ctime>
 #include <phantom.h>
 #include <core/Driver.h>
+#include <utils/PhantomException.h>
 
 namespace phantom {
 
-    int PhantomGame::GERJO_HACK_NEEDS_REFACTOR = 0;
+    //int PhantomGame::GERJO_HACK_NEEDS_REFACTOR = 0;
     PhantomGame* PhantomGame::INSTANCE = 0;
 
     PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(60) {
-        PhantomGame::INSTANCE = this;
+        if(PhantomGame::INSTANCE == 0)
+            PhantomGame::INSTANCE = this;
+        else
+            throw PhantomException("You should not create two games...");
     }
 
     PhantomGame::~PhantomGame() {

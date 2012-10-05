@@ -10,6 +10,7 @@ namespace phantom {
 
     Composite::Composite() : flags(0), destroyed(false), parent(0), _position(0, 0, 0) {
 
+        /* Not sure if really needed *insert futurama fry meme here* or just something too make it fool proof. 
         if(phantom::PhantomGame::INSTANCE == 0) {
             if(phantom::PhantomGame::GERJO_HACK_NEEDS_REFACTOR == 0) {
                 phantom::PhantomGame::GERJO_HACK_NEEDS_REFACTOR++;
@@ -23,7 +24,7 @@ namespace phantom {
                         "game being initialized. Yes we use global statics. Yes "
                         "I feel guilty, and so should you."
                     );
-        }
+        }*/
     }
 
     Composite::~Composite() {
