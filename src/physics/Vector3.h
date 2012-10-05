@@ -19,6 +19,7 @@ namespace phantom{
         Vector3 operator-(const Vector3& v);
         Vector3 operator%(const Vector3& v);
         Vector3& operator+=(const Vector3& v);
+        Vector3& operator-=(const Vector3& v);
         float operator*(const Vector3& v);
 
         Vector3 operator*(float f);
