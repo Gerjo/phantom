@@ -9,6 +9,12 @@ namespace phantom{
 
     }
 
+    Vector3::Vector3(const Vector3& origin) {
+        x = origin.x;
+        y = origin.y;
+        z = origin.z;
+    }
+
     Vector3 Vector3::operator+(const Vector3& v){
         return Vector3(v.x + x, v.y + y, v.z + z);
     }
