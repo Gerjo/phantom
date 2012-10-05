@@ -1,7 +1,6 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
-#include <Eigen/Geometry>
 #include <core/Composite.h>
 
 

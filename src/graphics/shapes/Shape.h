@@ -1,6 +1,5 @@
 #ifndef SHAPE_H_
 #define SHAPE_H_
-#include <Eigen/Geometry>
 #include <graphics/Color.h>
 #include <CompileConfig.h>
 #include <vector>

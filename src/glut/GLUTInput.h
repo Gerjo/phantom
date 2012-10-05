@@ -3,7 +3,6 @@
 
 #include <input/Input.h>
 #include <GL/freeglut.h>
-#include <Eigen/Eigen>
 
 namespace phantom {
     class LIBEXPORT GLUTInput : public Input {

@@ -8,29 +8,29 @@ namespace phantom {
     GLUTCamera::~GLUTCamera() {
     }
 
-    Eigen::Vector3f GLUTCamera::getViewCoordinates(Eigen::Vector3f *world) {
-        return Eigen::Vector3f();
+    Vector3 GLUTCamera::getViewCoordinates(Vector3 *world) {
+        return Vector3();
     }
 
-    Eigen::Vector3f GLUTCamera::getWorldCoordinates(Eigen::Vector3f *view) {
-        return Eigen::Vector3f();
+    Vector3 GLUTCamera::getWorldCoordinates(Vector3 *view) {
+        return Vector3();
     }
 
     void GLUTCamera::update(const float &elapsed) {
         Composite::update(elapsed);
 
         if(isActive()) {
-            const Eigen::Vector3f& pos = getPosition();
+            const Vector3& pos = getPosition();
 
-            Eigen::Vector3f viewPort = getViewPort();
-            glViewport(0, 0, viewPort.x(), viewPort.y());
+            Vector3 viewPort = getViewPort();
+            glViewport(0, 0, viewPort.x, viewPort.y);
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
             // Should become this:
             //glOrtho(0, 1280, 720, 0, -100, 100);
             glOrtho(0, 800, 450, 0, -100, 100);
-            glTranslatef(-pos.x(), -pos.y(), -pos.z());
+            glTranslatef(-pos.x, -pos.y, -pos.z);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
         }

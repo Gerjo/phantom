@@ -1,6 +1,7 @@
 #ifndef ARC_H
 #define ARC_H
 
+#include <cmath>
 #include <CompileConfig.h>
 #include <graphics/shapes/Line.h>
 

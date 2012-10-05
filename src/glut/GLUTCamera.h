@@ -11,8 +11,8 @@ namespace phantom {
         ~GLUTCamera();
 
         virtual void update(const float& elapsed);
-        virtual Eigen::Vector3f getViewCoordinates(Eigen::Vector3f *worldCoordinate);
-        virtual Eigen::Vector3f getWorldCoordinates(Eigen::Vector3f *viewCoordinate);
+        virtual Vector3 getViewCoordinates(Vector3* worldCoordinate);
+        virtual Vector3 getWorldCoordinates(Vector3* viewCoordinate);
     };
 }
 #endif // !GLUTCAMERA_H_

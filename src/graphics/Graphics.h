@@ -5,7 +5,6 @@
 #include <string>
 
 #include <CompileConfig.h>
-#include <Eigen/Geometry>
 #include <graphics/Color.h>
 #include <graphics/shapes/Shape.h>
 #include <graphics/shapes/Polygon.h>

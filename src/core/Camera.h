@@ -2,11 +2,11 @@
 #define CAMERA_H_
 
 #include <CompileConfig.h>
-#include <Eigen/Geometry>
-
 #include <core/Composite.h>
-
+#include <physics/Vector3.h>
 #include <iostream>
+#include <physics/Vector3.h>
+
 using namespace std;
 
 namespace phantom {
@@ -33,37 +33,37 @@ namespace phantom {
             return _isActive;
         }
 
-        virtual Eigen::Vector3f getViewCoordinates(Eigen::Vector3f *worldCoordinate) = 0;
-        virtual Eigen::Vector3f getWorldCoordinates(Eigen::Vector3f *viewCoordinate) = 0;
+        virtual Vector3 getViewCoordinates(Vector3 *worldCoordinate) = 0;
+        virtual Vector3 getWorldCoordinates(Vector3 *viewCoordinate) = 0;
 
-        const Eigen::Vector3f& getViewPort() {
+        const Vector3& getViewPort() {
             return _viewPort;
         }
 
-        const Eigen::Vector3f& getPosition() {
+        const Vector3& getPosition() {
             return _position;
         }
-        const Eigen::Vector3f& getRotation() {
+        const Vector3& getRotation() {
             return _rotation;
         }
 
-        virtual void setViewPort(Eigen::Vector3f vp) {
+        virtual void setViewPort(Vector3 vp) {
             _viewPort = vp;
         }
 
-        virtual void setPosition(Eigen::Vector3f pos) {
+        virtual void setPosition(Vector3 pos) {
             _position = pos;
         }
-        virtual void setRotation(Eigen::Vector3f rot) {
+        virtual void setRotation(Vector3 rot) {
             _rotation = rot;
         }
 
     private:
         bool _isActive;
         int _cameraID;
-        Eigen::Vector3f _position;
-        Eigen::Vector3f _rotation;
-        Eigen::Vector3f _viewPort;
+        Vector3 _position;
+        Vector3 _rotation;
+        Vector3 _viewPort;
     };
 }
 #endif // !CAMERA_H_

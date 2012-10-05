@@ -1,5 +1,5 @@
 #include "Rectangle.h"
-#include <Eigen/Geometry>
+
 namespace phantom{
 
     Rectangle::Rectangle(float x, float y, float width, float height){

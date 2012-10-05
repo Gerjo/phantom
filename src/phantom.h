@@ -1,8 +1,6 @@
 #ifndef PHANTOM_H_
 #define PHANTOM_H_
 
-#include <Eigen/Geometry>
-
 #include <core/Composite.h>
 #include <core/Entity.h>
 #include <layer/Layer.h>
