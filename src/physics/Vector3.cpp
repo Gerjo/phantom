@@ -49,6 +49,14 @@ namespace phantom{
     //    return !(a == b);
     //}
 
+    Vector3& Vector3::operator+=(const Vector3& v) {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+
+        return *this;
+    }
+
     std::string Vector3::toString() {
         stringstream ss;
 
