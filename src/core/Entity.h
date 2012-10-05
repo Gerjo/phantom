@@ -2,12 +2,11 @@
 #define ENTITY_H_
 
 #include <core/Composite.h>
-
+#include <physics/Box3.h>
 
 namespace phantom {
     class EntityLayer;
     class Mover;
-    class Shape;
 
     class LIBEXPORT Entity : public Composite {
     public:
@@ -18,9 +17,11 @@ namespace phantom {
 
         virtual void setX(float x);
         virtual void setY(float y);
+
+        Box3& getBoundingBox();
     protected:
-        Mover *mover;
-        Shape *shape;
+        Mover* mover;
+        Box3 _boundingBox;
     };
 
 } /* namespace phantom */

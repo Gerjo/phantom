@@ -7,6 +7,7 @@
 namespace phantom {
 
     Entity::Entity() {
+        _boundingBox.size = Vector3(10, 10, 10);
     }
 
     void Entity::addComponent(Composite* component) {
@@ -25,6 +26,11 @@ namespace phantom {
 
     void Entity::setY(float y) {
         _position.y = y;
+    }
+
+    Box3& Entity::getBoundingBox() {
+        _boundingBox.origin = getPosition();
+        return _boundingBox;
     }
 
 } /* namespace phantom */
