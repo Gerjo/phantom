@@ -22,11 +22,11 @@ namespace phantom {
         glutDestroyWindow(_windowID);
     }
 
-    void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Vector3& offset) {
+    void GLUTRenderer::drawLoop(std::vector<Composite*>& components, Vector3& offset) {
 
         // Get the iterator and start iterating.
-        std::vector<Composite*>::iterator compIt = components->begin();
-        while(compIt != components->end()) {
+        std::vector<Composite*>::iterator compIt = components.begin();
+        while(compIt != components.end()) {
             // Get the shapes and start iterating.
             deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
 
@@ -48,7 +48,7 @@ namespace phantom {
 
 
             // If the component has other components attached to it, draw them as well.
-            if((*compIt)->getComponents()->size() > 0) {
+            if((*compIt)->getComponents().size() > 0) {
                 drawLoop((*compIt)->getComponents(), offsetRecalculated);
             }
 
