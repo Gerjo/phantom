@@ -7,7 +7,6 @@
 
 namespace phantom {
 
-    //int PhantomGame::GERJO_HACK_NEEDS_REFACTOR = 0;
     PhantomGame* PhantomGame::INSTANCE = 0;
 
     PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(60) {
