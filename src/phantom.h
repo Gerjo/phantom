@@ -3,7 +3,6 @@
 
 #include <core/Composite.h>
 #include <core/Entity.h>
-#include <layer/Layer.h>
 #include <core/PhantomGame.h>
 #include <core/Driver.h>
 
@@ -11,8 +10,8 @@
 #include <graphics/Color.h>
 #include <utils/util.h>
 
-#include <layer/RenderLayer.h>
 #include <layer/EntityLayer.h>
+#include <layer/Layer.h>
 
 #include <physics/Vector3.h>
 #include <physics/Box3.h>

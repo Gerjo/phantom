@@ -55,8 +55,6 @@
         <itemPath>src/layer/EntityLayer.h</itemPath>
         <itemPath>src/layer/Layer.cpp</itemPath>
         <itemPath>src/layer/Layer.h</itemPath>
-        <itemPath>src/layer/RenderLayer.cpp</itemPath>
-        <itemPath>src/layer/RenderLayer.h</itemPath>
       </logicalFolder>
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/Box3.cpp</itemPath>

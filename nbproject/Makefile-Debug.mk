@@ -52,7 +52,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/glut/GLUTRenderer.o \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
-	${OBJECTDIR}/src/layer/RenderLayer.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/physics/Vector3.o \
@@ -167,11 +166,6 @@ ${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
-
-${OBJECTDIR}/src/layer/RenderLayer.o: src/layer/RenderLayer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/layer
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/RenderLayer.o src/layer/RenderLayer.cpp
 
 ${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/glut
