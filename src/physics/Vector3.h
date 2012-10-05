@@ -10,7 +10,7 @@ namespace phantom{
         float x,y,z;
     public:
         Vector3();
-        Vector3(float x, float y = 0, float z = 0);
+        Vector3(float x, float y = 0.0f, float z = 0.0f);
     };
 
 } /* namespace phantom */
