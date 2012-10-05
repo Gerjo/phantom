@@ -1,26 +1,20 @@
 #ifndef LAYER_H_
 #define LAYER_H_
 
+#include <utils/PhantomException.h>
 #include <core/GameState.h>
 #include <core/Composite.h>
 #include <CompileConfig.h>
+#include <iostream>
+
+using namespace std;
 
 namespace phantom {
 
-    class LIBEXPORT Layer: public Composite
-    {
+    class LIBEXPORT Layer : public Composite {
     public:
-        Layer(float width=0, float height=0);
-        virtual ~Layer();
+        Layer(void);
 
-        virtual void onAdd( Composite *parent );
-        virtual void onAnsestorChanged();
-        virtual float getWidth();
-        virtual float getHeight();
-    protected:
-        GameState *state;
-        float width;
-        float height;
     };
 
 } /* namespace phantom */
