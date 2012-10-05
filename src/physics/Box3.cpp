@@ -25,31 +25,48 @@ namespace phantom{
             other.z >= origin.z && other.z <= origin.z + size.z;
     }
 
-     bool Box3::contains(const Vector3* other) {
-         return contains(*other);
-     }
+    bool Box3::contains(const Vector3* other) {
+        return contains(*other);
+    }
 
-     bool Box3::testBounds(float aMin, float bMin, float aMax, float bMax) {
+    bool Box3::testBounds(float aMin, float bMin, float aMax, float bMax) {
 
-         // Note: we're testing for equality, too. This helps fix the "zero z width"
-         // incase of a 2D box. I've done the same with the Vector3 detection. We
-         // should have a discussion if this is actually desired. -- Gerjo
+        // Note: we're testing for equality, too. This helps fix the "zero z width"
+        // incase of a 2D box. I've done the same with the Vector3 detection. We
+        // should have a discussion if this is actually desired. -- Gerjo
 
-         // Two tests, a may bit in b, or b may fit in a.
-         return
-                 aMin >= bMin && aMin <= bMax
-                 ||
-                 bMin >= aMin && bMin <= aMax;
-     }
+        // Two tests, a may bit in b, or b may fit in a.
+        return
+                aMin >= bMin && aMin <= bMax
+                ||
+                bMin >= aMin && bMin <= aMax;
+    }
 
-     bool Box3::intersect(const Box3& other) {
-         // Test each dimension:
-         return
-            testBounds(origin.x, other.origin.x, origin.x + size.x, other.origin.x + other.size.x)
-            &&
-            testBounds(origin.y, other.origin.y, origin.y + size.y, other.origin.y + other.size.y)
-            &&
-            testBounds(origin.z, other.origin.z, origin.z + size.z, other.origin.z + other.size.z)
-         ;
-     }
+    bool Box3::intersect(const Box3& other) {
+        // Test each dimension:
+        return
+           testBounds(origin.x, other.origin.x, origin.x + size.x, other.origin.x + other.size.x)
+           &&
+           testBounds(origin.y, other.origin.y, origin.y + size.y, other.origin.y + other.size.y)
+           &&
+           testBounds(origin.z, other.origin.z, origin.z + size.z, other.origin.z + other.size.z)
+        ;
+    }
+
+    void Box3::repair(void) {
+        if(size.x < 0) {
+            origin.x += size.x;
+            size.x = abs(size.x);
+        }
+
+        if(size.y < 0) {
+            origin.y += size.y;
+            size.y = abs(size.y);
+        }
+
+        if(size.z < 0) {
+            origin.z += size.z;
+            size.z = abs(size.z);
+        }
+    }
 }

@@ -4,6 +4,7 @@
 #include <physics/Vector3.h>
 #include <CompileConfig.h>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -20,6 +21,8 @@ namespace phantom{
 
         Vector3 origin;
         Vector3 size;
+
+        void repair(void);
 
     private:
         bool testBounds(float aMin, float bMin, float aMax, float bMax);
