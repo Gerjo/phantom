@@ -15,6 +15,7 @@
 namespace phantom {
     class Entity;
     class PhantomGame;
+    class Driver;
 
     class LIBEXPORT Composite {
     public:
@@ -60,6 +61,8 @@ namespace phantom {
     protected:
         Eigen::Vector3f _position;
         PhantomGame* getGame(void);
+        Driver* getDriver(void);
+
     private:
         Composite *parent;
         std::vector<Composite*> components;
