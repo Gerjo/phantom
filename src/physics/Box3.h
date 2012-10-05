@@ -1,7 +1,7 @@
 #ifndef BOX3_H
 #define BOX3_H
 
-#include "Vector3.h"
+#include <physics/Vector3.h>
 #include <CompileConfig.h>
 
 namespace phantom{
