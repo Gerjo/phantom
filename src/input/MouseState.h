@@ -1,11 +1,11 @@
 #ifndef MOUSESTATE_H_
 #define MOUSESTATE_H_
 
-#include <Eigen/Geometry>
 #include <GL/freeglut.h>
 #include <iostream>
 #include <vector>
 #include <CompileConfig.h>
+#include <physics/Vector3.h>
 
 namespace phantom {
     namespace Buttons {
@@ -22,10 +22,10 @@ namespace phantom {
         };
         ~MouseState() { };
 
-        void handleEvent(Eigen::Vector3f newValue){ _mousePos = newValue;    }
+        void handleEvent(Vector3 newValue){ _mousePos = newValue;    }
         void handleEvent(char id, char newValue)  { _buttons[id] = newValue; }
 
-        const Eigen::Vector3f& getMousePosition() { return _mousePos; }
+        const Vector3 getMousePosition() { return _mousePos; }
         bool isButtonDown(char id) {
             if(id <= _buttonCount) {
                 return _buttons[id] == 1;
@@ -41,8 +41,8 @@ namespace phantom {
         bool isButtonUp  (char id) { return !isButtonDown(id); }
 
     private:
-        Eigen::Vector3f   _mousePos;
-        unsigned int      _buttonCount;
+        Vector3 _mousePos;
+        unsigned int _buttonCount;
         std::vector<char> _buttons;
     };
 }

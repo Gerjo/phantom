@@ -146,7 +146,7 @@ namespace phantom {
         return true;
     }
 
-    const Eigen::Vector3f& Composite::getPosition() {
+    const Vector3& Composite::getPosition() {
         return this->_position;
     }
 

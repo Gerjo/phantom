@@ -10,6 +10,7 @@
 #include <sstream>
 #include <vector>
 #include <CompileConfig.h>
+#include <physics/Vector3.h>
 
 
 namespace phantom {
@@ -56,10 +57,10 @@ namespace phantom {
         template <class T>
         T* findAnsestor();
 
-        const Eigen::Vector3f& getPosition();
+        const Vector3& getPosition();
 
     protected:
-        Eigen::Vector3f _position;
+        Vector3 _position;
         PhantomGame* getGame(void);
         Driver* getDriver(void);
 

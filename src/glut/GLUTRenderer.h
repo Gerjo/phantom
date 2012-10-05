@@ -6,6 +6,7 @@
 #include <core/GameState.h>
 #include <core/Composite.h>
 #include <deque>
+#include <physics/Vector3.h>
 
 namespace phantom {
 	class LIBEXPORT GLUTRenderer : public Renderer
@@ -14,7 +15,7 @@ namespace phantom {
 		GLUTRenderer(int width, int height);
 		virtual ~GLUTRenderer();
 
-		virtual void drawLoop(std::vector<Composite*> *components, Eigen::Vector3f& offset);
+		virtual void drawLoop(std::vector<Composite*> *components, Vector3& offset);
 		virtual void renderLoop(std::deque<GameState*> *states);
 	private:
 		int _windowID;

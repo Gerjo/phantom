@@ -14,7 +14,7 @@ namespace phantom {
 		Renderer(int width, int height) { this->width = width; this->height = height; }
 		virtual ~Renderer() { }
 
-		virtual void drawLoop(std::vector<Composite*> *components, Eigen::Vector3f& offset) = 0;
+		virtual void drawLoop(std::vector<Composite*> *components, Vector3& offset) = 0;
 		virtual void renderLoop(std::deque<GameState*> *states) = 0;
 	};
 }

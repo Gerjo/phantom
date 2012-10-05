@@ -22,7 +22,7 @@ namespace phantom {
         glutDestroyWindow(_windowID);
     }
 
-    void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Eigen::Vector3f& offset) {
+    void GLUTRenderer::drawLoop(std::vector<Composite*> *components, Vector3& offset) {
 
         // Get the iterator and start iterating.
         std::vector<Composite*>::iterator compIt = components->begin();
@@ -30,14 +30,14 @@ namespace phantom {
             // Get the shapes and start iterating.
             deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
 
-            Eigen::Vector3f offsetRecalculated = offset + (*compIt)->getPosition();
+            Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
 
             // Gerjo's double buffer!
             for(int i = 0; i < 2; ++i) {
                 deque<Shape*>::iterator itShape = shapes->begin();
 
                 while(itShape != shapes->end())	{
-                    drawShape(*itShape, *compIt, offsetRecalculated.x(), offsetRecalculated.y());
+                    drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
 
                     // Move on to the next shape.
                     ++itShape;
@@ -114,7 +114,7 @@ namespace phantom {
             if(!(*iter)->transparent)
                 break;
 
-            Eigen::Vector3f initialOffset(0, 0, 0);
+            Vector3 initialOffset(0, 0, 0);
 
             drawLoop((*iter)->getComponents(), initialOffset);
             ++iter;
