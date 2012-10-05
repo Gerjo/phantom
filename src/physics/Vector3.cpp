@@ -32,4 +32,20 @@ namespace phantom{
     Vector3 Vector3::operator*(float f){
         return Vector3(x * f, y * f, z * f);
     }
+
+    bool operator== (const Vector3& a, const Vector3& b) {
+        return a.x == b.x && a.y == b.y && a.z == b.z;
+    }
+
+    bool operator!= (const Vector3& a, const Vector3& b) {
+        return !(a == b);
+    }
+
+    //bool operator== (Vector3* a, Vector3* b) {
+    //    return a->x == b->x && a->y == b->y && a->z == b->z;
+    //}
+
+    //bool operator!= (Vector3* a, Vector3* b) {
+    //    return !(a == b);
+    //}
 }
