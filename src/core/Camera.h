@@ -33,8 +33,9 @@ namespace phantom {
             return _isActive;
         }
 
-        virtual Vector3 getViewCoordinates(Vector3 *worldCoordinate) = 0;
-        virtual Vector3 getWorldCoordinates(Vector3 *viewCoordinate) = 0;
+        Vector3 getWorldCoordinates(Vector3 viewCoordinate) {
+            return _position + viewCoordinate;
+        }
 
         Vector3& getViewPort() {
             return _viewPort;

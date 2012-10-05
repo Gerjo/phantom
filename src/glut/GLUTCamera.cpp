@@ -8,14 +8,6 @@ namespace phantom {
     GLUTCamera::~GLUTCamera() {
     }
 
-    Vector3 GLUTCamera::getViewCoordinates(Vector3 *world) {
-        return Vector3();
-    }
-
-    Vector3 GLUTCamera::getWorldCoordinates(Vector3 *view) {
-        return Vector3();
-    }
-
     void GLUTCamera::update(const float &elapsed) {
         Composite::update(elapsed);
 
