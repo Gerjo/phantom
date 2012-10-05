@@ -5,62 +5,49 @@
 #include <core/Composite.h>
 #include <core/Camera.h>
 #include <deque>
-#include <graphics/Renderer.h>
+#include <core/Renderer.h>
 #include <CompileConfig.h>
 
+using namespace std;
+
 namespace phantom {
-    class BaseDriver;
-class LIBEXPORT PhantomGame : public Composite {
-public:
-	PhantomGame( const char *configfile );
-	virtual ~PhantomGame();
+    class Driver;
 
-	void pushGameState( GameState *state );
-	void popGameState();
+    class LIBEXPORT PhantomGame : public Composite {
+    public:
+        PhantomGame(const char *configfile);
+        virtual ~PhantomGame();
 
-    int start( int argc, char *argv[], BaseDriver* driver );
+        void pushGameState(GameState *state);
+        void popGameState();
+        int start(int argc, char *argv[]);
+        void update(float elapsed);
+        void exit(int returncode);
 
-	void update( float elapsed );
+        unsigned int getHeight() const;
+        unsigned int getWidth() const;
 
-	void exit(int returncode);
+        deque<GameState*>& getGameStates();
+        Driver* getDriver();
+        void setDriver(Driver* driver);
 
-    unsigned int getHeight() const
-    {
-        return height;
-    }
+        friend class Composite;
+    protected:
+        virtual void onExit(int returncode);
 
-    unsigned int getWidth() const
-    {
-        return width;
-    }
+    private:
+        static PhantomGame* INSTANCE;
+        static int GERJO_HACK_NEEDS_REFACTOR;
 
-	void setRenderer(Renderer *renderer)
-	{
-		this->renderer = renderer;
-	}
+        unsigned int _width;
+        unsigned int _height;
 
-    void setCamera(Camera *camera)
-    {
-        this->camera = camera;
-    }
+        unsigned int _fps;
 
-protected:
-    virtual void onExit(int returncode);
+        Driver* _driver;
+        std::deque<GameState*> _states;
 
-private:
-
-	unsigned int width;
-	unsigned int height;
-
-	unsigned int fps;
-
-	Renderer *renderer;
-    Camera *camera;
-    BaseDriver *driver;
-	std::deque<GameState*> states;
-
-	double time();
-};
+    };
 
 } /* namespace phantom */
 #endif /* PHANTOMGAME_H_ */

@@ -1,25 +1,34 @@
-#ifndef GLUTINPUTSTATE_H_
-#define GLUTINPUTSTATE_H_
+#ifndef GLUTINPUT_H
+#define	GLUTINPUT_H
 
-#include <phantom.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-#include <CompileConfig.h>
+#include <input/Input.h>
+#include <GL/freeglut.h>
+#include <Eigen/Eigen>
 
 namespace phantom {
-	class LIBEXPORT GLUTInputState : public InputState {
-	public:
-		virtual void setup();
-		virtual void handleEvent(void *event){ }
+    class LIBEXPORT GLUTInput : public Input {
+    public:
+        GLUTInput();
 
-	private:
+        virtual KeyboardState* getKeyboardState();
+        virtual MouseState* getMouseState();
+
+
+    private:
 		static void keyboardListener			(unsigned char keycode, int mouseX, int mouseY);
 		static void keyboardUpListener			(unsigned char keycode, int mouseX, int mouseY);
 		static void keyboardSpecialListener		(int code, int mouseX, int mouseY);
 		static void keyboardSpecialUpListener	(int code, int mouseX, int mouseY);
 		static void mouseListener				(int button, int state, int mouseX, int mouseY);
 		static void mouseMotionListener			(int mouseX, int mouseY);
-	};
+
+        static GLUTInput* INSTANCE;
+
+        MouseState* _mouseState;
+        KeyboardState* _keyboardState;
+
+    };
 }
 
-#endif // GLUTINPUTSTATE_H_
+#endif	/* GLUTINPUT_H */
+

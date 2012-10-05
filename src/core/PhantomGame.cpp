@@ -2,52 +2,52 @@
 #include <iostream>
 #include <ctime>
 #include <phantom.h>
-#include <graphics/BaseDriver.h>
+#include <core/Driver.h>
 
 namespace phantom {
 
-    PhantomGame::PhantomGame(const char *configfile) : width(800), height(450), fps(63){
+    int PhantomGame::GERJO_HACK_NEEDS_REFACTOR = 0;
+    PhantomGame* PhantomGame::INSTANCE = 0;
 
+    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(60) {
+        PhantomGame::INSTANCE = this;
     }
 
     PhantomGame::~PhantomGame() {
+        delete _driver;
     }
 
-    void PhantomGame::pushGameState(GameState *state)
-    {
-        this->states.push_back(state);
-    }
-    void PhantomGame::popGameState()
-    {
-        this->states.pop_back();
+    void PhantomGame::pushGameState(GameState *state) {
+        _states.push_back(state);
     }
 
-    int PhantomGame::start(int argc, char *argv[], BaseDriver *driver )
-    {
-        driver->setGame(this);
-        double last = this->time();
+    void PhantomGame::popGameState() {
+        _states.pop_back();
+    }
+
+    int PhantomGame::start(int argc, char *argv[]) {
+
+        double last = Util::getTime();
         float total = 0.0f;
         float fpscount = 0.0f;
 
-        while(1) {
-            double now     = this->time();
+        while (1) {
+            double now = Util::getTime();
             double elapsed = now - last;
 
-            driver->onUpdate(elapsed);
-            camera->update(elapsed);
-            renderer->renderLoop(&states);
+            _driver->onUpdate(elapsed);
 
-            if(elapsed < (1.0f/this->fps)) {
-                phantom::Util::sleep(ceil(((1.0f/this->fps) - elapsed) * 1000.0f));
-            }
+            //if (elapsed < (1.0f / this->_fps)) {
+            //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
+            //}
 
             total += elapsed;
             fpscount++;
 
-            if(total >= 1) {
+            if (total >= 1) {
                 stringstream stream;
-                stream << "Phantom [Avg FPS: " << fpscount << " Cur FPS: " << 1/elapsed << "]" << endl;
-                renderer->setWindowTitle(stream.str());
+                stream << "Elephantom [Avg FPS: " << fpscount << " Cur FPS: " << 1 / elapsed << "]" << endl;
+                getDriver()->setWindowTitle(stream.str());
                 fpscount = 0;
                 total = 0;
             }
@@ -57,48 +57,43 @@ namespace phantom {
         return 0;
     }
 
-    void PhantomGame::update( float elapsed )
-    {
-        Composite::update( elapsed );
+    void PhantomGame::update(float elapsed) {
+        Composite::update(elapsed);
         std::deque<GameState*>::reverse_iterator iter;
-        iter = this->states.rbegin();
-        while( iter != this->states.rend() )
-        {
+        iter = this->_states.rbegin();
+        while (iter != this->_states.rend()) {
             (*iter)->update(elapsed);
-            if( iter == this->states.rend() || !(*iter)->propegateUpdate )
+            if (iter == this->_states.rend() || !(*iter)->propegateUpdate)
                 break;
             ++iter;
         }
     }
 
-    void PhantomGame::exit( int returncode )
-    {
-        this->onExit( returncode );
+    void PhantomGame::exit(int returncode) {
+        onExit(returncode);
     }
 
-    void PhantomGame::onExit( int returncode )
-    {
+    void PhantomGame::onExit(int returncode) {
     }
 
-    double PhantomGame::time()
-    {
-#ifndef WIN32
-        timeval tv;
-        gettimeofday(&tv, NULL);
-
-        double total = tv.tv_sec;
-        total += tv.tv_usec / 1000000.0;
-#else
-        SYSTEMTIME *lpSystemTime = new SYSTEMTIME();
-        GetLocalTime(lpSystemTime);
-
-        double total = lpSystemTime->wSecond;
-        total += lpSystemTime->wMilliseconds / 1000.0;
-
-        delete lpSystemTime;
-#endif
-        return total;
+    Driver* PhantomGame::getDriver() {
+        return _driver;
     }
 
+    void PhantomGame::setDriver(Driver* driver) {
+        _driver = driver;
+    }
+
+    deque<GameState*>& PhantomGame::getGameStates() {
+        return _states;
+    }
+
+    unsigned int PhantomGame::getHeight() const {
+        return _height;
+    }
+
+    unsigned int PhantomGame::getWidth() const {
+        return _width;
+    }
 
 } /* namespace phantom */

@@ -12,9 +12,10 @@
 #include <CompileConfig.h>
 
 
-
 namespace phantom {
     class Entity;
+    class PhantomGame;
+    class Driver;
 
     class LIBEXPORT Composite {
     public:
@@ -55,21 +56,21 @@ namespace phantom {
         template <class T>
         T* findAnsestor();
 
-        friend std::ostream& operator<<(std::ostream &s, const Composite *c) {
-            return s << "Composite(" << c->components.size() << ")";
-        }
-
-    public:
         const Eigen::Vector3f& getPosition();
 
     protected:
         Eigen::Vector3f _position;
+        PhantomGame* getGame(void);
+        Driver* getDriver(void);
 
     private:
         Composite *parent;
         std::vector<Composite*> components;
         Graphics graphics;
         Entity* _entity;
+
+
+
     };
 
     template <class T>
