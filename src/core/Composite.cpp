@@ -8,7 +8,14 @@
 namespace phantom {
 
 
-    Composite::Composite() : flags(0), destroyed(false), parent(0), _position(0, 0, 0) {
+    Composite::Composite() :
+        flags(0),
+        destroyed(false),
+        parent(0),
+        _position(0, 0, 0),
+        _type("Composite")
+    {
+
     }
 
     Composite::~Composite() {
@@ -152,5 +159,48 @@ namespace phantom {
 
     void Composite::removePosition(const Vector3& subtract) {
         _position -= subtract;
+    }
+
+    void Composite::setType(string type) {
+        _type = type;
+    }
+
+    const string& Composite::getType() {
+        return _type;
+    }
+
+    bool Composite::isType(string type) {
+        return _type.compare(type) == 0;
+    }
+
+    string Composite::toString(void) {
+        stringstream ss;
+
+        const int numChildren = _components.size();
+
+        ss << "[class " << _type << "] ";
+
+        if(numChildren == 0) {
+            ss << "with no children.";
+            
+        } else {
+            ss << "children (" << numChildren << "): ";
+
+            vector<Composite*>::iterator it = _components.begin();
+
+            for(int i = 0; it != _components.end(); ++it, ++i) {
+                ss << (*it)->getType();
+
+                if(i < numChildren - 1) {
+                    ss << ", ";
+                } else {
+                    ss << ".";
+                }
+            }
+        }
+
+        ss << endl;
+
+        return ss.str();
     }
 } /* namespace phantom */

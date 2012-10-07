@@ -6,12 +6,13 @@
 #define PHANTOM_MESSAGE_CONSUMED 2
 
 #include <graphics/Graphics.h>
-
 #include <sstream>
 #include <vector>
+#include <string>
 #include <CompileConfig.h>
 #include <physics/Vector3.h>
 
+using namespace std;
 
 namespace phantom {
     class Entity;
@@ -61,17 +62,22 @@ namespace phantom {
         void setPosition(Vector3 position);
         void addPosition(const Vector3& add);
         void removePosition(const Vector3& subtract);
+
+        const string& getType();
+        bool isType(string type);
+        string toString(void);
     protected:
         Vector3 _position;
+
+        void setType(string type);
         PhantomGame* getGame(void);
         Driver* getDriver(void);
-
     private:
         Composite *parent;
         std::vector<Composite*> _components;
         Graphics graphics;
         Entity* _entity;
-
+        string _type;
     };
 
     template <class T>
