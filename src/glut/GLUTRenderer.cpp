@@ -13,7 +13,7 @@ namespace phantom {
         int i = 0;
         glutInit(&i, 0);
         glutInitWindowSize(width, height);
-        glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+        glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
 
         _windowID = glutCreateWindow("Elephantom");
     }
@@ -120,8 +120,8 @@ namespace phantom {
             ++iter;
         }
 
-        glutSwapBuffers();
         glutMainLoopEvent();
+        glFlush();
     }
 
 }
