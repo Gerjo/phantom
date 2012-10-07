@@ -30,7 +30,6 @@ namespace phantom{
 
     Camera* GLUTDriver::createCamera(void) {
         Camera* cam = new GLUTCamera(0);
-        cam->setViewPort(Vector3(_game->getWidth(), _game->getHeight(), 0));
         return cam;
     }
 
