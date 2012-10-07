@@ -73,7 +73,7 @@ namespace phantom {
     }
     bool Composite::destroyComponentAt( size_t index )
     {
-        if( index < 0 || index >= this->_components.size() )
+        if(index >= this->_components.size() )
             return false;
         std::vector<Composite*>::iterator iter;
         iter = this->_components.begin() + index;
@@ -182,7 +182,7 @@ namespace phantom {
 
         if(numChildren == 0) {
             ss << "with no children.";
-            
+
         } else {
             ss << "children (" << numChildren << "): ";
 
