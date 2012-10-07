@@ -9,6 +9,10 @@ namespace phantom{
 
     }
 
+    Vector3::Vector3(double x, double y, double z): x(static_cast<float>(x)), y(static_cast<float>(y)), z(static_cast<float>(z)) {
+    
+    }
+
     Vector3::Vector3(const Vector3& origin) {
         x = origin.x;
         y = origin.y;

@@ -26,7 +26,7 @@ namespace phantom {
         void handleEvent(char id, char newValue)  { _buttons[id] = newValue; }
 
         Vector3 getMousePosition() { return _mousePos; }
-        bool isButtonDown(char id) {
+        bool isButtonDown(unsigned char id) {
             if(id <= _buttonCount) {
                 return _buttons[id] == 1;
             }
@@ -38,7 +38,7 @@ namespace phantom {
                 return _buttons[id] == 1;
             }
         }
-        bool isButtonUp  (char id) { return !isButtonDown(id); }
+        bool isButtonUp  (unsigned char id) { return !isButtonDown(id); }
 
     private:
         Vector3 _mousePos;

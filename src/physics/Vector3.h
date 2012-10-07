@@ -12,6 +12,7 @@ namespace phantom{
     public:
         Vector3(float x = 0.0f, float y = 0.0f, float z = 0.0f);
         Vector3(int x, int y, int z);
+        Vector3(double x, double y = 0.0, double z = 0.0);
 
         Vector3(const Vector3& origin);
 

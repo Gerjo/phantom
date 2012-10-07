@@ -31,14 +31,14 @@ namespace phantom {
     int PhantomGame::start(int argc, char *argv[]) {
 
         double last = Util::getTime();
-        float total = 0.0f;
-        float fpscount = 0.0f;
+        double total = 0.0f;
+        int fpscount = 0;
 
         while (1) {
             double now = Util::getTime();
             double elapsed = now - last;
 
-            _driver->onUpdate(elapsed);
+            _driver->onUpdate(static_cast<float>(elapsed));
 
             //if (elapsed < (1.0f / this->_fps)) {
             //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));

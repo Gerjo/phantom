@@ -17,7 +17,7 @@ namespace phantom {
             const Vector3& pos = getPosition();
 
             const Vector3& viewPort = getViewPort();
-            glViewport(0, 0, viewPort.x, viewPort.y);
+            glViewport(0, 0, static_cast<int>(viewPort.x), static_cast<int>(viewPort.y));
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
