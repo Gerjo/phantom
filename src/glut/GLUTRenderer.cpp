@@ -8,11 +8,11 @@
 
 namespace phantom {
 
-    GLUTRenderer::GLUTRenderer(int width, int height) : Renderer(width, height) {
+    GLUTRenderer::GLUTRenderer(Vector3* viewPort, Vector3* worldSize) : Renderer(viewPort, worldSize) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
         int i = 0;
         glutInit(&i, 0);
-        glutInitWindowSize(width, height);
+        glutInitWindowSize(viewPort->x, viewPort->y);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
 
         _windowID = glutCreateWindow("Elephantom");
@@ -88,7 +88,7 @@ namespace phantom {
 
         // Iterate through all the points located in our shape.
         vector<VerticeData>::iterator itVert = shape->vertices.begin();
-
+        
         while(itVert != shape->vertices.end()) {
             glTexCoord2f(itVert->texX, itVert->texY);
             glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);

@@ -24,22 +24,23 @@ namespace phantom {
         void update(float elapsed);
         void exit(int returncode);
 
-        unsigned int getHeight() const;
-        unsigned int getWidth() const;
+        Vector3 getViewPort() const;
+        Vector3 getWorldSize() const;
 
         deque<GameState*>& getGameStates();
         Driver* getDriver();
         void setDriver(Driver* driver);
 
         friend class Composite;
+    
     protected:
         virtual void onExit(int returncode);
 
     private:
         static PhantomGame* INSTANCE;
 
-        unsigned int _width;
-        unsigned int _height;
+        Vector3 _viewPort;
+        Vector3 _worldSize;
 
         unsigned int _fps;
 

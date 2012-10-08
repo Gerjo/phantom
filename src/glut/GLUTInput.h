@@ -5,9 +5,10 @@
 #include <GL/freeglut.h>
 
 namespace phantom {
+
     class LIBEXPORT GLUTInput : public Input {
     public:
-        GLUTInput();
+        GLUTInput(PhantomGame *game);
 
         virtual KeyboardState* getKeyboardState();
         virtual MouseState* getMouseState();

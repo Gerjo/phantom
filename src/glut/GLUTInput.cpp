@@ -4,7 +4,7 @@ namespace phantom {
 
     GLUTInput* GLUTInput::INSTANCE = 0;
 
-    GLUTInput::GLUTInput() {
+    GLUTInput::GLUTInput(PhantomGame *game) : Input(game) {
         GLUTInput::INSTANCE = this;
 
         glutKeyboardFunc        (GLUTInput::keyboardListener);
@@ -48,6 +48,13 @@ namespace phantom {
     }
 
     void GLUTInput::mouseMotionListener(int mouseX, int mouseY) {
-        GLUTInput::INSTANCE->_mouseState->handleEvent(Vector3(static_cast<float>(mouseX), static_cast<float>(mouseY)));
+        Vector3 mouseTranslated(mouseX, mouseY, 0);
+        printf("Mouseposition before: x: %f, y: %f, z: %f\n", mouseTranslated.x, mouseTranslated.y, mouseTranslated.z);
+        Vector3 translation = (GLUTInput::INSTANCE->_game->getViewPort() / GLUTInput::INSTANCE->_game->getWorldSize());
+        printf("Mouseposition trnaslation: x: %f, y: %f, z: %f\n", translation.x, translation.y, translation.z);
+        mouseTranslated = mouseTranslated / translation;
+        mouseTranslated.z = 0;
+        printf("Mouseposition after: x: %f, y: %f, z: %f\n", mouseTranslated.x, mouseTranslated.y, mouseTranslated.z);
+        GLUTInput::INSTANCE->_mouseState->handleEvent(mouseTranslated);
     }
 }

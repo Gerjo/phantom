@@ -9,7 +9,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _width(800), _height(450), _fps(60) {
+    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1280, 720, 0), _worldSize(800, 450, 0), _fps(60) {
         if(PhantomGame::INSTANCE == 0)
             PhantomGame::INSTANCE = this;
         else
@@ -91,12 +91,12 @@ namespace phantom {
         return _states;
     }
 
-    unsigned int PhantomGame::getHeight() const {
-        return _height;
+    Vector3 PhantomGame::getViewPort() const {
+        return _viewPort;
     }
-
-    unsigned int PhantomGame::getWidth() const {
-        return _width;
+    
+    Vector3 PhantomGame::getWorldSize() const {
+        return _worldSize;
     }
 
 } /* namespace phantom */

@@ -38,12 +38,20 @@ namespace phantom {
             return _position + viewCoordinate;
         }
 
+        Vector3& getWorldSize() {
+            return _worldSize;
+        }
+
         Vector3& getViewPort() {
             return _viewPort;
         }
 
         Vector3& getRotation() {
             return _rotation;
+        }
+
+        virtual void setWorldSize(Vector3 ws) {
+            _worldSize = ws;
         }
 
         virtual void setViewPort(Vector3 vp) {
@@ -59,6 +67,7 @@ namespace phantom {
         int _cameraID;
         Vector3 _rotation;
         Vector3 _viewPort;
+        Vector3 _worldSize;
     };
 }
 #endif // !CAMERA_H_
