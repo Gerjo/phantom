@@ -28,42 +28,41 @@ namespace phantom {
         if(_game->getDriver()->getActiveCamera() == 0)
             return;
 
+        bool isDrawable = false;
         Vector3 cameraPosition = _game->getDriver()->getActiveCamera()->getPosition();
+        Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
+
         // Get the iterator and start iterating.
         std::vector<Composite*>::iterator compIt = components.begin();
         while(compIt != components.end()) {
             Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
+            // Get the shapes and start iterating.
+            deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
 
-            // Check if we should draw our component.
-            bool isDrawable = false;
-            Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
-            if(cameraBox.intersect((*compIt)->getBoundingBox())){ isDrawable = true; }
+            // Gerjo's double buffer!
+            for(int i = 0; i < 2; ++i) {
+                deque<Shape*>::iterator itShape = shapes->begin();
 
-            if(isDrawable) {
-                // Get the shapes and start iterating.
-                deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
-               
-                // Gerjo's double buffer!
-                for(int i = 0; i < 2; ++i) {
-                    deque<Shape*>::iterator itShape = shapes->begin();
+                while(itShape != shapes->end())	{
+                    Box3 shapeBox = (*itShape)->getBounds();
+                    shapeBox.origin.x += offsetRecalculated.x;
+                    shapeBox.origin.y += offsetRecalculated.y;
 
-                    while(itShape != shapes->end())	{
-                        Box3 shapeBox = (*itShape)->getBounds();
-                        shapeBox.origin.x += offsetRecalculated.x;
-                        shapeBox.origin.y += offsetRecalculated.y;
-                        if(!cameraBox.intersect(shapeBox))
-                            isDrawable = false;
-
-                        // Draw the shape.
-                        if(isDrawable)
-                            drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
-
-                        // Move on to the next shape.
-                        ++itShape;
+                    if(shapeBox.origin.x + shapeBox.size.x >= cameraBox.origin.x && shapeBox.origin.x + shapeBox.size.x <= cameraBox.origin.x + cameraBox.size.x &&
+                        shapeBox.origin.y + shapeBox.size.y >= cameraBox.origin.y && shapeBox.origin.y + shapeBox.size.y <= cameraBox.origin.y + cameraBox.size.y)
+                    {
+                        isDrawable = true;
                     }
+                    // Draw the shape.
+                    if(isDrawable)
+                        drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
 
-                    shapes = & (*compIt)->getGraphics().getBufferedShapes();
+                    // Move on to the next shape.
+                    ++itShape;
                 }
+
+                shapes = & (*compIt)->getGraphics().getBufferedShapes();
+
             }
 
             // If the component has other components attached to it, draw them as well.
@@ -109,7 +108,7 @@ namespace phantom {
         vector<VerticeData>::iterator itVert = shape->vertices.begin();
 
         while(itVert != shape->vertices.end()) {
-            glTexCoord2f(itVert->texX, itVert->texY);
+            glTexCoord2f(itVert->texX, -itVert->texY);
             glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
             ++itVert;
         }

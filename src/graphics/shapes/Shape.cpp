@@ -29,10 +29,24 @@ namespace phantom {
         data.texY = texY;
         vertices.push_back(data);
 
-        if(x > _bounds.origin.x + _bounds.size.x) _bounds.size.x = x - _bounds.origin.x;
-        if(x < _bounds.origin.x) _bounds.origin.x = x;
-        if(y > _bounds.origin.y + _bounds.size.y) _bounds.size.y = y - _bounds.origin.y;
-        if(y < _bounds.origin.y) _bounds.origin.y = y;
+        if(x < _bounds.origin.x) {
+            _bounds.origin.x = x;
+        }
+        else if(x > _bounds.origin.x + _bounds.size.x) {
+            _bounds.size.x = x - _bounds.origin.x;
+        }        
+        if(y < _bounds.origin.y) {
+            _bounds.origin.y = y;
+        }
+        else if(y > _bounds.origin.y + _bounds.size.y) {
+            _bounds.size.y = y - _bounds.origin.y;
+        }        
+        /*if(z < _bounds.origin.z) {
+            _bounds.origin.z = z;
+        }
+        else if(z > _bounds.origin.z + _bounds.size.z) {
+            _bounds.size.z = z - _bounds.origin.z;
+        }*/
     }
 
     bool Shape::hasFillColor(void) {
