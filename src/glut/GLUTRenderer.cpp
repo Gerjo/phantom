@@ -24,7 +24,7 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawLoop(std::vector<Composite*>& components, Vector3& offset) {
-        
+
         if(_game->getDriver()->getActiveCamera() == 0)
             return;
 
@@ -44,8 +44,8 @@ namespace phantom {
                 while(itShape != shapes->end())	{
                     // Check if we should draw our shape.
                     vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
-                    bool isVisible = false;
-                    
+                    bool isVisible = true;/*false;
+
                     while(itVert != (*itShape)->vertices.end()) {
                         float x = ((*itShape)->x + itVert->x + offsetRecalculated.x) - cameraPosition.x;
                         float y = ((*itShape)->y + itVert->y + offsetRecalculated.y) - cameraPosition.y;
@@ -54,7 +54,7 @@ namespace phantom {
                             isVisible = true;
 
                         ++itVert;
-                    }
+                    }*/
 
                     // Draw the shape.
                     if(isVisible) drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
@@ -108,7 +108,7 @@ namespace phantom {
 
         // Iterate through all the points located in our shape.
         vector<VerticeData>::iterator itVert = shape->vertices.begin();
-        
+
         while(itVert != shape->vertices.end()) {
             glTexCoord2f(itVert->texX, itVert->texY);
             glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
