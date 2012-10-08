@@ -49,12 +49,7 @@ namespace phantom {
 
     void GLUTInput::mouseMotionListener(int mouseX, int mouseY) {
         Vector3 mouseTranslated(mouseX, mouseY, 0);
-        printf("Mouseposition before: x: %f, y: %f, z: %f\n", mouseTranslated.x, mouseTranslated.y, mouseTranslated.z);
-        Vector3 translation = (GLUTInput::INSTANCE->_game->getViewPort() / GLUTInput::INSTANCE->_game->getWorldSize());
-        printf("Mouseposition trnaslation: x: %f, y: %f, z: %f\n", translation.x, translation.y, translation.z);
-        mouseTranslated = mouseTranslated / translation;
-        mouseTranslated.z = 0;
-        printf("Mouseposition after: x: %f, y: %f, z: %f\n", mouseTranslated.x, mouseTranslated.y, mouseTranslated.z);
+        mouseTranslated = mouseTranslated / (GLUTInput::INSTANCE->_game->getViewPort() / GLUTInput::INSTANCE->_game->getWorldSize());
         GLUTInput::INSTANCE->_mouseState->handleEvent(mouseTranslated);
     }
 }
