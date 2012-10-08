@@ -2,15 +2,18 @@
 
 namespace phantom {
 
-Mover::Mover()
-{
-    // TODO Auto-generated constructor stub
+    Mover::Mover(){
 
-}
-
-Mover::~Mover()
-{
-    // TODO Auto-generated destructor stub
-}
+    }
+    void Mover::moveTo(Vector3* target){
+        setPosition(*target);
+    }
+    void Mover::moveTo(std::vector<Vector3*> targetList){
+        _it = targetList.begin();
+        while(_it != targetList.end()){
+            moveTo((*_it));
+            ++_it;
+        }
+    }
 
 } /* namespace phantom */
