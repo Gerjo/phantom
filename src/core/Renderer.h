@@ -4,22 +4,22 @@
 #include <CompileConfig.h>
 #include <deque>
 #include <core/GameState.h>
+#include <core/PhantomGame.h>
 
 namespace phantom {
 	class LIBEXPORT Renderer {
 	public:
-		Renderer(Vector3* viewPort, Vector3* worldSize) { 
-            this->_viewPort = viewPort;
-            this->_worldSize = worldSize;
+		Renderer(PhantomGame *game) { 
+            _game = game;
         }
+
 		virtual ~Renderer() { }
 
 		virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset) = 0;
 		virtual void renderLoop(std::deque<GameState*>* states) = 0;
     
     protected:
-        Vector3 *_viewPort;
-        Vector3 *_worldSize;
+        PhantomGame *_game;
 	};
 }
 

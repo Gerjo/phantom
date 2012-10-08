@@ -12,7 +12,7 @@ namespace phantom {
 	class LIBEXPORT GLUTRenderer : public Renderer
 	{
 	public:
-		GLUTRenderer(Vector3* viewPort, Vector3* worldSize);
+		GLUTRenderer(PhantomGame *game);
 		virtual ~GLUTRenderer();
 
 		virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset);

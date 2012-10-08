@@ -6,7 +6,7 @@
 namespace phantom{
 
     GLUTDriver::GLUTDriver(PhantomGame* game) : Driver(game) {
-        _renderer = new GLUTRenderer(&game->getViewPort(), &game->getWorldSize());
+        _renderer = new GLUTRenderer(game);
         _input    = new GLUTInput(game);
     }
 

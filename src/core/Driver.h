@@ -6,6 +6,7 @@
 #include <CompileConfig.h>
 #include <core/Camera.h>
 #include <core/Renderer.h>
+#include <utils/PhantomException.h>
 #include <input/Input.h>
 
 using namespace std;
@@ -13,7 +14,7 @@ using namespace std;
 namespace phantom{
     class LIBEXPORT Driver{
     public:
-        Driver(PhantomGame* game) : _game(game) {}
+        Driver(PhantomGame* game) : _game(game) { _camera = 0; }
         virtual ~Driver(){}
 
         virtual void setWindowTitle(string title) = 0;
@@ -24,9 +25,24 @@ namespace phantom{
 
         virtual Camera* createCamera(void) = 0;
 
+        Camera *getActiveCamera() {
+            if(_camera != 0)
+                return _camera;
+            else
+                throw PhantomException("There is no active camera set yet.");
+        }
+
+        void setActiveCamera(Camera *cam) {
+            if(_camera != 0)
+                _camera->setActive(false);
+            _camera = cam;
+            _camera->setActive(true);
+        }
+
     protected:
         Renderer* _renderer;
         Input* _input;
+        Camera* _camera;
         PhantomGame* _game;
     };
 } /* namespace phantom */

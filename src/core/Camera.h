@@ -13,6 +13,7 @@ using namespace std;
 
 namespace phantom {
     class LIBEXPORT Camera : public Entity {
+        friend Driver;
     public:
         Camera(int id) :
             _cameraID(id),
@@ -63,6 +64,10 @@ namespace phantom {
         }
 
     private:
+        virtual void setActive(bool value) {
+            _isActive = value;
+        }
+
         bool _isActive;
         int _cameraID;
         Vector3 _rotation;

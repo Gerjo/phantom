@@ -1,5 +1,6 @@
 #include "GLUTRenderer.h"
 #include <iostream>
+#include <core/Driver.h>
 #include <GL/freeglut.h>
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>
@@ -8,11 +9,11 @@
 
 namespace phantom {
 
-    GLUTRenderer::GLUTRenderer(Vector3* viewPort, Vector3* worldSize) : Renderer(viewPort, worldSize) {
+    GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
         int i = 0;
         glutInit(&i, 0);
-        glutInitWindowSize(viewPort->x, viewPort->y);
+        glutInitWindowSize(game->getViewPort().x, game->getViewPort().y);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
 
         _windowID = glutCreateWindow("Elephantom");
@@ -23,7 +24,11 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawLoop(std::vector<Composite*>& components, Vector3& offset) {
+        
+        if(_game->getDriver()->getActiveCamera() == 0)
+            return;
 
+        Vector3 cameraPosition = _game->getDriver()->getActiveCamera()->getPosition();
         // Get the iterator and start iterating.
         std::vector<Composite*>::iterator compIt = components.begin();
         while(compIt != components.end()) {
@@ -37,7 +42,22 @@ namespace phantom {
                 deque<Shape*>::iterator itShape = shapes->begin();
 
                 while(itShape != shapes->end())	{
-                    drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                    // Check if we should draw our shape.
+                    vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
+                    bool isVisible = false;
+                    
+                    while(itVert != (*itShape)->vertices.end()) {
+                        float x = ((*itShape)->x + itVert->x + offsetRecalculated.x) - cameraPosition.x;
+                        float y = ((*itShape)->y + itVert->y + offsetRecalculated.y) - cameraPosition.y;
+
+                        if(x <= _game->getWorldSize().x && x >= 0 && y <= _game->getWorldSize().y && y >= 0)
+                            isVisible = true;
+
+                        ++itVert;
+                    }
+
+                    // Draw the shape.
+                    if(isVisible) drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
 
                     // Move on to the next shape.
                     ++itShape;
