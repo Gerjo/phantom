@@ -125,7 +125,7 @@ namespace phantom {
     }
 
     void GLUTRenderer::renderLoop(std::deque<GameState*> *states) {
-        glClearColor(0.392f, 0.584f, 0.929f, 1.0f );
+        glClearColor(0.42f, 0.145f, 0.016f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         std::deque<GameState*>::reverse_iterator iter = states->rbegin();
