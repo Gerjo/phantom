@@ -17,6 +17,8 @@ namespace phantom {
 
         _keyboardState = new KeyboardState();
         _mouseState    = new MouseState();
+        
+        mouseMotionListener(game->getViewPort().x * 0.5, game->getViewPort().y * 0.5);
     }
 
     KeyboardState* GLUTInput::getKeyboardState() {
