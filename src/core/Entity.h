@@ -11,7 +11,7 @@ namespace phantom {
     class LIBEXPORT Entity : public Composite {
     public:
         Entity();
-        EntityLayer* objectLayer;
+        EntityLayer* layer;
 
         virtual void addComponent(Composite *component);
 
@@ -20,6 +20,7 @@ namespace phantom {
 
         Box3& getBoundingBox();
     protected:
+        
         Mover* mover;
         Box3 _boundingBox;
     };
