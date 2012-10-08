@@ -46,13 +46,15 @@ namespace phantom{
     }
 
     void EntityLayer::addComponent(Composite* component) {
-        if(dynamic_cast<Entity*>(component) == 0) {
+        Entity* e = dynamic_cast<Entity*>(component);
+        if(e == 0) {
             throw PhantomException(
                     "Only phantom::Entity derivatives "
                     "can be added to an entitylayer."
             );
         }
-
+        e->layer = this;
+        
         Layer::addComponent(component);
     }
 

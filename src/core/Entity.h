@@ -11,7 +11,7 @@ namespace phantom {
     class LIBEXPORT Entity : public Composite {
     public:
         Entity();
-        EntityLayer* objectLayer;
+        EntityLayer* layer;
 
         virtual void addComponent(Composite *component);
 
@@ -19,6 +19,7 @@ namespace phantom {
         virtual void setY(float y);
     
     protected:
+        
         Mover* mover;
     };
 
