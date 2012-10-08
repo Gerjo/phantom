@@ -24,7 +24,7 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawLoop(std::vector<Composite*>& components, Vector3& offset) {
-        
+
         if(_game->getDriver()->getActiveCamera() == 0)
             return;
 
@@ -32,40 +32,39 @@ namespace phantom {
         // Get the iterator and start iterating.
         std::vector<Composite*>::iterator compIt = components.begin();
         while(compIt != components.end()) {
-            // Get the shapes and start iterating.
-            deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
-
             Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
 
-            // Gerjo's double buffer!
-            for(int i = 0; i < 2; ++i) {
-                deque<Shape*>::iterator itShape = shapes->begin();
+            // Check if we should draw our component.
+            bool isDrawable = false;
+            Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
+            if(cameraBox.intersect((*compIt)->getBoundingBox())){ isDrawable = true; }
 
-                while(itShape != shapes->end())	{
-                    // Check if we should draw our shape.
-                    vector<VerticeData>::iterator itVert = (*itShape)->vertices.begin();
-                    bool isVisible = false;
-                    
-                    while(itVert != (*itShape)->vertices.end()) {
-                        float x = ((*itShape)->x + itVert->x + offsetRecalculated.x) - cameraPosition.x;
-                        float y = ((*itShape)->y + itVert->y + offsetRecalculated.y) - cameraPosition.y;
+            if(isDrawable) {
+                // Get the shapes and start iterating.
+                deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
+               
+                // Gerjo's double buffer!
+                for(int i = 0; i < 2; ++i) {
+                    deque<Shape*>::iterator itShape = shapes->begin();
 
-                        if(x <= _game->getWorldSize().x && x >= 0 && y <= _game->getWorldSize().y && y >= 0)
-                            isVisible = true;
+                    while(itShape != shapes->end())	{
+                        Box3 shapeBox = (*itShape)->getBounds();
+                        shapeBox.origin.x += offsetRecalculated.x;
+                        shapeBox.origin.y += offsetRecalculated.y;
+                        if(!cameraBox.intersect(shapeBox))
+                            isDrawable = false;
 
-                        ++itVert;
+                        // Draw the shape.
+                        if(isDrawable)
+                            drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
+
+                        // Move on to the next shape.
+                        ++itShape;
                     }
 
-                    // Draw the shape.
-                    if(isVisible) drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
-
-                    // Move on to the next shape.
-                    ++itShape;
+                    shapes = & (*compIt)->getGraphics().getBufferedShapes();
                 }
-
-                shapes = & (*compIt)->getGraphics().getBufferedShapes();
             }
-
 
             // If the component has other components attached to it, draw them as well.
             if((*compIt)->getComponents().size() > 0) {
@@ -108,7 +107,7 @@ namespace phantom {
 
         // Iterate through all the points located in our shape.
         vector<VerticeData>::iterator itVert = shape->vertices.begin();
-        
+
         while(itVert != shape->vertices.end()) {
             glTexCoord2f(itVert->texX, itVert->texY);
             glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);

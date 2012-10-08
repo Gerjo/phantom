@@ -4,19 +4,22 @@
 #include <graphics/shapes/Rectangle.h>
 #include <graphics/shapes/Arc.h>
 #include <graphics/shapes/PNGImage.h>
+#include <core/Composite.h>
+#include <physics/Box3.h>
 
 namespace phantom {
 
-    Graphics::Graphics(void) : _polygonLastX(0), _polygonLastY(0), _rotation(0) {
+    Graphics::Graphics(phantom::Composite *parent) : _polygonLastX(0), _polygonLastY(0), _rotation(0) {
+        _parent = parent;
         _polygonBuffer = 0;
     }
 
-    Graphics::~Graphics(void) {
+    Graphics::~Graphics() {
         this->clear();
     }
 
     Graphics& Graphics::beginPath() {
-        // Workspace contains non filled or stroked shapes. Destory!
+        // Workspace contains non filled or stroked shapes. Destroy!
         deleteShapes(_workspaceShapes);
 
         // The buffer is moved to the finalized collection. At this point
@@ -101,6 +104,20 @@ namespace phantom {
     }
 
     void Graphics::addShape(Shape* whom) {
+        Box3 boundingBox = _parent->getBoundingBox();
+
+        std::vector<VerticeData>::iterator verticeIter = whom->vertices.begin();
+        while(verticeIter != whom->vertices.end()) {
+            if((*verticeIter).x > boundingBox.origin.x + boundingBox.size.x) boundingBox.size.x = (*verticeIter).x - boundingBox.origin.x;
+            if((*verticeIter).x < boundingBox.origin.x) boundingBox.origin.x = (*verticeIter).x;
+            if((*verticeIter).y > boundingBox.origin.y + boundingBox.size.y) boundingBox.size.y = (*verticeIter).y - boundingBox.origin.y;
+            if((*verticeIter).y < boundingBox.origin.y) boundingBox.origin.y = (*verticeIter).y;
+            if((*verticeIter).z > boundingBox.origin.z + boundingBox.size.z) boundingBox.size.z = (*verticeIter).z - boundingBox.origin.z;
+            if((*verticeIter).z < boundingBox.origin.z) boundingBox.origin.z = (*verticeIter).z;
+            verticeIter++;
+        }
+        
+        _parent->setBoundingBox(boundingBox);
         _workspaceShapes.push_back(whom);
     }
 

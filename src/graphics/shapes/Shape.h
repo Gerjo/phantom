@@ -4,6 +4,7 @@
 #include <CompileConfig.h>
 #include <vector>
 #include <graphics/VerticeData.h>
+#include <physics/Box3.h>
 
 namespace phantom {
 
@@ -30,7 +31,10 @@ namespace phantom {
         const Color& getLineColor();
         const Color& getFillColor();
 
+        const Box3& getBounds();
+
     private:
+        Box3 _bounds;
         bool _hasFillColor;
         bool _hasLineColor;
         Color _lineColor;

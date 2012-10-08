@@ -10,7 +10,7 @@
 #include <vector>
 #include <string>
 #include <CompileConfig.h>
-#include <physics/Vector3.h>
+#include <physics/Box3.h>
 
 using namespace std;
 
@@ -21,7 +21,6 @@ namespace phantom {
 
     class LIBEXPORT Composite {
     public:
-
         unsigned int flags;
         bool destroyed;
 
@@ -51,8 +50,17 @@ namespace phantom {
             return _components;
         };
 
+        Box3& getBoundingBox() {
+            _boundingBox.origin = getPosition();
+            return _boundingBox;
+        }
+
+        void setBoundingBox(const Box3& boundingBox) {
+            _boundingBox = boundingBox;
+        }
+
         Graphics& getGraphics() {
-            return graphics;
+            return *graphics;
         }
 
         template <class T>
@@ -68,6 +76,7 @@ namespace phantom {
         string toString(void);
     protected:
         Vector3 _position;
+        Box3 _boundingBox;
 
         void setType(string type);
         PhantomGame* getGame(void);
@@ -75,7 +84,8 @@ namespace phantom {
     private:
         Composite *parent;
         std::vector<Composite*> _components;
-        Graphics graphics;
+        Graphics *graphics;
+        
         Entity* _entity;
         string _type;
     };

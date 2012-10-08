@@ -4,8 +4,10 @@ namespace phantom {
 	typedef struct {
 		float x;
 		float y;
+        float z;
 		float texX;
 		float texY;
+        float texZ;
 	} VerticeData;
 }
 #endif // VERTICEDATA_H_

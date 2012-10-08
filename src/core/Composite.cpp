@@ -15,13 +15,16 @@ namespace phantom {
         _position(0, 0, 0),
         _type("Composite")
     {
-
+        graphics = new Graphics(this);
+        _boundingBox.size = Vector3(10, 10, 10);
     }
 
     Composite::~Composite() {
         std::vector<Composite*>::iterator iter;
         for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             delete *iter;
+
+        delete graphics;
     }
 
     PhantomGame* Composite::getGame(void) {

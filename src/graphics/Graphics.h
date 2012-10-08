@@ -13,19 +13,20 @@ using namespace std;
 
 namespace phantom {
 
+class Composite;
 
 class LIBEXPORT Graphics {
 public:
 	friend class GLUTRenderer;
 
-    Graphics(void);
+    Graphics(phantom::Composite *parent);
 
-    ~Graphics(void);
+    ~Graphics();
 
-    Graphics& clear(void);
-    Graphics& beginPath(void);
-    Graphics& fill(void);
-    Graphics& stroke(void);
+    Graphics& clear();
+    Graphics& beginPath();
+    Graphics& fill();
+    Graphics& stroke();
 
     Graphics& setFillStyle(Color color);
     Graphics& setLineStyle(Color color);
@@ -52,7 +53,7 @@ private:
     deque<Shape*> _workspaceShapes;
     deque<Shape*> _bufferedShapes;
 
-
+    Composite *_parent;
     Color _fillColor;
     Color _lineColor;
 

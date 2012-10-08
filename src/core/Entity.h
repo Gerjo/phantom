@@ -17,11 +17,9 @@ namespace phantom {
 
         virtual void setX(float x);
         virtual void setY(float y);
-
-        Box3& getBoundingBox();
+    
     protected:
         Mover* mover;
-        Box3 _boundingBox;
     };
 
 } /* namespace phantom */

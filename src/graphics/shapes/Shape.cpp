@@ -28,6 +28,11 @@ namespace phantom {
         data.texX = texX;
         data.texY = texY;
         vertices.push_back(data);
+
+        if(x > _bounds.origin.x + _bounds.size.x) _bounds.size.x = x - _bounds.origin.x;
+        if(x < _bounds.origin.x) _bounds.origin.x = x;
+        if(y > _bounds.origin.y + _bounds.size.y) _bounds.size.y = y - _bounds.origin.y;
+        if(y < _bounds.origin.y) _bounds.origin.y = y;
     }
 
     bool Shape::hasFillColor(void) {
@@ -46,4 +51,7 @@ namespace phantom {
         return _fillColor;
     }
 
+    const Box3& Shape::getBounds() {
+        return _bounds;
+    }
 } /* namespace phantom */
