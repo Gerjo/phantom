@@ -8,7 +8,7 @@ namespace phantom {
     void Mover::moveTo(Vector3* target){
         _targetList.push_back(target);
     }
-    void Mover::moveTo(std::vector<Vector3*> targetList){
+    void Mover::moveTo(std::deque<Vector3*> targetList){
         _targetList = targetList;
     }
     void Mover::update(const float& elapsed){
@@ -22,5 +22,6 @@ namespace phantom {
             }
         }
     }
+
 
 } /* namespace phantom */
