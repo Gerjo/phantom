@@ -53,6 +53,8 @@ namespace phantom {
 
     Graphics& Graphics::rect(const Box3& box) {
         rect(box.origin.x, box.origin.y, box.size.x, box.size.y);
+
+        return *this;
     }
 
     Graphics& Graphics::rect(float x, float y, float width, float height) {

@@ -13,7 +13,7 @@ using namespace std;
 
 namespace phantom {
     class LIBEXPORT Camera : public Entity {
-        friend Driver;
+        friend class Driver;
     public:
         Camera(int id) :
             _cameraID(id),
