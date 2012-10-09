@@ -7,6 +7,7 @@
 namespace phantom {
 
     Entity::Entity() {
+        mover = 0;
     }
 
     void Entity::addComponent(Composite* component) {
