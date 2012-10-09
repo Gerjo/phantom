@@ -24,31 +24,23 @@ namespace phantom {
     void Mover::update(const float& elapsed){
         Composite::update(elapsed);
         if(!_targetList.empty() && _parent != 0){
-            _target = *_targetList.back();
+            Vector3 target    = (*_targetList.back());
+            Vector3 position  = _parent->getPosition();
+            Vector3 direction = target - position;
 
-            Vector3 center = _parent->getPosition() + (_parent->getBoundingBox().size * 0.5);
+            direction.normalize();
 
-            Vector3 diff = (_target - center);// * 0.4f * elapsed;
+            Vector3 newPosition = position + (direction * 100 * elapsed);
 
-            if(abs(diff.x) < 2 && abs(diff.y) < 2) {
+            float distanceSq = position.distanceToSq(target);
+            float threshold = pow(8, 2);
+
+            if(distanceSq < threshold) {
                 _targetList.pop_back();
-
-                cout << "pop route" << endl;
+                //cout << "Pop route, distance is " << distanceSq << " < " << threshold << endl;
             }
 
-            diff.x = diff.x * 5 * elapsed;
-            diff.y = diff.y * 5 * elapsed;
-
-            //cout << endl;
-            //cout << _target.toString();
-            //cout << _parent->getPosition().toString();
-            //cout << diff.toString() << endl;
-
-            diff.z = 0;
-
-            _parent->setPosition(_parent->getPosition() + diff);
-
-
+            _parent->setPosition(newPosition);
         }
     }
 
