@@ -1,6 +1,7 @@
 #include "Shape.h"
 
 namespace phantom {
+    const float Shape::TEX_COORD_UNUSED = -999.0f;
 
     Shape::Shape() :
     _hasFillColor(false),
@@ -21,13 +22,16 @@ namespace phantom {
         _hasLineColor = true;
     }
 
-    void Shape::addVertex(float x, float y, float texX, float texY) {
-        VerticeData data;
-        data.x = x;
-        data.y = y;
-        data.texX = texX;
-        data.texY = texY;
-        vertices.push_back(data);
+    void Shape::addVertex(float x, float y, float u, float v) {
+        Vertice vertice;
+        TexCoord tex;
+        vertice.x = x;
+        vertice.y = y;
+        tex.u = u;
+        tex.v = v;
+        vertices.push_back(vertice);
+        if(u != TEX_COORD_UNUSED && v != TEX_COORD_UNUSED)
+            texCoords.push_back(tex);
 
         if(x < _bounds.origin.x) {
             _bounds.origin.x = x;
