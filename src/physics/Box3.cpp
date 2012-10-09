@@ -29,7 +29,7 @@ namespace phantom{
         return contains(*other);
     }
 
-    bool Box3::testBounds(float aMin, float bMin, float aMax, float bMax) {
+    bool Box3::testBounds(const float& aMin, const float& bMin, const float& aMax, const float& bMax) const {
 
         // Note: we're testing for equality, too. This helps fix the "zero z width"
         // incase of a 2D box. I've done the same with the Vector3 detection. We

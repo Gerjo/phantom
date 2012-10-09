@@ -26,7 +26,7 @@ namespace phantom{
         void repair(void);
         string toString(void);
     private:
-        bool testBounds(float aMin, float bMin, float aMax, float bMax);
+        bool testBounds(const float& aMin, const float& bMin, const float& aMax, const float& bMax) const;
 
     };
 
