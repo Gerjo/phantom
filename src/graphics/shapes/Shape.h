@@ -13,8 +13,11 @@ namespace phantom {
         Shape();
         virtual ~Shape();
 
+        static const float TEX_COORD_UNUSED;
 
-		std::vector<VerticeData> vertices;
+		std::vector<Vertice> vertices;
+        std::vector<TexCoord> texCoords;
+
         unsigned char* imageData;
 
         float x;
@@ -23,7 +26,7 @@ namespace phantom {
         void setFillColor(Color color);
         void setLineColor(Color color);
 
-        virtual void addVertex(float x, float y, float texX = 0.0f, float texY = 0.0f);
+        virtual void addVertex(float x, float y, float u = TEX_COORD_UNUSED, float v = TEX_COORD_UNUSED);
 
         bool hasFillColor(void);
         bool hasLineColor(void);

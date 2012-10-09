@@ -2,6 +2,7 @@
 #include <iostream>
 #include <core/Driver.h>
 #include <GL/freeglut.h>
+#include <GL/glext.h>
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>
 #include <graphics/shapes/PNGImage.h>
@@ -105,12 +106,21 @@ namespace phantom {
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
         // Iterate through all the points located in our shape.
-        vector<VerticeData>::iterator itVert = shape->vertices.begin();
-
-        while(itVert != shape->vertices.end()) {
-            glTexCoord2f(itVert->texX, -itVert->texY);
-            glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-            ++itVert;
+        vector<Vertice>::iterator itVert = shape->vertices.begin();
+        vector<TexCoord>::iterator itTex = shape->texCoords.begin();
+        if(shape->texCoords.size() > 0) {
+            while(itVert != shape->vertices.end()) {
+                glTexCoord2f(itTex->u, -itTex->v);
+                glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
+                ++itVert;
+                ++itTex;
+            }
+        }
+        else {
+            while(itVert != shape->vertices.end()) {
+                glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
+                ++itVert;
+            }
         }
 
         // End of drawing our shape.

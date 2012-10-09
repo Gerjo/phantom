@@ -1,13 +1,14 @@
 #ifndef VERTICEDATA_H_
 #define VERTICEDATA_H_
 namespace phantom {
-	typedef struct {
-		float x;
-		float y;
-        float z;
-		float texX;
-		float texY;
-        float texZ;
-	} VerticeData;
+	class Vertice {
+    public:
+		float x,y,z;
+	};
+
+    class TexCoord {
+    public:
+        float u,v;
+    };
 }
 #endif // VERTICEDATA_H_
