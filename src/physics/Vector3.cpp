@@ -60,14 +60,6 @@ namespace phantom{
         return !(*this == v);
     }
 
-    //bool operator== (Vector3* a, Vector3* b) {
-    //    return a->x == b->x && a->y == b->y && a->z == b->z;
-    //}
-
-    //bool operator!= (Vector3* a, Vector3* b) {
-    //    return !(a == b);
-    //}
-
     Vector3& Vector3::operator+=(const Vector3& v) {
         x += v.x;
         y += v.y;
@@ -82,6 +74,33 @@ namespace phantom{
         z -= v.z;
 
         return *this;
+    }
+
+    void Vector3::normalize() {
+        float len = sqrt(x*x + y*y + z*z);
+
+        // What do we do here?
+        if(len == 0) {
+            return;
+        }
+
+        x /= len;
+        y /= len;
+        z /= len;
+    }
+
+    void Vector3::absolute() {
+        x = abs(x);
+        y = abs(y);
+        z = abs(z);
+    }
+
+    float Vector3::distanceToSq(const Vector3& other) {
+        float diffX = other.x - x;
+        float diffY = other.y - y;
+        float diffZ = other.z - z;
+
+        return diffX * diffX + diffY * diffY + diffZ * diffZ;
     }
 
     std::string Vector3::toString() {

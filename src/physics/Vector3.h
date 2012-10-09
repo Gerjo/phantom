@@ -3,6 +3,7 @@
 
 #include <CompileConfig.h>
 #include <sstream>
+#include <cmath>
 
 namespace phantom{
 
@@ -30,8 +31,10 @@ namespace phantom{
         bool operator== (const Vector3& v) const;
         bool operator!= (const Vector3& v) const;
 
-        //friend bool operator== (Vector3* a, Vector3* b);
-        //friend bool operator!= (Vector3* a, Vector3* b);
+        void absolute();
+        void normalize();
+
+        float distanceToSq(const Vector3& other);
 
         std::string toString();
     };
