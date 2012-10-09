@@ -51,6 +51,10 @@ namespace phantom {
         return *this;
     }
 
+    Graphics& Graphics::rect(const Box3& box) {
+        rect(box.origin.x, box.origin.y, box.size.x, box.size.y);
+    }
+
     Graphics& Graphics::rect(float x, float y, float width, float height) {
         Rectangle* rectangle = new Rectangle(x, y, width, height);
 
@@ -108,7 +112,7 @@ namespace phantom {
 
         //std::vector<VerticeData>::iterator verticeIter = whom->vertices.begin();
         //while(verticeIter != whom->vertices.end()) {
-        //    if((*verticeIter).x < boundingBox.origin.x) { 
+        //    if((*verticeIter).x < boundingBox.origin.x) {
         //        boundingBox.size.x += boundingBox.origin.x - (*verticeIter).x;
         //        boundingBox.origin.x = (*verticeIter).x;
         //    }

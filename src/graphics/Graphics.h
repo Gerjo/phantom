@@ -33,6 +33,7 @@ public:
 
     Graphics& line(float startX, float startY, float endX, float endY);
     Graphics& rect(float x, float y, float width, float height);
+    Graphics& rect(const Box3& box);
     Graphics& arc(float x, float y, float radius, float start, float end);
 
     Graphics& image(string fileName, float x, float y, float width, float height);
