@@ -6,10 +6,11 @@
 #include <png.h>
 using namespace std;
 namespace phantom {
-    typedef struct { 
+    class ImageCacheItem {
+    public:
         unsigned char *imageData;
         unsigned char **row_pointers;
-    } ImageCacheItem;
+    };
 
     class ImageCache
     {

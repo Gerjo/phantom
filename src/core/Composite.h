@@ -72,13 +72,13 @@ namespace phantom {
         void removePosition(const Vector3& subtract);
 
         const string& getType();
-        bool isType(string type);
+        bool isType(const string& type);
         string toString(void);
     protected:
         Vector3 _position;
         Box3 _boundingBox;
 
-        void setType(string type);
+        void setType(const string& type);
         PhantomGame* getGame(void);
         Driver* getDriver(void);
     private:

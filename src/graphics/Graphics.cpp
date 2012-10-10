@@ -71,7 +71,7 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::image(string fileName, float x, float y, float width, float height) {
+    Graphics& Graphics::image(const string& fileName, float x, float y, float width, float height) {
         PNGImage* image = new PNGImage(fileName, x, y, width, height);
 
         addShape(image);

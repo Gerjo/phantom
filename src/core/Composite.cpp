@@ -164,7 +164,7 @@ namespace phantom {
         _position -= subtract;
     }
 
-    void Composite::setType(string type) {
+    void Composite::setType(const string& type) {
         _type = type;
     }
 
@@ -172,7 +172,7 @@ namespace phantom {
         return _type;
     }
 
-    bool Composite::isType(string type) {
+    bool Composite::isType(const string& type) {
         return _type.compare(type) == 0;
     }
 

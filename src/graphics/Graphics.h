@@ -36,7 +36,7 @@ public:
     Graphics& rect(const Box3& box);
     Graphics& arc(float x, float y, float radius, float start, float end);
 
-    Graphics& image(string fileName, float x, float y, float width, float height);
+    Graphics& image(const string& fileName, float x, float y, float width, float height);
 
     Graphics& rotate(float angle);
 
