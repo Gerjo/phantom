@@ -14,7 +14,7 @@ namespace phantom {
         std::cout << "Initializing GLUT renderer..." << std::endl;
         int i = 0;
         glutInit(&i, 0);
-        glutInitWindowSize(game->getViewPort().x, game->getViewPort().y);
+        glutInitWindowSize(static_cast<int>(game->getViewPort().x), static_cast<int>(game->getViewPort().y));
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
 
         _windowID = glutCreateWindow("Elephantom");

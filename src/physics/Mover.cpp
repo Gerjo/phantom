@@ -33,7 +33,7 @@ namespace phantom {
             Vector3 newPosition = position + (direction * 100 * elapsed);
 
             float distanceSq = position.distanceToSq(target);
-            float threshold = pow(8, 2);
+            float threshold = static_cast<float>(pow(8, 2));
 
             if(distanceSq < threshold) {
                 _targetList.pop_back();
