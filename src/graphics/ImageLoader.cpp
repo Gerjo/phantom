@@ -60,24 +60,21 @@ namespace phantom {
             return 0;
         }
 
+        // Init imageData to contain all the image data that resides in the image.
+        ImageCacheItem *img = new ImageCacheItem();
+
         // Getting ready to read everything.
         png_init_io(png_ptr, fp);
         png_set_sig_bytes(png_ptr, 8);
         png_read_info(png_ptr, info_ptr);
-
-        png_uint_32 pngWidth, pngHeight;
-
-        png_get_IHDR(png_ptr, info_ptr, &pngWidth, &pngHeight, &bit_depth, &color_type, 0, 0, 0);
+        png_get_IHDR(png_ptr, info_ptr, &img->width, &img->height, &bit_depth, &color_type, 0, 0, 0);
 
         png_read_update_info(png_ptr, info_ptr);
 
         // Get the size of each row.
         rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 
-        // Init imageData to contain all the image data that resides in the image.
-        ImageCacheItem *img = new ImageCacheItem();
-
-        img->imageData = new png_byte[rowbytes * pngHeight];
+        img->imageData = new png_byte[rowbytes * img->height];
         if (!img->imageData) {
             png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
             fclose(fp);
@@ -85,7 +82,7 @@ namespace phantom {
         }
 
         // Init the row pointers.
-        img->row_pointers = new png_bytep[pngHeight];
+        img->row_pointers = new png_bytep[img->height];
         if (!img->row_pointers) {
             png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
             delete[] img->imageData;
@@ -94,8 +91,8 @@ namespace phantom {
         }
         
         // Make the row pointers point to the actual data in one row (1 y-axis line).
-        for (unsigned int i = 0; i < pngHeight; ++i)
-            img->row_pointers[pngHeight - 1 - i] = img->imageData + i * rowbytes;
+        for (unsigned int i = 0; i < img->height; ++i)
+            img->row_pointers[img->height - 1 - i] = img->imageData + i * rowbytes;
 
         // Actually read the image.
         png_read_image(png_ptr, img->row_pointers);

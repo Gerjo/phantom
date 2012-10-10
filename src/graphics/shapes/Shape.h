@@ -18,7 +18,7 @@ namespace phantom {
 		std::vector<Vertice> vertices;
         std::vector<TexCoord> texCoords;
 
-        unsigned char* imageData;
+        bool isImage;
 
         float x;
         float y;

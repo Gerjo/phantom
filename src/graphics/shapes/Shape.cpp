@@ -5,8 +5,9 @@ namespace phantom {
 
     Shape::Shape() :
     _hasFillColor(false),
-    _hasLineColor(false) {
-        imageData = 0;
+    _hasLineColor(false),
+    isImage(false) {
+        
     }
 
     Shape::~Shape() {

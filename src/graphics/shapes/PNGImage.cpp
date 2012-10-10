@@ -12,15 +12,16 @@ namespace phantom
         this->y = y;
         this->_width = width;
         this->_height = height;
+        isImage = true;
         
         ImageCache *imageCache = ImageCache::getInstance();
 
         if(imageCache->isCached(filename)) {
-            ImageCacheItem *item = imageCache->getFromCache(filename);
-            imageData = item->imageData;
+            _imageItem = imageCache->getFromCache(filename);
         }
         else {
             imageCache->insertIntoCache(filename, ImageLoader::createPNG(filename));
+            _imageItem = imageCache->getFromCache(filename);
         }
         createRectangle();
     }

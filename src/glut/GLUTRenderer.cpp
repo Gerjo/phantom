@@ -86,12 +86,12 @@ namespace phantom {
         glDisable(GL_COLOR_MATERIAL);
 
         // Add the texture.
-        if(shape->imageData != 0) {
+        if(shape->isImage) {
             glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glEnable(GL_TEXTURE_2D);
 
-            PNGImage *img = static_cast<PNGImage *>(shape);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->getImgWidth(), img->getImgHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
+            ImageCacheItem *img = static_cast<PNGImage *>(shape)->getImage();
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
             glNormal3f(0.0, 0.0, 1.0);
         }
@@ -128,7 +128,7 @@ namespace phantom {
         glEnd();
 
         // Disable the texturing again afterwards.
-        if(shape->imageData != 0) {
+        if(shape->isImage) {
             glDisable(GL_TEXTURE_2D);
             glPopAttrib();
         }

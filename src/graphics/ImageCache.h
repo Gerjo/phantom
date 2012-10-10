@@ -8,6 +8,8 @@ using namespace std;
 namespace phantom {
     class ImageCacheItem {
     public:
+        unsigned int width;
+        unsigned int height;
         unsigned char *imageData;
         unsigned char **row_pointers;
     };

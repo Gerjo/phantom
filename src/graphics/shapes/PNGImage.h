@@ -2,6 +2,7 @@
 #include <graphics/shapes/Shape.h>
 #include <png.h>
 #include <string>
+#include <graphics/ImageCache.h>
 
 namespace phantom {
 	class LIBEXPORT PNGImage : public Shape {
@@ -9,13 +10,12 @@ namespace phantom {
 		PNGImage(std::string filename, float x, float y, float width, float height);
 		~PNGImage();
 
-        int getImgWidth()  { return _pngWidth; }
-        int getImgHeight() { return _pngHeight; }
+        ImageCacheItem *getImage() { return _imageItem; }
+
 	private:
         float           _width;
         float           _height;
-        unsigned int    _pngWidth;
-        unsigned int    _pngHeight;
+        ImageCacheItem  *_imageItem;
 		
 		void createRectangle();
 	};
