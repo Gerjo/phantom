@@ -35,6 +35,7 @@ namespace phantom{
         void normalize();
 
         float distanceToSq(const Vector3& other);
+        float getLengthSq(void);
 
         std::string toString();
     };
