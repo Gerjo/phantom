@@ -7,6 +7,7 @@
 #include <graphics/VerticeData.h>
 #include <graphics/shapes/PNGImage.h>
 #include <png.h>
+#include <graphics/ImageCache.h>
 
 namespace phantom {
 

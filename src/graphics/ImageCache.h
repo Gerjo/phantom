@@ -1,7 +1,9 @@
 #ifndef IMAGECACHE_H_
 #define IMAGECACHE_H_
 
+#include <string>
 #include <map>
+#include <png.h>
 using namespace std;
 namespace phantom {
     typedef struct { 
@@ -25,11 +27,8 @@ namespace phantom {
                 return true;
         }
 
-        void insertIntoCache(const string filename, unsigned char *data, unsigned char **row_pointers) {
-            ImageCacheItem item;
-            item.imageData = data;
-            item.row_pointers = row_pointers;
-            imageCache.insert(pair<const string, ImageCacheItem>(filename, item));
+        void insertIntoCache(const string filename, ImageCacheItem *item) {
+            imageCache.insert(pair<const string, ImageCacheItem>(filename, *item));
         }
 
         ImageCacheItem *getFromCache(const string filename) {
