@@ -103,6 +103,10 @@ namespace phantom{
         return diffX * diffX + diffY * diffY + diffZ * diffZ;
     }
 
+    float Vector3::getLengthSq(void) {
+        return x*x + y*y + z*z;
+    }
+
     std::string Vector3::toString() {
         stringstream ss;
 
