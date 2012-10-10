@@ -1,4 +1,5 @@
 #include "PNGImage.h"
+#include <graphics/ImageCache.h>
 #include <png.h>
 #include <iostream>
 #include <fstream>
@@ -11,14 +12,23 @@ namespace phantom
         this->y = y;
         this->_width = width;
         this->_height = height;
+        
+        ImageCache *imageCache = ImageCache::getInstance();
 
-        createPNG(filename);
+        if(imageCache->isCached(filename)) {
+            ImageCacheItem *item = imageCache->getFromCache(filename);
+            imageData = item->imageData;
+            row_pointers = item->row_pointers;
+        }
+        else {
+            createPNG(filename);
+            imageCache->insertIntoCache(filename, imageData, row_pointers);
+        }
         createRectangle();
     }
 
     PNGImage::~PNGImage() {
-        delete[] imageData;
-        delete[] row_pointers;
+        
     }
 
     void PNGImage::createRectangle() {
