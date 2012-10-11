@@ -1,5 +1,6 @@
 #include <graphics/Graphics.h>
 #include <core/PhantomGame.h>
+#include <core/Driver.h>
 #include <iostream>
 #include <graphics/shapes/Rectangle.h>
 #include <graphics/shapes/Arc.h>
@@ -118,39 +119,6 @@ namespace phantom {
     }
 
     void Graphics::addShape(Shape* whom) {
-        //Box3 boundingBox = _parent->getBoundingBox();
-
-        //std::vector<VerticeData>::iterator verticeIter = whom->vertices.begin();
-        //while(verticeIter != whom->vertices.end()) {
-        //    if((*verticeIter).x < boundingBox.origin.x) {
-        //        boundingBox.size.x += boundingBox.origin.x - (*verticeIter).x;
-        //        boundingBox.origin.x = (*verticeIter).x;
-        //    }
-
-        //    else if((*verticeIter).x > boundingBox.origin.x + boundingBox.size.x) {
-        //        boundingBox.size.x = (*verticeIter).x - boundingBox.origin.x;
-        //    }
-
-        //    if((*verticeIter).y < boundingBox.origin.y) {
-        //        boundingBox.size.y += boundingBox.origin.y - (*verticeIter).y;
-        //        boundingBox.origin.y = (*verticeIter).y;
-        //    }
-
-        //    else if((*verticeIter).y > boundingBox.origin.y + boundingBox.size.y) {
-        //        boundingBox.size.y = (*verticeIter).y - boundingBox.origin.y;
-        //    }
-
-        //    if((*verticeIter).z < boundingBox.origin.z) {
-        //        boundingBox.size.z += boundingBox.origin.z - (*verticeIter).z;
-        //        boundingBox.origin.z = (*verticeIter).z;
-        //    }
-        //    else if((*verticeIter).z > boundingBox.origin.z + boundingBox.size.z) {
-        //        boundingBox.size.z = (*verticeIter).z - boundingBox.origin.z;
-        //    }
-        //    verticeIter++;
-        //}
-
-        //_parent->setBoundingBox(boundingBox);
         _workspaceShapes.push_back(whom);
     }
 
@@ -192,6 +160,7 @@ namespace phantom {
             // to comply with the HTML 5 API.
             shape->setLineColor(_lineColor);
             shape->setFillColor(_fillColor);
+            shape->buildVBO(_parent->getGame()->getDriver()->getRenderer());
 
             target.push_back(shape);
         }

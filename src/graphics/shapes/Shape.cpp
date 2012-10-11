@@ -8,7 +8,10 @@ namespace phantom {
     _hasFillColor(false),
     _hasLineColor(false),
     isImage(false),
-    isText(false) {
+    isText(false),
+    vboTexCoords(0),
+    vboVertices(0),
+    vboVerticesCount(0){
         
     }
 

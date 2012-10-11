@@ -22,13 +22,17 @@ namespace phantom {
         glutInit(&i, 0);
         glutInitWindowSize(static_cast<int>(game->getViewPort().x), static_cast<int>(game->getViewPort().y));
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
-
-        glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
-		glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
-		glBufferDataARB = (PFNGLBUFFERDATAARBPROC) wglGetProcAddress("glBufferDataARB");
-		glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
-
         _windowID = glutCreateWindow("Elephantom");
+        
+        if(IsExtensionSupported("GL_ARB_vertex_buffer_object")) {
+            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
+            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
+            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) wglGetProcAddress("glBufferDataARB");
+            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
+        }
+        else{
+            cout << "NO VBO SUPPORT FOUND" << endl;
+        }
     }
 
     GLUTRenderer::~GLUTRenderer() {
@@ -100,10 +104,9 @@ namespace phantom {
             glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glEnable(GL_TEXTURE_2D);
 
-            ImageCacheItem *img = static_cast<PNGImage *>(shape)->getImage();
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glNormal3f(0.0, 0.0, 1.0);
+            glBindTexture(GL_TEXTURE_2D, shape->textureID);
+
+            glNormal3f(0.0f, 0.0f, 1.0f);
         }
 
         // Add the rotation.
@@ -115,32 +118,37 @@ namespace phantom {
             const Color& fillColor = shape->getFillColor();
             glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
+            // Enable Pointers
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
             glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-		    glVertexPointer(3, GL_FLOAT, 0, 0);
-		    glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-		    glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL );
+            glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+            glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
             glDrawArrays(GL_TRIANGLES, 0, shape->vboVerticesCount);
+
+            glDisableClientState(GL_VERTEX_ARRAY);
+            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
             /*glBegin(GL_TRIANGLES);
-
-
 
             // Iterate through all the points located in our shape.
             vector<Vertice>::iterator itVert = shape->vertices.begin();
             vector<TexCoord>::iterator itTex = shape->texCoords.begin();
             if(shape->texCoords.size() > 0) {
-                while(itVert != shape->vertices.end()) {
-                    glTexCoord2f(itTex->u, -itTex->v);
-                    glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-                    ++itVert;
-                    ++itTex;
-                }
+            while(itVert != shape->vertices.end()) {
+            glTexCoord2f(itTex->u, -itTex->v);
+            glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
+            ++itVert;
+            ++itTex;
+            }
             }
             else {
-                while(itVert != shape->vertices.end()) {
-                    glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-                    ++itVert;
-                }
+            while(itVert != shape->vertices.end()) {
+            glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
+            ++itVert;
+            }
             }
 
             // End of drawing our shape.
@@ -183,15 +191,43 @@ namespace phantom {
         glFlush();
     }
 
+    // Based Off Of Code Supplied At OpenGL.org
+    bool GLUTRenderer::IsExtensionSupported( char* szTargetExtension )
+    {
+        const unsigned char *pszExtensions = NULL;
+        const unsigned char *pszStart;
+        unsigned char *pszWhere, *pszTerminator;
+
+        // Extension names should not have spaces
+        pszWhere = (unsigned char *) strchr( szTargetExtension, ' ' );
+        if( pszWhere || *szTargetExtension == '\0' )
+            return false;
+
+        // Get Extensions String
+        pszExtensions = glGetString( GL_EXTENSIONS );
+
+        // Search The Extensions String For An Exact Copy
+        pszStart = pszExtensions;
+        for(;;)
+        {
+            pszWhere = (unsigned char *) strstr( (const char *) pszStart, szTargetExtension );
+            if( !pszWhere )
+                break;
+            pszTerminator = pszWhere + strlen( szTargetExtension );
+            if( pszWhere == pszStart || *( pszWhere - 1 ) == ' ' )
+                if( *pszTerminator == ' ' || *pszTerminator == '\0' )
+                    return true;
+            pszStart = pszTerminator;
+        }
+        return false;
+    }
+
     void GLUTRenderer::buildVBO(Shape *shape) {
         // Be sure nothing is left to be deleted.
-        if(shape->vboVertices != 0)
+        if(shape->vboVerticesCount != 0) {
             glDeleteBuffersARB(1, &shape->vboVertices);
-        if(shape->vboTexCoords != 0)
             glDeleteBuffersARB(1, &shape->vboTexCoords);
-
-        shape->vboVertices = 0;
-        shape->vboTexCoords = 0;
+        }
 
         // Vertices
         glGenBuffersARB(1, &shape->vboVertices);
@@ -204,6 +240,16 @@ namespace phantom {
         glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->texCoords.size() * 2 * sizeof(float), &shape->texCoords, GL_STATIC_DRAW_ARB);
 
         shape->vboVerticesCount = shape->vertices.size();
+
+        // While we're at it, we'll do images aswell.
+        if(shape->isImage) {
+            ImageCacheItem *img = static_cast<PNGImage *>(shape)->getImage();
+
+            glGenTextures(1, &shape->textureID);
+            glBindTexture(GL_TEXTURE_2D, shape->textureID);
+	        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        }
 
         // Everything is safe in the videocard... hopefully :)
         shape->vertices.clear();

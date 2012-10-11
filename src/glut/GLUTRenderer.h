@@ -24,7 +24,7 @@ namespace phantom {
         virtual void buildVBO(Shape *shape);
     private:
         int _windowID;
-
+        bool IsExtensionSupported(char* szTargetExtension);
         void drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset);
     };
 }
