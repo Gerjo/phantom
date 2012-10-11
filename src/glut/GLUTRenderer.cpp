@@ -41,6 +41,10 @@ namespace phantom {
             glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddress((const GLubyte*)"glBufferDataARB");
             glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddress((const GLubyte*)"glDeleteBuffersARB");
 #endif
+            if(!glGenBuffersARB   )  std::cout << "glGenBuffersARB    is not loaded\n";
+            if(!glBindBufferARB   )  std::cout << "glBindBufferARB    is not loaded\n";
+            if(!glBufferDataARB   )  std::cout << "glBufferDataARB    is not loaded\n";
+            if(!glDeleteBuffersARB)  std::cout << "glDeleteBuffersARB is not loaded\n"; 
         }
         else{
             cout << "NO VBO SUPPORT FOUND" << endl;
