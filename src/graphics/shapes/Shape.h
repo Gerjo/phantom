@@ -20,6 +20,7 @@ namespace phantom {
         std::vector<TexCoord> texCoords;
 
         unsigned int vboVertices;
+        unsigned int vboVerticesCount;
         unsigned int vboTexCoords;
 
         bool isImage;

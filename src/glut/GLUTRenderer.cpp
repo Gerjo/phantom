@@ -111,11 +111,19 @@ namespace phantom {
 
         // Begin drawing our shape.
         if(!shape->isText) {
-            glBegin(GL_TRIANGLES);
-
             // Colorize!
             const Color& fillColor = shape->getFillColor();
             glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+
+            glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
+		    glVertexPointer(3, GL_FLOAT, 0, 0);
+		    glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+		    glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL );
+            glDrawArrays(GL_TRIANGLES, 0, shape->vboVerticesCount);
+            /*glBegin(GL_TRIANGLES);
+
+
 
             // Iterate through all the points located in our shape.
             vector<Vertice>::iterator itVert = shape->vertices.begin();
@@ -136,7 +144,7 @@ namespace phantom {
             }
 
             // End of drawing our shape.
-            glEnd();
+            glEnd();*/
         }
         else
         {
@@ -176,6 +184,15 @@ namespace phantom {
     }
 
     void GLUTRenderer::buildVBO(Shape *shape) {
+        // Be sure nothing is left to be deleted.
+        if(shape->vboVertices != 0)
+            glDeleteBuffersARB(1, &shape->vboVertices);
+        if(shape->vboTexCoords != 0)
+            glDeleteBuffersARB(1, &shape->vboTexCoords);
+
+        shape->vboVertices = 0;
+        shape->vboTexCoords = 0;
+
         // Vertices
         glGenBuffersARB(1, &shape->vboVertices);
         glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
@@ -185,6 +202,8 @@ namespace phantom {
         glGenBuffersARB(1, &shape->vboTexCoords);
         glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
         glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->texCoords.size() * 2 * sizeof(float), &shape->texCoords, GL_STATIC_DRAW_ARB);
+
+        shape->vboVerticesCount = shape->vertices.size();
 
         // Everything is safe in the videocard... hopefully :)
         shape->vertices.clear();
