@@ -1,4 +1,5 @@
 #include "Shape.h"
+#include <core/Renderer.h>
 
 namespace phantom {
     const float Shape::TEX_COORD_UNUSED = -999.0f;
@@ -53,6 +54,10 @@ namespace phantom {
         else if(z > _bounds.origin.z + _bounds.size.z) {
             _bounds.size.z = z - _bounds.origin.z;
         }*/
+    }
+
+    void Shape::buildVBO(Renderer *renderer) {
+        renderer->buildVBO(this);
     }
 
     bool Shape::hasFillColor(void) {

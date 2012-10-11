@@ -1,5 +1,6 @@
 #ifndef SHAPE_H_
 #define SHAPE_H_
+
 #include <graphics/Color.h>
 #include <CompileConfig.h>
 #include <vector>
@@ -7,7 +8,7 @@
 #include <physics/Box3.h>
 
 namespace phantom {
-
+    class Renderer;
     class LIBEXPORT Shape {
     public:
         Shape();
@@ -17,6 +18,9 @@ namespace phantom {
 
 		std::vector<Vertice> vertices;
         std::vector<TexCoord> texCoords;
+
+        unsigned int vboVertices;
+        unsigned int vboTexCoords;
 
         bool isImage;
         bool isText;
@@ -28,6 +32,7 @@ namespace phantom {
         void setLineColor(Color color);
 
         virtual void addVertex(float x, float y, float u = TEX_COORD_UNUSED, float v = TEX_COORD_UNUSED);
+        void buildVBO(Renderer *renderer);
 
         bool hasFillColor(void);
         bool hasLineColor(void);

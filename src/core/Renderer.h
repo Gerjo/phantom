@@ -17,7 +17,7 @@ namespace phantom {
 
 		virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset) = 0;
 		virtual void renderLoop(std::deque<GameState*>* states) = 0;
-    
+        virtual void buildVBO(Shape *shape) = 0;
     protected:
         PhantomGame *_game;
 	};

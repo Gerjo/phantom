@@ -1,14 +1,18 @@
 #include "GLUTRenderer.h"
 #include <iostream>
 #include <core/Driver.h>
-#include <GL/freeglut.h>
-#include <GL/glext.h>
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>
 #include <graphics/shapes/PNGImage.h>
 #include <graphics/shapes/Text.h>
 #include <png.h>
 #include <graphics/ImageCache.h>
+
+// Makes my life a bit easyer
+PFNGLGENBUFFERSARBPROC glGenBuffersARB = NULL;
+PFNGLBINDBUFFERARBPROC glBindBufferARB = NULL;
+PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
+PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
 
 namespace phantom {
 
@@ -18,6 +22,11 @@ namespace phantom {
         glutInit(&i, 0);
         glutInitWindowSize(static_cast<int>(game->getViewPort().x), static_cast<int>(game->getViewPort().y));
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
+
+        glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
+		glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
+		glBufferDataARB = (PFNGLBUFFERDATAARBPROC) wglGetProcAddress("glBufferDataARB");
+		glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
 
         _windowID = glutCreateWindow("Elephantom");
     }
@@ -166,4 +175,19 @@ namespace phantom {
         glFlush();
     }
 
+    void GLUTRenderer::buildVBO(Shape *shape) {
+        // Vertices
+        glGenBuffersARB(1, &shape->vboVertices);
+        glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
+        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->vertices.size() * 3 * sizeof(float), &shape->vertices, GL_STATIC_DRAW_ARB);
+
+        // Texcoords
+        glGenBuffersARB(1, &shape->vboTexCoords);
+        glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->texCoords.size() * 2 * sizeof(float), &shape->texCoords, GL_STATIC_DRAW_ARB);
+
+        // Everything is safe in the videocard... hopefully :)
+        shape->vertices.clear();
+        shape->texCoords.clear();
+    }
 }
