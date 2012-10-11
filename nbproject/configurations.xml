@@ -43,6 +43,10 @@
         <itemPath>src/graphics/Color.h</itemPath>
         <itemPath>src/graphics/Graphics.cpp</itemPath>
         <itemPath>src/graphics/Graphics.h</itemPath>
+        <itemPath>src/graphics/ImageCache.cpp</itemPath>
+        <itemPath>src/graphics/ImageCache.h</itemPath>
+        <itemPath>src/graphics/ImageLoader.cpp</itemPath>
+        <itemPath>src/graphics/ImageLoader.h</itemPath>
         <itemPath>src/graphics/VerticeData.h</itemPath>
       </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
