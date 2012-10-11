@@ -16,13 +16,11 @@ namespace phantom
         
         ImageCache *imageCache = ImageCache::getInstance();
 
-        if(imageCache->isCached(filename)) {
-            _imageItem = imageCache->getFromCache(filename);
-        }
-        else {
+        if(!imageCache->isCached(filename)) {
             imageCache->insertIntoCache(filename, ImageLoader::createPNG(filename));
-            _imageItem = imageCache->getFromCache(filename);
         }
+        _imageItem = imageCache->getFromCache(filename);
+        
         createRectangle();
     }
 
