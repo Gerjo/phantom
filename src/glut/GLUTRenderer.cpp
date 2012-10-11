@@ -136,7 +136,7 @@ namespace phantom {
             glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
             Text *txt = static_cast<Text *>(shape);
-            glRasterPos2f(0.2f,0.2f);
+            glRasterPos2f(shape->x, shape->y);
             glutBitmapString(txt->font, txt->text);
         }
 
