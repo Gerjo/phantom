@@ -211,8 +211,9 @@ namespace phantom {
     }
 
     // Based Off Of Code Supplied At OpenGL.org
-    bool GLUTRenderer::IsExtensionSupported( char* szTargetExtension )
+    bool GLUTRenderer::IsExtensionSupported(std::string szTargetExtensionString )
     {
+        const char* szTargetExtension = szTargetExtensionString.c_str();
         const unsigned char *pszExtensions = NULL;
         const unsigned char *pszStart;
         unsigned char *pszWhere, *pszTerminator;

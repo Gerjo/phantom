@@ -9,6 +9,7 @@
 #include <core/Composite.h>
 #include <deque>
 #include <physics/Vector3.h>
+#include <string>
 
 namespace phantom {
 
@@ -24,7 +25,7 @@ namespace phantom {
         virtual void buildVBO(Shape *shape);
     private:
         int _windowID;
-        bool IsExtensionSupported(char* szTargetExtension);
+        bool IsExtensionSupported(std::string szTargetExtensionString);
         void drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset);
     };
 }
