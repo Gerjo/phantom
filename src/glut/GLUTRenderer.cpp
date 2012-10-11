@@ -36,10 +36,10 @@ namespace phantom {
             glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
 #else
 
-            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddress(reinterpret_cast<const GLubyte*>("glGenBuffersARB"));
-            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddress(reinterpret_cast<const GLubyte*>("glBindBufferARB"));
-            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddress(reinterpret_cast<const GLubyte*>("glBufferDataARB"));
-            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddress(reinterpret_cast<const GLubyte*>("glDeleteBuffersARB"));
+            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddress((const GLubyte*)"glGenBuffersARB");
+            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddress((const GLubyte*)"glBindBufferARB");
+            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddress((const GLubyte*)"glBufferDataARB");
+            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddress((const GLubyte*)"glDeleteBuffersARB");
 #endif
         }
         else{
