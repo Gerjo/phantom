@@ -23,7 +23,7 @@ namespace phantom {
         glutInitWindowSize(static_cast<int>(game->getViewPort().x), static_cast<int>(game->getViewPort().y));
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
         _windowID = glutCreateWindow("Elephantom");
-        
+
         if(IsExtensionSupported("GL_ARB_vertex_buffer_object")) {
             glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
             glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
@@ -120,17 +120,24 @@ namespace phantom {
 
             // Enable Pointers
             glEnableClientState(GL_VERTEX_ARRAY);
-            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+            if(shape->isImage) 
+                glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
             glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
             glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
-            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-            glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
+
+            if(shape->isImage) {
+                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+                glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
+            }
+
             glDrawArrays(GL_TRIANGLES, 0, shape->vboVerticesCount);
 
             glDisableClientState(GL_VERTEX_ARRAY);
-            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+            if(shape->isImage) 
+                glDisableClientState(GL_TEXTURE_COORD_ARRAY);
             /*glBegin(GL_TRIANGLES);
 
             // Iterate through all the points located in our shape.
@@ -229,17 +236,31 @@ namespace phantom {
             glDeleteBuffersARB(1, &shape->vboTexCoords);
         }
 
+        shape->vboVerticesCount = shape->vertices.size();
+
+        // Creating REAL arrays -.-
+        Vertice *verticesArray = new Vertice[shape->vboVerticesCount];
+        TexCoord *texCoordArray;
+        if(shape->isImage)
+            texCoordArray = new TexCoord[shape->vboVerticesCount];
+
+        for(unsigned int i = 0; i < shape->vboVerticesCount; ++i) {
+            verticesArray[i] = shape->vertices[i];
+            if(shape->isImage) 
+                texCoordArray[i] = shape->texCoords[i];
+        }
+
         // Vertices
         glGenBuffersARB(1, &shape->vboVertices);
         glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->vertices.size() * 3 * sizeof(float), &shape->vertices, GL_STATIC_DRAW_ARB);
+        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->vboVerticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
 
         // Texcoords
-        glGenBuffersARB(1, &shape->vboTexCoords);
-        glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->texCoords.size() * 2 * sizeof(float), &shape->texCoords, GL_STATIC_DRAW_ARB);
-
-        shape->vboVerticesCount = shape->vertices.size();
+        if(shape->isImage) {
+            glGenBuffersARB(1, &shape->vboTexCoords);
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+            glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->vboVerticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
+        }
 
         // While we're at it, we'll do images aswell.
         if(shape->isImage) {
@@ -247,12 +268,16 @@ namespace phantom {
 
             glGenTextures(1, &shape->textureID);
             glBindTexture(GL_TEXTURE_2D, shape->textureID);
-	        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         }
 
         // Everything is safe in the videocard... hopefully :)
         shape->vertices.clear();
         shape->texCoords.clear();
+
+        delete [] verticesArray;
+        if(shape->isImage) 
+            delete [] texCoordArray;
     }
 }

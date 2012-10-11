@@ -33,6 +33,7 @@ namespace phantom {
         TexCoord tex;
         vertice.x = x;
         vertice.y = y;
+        vertice.z = 0.0f;
         tex.u = u;
         tex.v = v;
         vertices.push_back(vertice);
