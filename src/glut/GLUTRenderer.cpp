@@ -29,18 +29,22 @@ namespace phantom {
         _windowID = glutCreateWindow("Elephantom");
 
         if(IsExtensionSupported("GL_ARB_vertex_buffer_object")) {
-#ifdef _WINDOWS
-            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
-            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
-            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) wglGetProcAddress("glBufferDataARB");
-            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
-#else
 
-            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddressARB((const GLubyte*)"glGenBuffersARB");
-            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddressARB((const GLubyte*)"glBindBufferARB");
-            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddressARB((const GLubyte*)"glBufferDataARB");
-            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddressARB((const GLubyte*)"glDeleteBuffersARB");
+// Yes, i'm lazy.
+#ifdef _WINDOWS
+#   define GetProcAddress(X) wglGetProcAddress(X)
+#else
+#   ifdef GLX_VERSION_1_4
+#       define GetProcAddress(X) glXGetProcAddress(reinterpret_cast<const GLubyte*>(X))
+#   else
+#       define GetProcAddress(X) glXGetProcAddressARB(reinterpret_cast<const GLubyte*>(X))
+#   endif
 #endif
+
+            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) GetProcAddress("glGenBuffersARB");
+            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) GetProcAddress("glBindBufferARB");
+            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) GetProcAddress("glBufferDataARB");
+            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) GetProcAddress("glDeleteBuffersARB");
         }
         else{
             cout << "NO VBO SUPPORT FOUND" << endl;
