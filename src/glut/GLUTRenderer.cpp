@@ -8,6 +8,10 @@
 #include <png.h>
 #include <graphics/ImageCache.h>
 
+#ifndef _WINDOWS
+#   include <GL/glx.h>
+#endif
+
 // Makes my life a bit easyer
 PFNGLGENBUFFERSARBPROC glGenBuffersARB = NULL;
 PFNGLBINDBUFFERARBPROC glBindBufferARB = NULL;
@@ -31,6 +35,7 @@ namespace phantom {
             glBufferDataARB = (PFNGLBUFFERDATAARBPROC) wglGetProcAddress("glBufferDataARB");
             glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
 #else
+
             glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddress("glGenBuffersARB");
             glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddress("glBindBufferARB");
             glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddress("glBufferDataARB");
@@ -128,7 +133,7 @@ namespace phantom {
             // Enable Pointers
             glEnableClientState(GL_VERTEX_ARRAY);
 
-            if(shape->isImage) 
+            if(shape->isImage)
                 glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
             glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
@@ -143,7 +148,7 @@ namespace phantom {
             glDrawArrays(GL_TRIANGLES, 0, shape->vboVerticesCount);
 
             glDisableClientState(GL_VERTEX_ARRAY);
-            if(shape->isImage) 
+            if(shape->isImage)
                 glDisableClientState(GL_TEXTURE_COORD_ARRAY);
             /*glBegin(GL_TRIANGLES);
 
@@ -253,7 +258,7 @@ namespace phantom {
 
         for(unsigned int i = 0; i < shape->vboVerticesCount; ++i) {
             verticesArray[i] = shape->vertices[i];
-            if(shape->isImage) 
+            if(shape->isImage)
                 texCoordArray[i] = shape->texCoords[i];
         }
 
@@ -284,7 +289,7 @@ namespace phantom {
         shape->texCoords.clear();
 
         delete [] verticesArray;
-        if(shape->isImage) 
+        if(shape->isImage)
             delete [] texCoordArray;
     }
 }
