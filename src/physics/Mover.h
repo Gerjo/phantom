@@ -12,7 +12,7 @@ namespace phantom {
     public:
         Mover();
         void moveTo(Vector3* vector);
-        void moveTo(std::vector<Vector3*> vList);
+        void moveTo(const std::vector<Vector3*> *vList);
         virtual void update(const float& elapsed);
         virtual void onAnsestorChanged();
     private:
