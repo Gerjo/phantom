@@ -25,10 +25,17 @@ namespace phantom {
         _windowID = glutCreateWindow("Elephantom");
 
         if(IsExtensionSupported("GL_ARB_vertex_buffer_object")) {
+#ifdef _WINDOWS
             glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
             glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
             glBufferDataARB = (PFNGLBUFFERDATAARBPROC) wglGetProcAddress("glBufferDataARB");
             glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
+#else
+            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddress("glGenBuffersARB");
+            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddress("glBindBufferARB");
+            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddress("glBufferDataARB");
+            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddress("glDeleteBuffersARB");
+#endif
         }
         else{
             cout << "NO VBO SUPPORT FOUND" << endl;
