@@ -36,15 +36,11 @@ namespace phantom {
             glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
 #else
 
-            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddress((const GLubyte*)"glGenBuffersARB");
-            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddress((const GLubyte*)"glBindBufferARB");
-            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddress((const GLubyte*)"glBufferDataARB");
-            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddress((const GLubyte*)"glDeleteBuffersARB");
+            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) glXGetProcAddressARB((const GLubyte*)"glGenBuffersARB");
+            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) glXGetProcAddressARB((const GLubyte*)"glBindBufferARB");
+            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) glXGetProcAddressARB((const GLubyte*)"glBufferDataARB");
+            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) glXGetProcAddressARB((const GLubyte*)"glDeleteBuffersARB");
 #endif
-            if(!glGenBuffersARB   )  std::cout << "glGenBuffersARB    is not loaded\n";
-            if(!glBindBufferARB   )  std::cout << "glBindBufferARB    is not loaded\n";
-            if(!glBufferDataARB   )  std::cout << "glBufferDataARB    is not loaded\n";
-            if(!glDeleteBuffersARB)  std::cout << "glDeleteBuffersARB is not loaded\n"; 
         }
         else{
             cout << "NO VBO SUPPORT FOUND" << endl;
