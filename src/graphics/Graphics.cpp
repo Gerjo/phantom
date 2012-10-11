@@ -4,6 +4,7 @@
 #include <graphics/shapes/Rectangle.h>
 #include <graphics/shapes/Arc.h>
 #include <graphics/shapes/PNGImage.h>
+#include <graphics/shapes/Text.h>
 #include <core/Composite.h>
 #include <physics/Box3.h>
 
@@ -75,6 +76,13 @@ namespace phantom {
         PNGImage* image = new PNGImage(fileName, x, y, width, height);
 
         addShape(image);
+        return *this;
+    }
+
+    Graphics& Graphics::text(float x, float y, void *font, const unsigned char* text) {
+        Text* txt = new Text(x, y, font, text);
+
+        addShape(txt);
         return *this;
     }
 

@@ -6,6 +6,7 @@
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>
 #include <graphics/shapes/PNGImage.h>
+#include <graphics/shapes/Text.h>
 #include <png.h>
 #include <graphics/ImageCache.h>
 
@@ -100,32 +101,44 @@ namespace phantom {
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
 
         // Begin drawing our shape.
-        glBegin(GL_TRIANGLES);
+        if(!shape->isText) {
+            glBegin(GL_TRIANGLES);
 
-        // Colorize!
-        const Color& fillColor = shape->getFillColor();
-        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+            // Colorize!
+            const Color& fillColor = shape->getFillColor();
+            glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
-        // Iterate through all the points located in our shape.
-        vector<Vertice>::iterator itVert = shape->vertices.begin();
-        vector<TexCoord>::iterator itTex = shape->texCoords.begin();
-        if(shape->texCoords.size() > 0) {
-            while(itVert != shape->vertices.end()) {
-                glTexCoord2f(itTex->u, -itTex->v);
-                glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-                ++itVert;
-                ++itTex;
+            // Iterate through all the points located in our shape.
+            vector<Vertice>::iterator itVert = shape->vertices.begin();
+            vector<TexCoord>::iterator itTex = shape->texCoords.begin();
+            if(shape->texCoords.size() > 0) {
+                while(itVert != shape->vertices.end()) {
+                    glTexCoord2f(itTex->u, -itTex->v);
+                    glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
+                    ++itVert;
+                    ++itTex;
+                }
             }
-        }
-        else {
-            while(itVert != shape->vertices.end()) {
-                glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-                ++itVert;
+            else {
+                while(itVert != shape->vertices.end()) {
+                    glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
+                    ++itVert;
+                }
             }
-        }
 
-        // End of drawing our shape.
-        glEnd();
+            // End of drawing our shape.
+            glEnd();
+        }
+        else
+        {
+            // Colorize!
+            const Color& fillColor = shape->getFillColor();
+            glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+
+            Text *txt = static_cast<Text *>(shape);
+            glRasterPos2f(0.2f,0.2f);
+            glutBitmapString(txt->font, txt->text);
+        }
 
         // Disable the texturing again afterwards.
         if(shape->isImage) {

@@ -19,6 +19,7 @@ namespace phantom {
         std::vector<TexCoord> texCoords;
 
         bool isImage;
+        bool isText;
 
         float x;
         float y;
