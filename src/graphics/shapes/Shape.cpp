@@ -8,7 +8,13 @@ namespace phantom {
     _hasFillColor(false),
     _hasLineColor(false),
     isImage(false),
-    isText(false) {
+    isText(false),
+    verticesArray(0),
+    texCoordsArray(0),
+    vboTexCoords(0),
+    vboVertices(0),
+    verticesCount(0),
+    textureID(0){
         
     }
 
@@ -30,8 +36,9 @@ namespace phantom {
         TexCoord tex;
         vertice.x = x;
         vertice.y = y;
+        vertice.z = 0.0f;
         tex.u = u;
-        tex.v = v;
+        tex.v = -v;
         vertices.push_back(vertice);
         if(u != TEX_COORD_UNUSED && v != TEX_COORD_UNUSED)
             texCoords.push_back(tex);
@@ -56,8 +63,12 @@ namespace phantom {
         }*/
     }
 
-    void Shape::buildVBO(Renderer *renderer) {
-        renderer->buildVBO(this);
+    void Shape::buildShape(Renderer *renderer) {
+        renderer->buildShape(this);
+    }
+
+    void Shape::destroyShape(Renderer *renderer) {
+        renderer->destroyShape(this);
     }
 
     bool Shape::hasFillColor(void) {

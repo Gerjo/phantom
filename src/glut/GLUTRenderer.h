@@ -9,6 +9,7 @@
 #include <core/Composite.h>
 #include <deque>
 #include <physics/Vector3.h>
+#include <string>
 
 namespace phantom {
 
@@ -21,10 +22,13 @@ namespace phantom {
         virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset);
         virtual void renderLoop(std::deque<GameState*>* states);
 
-        virtual void buildVBO(Shape *shape);
+        virtual void buildShape(Shape *shape);
+        virtual void destroyShape(Shape *shape);
+
     private:
         int _windowID;
-
+        bool _vboSupport;
+        bool IsExtensionSupported(std::string szTargetExtensionString);
         void drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset);
     };
 }

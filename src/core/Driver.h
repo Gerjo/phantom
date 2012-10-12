@@ -39,6 +39,10 @@ namespace phantom{
             _camera->setActive(true);
         }
 
+        Renderer *getRenderer() {
+            return _renderer;
+        }
+
     protected:
         Renderer* _renderer;
         Input* _input;

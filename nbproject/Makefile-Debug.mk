@@ -53,6 +53,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/glut/GLUTRenderer.o \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
+	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
@@ -174,6 +175,11 @@ ${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Text.o src/graphics/shapes/Text.cpp
 
 ${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/glut

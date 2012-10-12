@@ -74,12 +74,13 @@ namespace phantom {
         const string& getType();
         bool isType(const string& type);
         string toString(void);
+
+        PhantomGame* getGame(void);
     protected:
         Vector3 _position;
         Box3 _boundingBox;
 
         void setType(const string& type);
-        PhantomGame* getGame(void);
         Driver* getDriver(void);
     private:
         Composite *parent;

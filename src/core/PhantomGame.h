@@ -32,7 +32,7 @@ namespace phantom {
         void setDriver(Driver* driver);
 
         friend class Composite;
-    
+        friend class Graphics;
     protected:
         virtual void onExit(int returncode);
 

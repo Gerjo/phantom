@@ -8,13 +8,17 @@
 #include <png.h>
 #include <graphics/ImageCache.h>
 
-// Makes my life a bit easyer
-PFNGLGENBUFFERSARBPROC glGenBuffersARB = NULL;
-PFNGLBINDBUFFERARBPROC glBindBufferARB = NULL;
-PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
-PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
+#ifndef _WINDOWS
+#   include <GL/glx.h>
+#endif
 
 namespace phantom {
+
+    // Makes my life a bit easier
+    PFNGLGENBUFFERSARBPROC glGenBuffersARB = NULL;
+    PFNGLBINDBUFFERARBPROC glBindBufferARB = NULL;
+    PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
+    PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
 
     GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
@@ -22,13 +26,30 @@ namespace phantom {
         glutInit(&i, 0);
         glutInitWindowSize(static_cast<int>(game->getViewPort().x), static_cast<int>(game->getViewPort().y));
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
-
-        glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
-		glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
-		glBufferDataARB = (PFNGLBUFFERDATAARBPROC) wglGetProcAddress("glBufferDataARB");
-		glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) wglGetProcAddress("glDeleteBuffersARB");
-
         _windowID = glutCreateWindow("Elephantom");
+
+        _vboSupport = IsExtensionSupported("GL_ARB_vertex_buffer_object");
+        if(_vboSupport) {
+
+            // Yes, i'm lazy.
+#ifdef _WINDOWS
+#   define GetProcAddress(X) wglGetProcAddress(X)
+#else
+#   ifdef GLX_VERSION_1_4
+#       define GetProcAddress(X) glXGetProcAddress(reinterpret_cast<const GLubyte*>(X))
+#   else
+#       define GetProcAddress(X) glXGetProcAddressARB(reinterpret_cast<const GLubyte*>(X))
+#   endif
+#endif
+
+            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) GetProcAddress("glGenBuffersARB");
+            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) GetProcAddress("glBindBufferARB");
+            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) GetProcAddress("glBufferDataARB");
+            glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) GetProcAddress("glDeleteBuffersARB");
+        }
+        else{
+            cout << "There is no VBO support." << endl;
+        }
     }
 
     GLUTRenderer::~GLUTRenderer() {
@@ -100,10 +121,9 @@ namespace phantom {
             glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glEnable(GL_TEXTURE_2D);
 
-            ImageCacheItem *img = static_cast<PNGImage *>(shape)->getImage();
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glNormal3f(0.0, 0.0, 1.0);
+            glBindTexture(GL_TEXTURE_2D, shape->textureID);
+
+            glNormal3f(0.0f, 0.0f, 1.0f);
         }
 
         // Add the rotation.
@@ -111,32 +131,38 @@ namespace phantom {
 
         // Begin drawing our shape.
         if(!shape->isText) {
-            glBegin(GL_TRIANGLES);
-
             // Colorize!
             const Color& fillColor = shape->getFillColor();
             glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
-            // Iterate through all the points located in our shape.
-            vector<Vertice>::iterator itVert = shape->vertices.begin();
-            vector<TexCoord>::iterator itTex = shape->texCoords.begin();
-            if(shape->texCoords.size() > 0) {
-                while(itVert != shape->vertices.end()) {
-                    glTexCoord2f(itTex->u, -itTex->v);
-                    glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-                    ++itVert;
-                    ++itTex;
+            // Enable Pointers
+            glEnableClientState(GL_VERTEX_ARRAY);
+
+            if(shape->isImage)
+                glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+            glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
+            if(_vboSupport) {
+                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
+                glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
+
+                if(shape->isImage) {
+                    glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+                    glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
                 }
             }
             else {
-                while(itVert != shape->vertices.end()) {
-                    glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-                    ++itVert;
+                glVertexPointer(3, GL_FLOAT, 0, shape->verticesArray);
+                if(shape->isImage) {
+                    glTexCoordPointer(2, GL_FLOAT, 0, shape->texCoordsArray);
                 }
             }
 
-            // End of drawing our shape.
-            glEnd();
+            glDrawArrays(GL_TRIANGLES, 0, shape->verticesCount);
+
+            glDisableClientState(GL_VERTEX_ARRAY);
+            if(shape->isImage)
+                glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         }
         else
         {
@@ -175,19 +201,128 @@ namespace phantom {
         glFlush();
     }
 
-    void GLUTRenderer::buildVBO(Shape *shape) {
-        // Vertices
-        glGenBuffersARB(1, &shape->vboVertices);
-        glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->vertices.size() * 3 * sizeof(float), &shape->vertices, GL_STATIC_DRAW_ARB);
+    // Based Off Of Code Supplied At OpenGL.org
+    bool GLUTRenderer::IsExtensionSupported(std::string szTargetExtensionString )
+    {
+        const char* szTargetExtension = szTargetExtensionString.c_str();
+        const unsigned char *pszExtensions = NULL;
+        const unsigned char *pszStart;
+        unsigned char *pszWhere, *pszTerminator;
 
-        // Texcoords
-        glGenBuffersARB(1, &shape->vboTexCoords);
-        glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->texCoords.size() * 2 * sizeof(float), &shape->texCoords, GL_STATIC_DRAW_ARB);
+        // Extension names should not have spaces
+        pszWhere = (unsigned char *) strchr( szTargetExtension, ' ' );
+        if( pszWhere || *szTargetExtension == '\0' )
+            return false;
 
-        // Everything is safe in the videocard... hopefully :)
-        shape->vertices.clear();
-        shape->texCoords.clear();
+        // Get Extensions String
+        pszExtensions = glGetString( GL_EXTENSIONS );
+
+        // Search The Extensions String For An Exact Copy
+        pszStart = pszExtensions;
+        for(;;)
+        {
+            pszWhere = (unsigned char *) strstr( (const char *) pszStart, szTargetExtension );
+            if( !pszWhere )
+                break;
+            pszTerminator = pszWhere + strlen( szTargetExtension );
+            if( pszWhere == pszStart || *( pszWhere - 1 ) == ' ' )
+                if( *pszTerminator == ' ' || *pszTerminator == '\0' )
+                    return true;
+            pszStart = pszTerminator;
+        }
+        return false;
+    }
+
+    void GLUTRenderer::buildShape(Shape *shape) {
+        // Be sure nothing is left to be deleted.
+        destroyShape(shape);
+
+        if(_vboSupport) {
+            shape->verticesCount = shape->vertices.size();
+
+            // Creating REAL arrays -.-
+            Vertice *verticesArray = new Vertice[shape->verticesCount];
+            TexCoord *texCoordArray;
+            if(shape->isImage)
+                texCoordArray = new TexCoord[shape->verticesCount];
+
+            for(unsigned int i = 0; i < shape->verticesCount; ++i) {
+                verticesArray[i] = shape->vertices[i];
+                if(shape->isImage)
+                    texCoordArray[i] = shape->texCoords[i];
+            }
+
+            // Vertices
+            glGenBuffersARB(1, &shape->vboVertices);
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
+            glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
+
+            // Texcoords
+            if(shape->isImage) {
+                glGenBuffersARB(1, &shape->vboTexCoords);
+                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+                glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
+            }
+
+            // Everything is safe in the videocard... hopefully :)
+            shape->vertices.clear();
+            shape->texCoords.clear();
+
+            delete [] verticesArray;
+            if(shape->isImage)
+                delete [] texCoordArray;
+        } else {
+            shape->verticesCount = shape->vertices.size();
+
+            // Creating REAL arrays -.-
+            shape->verticesArray = new Vertice[shape->vertices.size()];
+
+            if(shape->isImage)
+                shape->texCoordsArray = new TexCoord[shape->vertices.size()];
+
+            for(unsigned int i = 0; i < shape->vertices.size(); ++i) {
+                shape->verticesArray[i] = shape->vertices[i];
+                if(shape->isImage)
+                    shape->texCoordsArray[i] = shape->texCoords[i];
+            }
+        }
+
+        // While we're at it, we'll do images aswell.
+        if(shape->isImage) {
+
+            ImageCacheItem *img = static_cast<PNGImage *>(shape)->getImage();
+
+            glGenTextures(1, &shape->textureID);
+            glBindTexture(GL_TEXTURE_2D, shape->textureID);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        }
+    }
+
+    void GLUTRenderer::destroyShape(Shape *shape) {
+        if(_vboSupport) {
+            if(shape->verticesCount != 0) {
+                glDeleteBuffersARB(1, &shape->vboVertices);
+                glDeleteBuffersARB(1, &shape->vboTexCoords);
+            }
+
+            shape->verticesCount = 0;
+        }
+        else {
+            if(shape->verticesArray != 0)
+                delete [] shape->verticesArray;
+            if(shape->texCoordsArray != 0)
+                delete [] shape->texCoordsArray;
+
+            shape->verticesArray = 0;
+            shape->texCoordsArray = 0;
+        }
+
+        if(shape->isImage) {
+            if(shape->textureID != 0) {
+                glDeleteTextures(1, &shape->textureID);
+                shape->textureID = 0;
+            }
+        }
     }
 }
