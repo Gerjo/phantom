@@ -233,13 +233,11 @@ namespace phantom {
         return false;
     }
 
-    void GLUTRenderer::buildVBO(Shape *shape) {
+    void GLUTRenderer::buildShape(Shape *shape) {
+        // Be sure nothing is left to be deleted.
+        destroyShape(shape);
+
         if(_vboSupport) {
-            // Be sure nothing is left to be deleted.
-            if(shape->verticesCount != 0) {
-                glDeleteBuffersARB(1, &shape->vboVertices);
-                glDeleteBuffersARB(1, &shape->vboTexCoords);
-            }
             shape->verticesCount = shape->vertices.size();
 
             // Creating REAL arrays -.-
@@ -274,16 +272,11 @@ namespace phantom {
             if(shape->isImage)
                 delete [] texCoordArray;
         } else {
-            if(shape->verticesArray != 0)
-                delete [] shape->verticesArray;
-            if(shape->texCoordsArray != 0)
-                delete [] shape->texCoordsArray;
-
             shape->verticesCount = shape->vertices.size();
 
             // Creating REAL arrays -.-
             shape->verticesArray = new Vertice[shape->vertices.size()];
-            
+
             if(shape->isImage)
                 shape->texCoordsArray = new TexCoord[shape->vertices.size()];
 
@@ -296,12 +289,40 @@ namespace phantom {
 
         // While we're at it, we'll do images aswell.
         if(shape->isImage) {
+
             ImageCacheItem *img = static_cast<PNGImage *>(shape)->getImage();
 
             glGenTextures(1, &shape->textureID);
             glBindTexture(GL_TEXTURE_2D, shape->textureID);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        }
+    }
+
+    void GLUTRenderer::destroyShape(Shape *shape) {
+        if(_vboSupport) {
+            if(shape->verticesCount != 0) {
+                glDeleteBuffersARB(1, &shape->vboVertices);
+                glDeleteBuffersARB(1, &shape->vboTexCoords);
+            }
+
+            shape->verticesCount = 0;
+        }
+        else {
+            if(shape->verticesArray != 0)
+                delete [] shape->verticesArray;
+            if(shape->texCoordsArray != 0)
+                delete [] shape->texCoordsArray;
+
+            shape->verticesArray = 0;
+            shape->texCoordsArray = 0;
+        }
+
+        if(shape->isImage) {
+            if(shape->textureID != 0) {
+                glDeleteTextures(1, &shape->textureID);
+                shape->textureID = 0;
+            }
         }
     }
 }

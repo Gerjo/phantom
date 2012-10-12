@@ -13,7 +13,8 @@ namespace phantom {
     texCoordsArray(0),
     vboTexCoords(0),
     vboVertices(0),
-    verticesCount(0){
+    verticesCount(0),
+    textureID(0){
         
     }
 
@@ -62,8 +63,12 @@ namespace phantom {
         }*/
     }
 
-    void Shape::buildVBO(Renderer *renderer) {
-        renderer->buildVBO(this);
+    void Shape::buildShape(Renderer *renderer) {
+        renderer->buildShape(this);
+    }
+
+    void Shape::destroyShape(Renderer *renderer) {
+        renderer->destroyShape(this);
     }
 
     bool Shape::hasFillColor(void) {

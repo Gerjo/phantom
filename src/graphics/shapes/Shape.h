@@ -36,7 +36,8 @@ namespace phantom {
         void setLineColor(Color color);
 
         virtual void addVertex(float x, float y, float u = TEX_COORD_UNUSED, float v = TEX_COORD_UNUSED);
-        void buildVBO(Renderer *renderer);
+        void buildShape(Renderer *renderer);
+        void destroyShape(Renderer *renderer);
 
         bool hasFillColor(void);
         bool hasLineColor(void);

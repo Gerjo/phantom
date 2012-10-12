@@ -160,7 +160,7 @@ namespace phantom {
             // to comply with the HTML 5 API.
             shape->setLineColor(_lineColor);
             shape->setFillColor(_fillColor);
-            shape->buildVBO(_parent->getGame()->getDriver()->getRenderer());
+            shape->buildShape(_parent->getGame()->getDriver()->getRenderer());
 
             target.push_back(shape);
         }
@@ -170,6 +170,7 @@ namespace phantom {
         deque<Shape*>::iterator shIt;
 
         for(shIt = source.begin(); shIt != source.end(); ++shIt) {
+            (*shIt)->destroyShape(_parent->getGame()->getDriver()->getRenderer());
             delete *shIt;
         }
 
