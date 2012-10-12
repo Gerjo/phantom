@@ -12,13 +12,13 @@
 #   include <GL/glx.h>
 #endif
 
-// Makes my life a bit easyer
-PFNGLGENBUFFERSARBPROC glGenBuffersARB = NULL;
-PFNGLBINDBUFFERARBPROC glBindBufferARB = NULL;
-PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
-PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
-
 namespace phantom {
+
+    // Makes my life a bit easier
+    PFNGLGENBUFFERSARBPROC glGenBuffersARB = NULL;
+    PFNGLBINDBUFFERARBPROC glBindBufferARB = NULL;
+    PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
+    PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
 
     GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
