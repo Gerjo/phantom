@@ -121,7 +121,7 @@ namespace phantom {
             glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glEnable(GL_TEXTURE_2D);
 
-            glBindTexture(GL_TEXTURE_2D, shape->textureID);
+            glBindTexture(GL_TEXTURE_2D, static_cast<PNGImage *>(shape)->getImage()->textureID);
 
             glNormal3f(0.0f, 0.0f, 1.0f);
         }
@@ -286,16 +286,19 @@ namespace phantom {
                     shape->texCoordsArray[i] = shape->texCoords[i];
             }
         }
+    }
 
-        // While we're at it, we'll do images aswell.
-        if(shape->isImage) {
+    void GLUTRenderer::addTexture(ImageCacheItem *item) {
+        glGenTextures(1, &item->textureID);
+        glBindTexture(GL_TEXTURE_2D, item->textureID);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, item->imageData);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    }
 
-            ImageCacheItem *img = static_cast<PNGImage *>(shape)->getImage();
-
-            glGenTextures(1, &shape->textureID);
-            glBindTexture(GL_TEXTURE_2D, shape->textureID);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    void GLUTRenderer::removeTexture(ImageCacheItem *item) {
+        if(item->textureID != 0) {
+            glDeleteTextures(1, &item->textureID);
+            item->textureID = 0;
         }
     }
 
@@ -316,13 +319,6 @@ namespace phantom {
 
             shape->verticesArray = 0;
             shape->texCoordsArray = 0;
-        }
-
-        if(shape->isImage) {
-            if(shape->textureID != 0) {
-                glDeleteTextures(1, &shape->textureID);
-                shape->textureID = 0;
-            }
         }
     }
 }

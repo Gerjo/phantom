@@ -4,12 +4,15 @@
 #include <string>
 #include <map>
 #include <png.h>
+#include <core/Renderer.h>
+
 using namespace std;
 namespace phantom {
     class ImageCacheItem {
     public:
         unsigned int width;
         unsigned int height;
+        unsigned int textureID;
         unsigned char *imageData;
         unsigned char **row_pointers;
     };
@@ -23,6 +26,10 @@ namespace phantom {
             return INSTANCE;
         }
 
+        void setRenderer(Renderer *renderer) {
+            _renderer = renderer;
+        }
+
         bool isCached(const string filename) {
             if(imageCache.find(filename) == imageCache.end())
                 return false;
@@ -31,6 +38,7 @@ namespace phantom {
         }
 
         void insertIntoCache(const string filename, ImageCacheItem *item) {
+            _renderer->addTexture(item);
             imageCache.insert(pair<const string, ImageCacheItem>(filename, *item));
         }
 
@@ -45,6 +53,7 @@ namespace phantom {
 
         void removeFromCache(const string filename) {
             ImageCacheItem *item = &imageCache.at(filename);
+            _renderer->removeTexture(item);
             delete [] item->imageData;
             delete [] item->row_pointers;
             imageCache.erase(filename);
@@ -63,6 +72,7 @@ namespace phantom {
         };
 
         map<const string, ImageCacheItem> imageCache;
+        Renderer *_renderer;
 
         static ImageCache *INSTANCE;
     };

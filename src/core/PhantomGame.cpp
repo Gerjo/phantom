@@ -3,6 +3,7 @@
 #include <ctime>
 #include <phantom.h>
 #include <core/Driver.h>
+#include <graphics/ImageCache.h>
 #include <utils/PhantomException.h>
 
 namespace phantom {
@@ -85,6 +86,8 @@ namespace phantom {
 
     void PhantomGame::setDriver(Driver* driver) {
         _driver = driver;
+        //hacky:
+        ImageCache::getInstance()->setRenderer(_driver->getRenderer());
     }
 
     deque<GameState*>& PhantomGame::getGameStates() {
