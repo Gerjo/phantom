@@ -9,9 +9,11 @@ namespace phantom {
     _hasLineColor(false),
     isImage(false),
     isText(false),
+    verticesArray(0),
+    texCoordsArray(0),
     vboTexCoords(0),
     vboVertices(0),
-    vboVerticesCount(0){
+    verticesCount(0){
         
     }
 

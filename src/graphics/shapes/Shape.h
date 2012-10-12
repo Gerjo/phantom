@@ -17,10 +17,12 @@ namespace phantom {
         static const float TEX_COORD_UNUSED;
 
 		std::vector<Vertice> vertices;
+        Vertice *verticesArray;
         std::vector<TexCoord> texCoords;
+        TexCoord *texCoordsArray;
 
+        unsigned int verticesCount;
         unsigned int vboVertices;
-        unsigned int vboVerticesCount;
         unsigned int vboTexCoords;
         unsigned int textureID;
 

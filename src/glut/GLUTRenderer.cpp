@@ -28,9 +28,10 @@ namespace phantom {
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
         _windowID = glutCreateWindow("Elephantom");
 
-        if(IsExtensionSupported("GL_ARB_vertex_buffer_object")) {
+        _vboSupport = IsExtensionSupported("GL_ARB_vertex_buffer_object");
+        if(_vboSupport) {
 
-// Yes, i'm lazy.
+            // Yes, i'm lazy.
 #ifdef _WINDOWS
 #   define GetProcAddress(X) wglGetProcAddress(X)
 #else
@@ -47,7 +48,7 @@ namespace phantom {
             glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) GetProcAddress("glDeleteBuffersARB");
         }
         else{
-            cout << "NO VBO SUPPORT FOUND" << endl;
+            cout << "There is no VBO support." << endl;
         }
     }
 
@@ -141,41 +142,27 @@ namespace phantom {
                 glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
             glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
-            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-            glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
+            if(_vboSupport) {
+                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
+                glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
 
-            if(shape->isImage) {
-                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-                glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
+                if(shape->isImage) {
+                    glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+                    glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
+                }
+            }
+            else {
+                glVertexPointer(3, GL_FLOAT, 0, shape->verticesArray);
+                if(shape->isImage) {
+                    glTexCoordPointer(2, GL_FLOAT, 0, shape->texCoordsArray);
+                }
             }
 
-            glDrawArrays(GL_TRIANGLES, 0, shape->vboVerticesCount);
+            glDrawArrays(GL_TRIANGLES, 0, shape->verticesCount);
 
             glDisableClientState(GL_VERTEX_ARRAY);
             if(shape->isImage)
                 glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-            /*glBegin(GL_TRIANGLES);
-
-            // Iterate through all the points located in our shape.
-            vector<Vertice>::iterator itVert = shape->vertices.begin();
-            vector<TexCoord>::iterator itTex = shape->texCoords.begin();
-            if(shape->texCoords.size() > 0) {
-            while(itVert != shape->vertices.end()) {
-            glTexCoord2f(itTex->u, -itTex->v);
-            glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-            ++itVert;
-            ++itTex;
-            }
-            }
-            else {
-            while(itVert != shape->vertices.end()) {
-            glVertex2f(shape->x + itVert->x + xOffset, shape->y + itVert->y + yOffset);
-            ++itVert;
-            }
-            }
-
-            // End of drawing our shape.
-            glEnd();*/
         }
         else
         {
@@ -247,36 +234,64 @@ namespace phantom {
     }
 
     void GLUTRenderer::buildVBO(Shape *shape) {
-        // Be sure nothing is left to be deleted.
-        if(shape->vboVerticesCount != 0) {
-            glDeleteBuffersARB(1, &shape->vboVertices);
-            glDeleteBuffersARB(1, &shape->vboTexCoords);
-        }
+        if(_vboSupport) {
+            // Be sure nothing is left to be deleted.
+            if(shape->verticesCount != 0) {
+                glDeleteBuffersARB(1, &shape->vboVertices);
+                glDeleteBuffersARB(1, &shape->vboTexCoords);
+            }
+            shape->verticesCount = shape->vertices.size();
 
-        shape->vboVerticesCount = shape->vertices.size();
-
-        // Creating REAL arrays -.-
-        Vertice *verticesArray = new Vertice[shape->vboVerticesCount];
-        TexCoord *texCoordArray;
-        if(shape->isImage)
-            texCoordArray = new TexCoord[shape->vboVerticesCount];
-
-        for(unsigned int i = 0; i < shape->vboVerticesCount; ++i) {
-            verticesArray[i] = shape->vertices[i];
+            // Creating REAL arrays -.-
+            Vertice *verticesArray = new Vertice[shape->verticesCount];
+            TexCoord *texCoordArray;
             if(shape->isImage)
-                texCoordArray[i] = shape->texCoords[i];
-        }
+                texCoordArray = new TexCoord[shape->verticesCount];
 
-        // Vertices
-        glGenBuffersARB(1, &shape->vboVertices);
-        glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-        glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->vboVerticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
+            for(unsigned int i = 0; i < shape->verticesCount; ++i) {
+                verticesArray[i] = shape->vertices[i];
+                if(shape->isImage)
+                    texCoordArray[i] = shape->texCoords[i];
+            }
 
-        // Texcoords
-        if(shape->isImage) {
-            glGenBuffersARB(1, &shape->vboTexCoords);
-            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-            glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->vboVerticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
+            // Vertices
+            glGenBuffersARB(1, &shape->vboVertices);
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
+            glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
+
+            // Texcoords
+            if(shape->isImage) {
+                glGenBuffersARB(1, &shape->vboTexCoords);
+                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
+                glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
+            }
+
+            // Everything is safe in the videocard... hopefully :)
+            shape->vertices.clear();
+            shape->texCoords.clear();
+
+            delete [] verticesArray;
+            if(shape->isImage)
+                delete [] texCoordArray;
+        } else {
+            if(shape->verticesArray != 0)
+                delete [] shape->verticesArray;
+            if(shape->texCoordsArray != 0)
+                delete [] shape->texCoordsArray;
+
+            shape->verticesCount = shape->vertices.size();
+
+            // Creating REAL arrays -.-
+            shape->verticesArray = new Vertice[shape->vertices.size()];
+            
+            if(shape->isImage)
+                shape->texCoordsArray = new TexCoord[shape->vertices.size()];
+
+            for(unsigned int i = 0; i < shape->vertices.size(); ++i) {
+                shape->verticesArray[i] = shape->vertices[i];
+                if(shape->isImage)
+                    shape->texCoordsArray[i] = shape->texCoords[i];
+            }
         }
 
         // While we're at it, we'll do images aswell.
@@ -288,13 +303,5 @@ namespace phantom {
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->width, img->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->imageData);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         }
-
-        // Everything is safe in the videocard... hopefully :)
-        shape->vertices.clear();
-        shape->texCoords.clear();
-
-        delete [] verticesArray;
-        if(shape->isImage)
-            delete [] texCoordArray;
     }
 }
