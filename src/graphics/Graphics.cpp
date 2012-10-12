@@ -119,6 +119,7 @@ namespace phantom {
     }
 
     void Graphics::addShape(Shape* whom) {
+        whom->buildShape(_parent->getGame()->getDriver()->getRenderer());
         _workspaceShapes.push_back(whom);
     }
 
@@ -160,7 +161,6 @@ namespace phantom {
             // to comply with the HTML 5 API.
             shape->setLineColor(_lineColor);
             shape->setFillColor(_fillColor);
-            shape->buildShape(_parent->getGame()->getDriver()->getRenderer());
 
             target.push_back(shape);
         }

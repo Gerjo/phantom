@@ -1,6 +1,5 @@
 #include "Composite.h"
 #include <iostream>
-#include "Entity.h"
 #include "PhantomGame.h"
 #include <utils/PhantomException.h>
 #include <core/Driver.h>
