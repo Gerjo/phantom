@@ -39,6 +39,8 @@ namespace phantom {
 
         void insertIntoCache(const string filename, ImageCacheItem *item) {
             _renderer->addTexture(item);
+            delete [] item->imageData;
+            delete [] item->row_pointers;
             imageCache.insert(pair<const string, ImageCacheItem>(filename, *item));
         }
 
@@ -54,8 +56,6 @@ namespace phantom {
         void removeFromCache(const string filename) {
             ImageCacheItem *item = &imageCache.at(filename);
             _renderer->removeTexture(item);
-            delete [] item->imageData;
-            delete [] item->row_pointers;
             imageCache.erase(filename);
         }
 
