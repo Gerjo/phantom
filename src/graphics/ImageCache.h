@@ -25,10 +25,21 @@ namespace phantom {
                 INSTANCE = new ImageCache();
             return INSTANCE;
         }
+        
+        ~ImageCache() {
+            map<const string, ImageCacheItem>::iterator it = imageCache.begin();
+            for(; it != imageCache.end(); ++it) {
+                ImageCacheItem *second = &(*it).second;
+                _renderer->removeTexture(second);
+                if(second->imageData != 0) delete [] second->imageData;
+                if(second->row_pointers != 0) delete [] second->row_pointers;
+            }
+            imageCache.clear();
+        };
 
         void setRenderer(Renderer *renderer) {
             _renderer = renderer;
-        }
+        }\
 
         bool isCached(const string filename) {
             if(imageCache.find(filename) == imageCache.end())
@@ -39,8 +50,10 @@ namespace phantom {
 
         void insertIntoCache(const string filename, ImageCacheItem *item) {
             _renderer->addTexture(item);
-            delete [] item->imageData;
-            delete [] item->row_pointers;
+            if(item->imageData != 0) delete [] item->imageData;
+            if(item->row_pointers != 0) delete [] item->row_pointers;
+            item->imageData = 0;
+            item->row_pointers = 0;
             imageCache.insert(pair<const string, ImageCacheItem>(filename, *item));
         }
 
@@ -55,21 +68,14 @@ namespace phantom {
 
         void removeFromCache(const string filename) {
             ImageCacheItem *item = &imageCache.at(filename);
+            if(item->imageData != 0) delete [] item->imageData;
+            if(item->row_pointers != 0) delete [] item->row_pointers;
             _renderer->removeTexture(item);
             imageCache.erase(filename);
         }
 
     private:
         ImageCache(){ };
-        ~ImageCache() {
-            map<const string, ImageCacheItem>::iterator it = imageCache.begin();
-            for(; it != imageCache.end(); ++it) {
-                ImageCacheItem *second = &(*it).second;
-                delete [] second->imageData;
-                delete [] second->row_pointers;
-                imageCache.erase(it);
-            }
-        };
 
         map<const string, ImageCacheItem> imageCache;
         Renderer *_renderer;

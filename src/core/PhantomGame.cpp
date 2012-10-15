@@ -29,6 +29,9 @@ namespace phantom {
 #ifdef WIN32
         _CrtDumpMemoryLeaks();
 #endif
+
+        delete ImageCache::getInstance();
+        delete _driver;
     }
 
     void PhantomGame::pushGameState(GameState *state) {
