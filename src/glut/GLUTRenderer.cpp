@@ -61,7 +61,7 @@ namespace phantom {
         if(_game->getDriver()->getActiveCamera() == 0)
             return;
 
-        bool isDrawable = false;
+
         Vector3 cameraPosition = _game->getDriver()->getActiveCamera()->getPosition();
         Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
 
@@ -77,6 +77,8 @@ namespace phantom {
                 deque<Shape*>::iterator itShape = shapes->begin();
 
                 while(itShape != shapes->end())	{
+                    bool isDrawable = false;
+
                     Box3 shapeBox = (*itShape)->getBounds();
                     shapeBox.origin.x += offsetRecalculated.x;
                     shapeBox.origin.y += offsetRecalculated.y;
