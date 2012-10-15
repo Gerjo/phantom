@@ -21,6 +21,11 @@ namespace phantom {
         mouseMotionListener(static_cast<int>(game->getViewPort().x * 0.5), static_cast<int>(game->getViewPort().y * 0.5));
     }
 
+    GLUTInput::~GLUTInput() {
+        delete _keyboardState;
+        delete _mouseState;
+    }
+
     KeyboardState* GLUTInput::getKeyboardState() {
         return _keyboardState;
     }
