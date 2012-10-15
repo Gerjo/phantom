@@ -39,7 +39,7 @@ namespace phantom {
 
         void setRenderer(Renderer *renderer) {
             _renderer = renderer;
-        }\
+        }
 
         bool isCached(const string filename) {
             if(imageCache.find(filename) == imageCache.end())

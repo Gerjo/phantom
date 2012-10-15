@@ -2,6 +2,7 @@
 #include "GLUTRenderer.h"
 #include <glut/GLUTCamera.h>
 #include <glut/GLUTInput.h>
+#include <graphics/ImageCache.h>
 
 namespace phantom{
 
@@ -12,6 +13,7 @@ namespace phantom{
 
     GLUTDriver::~GLUTDriver(){
         delete _input;
+        delete ImageCache::getInstance();
         delete _renderer;
     }
 
