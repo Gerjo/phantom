@@ -25,7 +25,7 @@ namespace phantom{
         void repair(void);
         string toString(void);
 
-        friend ostream& operator<<(ostream&, const Box3& b){
+        friend ostream& operator<<(ostream& o, const Box3& b){
             o << "[Box3] (x: " << b.origin.x << ", y:"  << b.origin.y << ", z:"  << b.origin.z;
             o << ", width:" << b.size.x << ", height:" << b.size.y << ", depth:" << b.size.z << ")";
             return o;
