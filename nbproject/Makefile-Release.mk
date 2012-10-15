@@ -45,9 +45,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
-	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
+	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/graphics/ImageCache.o \
 	${OBJECTDIR}/src/graphics/shapes/Image.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
@@ -135,11 +135,6 @@ ${OBJECTDIR}/src/layer/EntityLayer.o: src/layer/EntityLayer.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/EntityLayer.o src/layer/EntityLayer.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
-
 ${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
@@ -149,6 +144,11 @@ ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Shape.o src/graphics/shapes/Shape.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
 
 ${OBJECTDIR}/src/graphics/ImageCache.o: src/graphics/ImageCache.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
