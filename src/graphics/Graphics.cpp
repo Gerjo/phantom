@@ -4,7 +4,7 @@
 #include <iostream>
 #include <graphics/shapes/Rectangle.h>
 #include <graphics/shapes/Arc.h>
-#include <graphics/shapes/PNGImage.h>
+#include <graphics/shapes/Image.h>
 #include <graphics/shapes/Text.h>
 #include <core/Composite.h>
 #include <physics/Box3.h>
@@ -74,7 +74,7 @@ namespace phantom {
     }
 
     Graphics& Graphics::image(const string& fileName, float x, float y, float width, float height) {
-        PNGImage* image = new PNGImage(fileName, x, y, width, height);
+        Image* image = new Image(fileName, x, y, width, height);
 
         addShape(image);
         return *this;

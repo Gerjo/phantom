@@ -3,7 +3,7 @@
 #include <core/Driver.h>
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>
-#include <graphics/shapes/PNGImage.h>
+#include <graphics/shapes/Image.h>
 #include <graphics/shapes/Text.h>
 #include <png.h>
 #include <graphics/ImageCache.h>
@@ -121,7 +121,7 @@ namespace phantom {
             glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glEnable(GL_TEXTURE_2D);
 
-            glBindTexture(GL_TEXTURE_2D, static_cast<PNGImage *>(shape)->getImage()->textureID);
+            glBindTexture(GL_TEXTURE_2D, static_cast<Image *>(shape)->getImage()->textureID);
 
             glNormal3f(0.0f, 0.0f, 1.0f);
         }

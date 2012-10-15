@@ -5,10 +5,10 @@
 #include <graphics/ImageCache.h>
 
 namespace phantom {
-	class LIBEXPORT PNGImage : public Shape {
+	class LIBEXPORT Image : public Shape {
 	public:
-		PNGImage(std::string filename, float x, float y, float width, float height);
-		~PNGImage();
+		Image(std::string filename, float x, float y, float width, float height);
+		~Image();
 
         ImageCacheItem *getImage() { return _imageItem; }
 
@@ -16,7 +16,7 @@ namespace phantom {
         float           _width;
         float           _height;
         ImageCacheItem  *_imageItem;
-		
+
 		void createRectangle();
 	};
 }

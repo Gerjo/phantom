@@ -29,10 +29,10 @@
         <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
           <itemPath>src/graphics/shapes/Arc.cpp</itemPath>
           <itemPath>src/graphics/shapes/Arc.h</itemPath>
+          <itemPath>src/graphics/shapes/Image.cpp</itemPath>
+          <itemPath>src/graphics/shapes/Image.h</itemPath>
           <itemPath>src/graphics/shapes/Line.cpp</itemPath>
           <itemPath>src/graphics/shapes/Line.h</itemPath>
-          <itemPath>src/graphics/shapes/PNGImage.cpp</itemPath>
-          <itemPath>src/graphics/shapes/PNGImage.h</itemPath>
           <itemPath>src/graphics/shapes/Polygon.cpp</itemPath>
           <itemPath>src/graphics/shapes/Polygon.h</itemPath>
           <itemPath>src/graphics/shapes/Rectangle.cpp</itemPath>
