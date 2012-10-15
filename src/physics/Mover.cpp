@@ -18,6 +18,7 @@ namespace phantom {
     }
     void Mover::moveTo(const std::vector<Vector3*> *targetList){
         _targetList = *targetList;
+        //delete targetList;
     }
     void Mover::update(const float& elapsed){
         Composite::update(elapsed);
