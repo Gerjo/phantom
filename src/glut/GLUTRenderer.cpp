@@ -77,19 +77,13 @@ namespace phantom {
                 deque<Shape*>::iterator itShape = shapes->begin();
 
                 while(itShape != shapes->end())	{
-                    bool isDrawable = false;
-
                     Box3 shapeBox = (*itShape)->getBounds();
                     shapeBox.origin.x += offsetRecalculated.x;
                     shapeBox.origin.y += offsetRecalculated.y;
 
                     if(shapeBox.intersect(cameraBox)) {
-                        isDrawable = true;
-                    }
-
-                    // Draw the shape.
-                    if(isDrawable)
                         drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                    }
 
                     // Move on to the next shape.
                     ++itShape;
