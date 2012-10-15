@@ -95,6 +95,14 @@ namespace phantom{
         z = abs(z);
     }
 
+    float Vector3::distanceTo(const Vector3& other) {
+        float diffX = other.x - x;
+        float diffY = other.y - y;
+        float diffZ = other.z - z;
+
+        return sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
+    }
+
     float Vector3::distanceToSq(const Vector3& other) {
         float diffX = other.x - x;
         float diffY = other.y - y;

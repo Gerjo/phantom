@@ -33,6 +33,7 @@ namespace phantom{
         void absolute();
         void normalize();
 
+        float distanceTo(const Vector3& other);
         float distanceToSq(const Vector3& other);
         float getLengthSq(void);
 
