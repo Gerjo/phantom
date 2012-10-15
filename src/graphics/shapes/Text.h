@@ -6,7 +6,7 @@
 #include <graphics/shapes/Shape.h>
 
 namespace phantom{
-	class LIBEXPORT Text : public Shape{
+	class LIBEXPORT Text : public Shape {
 	public:
         void *font;
         const unsigned char *text;

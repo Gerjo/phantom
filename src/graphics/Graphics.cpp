@@ -54,9 +54,7 @@ namespace phantom {
     }
 
     Graphics& Graphics::rect(const Box3& box, bool isFilled) {
-        rect(box.origin.x, box.origin.y, box.size.x, box.size.y, isFilled);
-
-        return *this;
+        return rect(box.origin.x, box.origin.y, box.size.x, box.size.y, isFilled);
     }
 
     Graphics& Graphics::rect(float x, float y, float width, float height, bool isFilled) {
@@ -80,8 +78,8 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::text(float x, float y, void *font, const unsigned char* text) {
-        Text* txt = new Text(x, y, font, text);
+    Graphics& Graphics::text(float x, float y, void *font, string text) {
+        Text* txt = new Text(x, y, font, reinterpret_cast<const unsigned char*>(text.c_str()));
 
         addShape(txt);
         return *this;
