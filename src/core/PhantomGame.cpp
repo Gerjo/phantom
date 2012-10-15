@@ -6,6 +6,14 @@
 #include <graphics/ImageCache.h>
 #include <utils/PhantomException.h>
 
+#ifdef WIN32
+#   ifdef _DEBUG
+#       define _CRTDBG_MAP_ALLOC
+#       include <stdlib.h>
+#       include <crtdbg.h>
+#   endif /* Debug */
+#endif /* win32*/
+
 namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
@@ -18,7 +26,9 @@ namespace phantom {
     }
 
     PhantomGame::~PhantomGame() {
-        delete _driver;
+#ifdef WIN32
+        _CrtDumpMemoryLeaks();
+#endif
     }
 
     void PhantomGame::pushGameState(GameState *state) {
@@ -30,12 +40,12 @@ namespace phantom {
     }
 
     int PhantomGame::start(int argc, char *argv[]) {
-
+        _running = true;
         double last = Util::getTime();
         double total = 0.0f;
         int fpscount = 0;
 
-        while (1) {
+        while (_running) {
             double now = Util::getTime();
             double elapsed = now - last;
 
