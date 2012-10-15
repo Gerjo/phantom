@@ -83,11 +83,10 @@ namespace phantom {
                     shapeBox.origin.x += offsetRecalculated.x;
                     shapeBox.origin.y += offsetRecalculated.y;
 
-                    if(shapeBox.origin.x + shapeBox.size.x >= cameraBox.origin.x && shapeBox.origin.x + shapeBox.size.x <= cameraBox.origin.x + cameraBox.size.x &&
-                        shapeBox.origin.y + shapeBox.size.y >= cameraBox.origin.y && shapeBox.origin.y + shapeBox.size.y <= cameraBox.origin.y + cameraBox.size.y)
-                    {
+                    if(shapeBox.intersect(cameraBox)) {
                         isDrawable = true;
                     }
+
                     // Draw the shape.
                     if(isDrawable)
                         drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
@@ -97,7 +96,6 @@ namespace phantom {
                 }
 
                 shapes = & (*compIt)->getGraphics().getBufferedShapes();
-
             }
 
             // If the component has other components attached to it, draw them as well.
@@ -173,7 +171,7 @@ namespace phantom {
             glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
             Text *txt = static_cast<Text *>(shape);
-            glRasterPos2f(shape->x, shape->y);
+            glRasterPos2f(xOffset + shape->x,yOffset + shape->y);
             glutBitmapString(txt->font, txt->text);
         }
 
