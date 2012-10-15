@@ -21,7 +21,7 @@ namespace phantom {
         void pushGameState(GameState *state);
         void popGameState();
         int start(int argc, char *argv[]);
-        void update(float elapsed);
+        virtual void update(float elapsed);
         void exit(int returncode);
 
         Vector3 getViewPort() const;
@@ -36,6 +36,7 @@ namespace phantom {
     protected:
         virtual void onExit(int returncode);
 
+        bool _running;
     private:
         static PhantomGame* INSTANCE;
 

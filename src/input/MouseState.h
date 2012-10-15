@@ -28,7 +28,7 @@ namespace phantom {
         Vector3 getMousePosition() { return _mousePos; }
         bool isButtonDown(unsigned char id) {
             if(id <= _buttonCount) {
-                std::cout << "mouse pos: " << _mousePos.toString() << std::endl;
+                //std::cout << "mouse pos: " << _mousePos << std::endl;
                 return _buttons[id] == 1;
             }
             else {
