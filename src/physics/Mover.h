@@ -15,6 +15,8 @@ namespace phantom {
         void moveTo(const std::vector<Vector3> vList);
         virtual void update(const float& elapsed);
         virtual void onAnsestorChanged();
+        void stop();
+
     private:
         std::vector<Vector3>::iterator _it;
         std::vector<Vector3> _targetList;
