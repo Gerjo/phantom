@@ -11,13 +11,13 @@ namespace phantom {
     class LIBEXPORT Mover: public phantom::Composite{
     public:
         Mover();
-        void moveTo(Vector3* vector);
-        void moveTo(const std::vector<Vector3*> *vList);
+        void moveTo(Vector3 vector);
+        void moveTo(const std::vector<Vector3> vList);
         virtual void update(const float& elapsed);
         virtual void onAnsestorChanged();
     private:
-        std::vector<Vector3*>::iterator _it;
-        std::vector<Vector3*> _targetList;
+        std::vector<Vector3>::iterator _it;
+        std::vector<Vector3> _targetList;
         Vector3 _target;
         Entity* _parent;
     };
