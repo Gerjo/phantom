@@ -24,7 +24,6 @@ namespace phantom {
         unsigned int verticesCount;
         unsigned int vboVertices;
         unsigned int vboTexCoords;
-        unsigned int textureID;
 
         bool isImage;
         bool isText;

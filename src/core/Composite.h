@@ -87,7 +87,6 @@ namespace phantom {
         std::vector<Composite*> _components;
         Graphics *graphics;
         
-        Entity* _entity;
         string _type;
     };
 

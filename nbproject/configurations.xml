@@ -39,6 +39,8 @@
           <itemPath>src/graphics/shapes/Rectangle.h</itemPath>
           <itemPath>src/graphics/shapes/Shape.cpp</itemPath>
           <itemPath>src/graphics/shapes/Shape.h</itemPath>
+          <itemPath>src/graphics/shapes/Text.cpp</itemPath>
+          <itemPath>src/graphics/shapes/Text.h</itemPath>
         </logicalFolder>
         <itemPath>src/graphics/Color.h</itemPath>
         <itemPath>src/graphics/Graphics.cpp</itemPath>

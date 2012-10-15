@@ -46,8 +46,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
-	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
 	${OBJECTDIR}/src/layer/Layer.o \
+	${OBJECTDIR}/src/graphics/shapes/PNGImage.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/ImageCache.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
@@ -55,6 +55,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
+	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
 	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/physics/Vector3.o \
@@ -140,15 +141,15 @@ ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
 
-${OBJECTDIR}/src/graphics/shapes/PNGImage.o: src/graphics/shapes/PNGImage.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/PNGImage.o src/graphics/shapes/PNGImage.cpp
-
 ${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
+
+${OBJECTDIR}/src/graphics/shapes/PNGImage.o: src/graphics/shapes/PNGImage.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/PNGImage.o src/graphics/shapes/PNGImage.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -184,6 +185,11 @@ ${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInput.o src/glut/GLUTInput.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Text.o src/graphics/shapes/Text.cpp
 
 ${OBJECTDIR}/src/graphics/ImageLoader.o: src/graphics/ImageLoader.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics

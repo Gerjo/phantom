@@ -9,17 +9,16 @@ namespace phantom {
     }
     void Mover::onAnsestorChanged(){
         Entity* e = dynamic_cast<Entity*>(findAnsestor<Entity>());
-        if(e != NULL){
+        if(e != 0){
             _parent = e;
         }
     }
     void Mover::moveTo(Vector3* target){
         _targetList.push_back(target);
-        //cout << "BAH" << endl;
     }
-    void Mover::moveTo(std::vector<Vector3*> targetList){
-        _targetList = targetList;
-        //cout << "congrats" << endl;
+    void Mover::moveTo(const std::vector<Vector3*> *targetList){
+        _targetList = *targetList;
+        //delete targetList;
     }
     void Mover::update(const float& elapsed){
         Composite::update(elapsed);
