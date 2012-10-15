@@ -22,9 +22,14 @@ namespace phantom{
 
         Vector3 origin;
         Vector3 size;
-
         void repair(void);
         string toString(void);
+
+        friend ostream& operator<<(ostream&, const Box3& b){
+            o << "[Box3] (x: " << b.origin.x << ", y:"  << b.origin.y << ", z:"  << b.origin.z;
+            o << ", width:" << b.size.x << ", height:" << b.size.y << ", depth:" << b.size.z << ")";
+            return o;
+        }
     private:
         bool testBounds(const float& aMin, const float& bMin, const float& aMax, const float& bMax) const;
 
