@@ -15,6 +15,8 @@ namespace phantom {
 
     class LIBEXPORT PhantomGame : public Composite {
     public:
+        bool fullscreen;
+
         PhantomGame(const char *configfile);
         virtual ~PhantomGame();
 

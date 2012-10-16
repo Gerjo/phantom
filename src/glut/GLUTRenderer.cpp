@@ -25,8 +25,10 @@ namespace phantom {
         int i = 0;
         glutInit(&i, 0);
         glutInitWindowSize(static_cast<int>(game->getViewPort().x), static_cast<int>(game->getViewPort().y));
-        glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
+        glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
         _windowID = glutCreateWindow("Elephantom");
+        if(game->fullscreen)
+            glutFullScreen();
 
         _vboSupport = IsExtensionSupported("GL_ARB_vertex_buffer_object");
         if(_vboSupport) {
@@ -192,6 +194,7 @@ namespace phantom {
         }
 
         glutMainLoopEvent();
+        glutSwapBuffers();
         glFlush();
     }
 

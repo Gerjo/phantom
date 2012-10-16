@@ -11,7 +11,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1200, 650, 0), _worldSize(1200, 650, 0), _fps(60) {
+    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1200, 650, 0), _worldSize(1200, 650, 0), _fps(60), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0)
             PhantomGame::INSTANCE = this;
         else
@@ -127,7 +127,8 @@ namespace phantom {
             else if(buffer[i] == 32) {
                 readingValue = true;
             }
-            else if(buffer[i] == '\n') {
+            
+            if(buffer[i] == '\n' || buffer[i] == '\0' || i == (length - 1)) {
                 readingValue = false;
 
                 if(propertyname.compare("screenWidth") == 0) {
@@ -135,6 +136,9 @@ namespace phantom {
                 }
                 else if(propertyname.compare("screenHeight") == 0) {
                     _viewPort.y = atoi(propertyvalue.c_str());
+                }
+                else if(propertyname.compare("fullscreen") == 0) {
+                    fullscreen = atoi(propertyvalue.c_str());
                 }
 
                 propertyname.clear();
