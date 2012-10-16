@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and '$(VisualStudioVersion)' == ''">$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{17C2FD96-A0E7-4EB4-92CB-58E648267948}</ProjectGuid>
+    <Keyword>CpPhantom</Keyword>
+    <RootNamespace>CpPhantom</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\</IntDir>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\</IntDir>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>FREEGLUT_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;includeWin;src</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>freeglut_staticd.lib;libpng15d.lib;zlibstaticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\x86</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(TargetPath) $(SolutionDir)dist /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>FREEGLUT_STATIC;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>include;includeWin;src</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>freeglut_static.lib;libpng15.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\x86</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(TargetPath) $(SolutionDir)dist /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+   <ClInclude Include="..\phantom\src\CompileConfig.h" />
+   <ClInclude Include="..\phantom\src\phantom.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClInclude Include="..\phantom\src\core\Camera.h" />
+   <ClCompile Include="..\phantom\src\core\Composite.cpp" />
+   <ClInclude Include="..\phantom\src\core\Composite.h" />
+   <ClInclude Include="..\phantom\src\core\Driver.h" />
+   <ClCompile Include="..\phantom\src\core\Entity.cpp" />
+   <ClInclude Include="..\phantom\src\core\Entity.h" />
+   <ClCompile Include="..\phantom\src\core\GameState.cpp" />
+   <ClInclude Include="..\phantom\src\core\GameState.h" />
+   <ClCompile Include="..\phantom\src\core\PhantomGame.cpp" />
+   <ClInclude Include="..\phantom\src\core\PhantomGame.h" />
+   <ClInclude Include="..\phantom\src\core\Renderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClCompile Include="..\phantom\src\glut\GLUTCamera.cpp" />
+   <ClInclude Include="..\phantom\src\glut\GLUTCamera.h" />
+   <ClCompile Include="..\phantom\src\glut\GLUTDriver.cpp" />
+   <ClInclude Include="..\phantom\src\glut\GLUTDriver.h" />
+   <ClCompile Include="..\phantom\src\glut\GLUTInput.cpp" />
+   <ClInclude Include="..\phantom\src\glut\GLUTInput.h" />
+   <ClCompile Include="..\phantom\src\glut\GLUTRenderer.cpp" />
+   <ClInclude Include="..\phantom\src\glut\GLUTRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClInclude Include="..\phantom\src\graphics\Color.h" />
+   <ClCompile Include="..\phantom\src\graphics\Graphics.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\Graphics.h" />
+   <ClCompile Include="..\phantom\src\graphics\ImageCache.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\ImageCache.h" />
+   <ClCompile Include="..\phantom\src\graphics\ImageLoader.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\ImageLoader.h" />
+   <ClInclude Include="..\phantom\src\graphics\VerticeData.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClCompile Include="..\phantom\src\graphics\shapes\Arc.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\shapes\Arc.h" />
+   <ClCompile Include="..\phantom\src\graphics\shapes\Image.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\shapes\Image.h" />
+   <ClCompile Include="..\phantom\src\graphics\shapes\Line.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\shapes\Line.h" />
+   <ClCompile Include="..\phantom\src\graphics\shapes\Polygon.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\shapes\Polygon.h" />
+   <ClCompile Include="..\phantom\src\graphics\shapes\Rectangle.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\shapes\Rectangle.h" />
+   <ClCompile Include="..\phantom\src\graphics\shapes\Shape.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\shapes\Shape.h" />
+   <ClCompile Include="..\phantom\src\graphics\shapes\Text.cpp" />
+   <ClInclude Include="..\phantom\src\graphics\shapes\Text.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClInclude Include="..\phantom\src\input\Input.h" />
+   <ClInclude Include="..\phantom\src\input\KeyboardState.h" />
+   <ClInclude Include="..\phantom\src\input\MouseState.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClCompile Include="..\phantom\src\layer\EntityLayer.cpp" />
+   <ClInclude Include="..\phantom\src\layer\EntityLayer.h" />
+   <ClCompile Include="..\phantom\src\layer\Layer.cpp" />
+   <ClInclude Include="..\phantom\src\layer\Layer.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClCompile Include="..\phantom\src\physics\Box3.cpp" />
+   <ClInclude Include="..\phantom\src\physics\Box3.h" />
+   <ClCompile Include="..\phantom\src\physics\Mover.cpp" />
+   <ClInclude Include="..\phantom\src\physics\Mover.h" />
+   <ClCompile Include="..\phantom\src\physics\Vector3.cpp" />
+   <ClInclude Include="..\phantom\src\physics\Vector3.h" />
+  </ItemGroup>
+  <ItemGroup>
+   <ClCompile Include="..\phantom\src\utils\PhantomException.cpp" />
+   <ClInclude Include="..\phantom\src\utils\PhantomException.h" />
+   <ClInclude Include="..\phantom\src\utils\util.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
