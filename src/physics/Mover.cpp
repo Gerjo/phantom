@@ -16,7 +16,7 @@ namespace phantom {
     void Mover::moveTo(Vector3 target){
         _targetList.push_back(target);
     }
-    void Mover::moveTo(const std::vector<Vector3> targetList){
+    void Mover::moveTo(const std::vector<Vector3> &targetList){
         _targetList = targetList;
     }
     void Mover::update(const float& elapsed){
