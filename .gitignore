@@ -1,6 +1,8 @@
 Debug/
 Release/
 
+# Visual Studio...
+*.vcxproj*
 
 # Compiled Object files
 *.slo
