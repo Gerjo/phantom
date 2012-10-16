@@ -78,8 +78,8 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::text(float x, float y, void *font, string text) {
-        Text* txt = new Text(x, y, font, reinterpret_cast<const unsigned char*>(text.c_str()));
+    Graphics& Graphics::text(float x, float y, void *font, string *text) {
+        Text* txt = new Text(x, y, font, reinterpret_cast<const unsigned char*>(text->c_str()));
 
         addShape(txt);
         return *this;
