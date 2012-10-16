@@ -48,6 +48,8 @@ namespace phantom {
         Driver* _driver;
         std::deque<GameState*> _states;
 
+        void parseConfigurationFile(const char *configfile);
+
     };
 
 } /* namespace phantom */

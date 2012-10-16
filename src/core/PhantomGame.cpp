@@ -1,5 +1,6 @@
 #include "PhantomGame.h"
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include <phantom.h>
 #include <core/Driver.h>
@@ -15,6 +16,8 @@ namespace phantom {
             PhantomGame::INSTANCE = this;
         else
             throw PhantomException("You should not create two games...");
+
+        parseConfigurationFile(configfile);
     }
 
     PhantomGame::~PhantomGame() {
@@ -100,6 +103,45 @@ namespace phantom {
 
     Vector3 PhantomGame::getWorldSize() const {
         return _worldSize;
+    }
+
+    void PhantomGame::parseConfigurationFile(const char *configfile) {
+        std::ifstream configuration(configfile);
+        configuration.seekg(0, ios::end);
+        unsigned int length = configuration.tellg();
+        configuration.seekg(0, ios::beg);
+        char *buffer = new char[length];
+
+        configuration.read(buffer, length);
+
+        string propertyname;
+        string propertyvalue;
+        bool readingValue = false;
+        for(unsigned int i = 0; i < length; ++i) {
+            if(buffer[i] != ' ' && buffer[i] != '\n') {
+                if(readingValue)
+                    propertyvalue += buffer[i];
+                else if(!readingValue)
+                    propertyname += buffer[i];
+            }
+            else if(buffer[i] == 32) {
+                readingValue = true;
+            }
+            else if(buffer[i] == '\n') {
+                readingValue = false;
+
+                if(propertyname.compare("screenWidth") == 0) {
+                    _viewPort.x = atoi(propertyvalue.c_str());
+                }
+                else if(propertyname.compare("screenHeight") == 0) {
+                    _viewPort.y = atoi(propertyvalue.c_str());
+                }
+
+                propertyname.clear();
+                propertyvalue.clear();
+            }
+
+        }
     }
 
 } /* namespace phantom */
