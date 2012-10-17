@@ -104,6 +104,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <standard>8</standard>
           <incDir>
             <pElem>include</pElem>
             <pElem>src</pElem>
@@ -133,6 +134,7 @@
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
+          <standard>8</standard>
           <incDir>
             <pElem>include</pElem>
             <pElem>src</pElem>
