@@ -15,8 +15,8 @@ namespace phantom {
         _type("Composite")
     {
         _layer = 0;
-        parent = 0;
-        graphics = new Graphics(this);
+        _parent = 0;
+        _graphics = new Graphics(this);
         _boundingBox.size = Vector3(10, 10, 10);
     }
 
@@ -25,7 +25,7 @@ namespace phantom {
         for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             delete *iter;
 
-        delete graphics;
+        delete _graphics;
     }
 
     PhantomGame* Composite::getGame(void) {
@@ -44,7 +44,7 @@ namespace phantom {
 
     void Composite::onParentChange( Composite *parent )
     {
-        this->parent = parent;
+        this->_parent = parent;
     }
 
     void Composite::onAnsestorChanged()

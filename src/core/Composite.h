@@ -62,7 +62,7 @@ namespace phantom {
         }
 
         Graphics& getGraphics() {
-            return *graphics;
+            return *_graphics;
         }
 
         template <class T>
@@ -78,7 +78,7 @@ namespace phantom {
         string toString(void);
 
         PhantomGame* getGame(void);
-        
+
     protected:
         Vector3 _position;
         Box3 _boundingBox;
@@ -87,10 +87,9 @@ namespace phantom {
         Driver* getDriver(void);
 
     private:
-
-        Composite *parent;
+        Composite *_parent;
         std::vector<Composite*> _components;
-        Graphics *graphics;
+        Graphics *_graphics;
 
         string _type;
     };
@@ -112,12 +111,12 @@ namespace phantom {
 
     template <class T>
     T* Composite::findAnsestor() {
-        Composite *c = this->parent;
+        Composite *c = this->_parent;
         while (c != NULL) {
             T* tc = dynamic_cast<T*> (c);
             if (tc != NULL)
                 return tc;
-            c = c->parent;
+            c = c->_parent;
         }
         return NULL;
     }
