@@ -112,7 +112,7 @@ namespace phantom {
         return _position;
     }
 
-    void Composite::setPosition(Vector3 position) {
+    void Composite::setPosition(Vector3& position) {
         _position = position;
     }
 
