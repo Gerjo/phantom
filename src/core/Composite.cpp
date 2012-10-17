@@ -9,7 +9,6 @@ namespace phantom {
 
 
     Composite::Composite() :
-        flags(0),
         _destroyed(false),
         _position(0, 0, 0),
         _type("Composite")
