@@ -14,7 +14,7 @@ namespace phantom {
     class LIBEXPORT Layer : public Composite {
     public:
         Layer(void);
-
+        virtual void onComponentRemove(Composite* who);
     };
 
 } /* namespace phantom */

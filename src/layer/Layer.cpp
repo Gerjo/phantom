@@ -8,4 +8,8 @@ namespace phantom {
 
     }
 
+    void Layer::onComponentRemove(Composite* who) {
+
+    }
+
 } /* namespace phantom */
