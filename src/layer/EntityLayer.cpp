@@ -8,7 +8,7 @@ namespace phantom{
         vector<Composite*>& entities = getComponents();
         vector<Composite*>::iterator itA;
 
-        // A premature halt, should avoid odd errors later on in case an
+        // A premature halt, should avoid odd errors later on, in case an
         // EntityLayer only contains 1 entity.
         if(entities.size() < 2) {
             return;
