@@ -24,7 +24,8 @@ namespace phantom{
         Vector3 operator/(const Vector3& v);
         Vector3& operator+=(const Vector3& v);
         Vector3& operator-=(const Vector3& v);
-        float operator*(const Vector3& v);
+
+        Vector3 operator*(const Vector3& v);
         Vector3 operator*(float f);
 
         bool operator== (const Vector3& v) const;
@@ -36,6 +37,7 @@ namespace phantom{
         float distanceTo(const Vector3& other);
         float distanceToSq(const Vector3& other);
         float getLengthSq(void);
+        float dot(const Vector3& v);
 
         std::string toString();
 

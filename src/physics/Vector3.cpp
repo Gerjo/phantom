@@ -32,15 +32,26 @@ namespace phantom{
         return Vector3(0,0,0);
     }
 
-    float Vector3::operator*(const Vector3& v){
+    float Vector3::dot(const Vector3& v){
         float dotx = x * v.x;
         float doty = y * v.y;
         float dotz = z * v.z;
 
         return dotx + doty + dotz;
     }
+    
     Vector3 Vector3::operator*(float f){
         return Vector3(x * f, y * f, z * f);
+    }
+
+    Vector3 Vector3::operator*(const Vector3& v) {
+        Vector3 multiplied(
+                x * v.x,
+                y * v.y,
+                z * v.z
+        );
+
+        return multiplied;
     }
 
     Vector3 Vector3::operator/(const Vector3& v) {
