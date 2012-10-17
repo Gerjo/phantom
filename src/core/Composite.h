@@ -29,8 +29,6 @@ namespace phantom {
         virtual void onAnsestorChanged();
         virtual void onLayerChanged(Layer* layer);
         virtual void addComponent(Composite *component);
-        virtual bool removeComponent(Composite *component);
-        virtual bool destroyComponent(Composite *component);
         virtual unsigned int handleMessage(const char *message, void *data);
         virtual void update(const float& elapsed);
         virtual void intergrate(const float& elapsed);
@@ -57,6 +55,8 @@ namespace phantom {
         T* getComponentByType(int nth);
 
         void destroy(void);
+        void remove(void);
+
     protected:
         Vector3 _position;
         Box3 _boundingBox;
@@ -68,8 +68,10 @@ namespace phantom {
         Composite *_parent;
         std::vector<Composite*> _components;
         Graphics *_graphics;
-        bool _destroyed;
         string _type;
+
+        bool _remove;
+        bool _destroy;
     };
 
     template <class T>
