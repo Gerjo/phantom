@@ -20,8 +20,7 @@ namespace phantom {
     }
 
     Composite::~Composite() {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             delete *iter;
 
         delete _graphics;
@@ -48,8 +47,7 @@ namespace phantom {
 
     void Composite::onAnsestorChanged()
     {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             (*iter)->onAnsestorChanged();
     }
 
@@ -62,8 +60,7 @@ namespace phantom {
 
     bool Composite::destroyComponent( Composite *component )
     {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
         {
             if( *iter == component )
             {
@@ -87,8 +84,7 @@ namespace phantom {
 
     bool Composite::removeComponent( Composite *component )
     {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
         {
             if( *iter == component )
             {
@@ -101,8 +97,7 @@ namespace phantom {
 
     void Composite::update(const float& elapsed)
     {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             (*iter)->update(elapsed);
 
         // Remove destroyed components:
@@ -117,8 +112,7 @@ namespace phantom {
 
     void Composite::intergrate(const float& elapsed)
     {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
             (*iter)->intergrate(elapsed);
     }
 
@@ -126,8 +120,7 @@ namespace phantom {
     {
         int r;
         int result = PHANTOM_MESSAGE_IGNORED;
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
         {
             r = (*iter)->handleMessage(msg, data);
             if( r == PHANTOM_MESSAGE_HANDLED)
@@ -189,7 +182,7 @@ namespace phantom {
         } else {
             ss << "children (" << numChildren << "): ";
 
-            vector<Composite*>::iterator it = _components.begin();
+           auto it = _components.begin();
 
             for(int i = 0; it != _components.end(); ++it, ++i) {
                 ss << (*it)->getType();
