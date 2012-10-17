@@ -8,7 +8,6 @@
 #include <png.h>
 #include <graphics/ImageCache.h>
 #include <GL/freeglut.h>
-#include <GL/GL.h>
 #include <GL/glext.h>
 
 #ifndef _WINDOWS
