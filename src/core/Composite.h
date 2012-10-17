@@ -22,9 +22,6 @@ namespace phantom {
 
     class LIBEXPORT Composite {
     public:
-        unsigned int flags;
-
-
         Composite();
         virtual ~Composite();
 
