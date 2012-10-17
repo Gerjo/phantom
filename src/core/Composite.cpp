@@ -93,10 +93,9 @@ namespace phantom {
     }
 
     unsigned int Composite::handleMessage(const char *msg, void *data) {
-        int r;
         int result = PHANTOM_MESSAGE_IGNORED;
         for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
-            r = (*iter)->handleMessage(msg, data);
+            int r = (*iter)->handleMessage(msg, data);
             if (r == PHANTOM_MESSAGE_HANDLED)
                 result = r;
             else if (r == PHANTOM_MESSAGE_CONSUMED)
