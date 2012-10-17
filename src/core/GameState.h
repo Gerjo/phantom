@@ -3,8 +3,10 @@
 
 #include "Composite.h"
 #include <CompileConfig.h>
-namespace phantom {
 
+
+namespace phantom {
+    class Layer;
     class LIBEXPORT GameState : public Composite {
     public:
 
@@ -13,6 +15,8 @@ namespace phantom {
 
         GameState();
         virtual ~GameState();
+
+        virtual void addComponent      (Composite *component);
     };
 
 }
