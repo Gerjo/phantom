@@ -27,7 +27,7 @@ namespace phantom {
         Composite();
         virtual ~Composite();
 
-        virtual void onAdd(Composite *parent);
+        virtual void onParentChange(Composite *parent);
         virtual void onAnsestorChanged();
 
         virtual void addComponent      (Composite *component);
@@ -86,7 +86,7 @@ namespace phantom {
         Composite *parent;
         std::vector<Composite*> _components;
         Graphics *graphics;
-        
+
         string _type;
     };
 

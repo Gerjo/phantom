@@ -40,7 +40,7 @@ namespace phantom {
         return getGame()->getDriver();
     }
 
-    void Composite::onAdd( Composite *parent )
+    void Composite::onParentChange( Composite *parent )
     {
         this->parent = parent;
     }
@@ -55,7 +55,7 @@ namespace phantom {
     void Composite::addComponent( Composite *component )
     {
         this->_components.push_back(component);
-        component->onAdd( this );
+        component->onParentChange( this );
         component->onAnsestorChanged();
     }
 
