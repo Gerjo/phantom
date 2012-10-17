@@ -146,6 +146,8 @@ namespace phantom {
         FT_Face face = *freetypeLibrary.getFont(&txt->font);
         FT_GlyphSlot g = face->glyph;
 
+        FT_Set_Pixel_Sizes(face, 0, txt->size);
+
         glEnable(GL_TEXTURE);
 
         GLuint texture;
