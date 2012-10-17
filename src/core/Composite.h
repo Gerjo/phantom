@@ -55,7 +55,7 @@ namespace phantom {
         T* getComponentByType(int nth);
 
         void destroy(void);
-        void remove(void);
+        void removeFromParent(void);
 
     protected:
         Vector3 _position;

@@ -192,7 +192,7 @@ namespace phantom {
         return *_graphics;
     }
 
-    void Composite::remove(void) {
+    void Composite::removeFromParent(void) {
         _remove  = true;
     }
 
