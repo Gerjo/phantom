@@ -76,26 +76,26 @@ namespace phantom {
     T* Composite::getComponentByType(int nth) {
         for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
             T* c = dynamic_cast<T*> (*iter);
-            if (c != NULL) {
+            if (c != 0) {
                 if (nth == 0)
                     return c;
                 else
                     --nth;
             }
         }
-        return NULL;
+        return 0;
     }
 
     template <class T>
     T* Composite::findAnsestor() {
         Composite *c = this->_parent;
-        while (c != NULL) {
+        while (c != 0) {
             T* tc = dynamic_cast<T*> (c);
-            if (tc != NULL)
+            if (tc != 0)
                 return tc;
             c = c->_parent;
         }
-        return NULL;
+        return 0;
     }
 
 }
