@@ -37,7 +37,7 @@ public:
     Graphics& arc(float x, float y, float radius, float start, float end);
 
     Graphics& image(const string& fileName, float x, float y, float width, float height);
-    Graphics& text(float x, float y, void *font, string *text);
+    Graphics& text(float x, float y, unsigned int size, string *fontname, string *text);
 
     Graphics& rotate(float angle);
 

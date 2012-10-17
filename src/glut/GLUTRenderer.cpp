@@ -8,6 +8,7 @@
 #include <png.h>
 #include <graphics/ImageCache.h>
 #include <GL/freeglut.h>
+#include <GL/GL.h>
 #include <GL/glext.h>
 
 #ifndef _WINDOWS
@@ -24,13 +25,30 @@ namespace phantom {
 
     GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
+        Vector3 viewPort = game->getViewPort();
+
         int i = 0;
         glutInit(&i, 0);
-        glutInitWindowSize(static_cast<int>(game->getViewPort().x), static_cast<int>(game->getViewPort().y));
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
-        _windowID = glutCreateWindow("Elephantom");
-        if(game->fullscreen)
-            glutFullScreen();
+        glutInitWindowSize(static_cast<int>(viewPort.x), static_cast<int>(viewPort.y));
+
+        if(!game->fullscreen) {
+            _windowID = glutCreateWindow("Elephantom");
+        }
+        else if(game->fullscreen) {
+            std::stringstream stream;
+            std::string gamemodeStr;
+
+            stream << viewPort.x << "x" << viewPort.y << ":32@60";
+
+            gamemodeStr = stream.str();
+
+            glutGameModeString(gamemodeStr.c_str());
+
+            if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)) {
+                glutEnterGameMode();
+            } 
+        }
 
         _vboSupport = IsExtensionSupported("GL_ARB_vertex_buffer_object");
         if(_vboSupport) {
@@ -61,10 +79,8 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawLoop(std::vector<Composite*>& components, Vector3& offset) {
-
         if(_game->getDriver()->getActiveCamera() == 0)
             return;
-
 
         Vector3 cameraPosition = _game->getDriver()->getActiveCamera()->getPosition();
         Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
@@ -86,7 +102,21 @@ namespace phantom {
                     shapeBox.origin.y += offsetRecalculated.y;
 
                     if(shapeBox.intersect(cameraBox)) {
-                        drawShape(*itShape, *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                        glLoadIdentity();
+
+                        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                        glEnable(GL_BLEND);
+                        glDisable(GL_COLOR_MATERIAL);
+
+                        if((*itShape)->isImage) {
+                            drawImage(static_cast<Image *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                        }
+                        else if((*itShape)->isText) {
+                            drawText(static_cast<Text *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                        }
+                        else {
+                            drawShape((*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                        }
                     }
 
                     // Move on to the next shape.
@@ -106,78 +136,120 @@ namespace phantom {
         }
     }
 
-    void GLUTRenderer::drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset) {
-        // Load the identity matrix so all coordinates go to the position they belong.
-        glLoadIdentity();
+    void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
+        const char *p;
+        float x = txt->x;
+        float y = txt->y;
+        float sx = 2.0f / _game->getViewPort().x;
+        float sy = 2.0f / _game->getViewPort().y;
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        glDisable(GL_COLOR_MATERIAL);
+        FT_Face *face = freetypeLibrary.getFont(txt->font);
+        FT_GlyphSlot g = (*face)->glyph;
 
-        // Add the texture.
-        if(shape->isImage) {
-            glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glEnable(GL_TEXTURE_2D);
+        glEnable(GL_TEXTURE);
 
-            glBindTexture(GL_TEXTURE_2D, static_cast<Image *>(shape)->getImage()->textureID);
+        GLuint texture;
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
 
-            glNormal3f(0.0f, 0.0f, 1.0f);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+        for(p = txt->text; *p; ++p) {
+            if(FT_Load_Char(*face, *p, FT_LOAD_RENDER))
+                continue;
+
+            float x2 = x + g->bitmap_left * sx;
+            float y2 = -y - g->bitmap_top * sy;
+            float w = g->bitmap.width * sx;
+            float h = g->bitmap.rows * sy;
+
+            float box[4][4] = {
+                {x2,	 -y2	, 0, 0},
+                {x2 + w, -y2	, 1, 0},
+                {x2,	 -y2 - h, 0, 1},
+                {x2 + w, -y2 - h, 1, 1},
+            };
+
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, g->bitmap.width, g->bitmap.rows, 0, GL_ALPHA, GL_UNSIGNED_BYTE, g->bitmap.buffer);
+
+            glVertexPointer(sizeof(box), GL_FLOAT, 0, box);
+            glTexCoordPointer(sizeof(box), GL_FLOAT, 0, box);
+
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+            x += (g->advance.x >> 6) * sx;
+            y += (g->advance.y >> 6) * sy;
         }
 
-        // Add the rotation.
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+        glDisable(GL_TEXTURE);
+    }
+
+    void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
+        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
+        glNormal3f(0.0f, 0.0f, 1.0f);
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
 
-        // Begin drawing our shape.
-        if(!shape->isText) {
-            // Colorize!
-            const Color& fillColor = shape->getFillColor();
-            glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+        const Color& fillColor = img->getFillColor();
+        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
-            // Enable Pointers
-            glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-            if(shape->isImage)
-                glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glTranslatef(img->x + xOffset, img->y + yOffset, 0.0f);
+        if(_vboSupport) {
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, img->vboVertices);
+            glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
 
-            glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
-            if(_vboSupport) {
-                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-                glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, img->vboTexCoords);
+            glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
 
-                if(shape->isImage) {
-                    glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-                    glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
-                }
-            }
-            else {
-                glVertexPointer(3, GL_FLOAT, 0, shape->verticesArray);
-                if(shape->isImage) {
-                    glTexCoordPointer(2, GL_FLOAT, 0, shape->texCoordsArray);
-                }
-            }
-
-            glDrawArrays(GL_TRIANGLES, 0, shape->verticesCount);
-
-            glDisableClientState(GL_VERTEX_ARRAY);
-            if(shape->isImage)
-                glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         }
-        else
-        {
-            // Colorize!
-            const Color& fillColor = shape->getFillColor();
-            glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
-
-            Text *txt = static_cast<Text *>(shape);
-            glRasterPos2f(xOffset + shape->x,yOffset + shape->y);
-            glutBitmapString(txt->font, txt->text);
+        else {
+            glVertexPointer(3, GL_FLOAT, 0, img->verticesArray);
+            glTexCoordPointer(2, GL_FLOAT, 0, img->texCoordsArray);
         }
 
-        // Disable the texturing again afterwards.
-        if(shape->isImage) {
-            glDisable(GL_TEXTURE_2D);
-            glPopAttrib();
+        glDrawArrays(GL_TRIANGLES, 0, img->verticesCount);
+
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisable(GL_TEXTURE_2D);
+        glPopAttrib();
+    }
+
+    void GLUTRenderer::drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset) {
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
+
+        const Color& fillColor = shape->getFillColor();
+        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+
+        glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
+        if(_vboSupport) {
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
+            glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
         }
+        else {
+            glVertexPointer(3, GL_FLOAT, 0, shape->verticesArray);
+        }
+
+        glDrawArrays(GL_TRIANGLES, 0, shape->verticesCount);
+
+        glDisableClientState(GL_VERTEX_ARRAY);
     }
 
     void GLUTRenderer::renderLoop(std::deque<GameState*> *states) {
