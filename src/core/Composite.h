@@ -74,8 +74,7 @@ namespace phantom {
 
     template <class T>
     T* Composite::getComponentByType(int nth) {
-        std::vector<Composite*>::iterator iter;
-        for (iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
             T* c = dynamic_cast<T*> (*iter);
             if (c != NULL) {
                 if (nth == 0)
