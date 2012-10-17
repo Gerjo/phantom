@@ -43,6 +43,8 @@
           <itemPath>src/graphics/shapes/Text.h</itemPath>
         </logicalFolder>
         <itemPath>src/graphics/Color.h</itemPath>
+        <itemPath>src/graphics/FreeTypeLibrary.cpp</itemPath>
+        <itemPath>src/graphics/FreeTypeLibrary.h</itemPath>
         <itemPath>src/graphics/Graphics.cpp</itemPath>
         <itemPath>src/graphics/Graphics.h</itemPath>
         <itemPath>src/graphics/ImageCache.cpp</itemPath>
@@ -105,6 +107,7 @@
           <incDir>
             <pElem>include</pElem>
             <pElem>src</pElem>
+            <pElem>/usr/include/freetype2</pElem>
           </incDir>
         </ccTool>
         <asmTool>
@@ -115,7 +118,7 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut -lGL -lGLU -lpng15</commandLine>
+          <commandLine>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype</commandLine>
         </linkerTool>
       </compileType>
     </conf>
@@ -146,7 +149,7 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut -lGL -lGLU -lpng15</commandLine>
+          <commandLine>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype2</commandLine>
         </linkerTool>
       </compileType>
     </conf>
