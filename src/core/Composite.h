@@ -56,7 +56,9 @@ namespace phantom {
 
         void destroy(void);
         void removeFromParent(void);
-
+        virtual void setX(float x);
+        virtual void setY(float y);
+        
     protected:
         Vector3 _position;
         Box3 _boundingBox;

@@ -124,6 +124,15 @@ namespace phantom {
         _position += add;
     }
 
+    void Composite::setX(float x) {
+        _position.x = x;
+    }
+
+    void Composite::setY(float y) {
+        _position.y = y;
+    }
+
+
     void Composite::removePosition(const Vector3& subtract) {
         _position -= subtract;
     }

@@ -22,12 +22,4 @@ namespace phantom {
         }
     }
 
-    void Entity::setX(float x) {
-        _position.x = x;
-    }
-
-    void Entity::setY(float y) {
-        _position.y = y;
-    }
-
 } /* namespace phantom */
