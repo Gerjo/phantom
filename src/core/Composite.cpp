@@ -30,7 +30,6 @@ namespace phantom {
     PhantomGame* Composite::getGame(void) {
         if (PhantomGame::INSTANCE == 0) {
             throw PhantomException("Did you forget to create PhantomGame?");
-            return 0;
         } else {
             return phantom::PhantomGame::INSTANCE;
         }
@@ -83,18 +82,20 @@ namespace phantom {
     }
 
     void Composite::intergrate(const float& elapsed) {
-        for (auto iter = _components.begin(); iter != _components.end(); ++iter)
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             (*iter)->intergrate(elapsed);
+        }
     }
 
     unsigned int Composite::handleMessage(const char *msg, void *data) {
         int result = PHANTOM_MESSAGE_IGNORED;
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             int r = (*iter)->handleMessage(msg, data);
-            if (r == PHANTOM_MESSAGE_HANDLED)
+            if (r == PHANTOM_MESSAGE_HANDLED) {
                 result = r;
-            else if (r == PHANTOM_MESSAGE_CONSUMED)
+            } else if (r == PHANTOM_MESSAGE_CONSUMED) {
                 return PHANTOM_MESSAGE_CONSUMED;
+            }
         }
         return result;
     }
