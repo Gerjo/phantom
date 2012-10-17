@@ -1,5 +1,7 @@
 #include "GLUTDriver.h"
 #include "GLUTRenderer.h"
+
+#include <gl/freeglut.h>
 #include <glut/GLUTCamera.h>
 #include <glut/GLUTInput.h>
 #include <graphics/ImageCache.h>

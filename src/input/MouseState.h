@@ -1,7 +1,6 @@
 #ifndef MOUSESTATE_H_
 #define MOUSESTATE_H_
 
-#include <GL/freeglut.h>
 #include <iostream>
 #include <vector>
 #include <CompileConfig.h>

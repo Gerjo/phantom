@@ -2,7 +2,6 @@
 #define	GLUTINPUT_H
 
 #include <input/Input.h>
-#include <GL/freeglut.h>
 
 namespace phantom {
 

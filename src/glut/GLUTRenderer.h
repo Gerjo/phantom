@@ -1,8 +1,6 @@
 #ifndef GLUTRENDERER_H
 #define GLUTRENDERER_H
 
-#include <GL/freeglut.h>
-#include <GL/glext.h>
 #include <core/Renderer.h>
 #include <CompileConfig.h>
 #include <core/GameState.h>

@@ -1,4 +1,5 @@
 #include "GLUTInput.h"
+#include <GL/freeglut.h>
 
 namespace phantom {
 

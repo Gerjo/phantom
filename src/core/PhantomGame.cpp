@@ -108,7 +108,7 @@ namespace phantom {
     void PhantomGame::parseConfigurationFile(const char *configfile) {
         std::ifstream configuration(configfile);
         configuration.seekg(0, ios::end);
-        unsigned int length = configuration.tellg();
+        std::streamoff length = configuration.tellg();
         configuration.seekg(0, ios::beg);
         char *buffer = new char[length];
 
@@ -132,13 +132,16 @@ namespace phantom {
                 readingValue = false;
 
                 if(propertyname.compare("screenWidth") == 0) {
-                    _viewPort.x = atoi(propertyvalue.c_str());
+                    _viewPort.x = static_cast<float>(atoi(propertyvalue.c_str()));
                 }
                 else if(propertyname.compare("screenHeight") == 0) {
-                    _viewPort.y = atoi(propertyvalue.c_str());
+                    _viewPort.y = static_cast<float>(atoi(propertyvalue.c_str()));
                 }
                 else if(propertyname.compare("fullscreen") == 0) {
-                    fullscreen = atoi(propertyvalue.c_str());
+                    if(atoi(propertyvalue.c_str()) == 0)
+                        fullscreen = false;
+                    else
+                        fullscreen = true;
                 }
 
                 propertyname.clear();
