@@ -41,8 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/core/GameState.o \
-	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
+	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
 	${OBJECTDIR}/src/layer/Layer.o \
@@ -52,8 +52,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/shapes/Image.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/glut/GLUTRenderer.o \
-	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/graphics/FreeTypeLibrary.o \
+	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
@@ -116,15 +116,15 @@ ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
-${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
-
 ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
+
+${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
 
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
@@ -171,15 +171,15 @@ ${OBJECTDIR}/src/glut/GLUTRenderer.o: src/glut/GLUTRenderer.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTRenderer.o src/glut/GLUTRenderer.cpp
 
-${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
-
 ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o: src/graphics/FreeTypeLibrary.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o src/graphics/FreeTypeLibrary.cpp
+
+${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
 
 ${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/glut
