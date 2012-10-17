@@ -3,6 +3,7 @@
 #include "PhantomGame.h"
 #include <utils/PhantomException.h>
 #include <core/Driver.h>
+#include <layer/Layer.h>
 
 namespace phantom {
 
@@ -10,10 +11,11 @@ namespace phantom {
     Composite::Composite() :
         flags(0),
         destroyed(false),
-        parent(0),
         _position(0, 0, 0),
         _type("Composite")
     {
+        _layer = 0;
+        parent = 0;
         graphics = new Graphics(this);
         _boundingBox.size = Vector3(10, 10, 10);
     }
@@ -204,5 +206,13 @@ namespace phantom {
         ss << endl;
 
         return ss.str();
+    }
+
+    void Composite::onLayerChanged(Layer* layer) {
+        if(layer != _layer) {
+            _layer = layer;
+            for(auto iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+                (*iter)->onLayerChanged(layer);
+        }
     }
 } /* namespace phantom */

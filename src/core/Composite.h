@@ -18,6 +18,7 @@ namespace phantom {
     class Entity;
     class PhantomGame;
     class Driver;
+    class Layer;
 
     class LIBEXPORT Composite {
     public:
@@ -29,6 +30,7 @@ namespace phantom {
 
         virtual void onParentChange(Composite *parent);
         virtual void onAnsestorChanged();
+        virtual void onLayerChanged(Layer* layer);
 
         virtual void addComponent      (Composite *component);
         virtual bool removeComponent   (Composite *component);
@@ -76,13 +78,16 @@ namespace phantom {
         string toString(void);
 
         PhantomGame* getGame(void);
+        
     protected:
         Vector3 _position;
         Box3 _boundingBox;
-
+        Layer* _layer;
         void setType(const string& type);
         Driver* getDriver(void);
+
     private:
+
         Composite *parent;
         std::vector<Composite*> _components;
         Graphics *graphics;
