@@ -31,7 +31,6 @@ namespace phantom {
         virtual void addComponent(Composite *component);
         virtual bool removeComponent(Composite *component);
         virtual bool destroyComponent(Composite *component);
-        virtual bool destroyComponentAt(size_t index);
         virtual unsigned int handleMessage(const char *message, void *data);
         virtual void update(const float& elapsed);
         virtual void intergrate(const float& elapsed);
@@ -57,6 +56,7 @@ namespace phantom {
         template <class T>
         T* getComponentByType(int nth);
 
+        void destroy(void);
     protected:
         Vector3 _position;
         Box3 _boundingBox;

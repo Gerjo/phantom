@@ -63,16 +63,6 @@ namespace phantom {
         return false;
     }
 
-    bool Composite::destroyComponentAt(size_t index) {
-        if (index >= this->_components.size())
-            return false;
-        std::vector<Composite*>::iterator iter;
-        iter = this->_components.begin() + index;
-        delete *iter;
-        this->_components.erase(iter);
-        return true;
-    }
-
     bool Composite::removeComponent(Composite *component) {
         for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
             if (*iter == component) {
@@ -90,7 +80,9 @@ namespace phantom {
         // Remove destroyed components:
         for (int i = this->_components.size() - 1; i >= 0; --i) {
             if (this->_components[i]->_destroyed) {
-                this->destroyComponentAt(i);
+                auto iter = this->_components.begin();
+                std::advance(iter, i);
+                this->_components.erase(iter);
             }
         }
     }
@@ -203,5 +195,9 @@ namespace phantom {
 
     Graphics& Composite::getGraphics() {
         return *_graphics;
+    }
+
+    void Composite::destroy(void) {
+        _destroyed = true;
     }
 } /* namespace phantom */
