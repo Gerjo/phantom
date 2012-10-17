@@ -7,6 +7,7 @@
 #include <deque>
 #include <core/Renderer.h>
 #include <CompileConfig.h>
+#include <cstdlib>
 
 using namespace std;
 
