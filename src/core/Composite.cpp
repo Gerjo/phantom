@@ -215,4 +215,21 @@ namespace phantom {
                 (*iter)->onLayerChanged(layer);
         }
     }
+
+    std::vector<Composite*>& Composite::getComponents() {
+        return _components;
+    };
+
+    Box3& Composite::getBoundingBox() {
+        _boundingBox.origin = getPosition();
+        return _boundingBox;
+    }
+
+    void Composite::setBoundingBox(const Box3& boundingBox) {
+        _boundingBox = boundingBox;
+    }
+
+    Graphics& Composite::getGraphics() {
+        return *_graphics;
+    }
 } /* namespace phantom */
