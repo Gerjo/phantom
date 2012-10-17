@@ -15,6 +15,7 @@ namespace phantom {
     public:
         Layer(void);
         virtual void onComponentRemove(Composite* who);
+        void addComponent(Composite* component);
     };
 
 } /* namespace phantom */
