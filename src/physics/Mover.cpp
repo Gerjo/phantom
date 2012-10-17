@@ -45,4 +45,7 @@ namespace phantom {
         _targetList.clear();
     }
 
+    bool Mover::isStopped() {
+        return _targetList.empty();
+    }
 } /* namespace phantom */

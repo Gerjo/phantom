@@ -16,7 +16,7 @@ namespace phantom {
         virtual void update(const float& elapsed);
         virtual void onAnsestorChanged();
         void stop();
-
+        bool isStopped();
     private:
         std::vector<Vector3>::iterator _it;
         std::vector<Vector3> _targetList;
