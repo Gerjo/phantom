@@ -23,7 +23,7 @@ namespace phantom {
     class LIBEXPORT Composite {
     public:
         unsigned int flags;
-        bool destroyed;
+
 
         Composite();
         virtual ~Composite();
@@ -71,7 +71,7 @@ namespace phantom {
         Composite *_parent;
         std::vector<Composite*> _components;
         Graphics *_graphics;
-
+        bool _destroyed;
         string _type;
     };
 

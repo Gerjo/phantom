@@ -10,7 +10,7 @@ namespace phantom {
 
     Composite::Composite() :
         flags(0),
-        destroyed(false),
+        _destroyed(false),
         _position(0, 0, 0),
         _type("Composite")
     {
@@ -109,7 +109,7 @@ namespace phantom {
         // Remove destroyed components:
         for( int i = this->_components.size()-1; i >= 0; --i )
         {
-            if( this->_components[i]->destroyed )
+            if( this->_components[i]->_destroyed )
             {
                 this->destroyComponentAt(i);
             }
