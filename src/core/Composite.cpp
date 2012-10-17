@@ -59,8 +59,12 @@ namespace phantom {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             Composite* composite = *iter;
 
-            composite->update(elapsed);
+            // Let's make sure we're fit for an update:
+            if(!composite->_remove && !composite->_destroy) {
+                composite->update(elapsed);
+            }
 
+            // Check again, since update is potentially state changing.
             if(composite->_remove == true) {
                 composite->_remove = false;
                 if(composite->_destroy) {
@@ -170,8 +174,9 @@ namespace phantom {
     void Composite::onLayerChanged(Layer* layer) {
         if (layer != _layer) {
             _layer = layer;
-            for (auto iter = _components.begin(); iter != _components.end(); ++iter)
+            for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
                 (*iter)->onLayerChanged(layer);
+            }
         }
     }
 
