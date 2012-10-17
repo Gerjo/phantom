@@ -40,7 +40,7 @@ namespace phantom {
         void setBoundingBox(const Box3& boundingBox);
         Graphics& getGraphics();
         Vector3 getPosition();
-        void setPosition(Vector3& position);
+        void setPosition(Vector3 position);
         void addPosition(const Vector3& add);
         void removePosition(const Vector3& subtract);
         const string& getType();
