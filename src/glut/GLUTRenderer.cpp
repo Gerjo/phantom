@@ -143,8 +143,8 @@ namespace phantom {
         float sx = 2.0f / _game->getViewPort().x;
         float sy = 2.0f / _game->getViewPort().y;
 
-        FT_Face *face = freetypeLibrary.getFont(txt->font);
-        FT_GlyphSlot g = (*face)->glyph;
+        FT_Face face = *freetypeLibrary.getFont(&txt->font);
+        FT_GlyphSlot g = face->glyph;
 
         glEnable(GL_TEXTURE);
 
@@ -163,8 +163,9 @@ namespace phantom {
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
         for(p = txt->text; *p; ++p) {
-            if(FT_Load_Char(*face, *p, FT_LOAD_RENDER))
+            if(FT_Load_Char(face, *p, FT_LOAD_RENDER)) {
                 continue;
+            }
 
             float x2 = x + g->bitmap_left * sx;
             float y2 = -y - g->bitmap_top * sy;

@@ -11,12 +11,12 @@ public:
     FreeTypeLibrary();
     ~FreeTypeLibrary();
 
-    void addFont(const std::string *filename);
+    void addFont(const std::string filename);
     FT_Face *getFont(const std::string *filename);
 
-    FT_Library *lib;
+    FT_Library lib;
 private:
-    std::map<const std::string, FT_Face*> fontCache;
+    std::map<const std::string, FT_Face> fontCache;
 };
 
 #endif

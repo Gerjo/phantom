@@ -5,7 +5,7 @@ namespace phantom{
         this->isText = true;
         this->x = x;
         this->y = y;
-        this->font = font;
+        this->font = *font;
         this->text = text;
         this->size = size;
     }
