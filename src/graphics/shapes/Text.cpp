@@ -11,7 +11,7 @@ namespace phantom{
     }
 
     void Text::genVertices(const char *text, FreeTypeFont *font) {
-        int size = sizeof(text)/sizeof(char);
+        int size = strlen(text);
         int advance = 0;
         int c = 0;
 

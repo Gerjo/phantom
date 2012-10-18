@@ -164,7 +164,7 @@ namespace phantom {
             glTexCoordPointer(2, GL_FLOAT, 0, txt->texCoordsArray);
         }
 
-        glDrawArrays(GL_TRIANGLES, 0, txt->verticesCount);
+        glDrawArrays(GL_QUADS, 0, txt->verticesCount);
 
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -337,10 +337,13 @@ namespace phantom {
         }
     }
 
-    void GLUTRenderer::addTexture(ImageCacheItem *item) {
+    void GLUTRenderer::addTexture(ImageCacheItem *item, bool isText) {
         glGenTextures(1, &item->textureID);
         glBindTexture(GL_TEXTURE_2D, item->textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, item->imageData);
+        if(!isText)
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, item->imageData);
+        else
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, item->imageData);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }
 

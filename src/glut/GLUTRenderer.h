@@ -26,7 +26,7 @@ namespace phantom {
         virtual void buildShape(Shape *shape);
         virtual void destroyShape(Shape *shape);
 
-        virtual void addTexture(ImageCacheItem *item);
+        virtual void addTexture(ImageCacheItem *item, bool isText = false);
         virtual void removeTexture(ImageCacheItem *item);
 
     private:

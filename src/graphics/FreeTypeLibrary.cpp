@@ -82,7 +82,9 @@ namespace phantom {
         }
         font->texture = new ImageCacheItem();
         font->texture->imageData = textureData;
-        _renderer->addTexture(font->texture);
+        font->texture->width = maxWidth;
+        font->texture->height = font->info.maxHeight * maxRows;
+        _renderer->addTexture(font->texture, true);
         FT_Done_Face(face);
         fontCache.insert(std::pair<const char *, FreeTypeFont>(fontname, *font));
         delete font;
