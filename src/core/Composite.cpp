@@ -11,6 +11,7 @@ namespace phantom {
     _position(0, 0, 0),
     _remove(false),
     _destroy(false),
+    _isUpdating(false),
     _type("Composite")
     {
         _layer = 0;
@@ -56,6 +57,8 @@ namespace phantom {
     }
 
     void Composite::update(const float& elapsed) {
+        _isUpdating = true;
+
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             Composite* composite = *iter;
 
@@ -81,8 +84,9 @@ namespace phantom {
                     break;
                 }
             }
-
         }
+
+        _isUpdating = false;
     }
 
     void Composite::intergrate(const float& elapsed) {
@@ -131,7 +135,6 @@ namespace phantom {
     void Composite::setY(float y) {
         _position.y = y;
     }
-
 
     void Composite::removePosition(const Vector3& subtract) {
         _position -= subtract;
@@ -191,7 +194,7 @@ namespace phantom {
 
     std::vector<Composite*>& Composite::getComponents() {
         return _components;
-    };
+    }
 
     Box3& Composite::getBoundingBox() {
         _boundingBox.origin = getPosition();
@@ -207,11 +210,39 @@ namespace phantom {
     }
 
     void Composite::removeFromParent(void) {
-        _remove  = true;
+        if(_parent != 0) {
+            if(_parent->_isUpdating) {
+                // We're deleting from a collection, we're also iterating over,
+                // using these flags, said iteration will also remove this component.
+                _parent = 0;
+                _layer  = 0;
+                _remove = true;
+            } else {
+                // We're not iterating over the parent, so it's safe to delete right away.
+                _parent->removeComponent(this);
+            }
+        } else {
+            throw PhantomException("Cannot remove from parent if there is no parent.");
+        }
     }
 
     void Composite::destroy(void) {
-        _remove  = true;
-        _destroy = true;
+        if(_parent == 0) {
+            // Called without a parent, save to delete right away.
+            delete this;
+
+        } else {
+            _destroy = true;
+            removeFromParent();
+        }
+    }
+
+    void Composite::removeComponent(Composite* who) {
+         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
+             if(who == *iter) {
+                 iter = _components.erase(iter);
+                 break;
+             }
+         }
     }
 } /* namespace phantom */

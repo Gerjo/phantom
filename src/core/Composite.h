@@ -58,7 +58,7 @@ namespace phantom {
         void removeFromParent(void);
         virtual void setX(float x);
         virtual void setY(float y);
-        
+
     protected:
         Vector3 _position;
         Box3 _boundingBox;
@@ -74,6 +74,9 @@ namespace phantom {
 
         bool _remove;
         bool _destroy;
+        bool _isUpdating;
+
+        void removeComponent(Composite* who);
     };
 
     template <class T>
