@@ -53,8 +53,7 @@ namespace phantom{
                     "can be added to an entitylayer."
             );
         }
-        e->layer = this;
-        
+
         Layer::addComponent(component);
     }
 

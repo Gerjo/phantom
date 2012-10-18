@@ -3,35 +3,32 @@
 #include "PhantomGame.h"
 #include <utils/PhantomException.h>
 #include <core/Driver.h>
+#include <layer/Layer.h>
 
 namespace phantom {
 
-
     Composite::Composite() :
-        flags(0),
-        destroyed(false),
-        parent(0),
-        _position(0, 0, 0),
-        _type("Composite")
-    {
-        graphics = new Graphics(this);
+    _destroyed(false),
+    _position(0, 0, 0),
+    _type("Composite") {
+        _layer = 0;
+        _parent = 0;
+        _graphics = new Graphics(this);
         _boundingBox.size = Vector3(10, 10, 10);
     }
 
     Composite::~Composite() {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
             delete *iter;
 
-        delete graphics;
+        delete _graphics;
     }
 
     PhantomGame* Composite::getGame(void) {
-        if(PhantomGame::INSTANCE == 0) {
+        if (PhantomGame::INSTANCE == 0) {
             throw PhantomException("Did you forget to create PhantomGame?");
             return 0;
-        }
-        else {
+        } else {
             return phantom::PhantomGame::INSTANCE;
         }
     }
@@ -40,32 +37,24 @@ namespace phantom {
         return getGame()->getDriver();
     }
 
-    void Composite::onAdd( Composite *parent )
-    {
-        this->parent = parent;
+    void Composite::onParentChange(Composite *parent) {
+        this->_parent = parent;
     }
 
-    void Composite::onAnsestorChanged()
-    {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+    void Composite::onAnsestorChanged() {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
             (*iter)->onAnsestorChanged();
     }
 
-    void Composite::addComponent( Composite *component )
-    {
+    void Composite::addComponent(Composite *component) {
         this->_components.push_back(component);
-        component->onAdd( this );
+        component->onParentChange(this);
         component->onAnsestorChanged();
     }
 
-    bool Composite::destroyComponent( Composite *component )
-    {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
-        {
-            if( *iter == component )
-            {
+    bool Composite::destroyComponent(Composite *component) {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
+            if (*iter == component) {
                 delete *iter;
                 this->_components.erase(iter);
                 return true;
@@ -73,24 +62,20 @@ namespace phantom {
         }
         return false;
     }
-    bool Composite::destroyComponentAt( size_t index )
-    {
-        if(index >= this->_components.size() )
+
+    bool Composite::destroyComponentAt(size_t index) {
+        if (index >= this->_components.size())
             return false;
         std::vector<Composite*>::iterator iter;
         iter = this->_components.begin() + index;
         delete *iter;
-        this->_components.erase( iter );
+        this->_components.erase(iter);
         return true;
     }
 
-    bool Composite::removeComponent( Composite *component )
-    {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
-        {
-            if( *iter == component )
-            {
+    bool Composite::removeComponent(Composite *component) {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
+            if (*iter == component) {
                 this->_components.erase(iter);
                 return true;
             }
@@ -98,52 +83,41 @@ namespace phantom {
         return false;
     }
 
-    void Composite::update(const float& elapsed)
-    {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+    void Composite::update(const float& elapsed) {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
             (*iter)->update(elapsed);
 
         // Remove destroyed components:
-        for( int i = this->_components.size()-1; i >= 0; --i )
-        {
-            if( this->_components[i]->destroyed )
-            {
+        for (int i = this->_components.size() - 1; i >= 0; --i) {
+            if (this->_components[i]->_destroyed) {
                 this->destroyComponentAt(i);
             }
         }
     }
 
-    void Composite::intergrate(const float& elapsed)
-    {
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
+    void Composite::intergrate(const float& elapsed) {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
             (*iter)->intergrate(elapsed);
     }
 
-    unsigned int Composite::handleMessage(const char *msg, void *data)
-    {
+    unsigned int Composite::handleMessage(const char *msg, void *data) {
         int r;
         int result = PHANTOM_MESSAGE_IGNORED;
-        std::vector<Composite*>::iterator iter;
-        for( iter = this->_components.begin(); iter != this->_components.end(); ++iter )
-        {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
             r = (*iter)->handleMessage(msg, data);
-            if( r == PHANTOM_MESSAGE_HANDLED)
+            if (r == PHANTOM_MESSAGE_HANDLED)
                 result = r;
-            else if( r == PHANTOM_MESSAGE_CONSUMED )
+            else if (r == PHANTOM_MESSAGE_CONSUMED)
                 return PHANTOM_MESSAGE_CONSUMED;
         }
         return result;
     }
 
-    void Composite::onCollision( Composite *other )
-    {
+    void Composite::onCollision(Composite *other) {
 
     }
 
-    bool Composite::canCollideWith( Composite *other )
-    {
+    bool Composite::canCollideWith(Composite *other) {
         return true;
     }
 
@@ -182,18 +156,18 @@ namespace phantom {
 
         ss << "[class " << _type << "] ";
 
-        if(numChildren == 0) {
+        if (numChildren == 0) {
             ss << "with no children.";
 
         } else {
             ss << "children (" << numChildren << "): ";
 
-            vector<Composite*>::iterator it = _components.begin();
+            auto it = _components.begin();
 
-            for(int i = 0; it != _components.end(); ++it, ++i) {
+            for (int i = 0; it != _components.end(); ++it, ++i) {
                 ss << (*it)->getType();
 
-                if(i < numChildren - 1) {
+                if (i < numChildren - 1) {
                     ss << ", ";
                 } else {
                     ss << ".";
@@ -204,5 +178,30 @@ namespace phantom {
         ss << endl;
 
         return ss.str();
+    }
+
+    void Composite::onLayerChanged(Layer* layer) {
+        if (layer != _layer) {
+            _layer = layer;
+            for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
+                (*iter)->onLayerChanged(layer);
+        }
+    }
+
+    std::vector<Composite*>& Composite::getComponents() {
+        return _components;
+    };
+
+    Box3& Composite::getBoundingBox() {
+        _boundingBox.origin = getPosition();
+        return _boundingBox;
+    }
+
+    void Composite::setBoundingBox(const Box3& boundingBox) {
+        _boundingBox = boundingBox;
+    }
+
+    Graphics& Composite::getGraphics() {
+        return *_graphics;
     }
 } /* namespace phantom */

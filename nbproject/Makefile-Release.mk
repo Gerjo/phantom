@@ -41,8 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/core/GameState.o \
-	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
+	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
 	${OBJECTDIR}/src/layer/Layer.o \
@@ -52,8 +52,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/shapes/Image.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
 	${OBJECTDIR}/src/glut/GLUTRenderer.o \
-	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/graphics/FreeTypeLibrary.o \
+	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
@@ -89,127 +89,127 @@ LDLIBSOPTIONS=-Wl,-rpath,.
 ${OBJECTDIR}/src/utils/PhantomException.o: src/utils/PhantomException.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/utils
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/PhantomException.o src/utils/PhantomException.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/PhantomException.o src/utils/PhantomException.cpp
 
 ${OBJECTDIR}/src/core/Entity.o: src/core/Entity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Entity.o src/core/Entity.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Entity.o src/core/Entity.cpp
 
 ${OBJECTDIR}/src/core/Composite.o: src/core/Composite.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Composite.o src/core/Composite.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Composite.o src/core/Composite.cpp
 
 ${OBJECTDIR}/src/core/PhantomGame.o: src/core/PhantomGame.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/PhantomGame.o src/core/PhantomGame.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Line.o: src/graphics/shapes/Line.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Line.o src/graphics/shapes/Line.cpp
 
 ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
-
-${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
+
+${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
 
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
 
 ${OBJECTDIR}/src/layer/EntityLayer.o: src/layer/EntityLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/EntityLayer.o src/layer/EntityLayer.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/EntityLayer.o src/layer/EntityLayer.cpp
 
 ${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Shape.o src/graphics/shapes/Shape.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Shape.o src/graphics/shapes/Shape.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
 
 ${OBJECTDIR}/src/graphics/ImageCache.o: src/graphics/ImageCache.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageCache.o src/graphics/ImageCache.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageCache.o src/graphics/ImageCache.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Image.o: src/graphics/shapes/Image.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Image.o src/graphics/shapes/Image.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Image.o src/graphics/shapes/Image.cpp
 
 ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
 
 ${OBJECTDIR}/src/glut/GLUTRenderer.o: src/glut/GLUTRenderer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTRenderer.o src/glut/GLUTRenderer.cpp
-
-${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTRenderer.o src/glut/GLUTRenderer.cpp
 
 ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o: src/graphics/FreeTypeLibrary.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o src/graphics/FreeTypeLibrary.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o src/graphics/FreeTypeLibrary.cpp
+
+${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/glut
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
 
 ${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInput.o src/glut/GLUTInput.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInput.o src/glut/GLUTInput.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Text.o src/graphics/shapes/Text.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Text.o src/graphics/shapes/Text.cpp
 
 ${OBJECTDIR}/src/graphics/ImageLoader.o: src/graphics/ImageLoader.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageLoader.o src/graphics/ImageLoader.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageLoader.o src/graphics/ImageLoader.cpp
 
 ${OBJECTDIR}/src/physics/Box3.o: src/physics/Box3.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Box3.o src/physics/Box3.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Box3.o src/physics/Box3.cpp
 
 ${OBJECTDIR}/src/physics/Vector3.o: src/physics/Vector3.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Vector3.o src/physics/Vector3.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Vector3.o src/physics/Vector3.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
 
 # Subprojects
 .build-subprojects:

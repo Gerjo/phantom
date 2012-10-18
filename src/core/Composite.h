@@ -18,103 +18,84 @@ namespace phantom {
     class Entity;
     class PhantomGame;
     class Driver;
+    class Layer;
 
     class LIBEXPORT Composite {
     public:
-        unsigned int flags;
-        bool destroyed;
-
         Composite();
         virtual ~Composite();
 
-        virtual void onAdd(Composite *parent);
+        virtual void onParentChange(Composite *parent);
         virtual void onAnsestorChanged();
-
-        virtual void addComponent      (Composite *component);
-        virtual bool removeComponent   (Composite *component);
-        virtual bool destroyComponent  (Composite *component);
+        virtual void onLayerChanged(Layer* layer);
+        virtual void addComponent(Composite *component);
+        virtual bool removeComponent(Composite *component);
+        virtual bool destroyComponent(Composite *component);
         virtual bool destroyComponentAt(size_t index);
-
         virtual unsigned int handleMessage(const char *message, void *data);
-
-        virtual void update    (const float& elapsed);
+        virtual void update(const float& elapsed);
         virtual void intergrate(const float& elapsed);
-
         virtual bool canCollideWith(Composite *other);
         virtual void onCollision(Composite *other);
 
-        template <class T>
-        T* getComponentByType(int nth);
-
-        std::vector<Composite*>& getComponents() {
-            return _components;
-        };
-
-        Box3& getBoundingBox() {
-            _boundingBox.origin = getPosition();
-            return _boundingBox;
-        }
-
-        void setBoundingBox(const Box3& boundingBox) {
-            _boundingBox = boundingBox;
-        }
-
-        Graphics& getGraphics() {
-            return *graphics;
-        }
-
-        template <class T>
-        T* findAnsestor();
-
+        std::vector<Composite*>& getComponents();
+        Box3& getBoundingBox();
+        void setBoundingBox(const Box3& boundingBox);
+        Graphics& getGraphics();
         Vector3 getPosition();
         void setPosition(Vector3 position);
         void addPosition(const Vector3& add);
         void removePosition(const Vector3& subtract);
-
         const string& getType();
         bool isType(const string& type);
         string toString(void);
-
         PhantomGame* getGame(void);
+
+        template <class T>
+        T* findAnsestor();
+
+        template <class T>
+        T* getComponentByType(int nth);
+
     protected:
         Vector3 _position;
         Box3 _boundingBox;
-
+        Layer* _layer;
         void setType(const string& type);
         Driver* getDriver(void);
+
     private:
-        Composite *parent;
+        Composite *_parent;
         std::vector<Composite*> _components;
-        Graphics *graphics;
-        
+        Graphics *_graphics;
+        bool _destroyed;
         string _type;
     };
 
     template <class T>
     T* Composite::getComponentByType(int nth) {
-        std::vector<Composite*>::iterator iter;
-        for (iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
+        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
             T* c = dynamic_cast<T*> (*iter);
-            if (c != NULL) {
+            if (c != 0) {
                 if (nth == 0)
                     return c;
                 else
                     --nth;
             }
         }
-        return NULL;
+        return 0;
     }
 
     template <class T>
     T* Composite::findAnsestor() {
-        Composite *c = this->parent;
-        while (c != NULL) {
+        Composite *c = this->_parent;
+        while (c != 0) {
             T* tc = dynamic_cast<T*> (c);
-            if (tc != NULL)
+            if (tc != 0)
                 return tc;
-            c = c->parent;
+            c = c->_parent;
         }
-        return NULL;
+        return 0;
     }
 
 }
