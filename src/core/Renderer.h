@@ -23,7 +23,7 @@ namespace phantom {
         virtual void buildShape(Shape *shape) = 0;
         virtual void destroyShape(Shape *shape) = 0;
 
-        virtual void addTexture(ImageCacheItem *item) = 0;
+        virtual void addTexture(ImageCacheItem *item, bool isText = false) = 0;
         virtual void removeTexture(ImageCacheItem *item) = 0;
     protected:
         PhantomGame *_game;

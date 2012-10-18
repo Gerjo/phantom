@@ -5,19 +5,26 @@
 #include <map>
 #include <string>
 
-class FreeTypeLibrary
-{
-public:
-    FreeTypeLibrary();
-    ~FreeTypeLibrary();
+#include <core/Renderer.h>
+#include <graphics/FreeTypeFont.h>
+#include <graphics/shapes/Text.h>
 
-    void addFont(const std::string filename);
-    FT_Face *getFont(const std::string *filename);
+namespace phantom {
+    class FreeTypeLibrary
+    {
+    public:
+        FreeTypeLibrary(Renderer *renderer);
+        ~FreeTypeLibrary();
 
-    FT_Library lib;
-private:
-    std::map<const std::string, FT_Face> fontCache;
-};
+        void addFont(const char *filename, unsigned int size);
+        FreeTypeFont *getFont(Text *txt);
 
+        FT_Library lib;
+    private:
+        Renderer *_renderer;
+        std::map<const char *, FreeTypeFont> fontCache;
+        void fillTextureData(unsigned int ch, FreeTypeFont::font_info_t *font, unsigned int textureWidth, unsigned char *textureData);
+    };
+}
 #endif
 

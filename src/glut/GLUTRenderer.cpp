@@ -136,65 +136,41 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
-        const char *p;
-        float x = txt->x;
-        float y = txt->y;
-        float sx = 2.0f / _game->getViewPort().x;
-        float sy = 2.0f / _game->getViewPort().y;
+        FreeTypeFont *font = _game->getDriver()->getFontLibrary()->getFont(txt);	
 
-        FT_Face face = *freetypeLibrary.getFont(&txt->font);
-        FT_GlyphSlot g = face->glyph;
-
-        FT_Set_Pixel_Sizes(face, 0, txt->size);
-
-        glEnable(GL_TEXTURE);
-
-        GLuint texture;
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, font->texture->textureID);
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+        
+        const Color& fillColor = txt->getFillColor();
+        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        for(p = txt->text; *p; ++p) {
-            if(FT_Load_Char(face, *p, FT_LOAD_RENDER)) {
-                continue;
-            }
+        glTranslatef(txt->x + xOffset, txt->y + yOffset, 0.0f);
+        if(_vboSupport) {
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, txt->vboVertices);
+            glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
 
-            float x2 = x + g->bitmap_left * sx;
-            float y2 = -y - g->bitmap_top * sy;
-            float w = g->bitmap.width * sx;
-            float h = g->bitmap.rows * sy;
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, txt->vboTexCoords);
+            glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
 
-            float box[4][4] = {
-                {x2,	 -y2	, 0, 0},
-                {x2 + w, -y2	, 1, 0},
-                {x2,	 -y2 - h, 0, 1},
-                {x2 + w, -y2 - h, 1, 1},
-            };
-
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, g->bitmap.width, g->bitmap.rows, 0, GL_ALPHA, GL_UNSIGNED_BYTE, g->bitmap.buffer);
-
-            glVertexPointer(sizeof(box), GL_FLOAT, 0, box);
-            glTexCoordPointer(sizeof(box), GL_FLOAT, 0, box);
-
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-            x += (g->advance.x >> 6) * sx;
-            y += (g->advance.y >> 6) * sy;
         }
+        else {
+            glVertexPointer(3, GL_FLOAT, 0, txt->verticesArray);
+            glTexCoordPointer(2, GL_FLOAT, 0, txt->texCoordsArray);
+        }
+
+        glDrawArrays(GL_QUADS, 0, txt->verticesCount);
 
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisable(GL_TEXTURE_2D);
+        glPopAttrib();
 
-        glDisable(GL_TEXTURE);
     }
 
     void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
@@ -316,12 +292,12 @@ namespace phantom {
             // Creating REAL arrays -.-
             Vertice *verticesArray = new Vertice[shape->verticesCount];
             TexCoord *texCoordArray;
-            if(shape->isImage)
+            if(shape->isImage || shape->isText)
                 texCoordArray = new TexCoord[shape->verticesCount];
 
             for(unsigned int i = 0; i < shape->verticesCount; ++i) {
                 verticesArray[i] = shape->vertices[i];
-                if(shape->isImage)
+                if(shape->isImage || shape->isText)
                     texCoordArray[i] = shape->texCoords[i];
             }
 
@@ -331,7 +307,7 @@ namespace phantom {
             glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
 
             // Texcoords
-            if(shape->isImage) {
+            if(shape->isImage || shape->isText) {
                 glGenBuffersARB(1, &shape->vboTexCoords);
                 glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
                 glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
@@ -342,7 +318,7 @@ namespace phantom {
             shape->texCoords.clear();
 
             delete [] verticesArray;
-            if(shape->isImage)
+            if(shape->isImage || shape->isText)
                 delete [] texCoordArray;
         } else {
             shape->verticesCount = shape->vertices.size();
@@ -350,7 +326,7 @@ namespace phantom {
             // Creating REAL arrays -.-
             shape->verticesArray = new Vertice[shape->vertices.size()];
 
-            if(shape->isImage)
+            if(shape->isImage || shape->isText)
                 shape->texCoordsArray = new TexCoord[shape->vertices.size()];
 
             for(unsigned int i = 0; i < shape->vertices.size(); ++i) {
@@ -361,10 +337,14 @@ namespace phantom {
         }
     }
 
-    void GLUTRenderer::addTexture(ImageCacheItem *item) {
+    void GLUTRenderer::addTexture(ImageCacheItem *item, bool isText) {
         glGenTextures(1, &item->textureID);
         glBindTexture(GL_TEXTURE_2D, item->textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, item->imageData);
+        if(!isText)
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, item->imageData);
+        else
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, item->imageData);
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }
 

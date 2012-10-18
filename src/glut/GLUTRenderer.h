@@ -22,15 +22,14 @@ namespace phantom {
 
         virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset);
         virtual void renderLoop(std::deque<GameState*>* states);       
-        
+
         virtual void buildShape(Shape *shape);
         virtual void destroyShape(Shape *shape);
 
-        virtual void addTexture(ImageCacheItem *item);
+        virtual void addTexture(ImageCacheItem *item, bool isText = false);
         virtual void removeTexture(ImageCacheItem *item);
 
     private:
-        FreeTypeLibrary freetypeLibrary;
         int _windowID;
         bool _vboSupport;
         bool IsExtensionSupported(std::string szTargetExtensionString);
