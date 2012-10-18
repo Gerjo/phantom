@@ -262,4 +262,8 @@ namespace phantom {
              }
          }
     }
+
+    bool Composite::isDestroyed() {
+        return _destroy;
+    }
 } /* namespace phantom */

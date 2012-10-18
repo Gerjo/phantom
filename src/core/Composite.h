@@ -67,6 +67,7 @@ namespace phantom {
         virtual void removeComponent(Composite* who);
         virtual void destroyComponent(Composite* who);
 
+        bool isDestroyed();
     protected:
         Vector3 _position;
         Box3 _boundingBox;
