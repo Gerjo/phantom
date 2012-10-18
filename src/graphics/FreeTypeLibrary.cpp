@@ -29,11 +29,13 @@ namespace phantom {
         font->info.maxHeight = 0;
         int maxWidth = 0, maxRows = 0;
         for(unsigned int ch = 0; ch < charcount; ++ch) {
-            FT_Load_Glyph(face, FT_Get_Char_Index(face, ch), FT_LOAD_NO_HINTING);
+            if(FT_Load_Glyph(face, FT_Get_Char_Index(face, ch), FT_LOAD_NO_HINTING))
+                std::cout << "Failed to load glyph";
             FT_Glyph glyph;
-            FT_Get_Glyph(face->glyph, &glyph);
+            if(FT_Get_Glyph(face->glyph, &glyph))
+                std::cout << "Failed to get glyph";
             FT_Glyph_To_Bitmap(&glyph, FT_RENDER_MODE_NORMAL, 0, 1);
-            FT_BitmapGlyph bmpGlyph = reinterpret_cast<FT_BitmapGlyph>(glyph);
+            FT_BitmapGlyph bmpGlyph = (FT_BitmapGlyph) glyph;
             FT_Bitmap &bmp = bmpGlyph->bitmap;
             FreeTypeFont::char_info_t* charInfo = &font->info.characters[ch];
             charInfo->width = bmp.width;
@@ -42,7 +44,8 @@ namespace phantom {
             unsigned int* charBmp = charInfo->bitmap;
             for(int j = 0; j < charInfo->height; ++j)
                 for(int i = 0; i < charInfo->width; ++i)
-                    charBmp[2*(i+j*charInfo->width)] = charBmp[2*(i+j*charInfo->width)+1] = (i>=bmp.width || j>=bmp.rows) ? 0 : bmp.buffer[i + bmp.width*j];
+                    charBmp[2*(i+j*charInfo->width)] = charBmp[2*(i+j*charInfo->width)+1] = 
+                        (i>=bmp.width || j>=bmp.rows) ? 0 : bmp.buffer[i + bmp.width*j];
             maxWidth += charInfo->width;
             if(maxWidth >= maxTextureWidth) {
                 maxWidth = charInfo->width;
@@ -56,7 +59,10 @@ namespace phantom {
             charInfo->advance = face->glyph->advance.x >> 6;
             charInfo->x = maxWidth - charInfo->width;
         }
-        int textureHeight = pow(font->info.maxHeight*(maxRows+1), 2);
+        
+        int rval = 1;
+        while(rval < font->info.maxHeight*(maxRows+1)) rval<<=1;
+        int textureHeight = rval;
         unsigned char *textureData = new unsigned char[maxTextureWidth*textureHeight*2];
         for(unsigned int ch = 0; ch < charcount; ++ch) {
             FreeTypeFont::char_info_t *charInfo = &font->info.characters[ch];
@@ -71,7 +77,7 @@ namespace phantom {
             charInfo->vertice[1].x = 0.0f;
             charInfo->vertice[1].y = 0.0f;
             charInfo->uv[2].u = (float) (charInfo->x + charInfo->width) / maxTextureWidth;
-            charInfo->uv[2].v = (float) (float) charInfo->y / maxTextureWidth;
+            charInfo->uv[2].v = (float) (float) charInfo->y / textureHeight;
             charInfo->vertice[2].x = charInfo->width;
             charInfo->vertice[2].y = 0.0f;
             charInfo->uv[3].u = (float) (charInfo->x + charInfo->width) / maxTextureWidth;
@@ -81,9 +87,9 @@ namespace phantom {
             delete [] font->info.characters[ch].bitmap;
         }
         font->texture = new ImageCacheItem();
-        font->texture->imageData = textureData;
-        font->texture->width = maxWidth;
-        font->texture->height = font->info.maxHeight * maxRows;
+        font->texture->imageData = (unsigned char *)textureData;
+        font->texture->width = maxTextureWidth;
+        font->texture->height = textureHeight;
         _renderer->addTexture(font->texture, true);
         FT_Done_Face(face);
         fontCache.insert(std::pair<const char *, FreeTypeFont>(fontname, *font));

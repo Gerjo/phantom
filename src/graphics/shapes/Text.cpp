@@ -18,9 +18,9 @@ namespace phantom{
         FreeTypeFont::char_info_t* ci;
         for(; c != size; ++c)
         {
-            ci = &font->info.characters[c];
+            ci = &font->info.characters[text[c]];
             for(int i = 0; i < 4; ++i) {
-                addVertex(ci->left+advance+ci->vertice[i].x, ci->vertice[i].y + (font->info.maxHeight-ci->top), ci->uv[i].u, ci->uv[i].v);
+                addVertex(ci->left+advance+ci->vertice[i].x, ci->vertice[i].y + (font->info.maxHeight-ci->top), ci->uv[i].u, -ci->uv[i].v);
             }
             advance += ci->advance;
         }
