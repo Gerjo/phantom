@@ -5,7 +5,7 @@
 namespace phantom {
 
     Layer::Layer(void) {
-
+        setType("Layer");
     }
 
     void Layer::addComponent(Composite* component) {
