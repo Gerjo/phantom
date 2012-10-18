@@ -247,7 +247,6 @@ namespace phantom {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
              if(who == *iter) {
                  _components.erase(iter);
-
                  delete who;
                  break;
              }
