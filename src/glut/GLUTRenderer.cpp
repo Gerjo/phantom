@@ -22,7 +22,7 @@ namespace phantom {
     PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
     PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
 
-    GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
+    GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game), _freetypeLibrary(this) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
         Vector3 viewPort = game->getViewPort();
 
@@ -136,6 +136,27 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
+        FreeTypeFont *font = _freetypeLibrary.getFont(txt->font, txt->size);	
+
+        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, font->texture->textureID);
+
+        const Color& fillColor = txt->getFillColor();
+        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+        //TODO: Draw vertices with textures.
+        //
+        //glDrawArrays(GL_TRIANGLES, 0, font->verticeCount);
+
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_VERTEX_ARRAY);
+
+        glDisable(GL_TEXTURE_2D);
+        glPopAttrib();
 
     }
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include <ft2build.h>
 #include <graphics/VerticeData.h>
+#include <graphics/ImageCache.h>
 
 namespace phantom {
     class FreeTypeFont
@@ -22,7 +23,7 @@ namespace phantom {
         };
 
         font_info_t info;
-        unsigned int textureID;
+        ImageCacheItem *texture;
     };
 }
 #endif

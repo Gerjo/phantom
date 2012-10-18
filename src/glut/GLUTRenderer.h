@@ -22,7 +22,7 @@ namespace phantom {
 
         virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset);
         virtual void renderLoop(std::deque<GameState*>* states);       
-        
+
         virtual void buildShape(Shape *shape);
         virtual void destroyShape(Shape *shape);
 
@@ -30,7 +30,7 @@ namespace phantom {
         virtual void removeTexture(ImageCacheItem *item);
 
     private:
-        FreeTypeLibrary freetypeLibrary;
+        FreeTypeLibrary _freetypeLibrary;
         int _windowID;
         bool _vboSupport;
         bool IsExtensionSupported(std::string szTargetExtensionString);

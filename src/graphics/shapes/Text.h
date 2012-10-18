@@ -11,9 +11,9 @@ namespace phantom{
 	class LIBEXPORT Text : public Shape {
 	public:
         const char *text;
-        string font;
+        const char *font;
         unsigned int size;
-        Text(float x, float y, unsigned int size, string *font, const char* text);
+        Text(float x, float y, unsigned int size, const char *font, const char *text);
 	};
 }
 
