@@ -11,8 +11,8 @@ public:
     FreeTypeLibrary();
     ~FreeTypeLibrary();
 
-    void addFont(const std::string filename);
-    FT_Face *getFont(const std::string *filename);
+    void addFont(const std::string filename, float size);
+    FT_Face *getFont(const std::string *filename, float size);
 
     FT_Library lib;
 private:

@@ -136,65 +136,7 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
-        const char *p;
-        float x = txt->x;
-        float y = txt->y;
-        float sx = 2.0f / _game->getViewPort().x;
-        float sy = 2.0f / _game->getViewPort().y;
 
-        FT_Face face = *freetypeLibrary.getFont(&txt->font);
-        FT_GlyphSlot g = face->glyph;
-
-        FT_Set_Pixel_Sizes(face, 0, txt->size);
-
-        glEnable(GL_TEXTURE);
-
-        GLuint texture;
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-        for(p = txt->text; *p; ++p) {
-            if(FT_Load_Char(face, *p, FT_LOAD_RENDER)) {
-                continue;
-            }
-
-            float x2 = x + g->bitmap_left * sx;
-            float y2 = -y - g->bitmap_top * sy;
-            float w = g->bitmap.width * sx;
-            float h = g->bitmap.rows * sy;
-
-            float box[4][4] = {
-                {x2,	 -y2	, 0, 0},
-                {x2 + w, -y2	, 1, 0},
-                {x2,	 -y2 - h, 0, 1},
-                {x2 + w, -y2 - h, 1, 1},
-            };
-
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, g->bitmap.width, g->bitmap.rows, 0, GL_ALPHA, GL_UNSIGNED_BYTE, g->bitmap.buffer);
-
-            glVertexPointer(sizeof(box), GL_FLOAT, 0, box);
-            glTexCoordPointer(sizeof(box), GL_FLOAT, 0, box);
-
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-            x += (g->advance.x >> 6) * sx;
-            y += (g->advance.y >> 6) * sy;
-        }
-
-        glDisableClientState(GL_VERTEX_ARRAY);
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
-        glDisable(GL_TEXTURE);
     }
 
     void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
