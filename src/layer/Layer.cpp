@@ -12,9 +12,4 @@ namespace phantom {
         component->onLayerChanged(this);
         Composite::addComponent(component);
     }
-
-    void Layer::onComponentRemove(Composite* who) {
-
-    }
-
 } /* namespace phantom */
