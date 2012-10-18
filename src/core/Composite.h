@@ -54,10 +54,18 @@ namespace phantom {
         template <class T>
         T* getComponentByType(int nth);
 
-        void destroy(void);
-        void removeFromParent(void);
+        virtual void destroy(void);
+        virtual void removeFromParent(void);
         virtual void setX(float x);
         virtual void setY(float y);
+
+        // If you are calling these two from you game, consider using:
+        // - removeFromParent();
+        // - destroy();
+        // Calling "removeComponent" directly may or may not work, depending
+        // on cosmic radiation and the alignment of the stars.
+        virtual void removeComponent(Composite* who);
+        virtual void destroyComponent(Composite* who);
 
     protected:
         Vector3 _position;
@@ -76,7 +84,7 @@ namespace phantom {
         bool _destroy;
         bool _isUpdating;
 
-        void removeComponent(Composite* who);
+
     };
 
     template <class T>

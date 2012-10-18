@@ -58,7 +58,6 @@ namespace phantom {
 
     void Composite::update(const float& elapsed) {
         _isUpdating = true;
-
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             Composite* composite = *iter;
 
@@ -218,8 +217,15 @@ namespace phantom {
                 _layer  = 0;
                 _remove = true;
             } else {
-                // We're not iterating over the parent, so it's safe to delete right away.
-                _parent->removeComponent(this);
+                // Actually ask the parent to destroy or remove us. Having the parent
+                // destroy its children, permits the parent to clean any references
+                // to said child. This actually means that the real deletion may
+                // occur later on, and not instantly.
+                if(_destroy) {
+                    _parent->destroyComponent(this);
+                } else {
+                    _parent->removeComponent(this);
+                }
             }
         } else {
             throw PhantomException("Cannot remove from parent if there is no parent.");
@@ -235,6 +241,17 @@ namespace phantom {
             _destroy = true;
             removeFromParent();
         }
+    }
+
+    void Composite::destroyComponent(Composite* who) {
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
+             if(who == *iter) {
+                 _components.erase(iter);
+
+                 delete who;
+                 break;
+             }
+         }
     }
 
     void Composite::removeComponent(Composite* who) {
