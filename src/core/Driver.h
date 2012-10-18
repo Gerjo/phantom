@@ -12,9 +12,14 @@
 using namespace std;
 
 namespace phantom{
+    class FreeTypeLibrary;
     class LIBEXPORT Driver{
     public:
-        Driver(PhantomGame* game) : _game(game) { _camera = 0; }
+        Driver(PhantomGame* game) : _game(game) {
+            _camera = 0;
+            _renderer = 0;
+            _fontLibrary = 0;
+        }
         virtual ~Driver(){}
 
         virtual void setWindowTitle(string title) = 0;
@@ -43,8 +48,13 @@ namespace phantom{
             return _renderer;
         }
 
+        FreeTypeLibrary *getFontLibrary() {
+            return _fontLibrary;
+        }
+
     protected:
         Renderer* _renderer;
+        FreeTypeLibrary* _fontLibrary;
         Input* _input;
         Camera* _camera;
         PhantomGame* _game;

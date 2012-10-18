@@ -8,9 +8,9 @@ namespace phantom {
         if(FT_Init_FreeType(&lib)) {
             std::cout << "Failed to initialize the freetype library." << std::endl;
         }
+
         _renderer = renderer;
     }
-
 
     FreeTypeLibrary::~FreeTypeLibrary() {
         FT_Done_FreeType(lib);
@@ -88,14 +88,14 @@ namespace phantom {
         delete font;
     }
 
-    FreeTypeFont *FreeTypeLibrary::getFont(const char *fontname, unsigned int size) {
-        if(fontCache.find(fontname) == fontCache.end()) {
-            addFont(fontname, size);
-            return &fontCache.at(fontname);
+    FreeTypeFont *FreeTypeLibrary::getFont(Text *txt) {
+        if(fontCache.find(txt->font) == fontCache.end())
+            addFont(txt->font, txt->size);
+        if(txt->verticesCount == 0) {
+            txt->genVertices(txt->text, &fontCache.at(txt->font));
+            txt->buildShape(_renderer);
         }
-        else {
-            return &fontCache.at(fontname);
-        }
+        return &fontCache.at(txt->font);
     }
 
     void FreeTypeLibrary::fillTextureData(unsigned int ch, FreeTypeFont::font_info_t *font, unsigned int textureWidth, unsigned char *textureData) {
@@ -121,7 +121,5 @@ namespace phantom {
                 textureData[tex_pos+1] = char_bmp[bmp_pos+1];
             }
         }
-
-
     }
 }

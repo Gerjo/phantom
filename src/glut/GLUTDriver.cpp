@@ -11,12 +11,14 @@ namespace phantom{
     GLUTDriver::GLUTDriver(PhantomGame* game) : Driver(game) {
         _renderer = new GLUTRenderer(game);
         _input    = new GLUTInput(game);
+        _fontLibrary = new FreeTypeLibrary(_renderer);
     }
 
     GLUTDriver::~GLUTDriver(){
         delete _input;
         delete ImageCache::getInstance();
         delete _renderer;
+        delete _fontLibrary;
     }
 
     void GLUTDriver::setWindowTitle(string title) {

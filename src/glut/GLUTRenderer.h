@@ -30,7 +30,6 @@ namespace phantom {
         virtual void removeTexture(ImageCacheItem *item);
 
     private:
-        FreeTypeLibrary _freetypeLibrary;
         int _windowID;
         bool _vboSupport;
         bool IsExtensionSupported(std::string szTargetExtensionString);

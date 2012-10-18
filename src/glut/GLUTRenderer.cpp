@@ -22,7 +22,7 @@ namespace phantom {
     PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
     PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
 
-    GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game), _freetypeLibrary(this) {
+    GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
         Vector3 viewPort = game->getViewPort();
 
@@ -136,11 +136,13 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
-        FreeTypeFont *font = _freetypeLibrary.getFont(txt->font, txt->size);	
+        FreeTypeFont *font = _game->getDriver()->getFontLibrary()->getFont(txt);	
 
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, font->texture->textureID);
+        glNormal3f(0.0f, 0.0f, 1.0f);
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
 
         const Color& fillColor = txt->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -148,13 +150,24 @@ namespace phantom {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        //TODO: Draw vertices with textures.
-        //
-        //glDrawArrays(GL_TRIANGLES, 0, font->verticeCount);
+        glTranslatef(txt->x + xOffset, txt->y + yOffset, 0.0f);
+        if(_vboSupport) {
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, txt->vboVertices);
+            glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
 
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+            glBindBufferARB(GL_ARRAY_BUFFER_ARB, txt->vboTexCoords);
+            glTexCoordPointer(2, GL_FLOAT, 0, (char *) NULL);
+
+        }
+        else {
+            glVertexPointer(3, GL_FLOAT, 0, txt->verticesArray);
+            glTexCoordPointer(2, GL_FLOAT, 0, txt->texCoordsArray);
+        }
+
+        glDrawArrays(GL_TRIANGLES, 0, txt->verticesCount);
+
         glDisableClientState(GL_VERTEX_ARRAY);
-
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisable(GL_TEXTURE_2D);
         glPopAttrib();
 
@@ -279,12 +292,12 @@ namespace phantom {
             // Creating REAL arrays -.-
             Vertice *verticesArray = new Vertice[shape->verticesCount];
             TexCoord *texCoordArray;
-            if(shape->isImage)
+            if(shape->isImage || shape->isText)
                 texCoordArray = new TexCoord[shape->verticesCount];
 
             for(unsigned int i = 0; i < shape->verticesCount; ++i) {
                 verticesArray[i] = shape->vertices[i];
-                if(shape->isImage)
+                if(shape->isImage || shape->isText)
                     texCoordArray[i] = shape->texCoords[i];
             }
 
@@ -294,7 +307,7 @@ namespace phantom {
             glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
 
             // Texcoords
-            if(shape->isImage) {
+            if(shape->isImage || shape->isText) {
                 glGenBuffersARB(1, &shape->vboTexCoords);
                 glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
                 glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
@@ -305,7 +318,7 @@ namespace phantom {
             shape->texCoords.clear();
 
             delete [] verticesArray;
-            if(shape->isImage)
+            if(shape->isImage || shape->isText)
                 delete [] texCoordArray;
         } else {
             shape->verticesCount = shape->vertices.size();
@@ -313,7 +326,7 @@ namespace phantom {
             // Creating REAL arrays -.-
             shape->verticesArray = new Vertice[shape->vertices.size()];
 
-            if(shape->isImage)
+            if(shape->isImage || shape->isText)
                 shape->texCoordsArray = new TexCoord[shape->vertices.size()];
 
             for(unsigned int i = 0; i < shape->vertices.size(); ++i) {

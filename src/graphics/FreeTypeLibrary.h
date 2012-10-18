@@ -7,6 +7,7 @@
 
 #include <core/Renderer.h>
 #include <graphics/FreeTypeFont.h>
+#include <graphics/shapes/Text.h>
 
 namespace phantom {
     class FreeTypeLibrary
@@ -16,7 +17,7 @@ namespace phantom {
         ~FreeTypeLibrary();
 
         void addFont(const char *filename, unsigned int size);
-        FreeTypeFont *getFont(const char *filename, unsigned int size);
+        FreeTypeFont *getFont(Text *txt);
 
         FT_Library lib;
     private:
