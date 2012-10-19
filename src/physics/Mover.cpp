@@ -16,8 +16,8 @@ namespace phantom {
     void Mover::moveTo(Vector3 target){
         _targetList.push_back(target);
     }
-    void Mover::moveTo(const std::vector<Vector3> &targetList){
-        _targetList = targetList;
+    void Mover::moveTo(const std::vector<Vector3> *targetList){
+        _targetList = *targetList;
     }
     void Mover::update(const float& elapsed){
         Composite::update(elapsed);
@@ -28,7 +28,8 @@ namespace phantom {
 
             direction.normalize();
 
-            Vector3 newPosition = position + (direction * 100 * elapsed);
+            Vector3 *newPosition = new Vector3();
+            *newPosition = position + (direction * 100 * elapsed);
 
             float distanceSq = position.distanceToSq(target);
             float threshold = static_cast<float>(pow(8, 2));
@@ -37,7 +38,17 @@ namespace phantom {
                 _targetList.pop_back();
             }
 
-            _parent->setPosition(newPosition);
+            if(newPosition == 0) {
+                // Report back to Sander. Appearantly one of the values caused new position to be non existant.
+                // Please use your debugger to tell me which one has to be fixed.
+                __asm {
+                    int 3
+                }
+            }
+       
+
+            _parent->setPosition(*newPosition);
+            delete newPosition;
         }
     }
 
