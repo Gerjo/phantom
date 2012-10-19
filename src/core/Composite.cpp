@@ -8,9 +8,12 @@
 namespace phantom {
 
     Composite::Composite() :
-    _destroyed(false),
     _position(0, 0, 0),
-    _type("Composite") {
+    _remove(false),
+    _destroy(false),
+    _isUpdating(false),
+    _type("Composite")
+    {
         _layer = 0;
         _parent = 0;
         _graphics = new Graphics(this);
@@ -18,8 +21,9 @@ namespace phantom {
     }
 
     Composite::~Composite() {
-        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             delete *iter;
+        }
 
         delete _graphics;
     }
@@ -27,7 +31,6 @@ namespace phantom {
     PhantomGame* Composite::getGame(void) {
         if (PhantomGame::INSTANCE == 0) {
             throw PhantomException("Did you forget to create PhantomGame?");
-            return 0;
         } else {
             return phantom::PhantomGame::INSTANCE;
         }
@@ -38,12 +41,13 @@ namespace phantom {
     }
 
     void Composite::onParentChange(Composite *parent) {
-        this->_parent = parent;
+        _parent = parent;
     }
 
     void Composite::onAnsestorChanged() {
-        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             (*iter)->onAnsestorChanged();
+        }
     }
 
     void Composite::addComponent(Composite *component) {
@@ -52,63 +56,53 @@ namespace phantom {
         component->onAnsestorChanged();
     }
 
-    bool Composite::destroyComponent(Composite *component) {
-        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
-            if (*iter == component) {
-                delete *iter;
-                this->_components.erase(iter);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool Composite::destroyComponentAt(size_t index) {
-        if (index >= this->_components.size())
-            return false;
-        std::vector<Composite*>::iterator iter;
-        iter = this->_components.begin() + index;
-        delete *iter;
-        this->_components.erase(iter);
-        return true;
-    }
-
-    bool Composite::removeComponent(Composite *component) {
-        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
-            if (*iter == component) {
-                this->_components.erase(iter);
-                return true;
-            }
-        }
-        return false;
-    }
-
     void Composite::update(const float& elapsed) {
-        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
-            (*iter)->update(elapsed);
+        _isUpdating = true;
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
+            Composite* composite = *iter;
 
-        // Remove destroyed components:
-        for (int i = this->_components.size() - 1; i >= 0; --i) {
-            if (this->_components[i]->_destroyed) {
-                this->destroyComponentAt(i);
+            // Let's make sure we're fit for an update:
+            if(!composite->_remove && !composite->_destroy) {
+                composite->update(elapsed);
+            }
+
+            // Check again, since update is potentially state changing.
+            if(composite->_remove == true) {
+                composite->_remove = false;
+                if(composite->_destroy) {
+                    delete composite;
+                }
+
+                // Nifty little feature, erase returns the next available iterator:
+                iter = _components.erase(iter);
+
+                // Ok, we just updated the iterator, let us make sure it's not the
+                // end. If we skip this check, "++iter" will yield the most obscure
+                // error that'll take hours to discover.
+                if(iter == _components.end()) {
+                    break;
+                }
             }
         }
+
+        _isUpdating = false;
     }
 
     void Composite::intergrate(const float& elapsed) {
-        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             (*iter)->intergrate(elapsed);
+        }
     }
 
     unsigned int Composite::handleMessage(const char *msg, void *data) {
-        int r;
         int result = PHANTOM_MESSAGE_IGNORED;
-        for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter) {
-            r = (*iter)->handleMessage(msg, data);
-            if (r == PHANTOM_MESSAGE_HANDLED)
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
+            int r = (*iter)->handleMessage(msg, data);
+            if (r == PHANTOM_MESSAGE_HANDLED) {
                 result = r;
-            else if (r == PHANTOM_MESSAGE_CONSUMED)
+            } else if (r == PHANTOM_MESSAGE_CONSUMED) {
                 return PHANTOM_MESSAGE_CONSUMED;
+            }
         }
         return result;
     }
@@ -131,6 +125,14 @@ namespace phantom {
 
     void Composite::addPosition(const Vector3& add) {
         _position += add;
+    }
+
+    void Composite::setX(float x) {
+        _position.x = x;
+    }
+
+    void Composite::setY(float y) {
+        _position.y = y;
     }
 
     void Composite::removePosition(const Vector3& subtract) {
@@ -183,14 +185,15 @@ namespace phantom {
     void Composite::onLayerChanged(Layer* layer) {
         if (layer != _layer) {
             _layer = layer;
-            for (auto iter = this->_components.begin(); iter != this->_components.end(); ++iter)
+            for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
                 (*iter)->onLayerChanged(layer);
+            }
         }
     }
 
     std::vector<Composite*>& Composite::getComponents() {
         return _components;
-    };
+    }
 
     Box3& Composite::getBoundingBox() {
         _boundingBox.origin = getPosition();
@@ -203,5 +206,63 @@ namespace phantom {
 
     Graphics& Composite::getGraphics() {
         return *_graphics;
+    }
+
+    void Composite::removeFromParent(void) {
+        if(_parent != 0) {
+            if(_parent->_isUpdating) {
+                // We're deleting from a collection, we're also iterating over,
+                // using these flags, said iteration will also remove this component.
+                _parent = 0;
+                _layer  = 0;
+                _remove = true;
+            } else {
+                // Actually ask the parent to destroy or remove us. Having the parent
+                // destroy its children, permits the parent to clean any references
+                // to said child. This actually means that the real deletion may
+                // occur later on, and not instantly.
+                if(_destroy) {
+                    _parent->destroyComponent(this);
+                } else {
+                    _parent->removeComponent(this);
+                }
+            }
+        } else {
+            throw PhantomException("Cannot remove from parent if there is no parent.");
+        }
+    }
+
+    void Composite::destroy(void) {
+        if(_parent == 0) {
+            // Called without a parent, save to delete right away.
+            delete this;
+
+        } else {
+            _destroy = true;
+            removeFromParent();
+        }
+    }
+
+    void Composite::destroyComponent(Composite* who) {
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
+             if(who == *iter) {
+                 _components.erase(iter);
+                 delete who;
+                 break;
+             }
+         }
+    }
+
+    void Composite::removeComponent(Composite* who) {
+         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
+             if(who == *iter) {
+                 iter = _components.erase(iter);
+                 break;
+             }
+         }
+    }
+
+    bool Composite::isDestroyed() {
+        return _destroy;
     }
 } /* namespace phantom */

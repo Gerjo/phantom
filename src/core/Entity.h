@@ -11,15 +11,11 @@ namespace phantom {
     class LIBEXPORT Entity : public Composite {
     public:
         Entity();
-
         virtual void addComponent(Composite *component);
 
-        virtual void setX(float x);
-        virtual void setY(float y);
-
     protected:
-
         Mover* mover;
+        
     };
 
 } /* namespace phantom */
