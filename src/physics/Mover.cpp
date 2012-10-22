@@ -41,11 +41,11 @@ namespace phantom {
             if(newPosition == 0) {
                 // Report back to Sander. Appearantly one of the values caused new position to be non existant.
                 // Please use your debugger to tell me which one has to be fixed.
-                __asm {
-                    int 3
-                }
+                //__asm {
+                //    int 3
+                //}
             }
-       
+
 
             _parent->setPosition(*newPosition);
             delete newPosition;
