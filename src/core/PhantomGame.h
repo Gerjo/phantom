@@ -34,6 +34,8 @@ namespace phantom {
         Driver* getDriver();
         void setDriver(Driver* driver);
 
+        virtual MessageState handleMessage(const string& message, void* data);
+
         friend class Composite;
         friend class Graphics;
     protected:

@@ -127,7 +127,7 @@ namespace phantom {
             else if(buffer[i] == 32) {
                 readingValue = true;
             }
-            
+
             if(buffer[i] == '\n' || buffer[i] == '\0' || i == (length - 1)) {
                 readingValue = false;
 
@@ -147,8 +147,25 @@ namespace phantom {
                 propertyname.clear();
                 propertyvalue.clear();
             }
-
         }
+    }
+
+    // Since gamestates are not added as child, messages must be manually moved
+    // into each state.
+    MessageState PhantomGame::handleMessage(const string& message, void* data) {
+        MessageState messageState = IGNORED;
+
+        for(GameState* gameState : _states) {
+            MessageState r = gameState->handleMessage(message, data);
+
+            if(r == CONSUMED) {
+                return r;
+            }
+
+            messageState = r;
+        }
+
+        return messageState;
     }
 
 } /* namespace phantom */

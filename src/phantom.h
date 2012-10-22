@@ -7,6 +7,7 @@
 #include <core/Entity.h>
 #include <core/PhantomGame.h>
 #include <core/Driver.h>
+#include <core/MessageState.h>
 
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>

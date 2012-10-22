@@ -94,17 +94,19 @@ namespace phantom {
         }
     }
 
-    unsigned int Composite::handleMessage(const char *msg, void *data) {
-        int result = PHANTOM_MESSAGE_IGNORED;
+    MessageState Composite::handleMessage(const string& message, void* data) {
+        MessageState state = IGNORED;
+
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-            int r = (*iter)->handleMessage(msg, data);
-            if (r == PHANTOM_MESSAGE_HANDLED) {
-                result = r;
-            } else if (r == PHANTOM_MESSAGE_CONSUMED) {
-                return PHANTOM_MESSAGE_CONSUMED;
+            MessageState r = (*iter)->handleMessage(message, data);
+            if (r == MessageState::CONSUMED) {
+                return r;
             }
+
+            state = r;
         }
-        return result;
+
+        return state;
     }
 
     void Composite::onCollision(Composite *other) {

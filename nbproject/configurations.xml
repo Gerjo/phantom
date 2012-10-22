@@ -11,6 +11,7 @@
         <itemPath>src/core/Entity.h</itemPath>
         <itemPath>src/core/GameState.cpp</itemPath>
         <itemPath>src/core/GameState.h</itemPath>
+        <itemPath>src/core/MessageState.h</itemPath>
         <itemPath>src/core/PhantomGame.cpp</itemPath>
         <itemPath>src/core/PhantomGame.h</itemPath>
         <itemPath>src/core/Renderer.h</itemPath>
