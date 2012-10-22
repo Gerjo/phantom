@@ -7,7 +7,10 @@
 #include <core/Entity.h>
 #include <core/PhantomGame.h>
 #include <core/Driver.h>
-#include <core/MessageState.h>
+
+#include <messaging/Message.h>
+#include <messaging/MessageState.h>
+#include <messaging/AbstractMessage.h>
 
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>

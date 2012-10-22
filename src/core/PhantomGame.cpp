@@ -152,11 +152,11 @@ namespace phantom {
 
     // Since gamestates are not added as child, messages must be manually moved
     // into each state.
-    MessageState PhantomGame::handleMessage(const string& message, void* data) {
+    MessageState PhantomGame::handleMessage(AbstractMessage* message) {
         MessageState messageState = IGNORED;
 
         for(GameState* gameState : _states) {
-            MessageState r = gameState->handleMessage(message, data);
+            MessageState r = gameState->handleMessage(message);
 
             if(r == CONSUMED) {
                 return r;

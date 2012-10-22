@@ -11,7 +11,6 @@
         <itemPath>src/core/Entity.h</itemPath>
         <itemPath>src/core/GameState.cpp</itemPath>
         <itemPath>src/core/GameState.h</itemPath>
-        <itemPath>src/core/MessageState.h</itemPath>
         <itemPath>src/core/PhantomGame.cpp</itemPath>
         <itemPath>src/core/PhantomGame.h</itemPath>
         <itemPath>src/core/Renderer.h</itemPath>
@@ -64,6 +63,11 @@
         <itemPath>src/layer/EntityLayer.h</itemPath>
         <itemPath>src/layer/Layer.cpp</itemPath>
         <itemPath>src/layer/Layer.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="messaging" displayName="messaging" projectFiles="true">
+        <itemPath>src/messaging/AbstractMessage.h</itemPath>
+        <itemPath>src/messaging/Message.h</itemPath>
+        <itemPath>src/messaging/MessageState.h</itemPath>
       </logicalFolder>
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/Box3.cpp</itemPath>

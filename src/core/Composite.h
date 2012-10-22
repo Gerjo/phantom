@@ -7,7 +7,9 @@
 #include <string>
 #include <CompileConfig.h>
 #include <physics/Box3.h>
-#include <core/MessageState.h>
+#include <messaging/MessageState.h>
+#include <messaging/Message.h>
+#include <messaging/AbstractMessage.h>
 
 using namespace std;
 
@@ -26,7 +28,7 @@ namespace phantom {
         virtual void onAnsestorChanged();
         virtual void onLayerChanged(Layer* layer);
         virtual void addComponent(Composite *component);
-        virtual MessageState handleMessage(const string& message, void* data);
+        virtual MessageState handleMessage(AbstractMessage* message);
         virtual void update(const float& elapsed);
         virtual void intergrate(const float& elapsed);
         virtual bool canCollideWith(Composite *other);

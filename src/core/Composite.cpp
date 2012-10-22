@@ -94,11 +94,11 @@ namespace phantom {
         }
     }
 
-    MessageState Composite::handleMessage(const string& message, void* data) {
+    MessageState Composite::handleMessage(AbstractMessage* message) {
         MessageState state = IGNORED;
 
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-            MessageState r = (*iter)->handleMessage(message, data);
+            MessageState r = (*iter)->handleMessage(message);
             if (r == MessageState::CONSUMED) {
                 return r;
             }
