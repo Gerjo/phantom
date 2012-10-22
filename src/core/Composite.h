@@ -1,10 +1,6 @@
 #ifndef COMPOSITE_H_
 #define COMPOSITE_H_
 
-#define PHANTOM_MESSAGE_IGNORED  0
-#define PHANTOM_MESSAGE_HANDLED  1
-#define PHANTOM_MESSAGE_CONSUMED 2
-
 #include <graphics/Graphics.h>
 #include <sstream>
 #include <vector>
