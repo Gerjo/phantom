@@ -15,7 +15,7 @@ namespace phantom {
         GameState();
         virtual ~GameState();
 
-        virtual void addComponent      (Composite *component);
+        //virtual void addComponent(Composite *component);
     };
 
 }
