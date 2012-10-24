@@ -28,7 +28,7 @@ namespace phantom {
         delete _graphics;
     }
 
-    PhantomGame* Composite::getGame(void) {
+    PhantomGame* Composite::getPhantomGame(void) {
         if (PhantomGame::INSTANCE == 0) {
             throw PhantomException("Did you forget to create PhantomGame?");
         } else {
@@ -37,7 +37,7 @@ namespace phantom {
     }
 
     Driver* Composite::getDriver(void) {
-        return getGame()->getDriver();
+        return getPhantomGame()->getDriver();
     }
 
     void Composite::onParentChange(Composite *parent) {

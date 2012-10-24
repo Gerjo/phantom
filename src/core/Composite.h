@@ -45,7 +45,12 @@ namespace phantom {
         const string& getType();
         bool isType(const string& type);
         string toString(void);
-        PhantomGame* getGame(void);
+        PhantomGame* getPhantomGame(void);
+
+        template <class T>
+        T getGame(void) {
+            return static_cast<T>(getPhantomGame());
+        }
 
         template <class T>
         T* findAnsestor();
