@@ -64,15 +64,13 @@ namespace phantom {
         return 0;
     }
 
-    void PhantomGame::update(float elapsed) {
+    void PhantomGame::update(const float& elapsed) {
         Composite::update(elapsed);
-        std::deque<GameState*>::reverse_iterator iter;
-        iter = this->_states.rbegin();
-        while (iter != this->_states.rend()) {
-            (*iter)->update(elapsed);
-            if (iter == this->_states.rend() || !(*iter)->propegateUpdate)
-                break;
-            ++iter;
+
+        for(GameState* gameState : _states) {
+            if(gameState->doUpdate) {
+                gameState->update(elapsed);
+            }
         }
     }
 
@@ -81,6 +79,7 @@ namespace phantom {
     }
 
     void PhantomGame::onExit(int returncode) {
+
     }
 
     Driver* PhantomGame::getDriver() {

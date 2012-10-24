@@ -46,7 +46,7 @@ namespace phantom {
 
             if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)) {
                 glutEnterGameMode();
-            } 
+            }
         }
 
         _vboSupport = IsExtensionSupported("GL_ARB_vertex_buffer_object");
@@ -136,14 +136,14 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
-        FreeTypeFont *font = _game->getDriver()->getFontLibrary()->getFont(txt);	
+        FreeTypeFont *font = _game->getDriver()->getFontLibrary()->getFont(txt);
 
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, font->texture->textureID);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        
+
         const Color& fillColor = txt->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
@@ -234,15 +234,13 @@ namespace phantom {
         glClearColor(0.42f, 0.145f, 0.016f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        std::deque<GameState*>::reverse_iterator iter = states->rbegin();
-        while(iter != states->rend()) {
-            if(!(*iter)->transparent)
-                break;
 
-            Vector3 initialOffset(0, 0, 0);
+        Vector3 initialOffset(0, 0, 0);
 
-            drawLoop((*iter)->getComponents(), initialOffset);
-            ++iter;
+        for(GameState* gamestate : *states) {
+            if(gamestate->doRender) {
+                drawLoop(gamestate->getComponents(), initialOffset);
+            }
         }
 
         glutMainLoopEvent();

@@ -4,12 +4,12 @@
 
 namespace phantom {
 
-    GameState::GameState() : transparent(true), propegateUpdate(true) {
+    GameState::GameState() : doUpdate(true), doRender(true) {
         setType("GameState");
     }
 
     GameState::~GameState() {
-        
+
     }
 
     void GameState::addComponent(Composite* component) {

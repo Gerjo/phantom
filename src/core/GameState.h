@@ -9,9 +9,8 @@ namespace phantom {
     class Layer;
     class LIBEXPORT GameState : public Composite {
     public:
-
-        bool transparent;
-        bool propegateUpdate;
+        bool doUpdate;
+        bool doRender;
 
         GameState();
         virtual ~GameState();
