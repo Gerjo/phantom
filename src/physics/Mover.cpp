@@ -39,11 +39,14 @@ namespace phantom {
             }
 
             if(newPosition == 0) {
-                // Report back to Sander. Appearantly one of the values caused new position to be non existant.
+                // Report back to Sander. Apparently one of the values caused new position to be non existent.
                 // Please use your debugger to tell me which one has to be fixed.
-                //__asm {
-                //    int 3
-                //}
+
+                #ifdef WIN32
+                    __asm {
+                        int 3
+                    }
+                #endif
             }
 
 
