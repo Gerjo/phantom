@@ -121,7 +121,7 @@ namespace phantom {
     }
 
     void Graphics::addShape(Shape* whom) {
-        whom->buildShape(_parent->getGame()->getDriver()->getRenderer());
+        whom->buildShape(_parent->getPhantomGame()->getDriver()->getRenderer());
         _workspaceShapes.push_back(whom);
     }
 
@@ -172,7 +172,7 @@ namespace phantom {
         deque<Shape*>::iterator shIt;
 
         for(shIt = source.begin(); shIt != source.end(); ++shIt) {
-            (*shIt)->destroyShape(_parent->getGame()->getDriver()->getRenderer());
+            (*shIt)->destroyShape(_parent->getPhantomGame()->getDriver()->getRenderer());
             delete *shIt;
         }
 

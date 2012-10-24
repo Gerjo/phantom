@@ -4,8 +4,8 @@
 
 namespace phantom {
     GLUTCamera::GLUTCamera(int id) : Camera(id) {
-        setViewPort(getGame()->getViewPort());
-        setWorldSize(getGame()->getWorldSize());
+        setViewPort(getPhantomGame()->getViewPort());
+        setWorldSize(getPhantomGame()->getWorldSize());
     }
 
     GLUTCamera::~GLUTCamera() {
