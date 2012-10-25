@@ -71,19 +71,19 @@ namespace phantom {
             charInfo->uv[0].u = (float) charInfo->x / maxTextureWidth;
             charInfo->uv[0].v = (float) (charInfo->y + charInfo->height)/textureHeight;
             charInfo->vertice[0].x = 0.0f;
-            charInfo->vertice[0].y = (float)charInfo->height;
+            charInfo->vertice[0].y = (float) charInfo->height;
             charInfo->uv[1].u = (float) charInfo->x / maxTextureWidth;
             charInfo->uv[1].v = (float) charInfo->y / textureHeight;
             charInfo->vertice[1].x = 0.0f;
             charInfo->vertice[1].y = 0.0f;
             charInfo->uv[2].u = (float) (charInfo->x + charInfo->width) / maxTextureWidth;
             charInfo->uv[2].v = (float) (float) charInfo->y / textureHeight;
-            charInfo->vertice[2].x = (float)charInfo->width;
+            charInfo->vertice[2].x = (float) charInfo->width;
             charInfo->vertice[2].y = 0.0f;
             charInfo->uv[3].u = (float) (charInfo->x + charInfo->width) / maxTextureWidth;
             charInfo->uv[3].v = (float) (charInfo->y + charInfo->height) / textureHeight;
-            charInfo->vertice[3].x = charInfo->width;
-            charInfo->vertice[3].y = charInfo->height;
+            charInfo->vertice[3].x = (float) charInfo->width;
+            charInfo->vertice[3].y = (float) charInfo->height;
             delete [] font->info.characters[ch].bitmap;
         }
         font->texture = new ImageCacheItem();

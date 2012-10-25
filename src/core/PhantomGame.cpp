@@ -109,7 +109,7 @@ namespace phantom {
         configuration.seekg(0, ios::end);
         std::streamoff length = configuration.tellg();
         configuration.seekg(0, ios::beg);
-        char *buffer = new char[length];
+        char *buffer = new char[static_cast<unsigned int>(length)];
 
         configuration.read(buffer, length);
 
