@@ -38,18 +38,6 @@ namespace phantom {
                 _targetList.pop_back();
             }
 
-            if(newPosition == 0) {
-                // Report back to Sander. Apparently one of the values caused new position to be non existent.
-                // Please use your debugger to tell me which one has to be fixed.
-
-                #ifdef WIN32
-                    __asm {
-                        int 3
-                    }
-                #endif
-            }
-
-
             _parent->setPosition(*newPosition);
             delete newPosition;
         }
