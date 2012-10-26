@@ -43,6 +43,7 @@
           <itemPath>src/graphics/shapes/Text.h</itemPath>
         </logicalFolder>
         <itemPath>src/graphics/Color.h</itemPath>
+        <itemPath>src/graphics/FreeTypeFont.h</itemPath>
         <itemPath>src/graphics/FreeTypeLibrary.cpp</itemPath>
         <itemPath>src/graphics/FreeTypeLibrary.h</itemPath>
         <itemPath>src/graphics/Graphics.cpp</itemPath>
@@ -80,6 +81,8 @@
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
         <itemPath>src/utils/PhantomException.cpp</itemPath>
         <itemPath>src/utils/PhantomException.h</itemPath>
+        <itemPath>src/utils/Time.cpp</itemPath>
+        <itemPath>src/utils/Time.h</itemPath>
         <itemPath>src/utils/util.h</itemPath>
       </logicalFolder>
       <itemPath>src/CompileConfig.h</itemPath>
