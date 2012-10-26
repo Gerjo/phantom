@@ -2,8 +2,8 @@
 #include <iostream>
 
 namespace phantom{
-    void EntityLayer::update(const float &elapsed){
-        Composite::update(elapsed);
+    void EntityLayer::update(const Time &time){
+        Composite::update(time);
 
         vector<Composite*>& entities = getComponents();
         vector<Composite*>::iterator itA;

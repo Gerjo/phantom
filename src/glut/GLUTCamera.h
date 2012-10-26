@@ -10,7 +10,7 @@ namespace phantom {
         GLUTCamera(int id);
         ~GLUTCamera();
 
-        virtual void update(const float& elapsed);
+        virtual void update(const Time& time);
     };
 }
 #endif // !GLUTCAMERA_H_

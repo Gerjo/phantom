@@ -10,6 +10,7 @@
 #include <messaging/MessageState.h>
 #include <messaging/Message.h>
 #include <messaging/AbstractMessage.h>
+#include <utils/Time.h>
 
 using namespace std;
 
@@ -29,8 +30,8 @@ namespace phantom {
         virtual void onLayerChanged(Layer* layer);
         virtual void addComponent(Composite *component);
         virtual MessageState handleMessage(AbstractMessage* message);
-        virtual void update(const float& elapsed);
-        virtual void intergrate(const float& elapsed);
+        virtual void update(const Time& time);
+        virtual void intergrate(const Time& time);
         virtual bool canCollideWith(Composite *other);
         virtual void onCollision(Composite *other);
 

@@ -6,6 +6,7 @@
 #include <core/Driver.h>
 #include <graphics/ImageCache.h>
 #include <utils/PhantomException.h>
+#include <utils/Time.h>
 
 namespace phantom {
 
@@ -41,14 +42,16 @@ namespace phantom {
         while (_running) {
             double now = Util::getTime();
             double elapsed = now - last;
+            total += elapsed;
 
-            _driver->onUpdate(static_cast<float>(elapsed));
+            Time time(elapsed, total, now);
+
+            _driver->onUpdate(time);
 
             //if (elapsed < (1.0f / this->_fps)) {
             //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
             //}
 
-            total += elapsed;
             fpscount++;
 
             if (total >= 1) {
@@ -64,12 +67,12 @@ namespace phantom {
         return 0;
     }
 
-    void PhantomGame::update(const float& elapsed) {
-        Composite::update(elapsed);
+    void PhantomGame::update(const Time& time) {
+        Composite::update(time);
 
         for(GameState* gameState : _states) {
             if(gameState->doUpdate) {
-                gameState->update(elapsed);
+                gameState->update(time);
             }
         }
     }

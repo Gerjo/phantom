@@ -56,14 +56,14 @@ namespace phantom {
         component->onAnsestorChanged();
     }
 
-    void Composite::update(const float& elapsed) {
+    void Composite::update(const Time& time) {
         _isUpdating = true;
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             Composite* composite = *iter;
 
             // Let's make sure we're fit for an update:
             if(!composite->_remove && !composite->_destroy) {
-                composite->update(elapsed);
+                composite->update(time);
             }
 
             // Check again, since update is potentially state changing.
@@ -88,9 +88,9 @@ namespace phantom {
         _isUpdating = false;
     }
 
-    void Composite::intergrate(const float& elapsed) {
+    void Composite::intergrate(const Time& time) {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-            (*iter)->intergrate(elapsed);
+            (*iter)->intergrate(time);
         }
     }
 

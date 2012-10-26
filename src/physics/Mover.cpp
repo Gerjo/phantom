@@ -19,8 +19,8 @@ namespace phantom {
     void Mover::moveTo(const std::vector<Vector3> *targetList){
         _targetList = *targetList;
     }
-    void Mover::update(const float& elapsed){
-        Composite::update(elapsed);
+    void Mover::update(const Time& time){
+        Composite::update(time);
         if(!_targetList.empty() && _parent != 0){
             Vector3 target    = _targetList.back();
             Vector3 position  = _parent->getPosition();
@@ -29,7 +29,7 @@ namespace phantom {
             direction.normalize();
 
             Vector3 *newPosition = new Vector3();
-            *newPosition = position + (direction * 100 * elapsed);
+            *newPosition = position + (direction * 100 * time.getElapsed());
 
             float distanceSq = position.distanceToSq(target);
             float threshold = static_cast<float>(pow(8, 2));

@@ -11,8 +11,8 @@ namespace phantom {
     GLUTCamera::~GLUTCamera() {
     }
 
-    void GLUTCamera::update(const float &elapsed) {
-        Composite::update(elapsed);
+    void GLUTCamera::update(const Time &time) {
+        Composite::update(time);
 
         if(isActive()) {
             const Vector3& pos = getPosition();

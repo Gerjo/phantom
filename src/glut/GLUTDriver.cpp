@@ -25,8 +25,8 @@ namespace phantom{
         glutSetWindowTitle(title.c_str());
     }
 
-    void GLUTDriver::onUpdate(float elapsed){
-        _game->update(elapsed);
+    void GLUTDriver::onUpdate(Time time){
+        _game->update(time);
         _renderer->renderLoop(&_game->getGameStates());
     }
 

@@ -8,6 +8,7 @@
 #include <core/Renderer.h>
 #include <utils/PhantomException.h>
 #include <input/Input.h>
+#include <utils/Time.h>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ namespace phantom{
         virtual ~Driver(){}
 
         virtual void setWindowTitle(string title) = 0;
-        virtual void onUpdate(float elapsed) = 0;
+        virtual void onUpdate(Time time) = 0;
         virtual void onRender() = 0;
 
         Input* getInput() { return _input; }
