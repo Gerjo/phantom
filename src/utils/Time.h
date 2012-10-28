@@ -6,17 +6,17 @@
 namespace phantom {
     class LIBEXPORT Time {
     public:
-        Time(float elapsed, float totalGameTime, float currentTime);
+        Time(float elapsed, float totalGameTime, double currentTime);
         ~Time();
-        
+
         float getElapsed() const;
         float getTotalGameTime() const;
-        float getTime() const;
-    
+        double getTime() const;
+
     private:
         float _elapsed;
         float _totalGameTime;
-        float _currentTime;
+        double _currentTime;
     };
 }
 

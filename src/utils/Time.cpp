@@ -1,13 +1,13 @@
 #include "Time.h"
 
 namespace phantom {
-    Time::Time(float elapsed, float totalGameTime, float currentTime) {
+    Time::Time(float elapsed, float totalGameTime, double currentTime) {
         _elapsed = elapsed;
         _totalGameTime = totalGameTime;
         _currentTime = currentTime;
     }
 
-    Time::~Time() { 
+    Time::~Time() {
     }
 
     float Time::getElapsed() const {
@@ -18,7 +18,7 @@ namespace phantom {
         return _totalGameTime;
     }
 
-    float Time::getTime() const {
+    double Time::getTime() const {
         return _currentTime;
     }
 }
