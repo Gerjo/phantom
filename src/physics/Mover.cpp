@@ -28,8 +28,7 @@ namespace phantom {
 
             direction.normalize();
 
-            Vector3 *newPosition = new Vector3();
-            *newPosition = position + (direction * 100 * time.getElapsed());
+            Vector3 newPosition = position + (direction * 100 * time.getElapsed());
 
             float distanceSq = position.distanceToSq(target);
             float threshold = static_cast<float>(pow(8, 2));
@@ -38,8 +37,7 @@ namespace phantom {
                 _targetList.pop_back();
             }
 
-            _parent->setPosition(*newPosition);
-            delete newPosition;
+            _parent->setPosition(newPosition);
         }
     }
 

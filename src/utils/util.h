@@ -31,6 +31,9 @@ namespace phantom{
                 GetLocalTime(lpSystemTime);
 
                 double total = lpSystemTime->wSecond;
+                total += lpSystemTime->wMinute * 60;
+                total += lpSystemTime->wHour * 3600;
+                total += lpSystemTime->wDay * 86400;
                 total += lpSystemTime->wMilliseconds / 1000.0;
 
                 delete lpSystemTime;
