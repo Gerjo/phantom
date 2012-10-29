@@ -79,6 +79,7 @@ namespace phantom {
 
     void PhantomGame::exit(int returncode) {
         onExit(returncode);
+        _running = false;
     }
 
     void PhantomGame::onExit(int returncode) {
