@@ -12,7 +12,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1280, 720, 0), _worldSize(1200, 650, 0), _fps(60), fullscreen(false) {
+    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(60), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0)
             PhantomGame::INSTANCE = this;
         else
