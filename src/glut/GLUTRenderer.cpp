@@ -49,6 +49,10 @@ namespace phantom {
             }
         }
 
+        if(!game->mousecursor) {
+            glutSetCursor(GLUT_CURSOR_NONE);
+        }
+
         _vboSupport = IsExtensionSupported("GL_ARB_vertex_buffer_object");
         if(_vboSupport) {
 
@@ -176,6 +180,7 @@ namespace phantom {
     void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_TEXTURE_2D);
+
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
         glNormal3f(0.0f, 0.0f, 1.0f);
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
@@ -204,6 +209,7 @@ namespace phantom {
 
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
         glDisable(GL_TEXTURE_2D);
         glPopAttrib();
     }
@@ -338,12 +344,12 @@ namespace phantom {
     void GLUTRenderer::addTexture(ImageCacheItem *item, bool isText) {
         glGenTextures(1, &item->textureID);
         glBindTexture(GL_TEXTURE_2D, item->textureID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         if(!isText)
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, item->imageData);
         else
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, item->imageData);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     }
 
     void GLUTRenderer::removeTexture(ImageCacheItem *item) {

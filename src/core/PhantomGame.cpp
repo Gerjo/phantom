@@ -12,7 +12,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1280, 720, 0), _worldSize(1280, 720, 0), _fps(60), fullscreen(false) {
+    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1280, 720, 0), _worldSize(1200, 650, 0), _fps(60), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0)
             PhantomGame::INSTANCE = this;
         else
@@ -144,6 +144,12 @@ namespace phantom {
                         fullscreen = false;
                     else
                         fullscreen = true;
+                }
+                else if(propertyname.compare("mousecursor") == 0) {
+                    if(atoi(propertyvalue.c_str()) == 0)
+                        mousecursor = false;
+                    else
+                        mousecursor = true;
                 }
 
                 propertyname.clear();
