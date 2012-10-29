@@ -78,12 +78,12 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::text(float x, float y, unsigned int size, string *fontname, string *text) {
-        return this->text(x, y, size, fontname->c_str(), text);
+    Graphics& Graphics::text(float x, float y, unsigned int size, string& fontname, string& text) {
+        return this->text(x, y, size, fontname.c_str(), text);
     }
 
-    Graphics& Graphics::text(float x, float y, unsigned int size, const char *fontname, string *text) {
-        Text* txt = new Text(x, y, size, fontname, text->c_str());
+    Graphics& Graphics::text(float x, float y, unsigned int size, const char* fontname, string& text) {
+        Text* txt = new Text(x, y, size, fontname, text.c_str());
 
         addShape(txt);
         return *this;
