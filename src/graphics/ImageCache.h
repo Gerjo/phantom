@@ -27,8 +27,7 @@ namespace phantom {
         }
         
         ~ImageCache() {
-            map<const string, ImageCacheItem>::iterator it = imageCache.begin();
-            for(; it != imageCache.end(); ++it) {
+            for(map<const string, ImageCacheItem>::iterator it = imageCache.begin(); it != imageCache.end(); ++it) {
                 ImageCacheItem *second = &(*it).second;
                 _renderer->removeTexture(second);
                 if(second->imageData != 0) delete [] second->imageData;

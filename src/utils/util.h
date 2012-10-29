@@ -11,14 +11,6 @@
 namespace phantom{
     class Util{
     public:
-        void static sleep(float timems){
-            #ifndef WIN32
-                usleep(timems * 1000);
-            #else
-                Sleep(static_cast<DWORD>(timems));
-            #endif
-        }
-
         double static getTime() {
             #ifndef WIN32
                 timeval tv;

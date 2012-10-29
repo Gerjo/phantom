@@ -44,7 +44,7 @@ namespace phantom {
             double elapsed = now - last;
             total += elapsed;
 
-            Time time(elapsed, total, now);
+            Time time(static_cast<float>(elapsed), static_cast<float>(total), now);
 
             _driver->onUpdate(time);
 

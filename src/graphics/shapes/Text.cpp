@@ -13,10 +13,9 @@ namespace phantom{
     void Text::genVertices(const char *text, FreeTypeFont *font) {
         int size = strlen(text);
         int advance = 0;
-        int c = 0;
-
+        
         FreeTypeFont::char_info_t* ci;
-        for(; c != size; ++c)
+        for(int c = 0; c != size; ++c)
         {
             ci = &font->info.characters[text[c]];
             for(int i = 0; i < 4; ++i) {
