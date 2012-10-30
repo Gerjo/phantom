@@ -118,6 +118,7 @@
             <pElem>src</pElem>
             <pElem>/usr/include/freetype2</pElem>
           </incDir>
+          <commandLine>-D_GLIBCXX_USE_NANOSLEEP</commandLine>
         </ccTool>
         <asmTool>
           <commandlineTool>as</commandlineTool>
@@ -147,6 +148,7 @@
             <pElem>include</pElem>
             <pElem>src</pElem>
           </incDir>
+          <commandLine>-D_GLIBCXX_USE_NANOSLEEP</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
