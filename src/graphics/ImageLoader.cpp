@@ -92,7 +92,8 @@ namespace phantom {
         
         // Make the row pointers point to the actual data in one row (1 y-axis line).
         for (unsigned int i = 0; i < img->height; ++i)
-            img->row_pointers[img->height - 1 - i] = img->imageData + i * rowbytes;
+            //img->row_pointers[img->height - 1 - i] = img->imageData + (i * rowbytes);
+                img->row_pointers[i] = img->imageData + (i * rowbytes);
 
         // Actually read the image.
         png_read_image(png_ptr, img->row_pointers);

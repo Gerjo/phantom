@@ -38,7 +38,8 @@ namespace phantom {
         vertice.y = y;
         vertice.z = 0.0f;
         tex.u = u;
-        tex.v = -v;
+        tex.v = v;
+
         vertices.push_back(vertice);
         if(u != TEX_COORD_UNUSED && v != TEX_COORD_UNUSED)
             texCoords.push_back(tex);

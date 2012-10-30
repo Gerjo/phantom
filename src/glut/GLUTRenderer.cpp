@@ -182,8 +182,7 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
 
-        glNormal3f(0.0f, 0.0f, 1.0f);
-        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 0.0f);
 
         const Color& fillColor = img->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -350,9 +349,11 @@ namespace phantom {
         else
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, item->imageData);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
         glDisable(GL_TEXTURE_2D);
     }
 
