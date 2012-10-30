@@ -143,10 +143,9 @@ namespace phantom {
         FreeTypeFont *font = _game->getDriver()->getFontLibrary()->getFont(txt);
 
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, font->texture->textureID);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
         const Color& fillColor = txt->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -178,10 +177,11 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
-        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_TEXTURE_2D);
+        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 
+        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
+
         glNormal3f(0.0f, 0.0f, 1.0f);
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
 
@@ -239,7 +239,6 @@ namespace phantom {
     void GLUTRenderer::renderLoop(std::deque<GameState*> *states) {
         glClearColor(0.42f, 0.145f, 0.016f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
         Vector3 initialOffset(0, 0, 0);
 
@@ -342,14 +341,19 @@ namespace phantom {
     }
 
     void GLUTRenderer::addTexture(ImageCacheItem *item, bool isText) {
+        glEnable(GL_TEXTURE_2D);
         glGenTextures(1, &item->textureID);
         glBindTexture(GL_TEXTURE_2D, item->textureID);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
         if(!isText)
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, item->imageData);
         else
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, item->width, item->height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, item->imageData);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        
+        glDisable(GL_TEXTURE_2D);
     }
 
     void GLUTRenderer::removeTexture(ImageCacheItem *item) {
