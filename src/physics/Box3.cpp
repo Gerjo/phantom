@@ -57,6 +57,8 @@ namespace phantom{
            testBounds(origin.y, other.origin.y, origin.y + size.y, other.origin.y + other.size.y)
            &&
            testBounds(origin.z, other.origin.z, origin.z + size.z, other.origin.z + other.size.z)
+           //&&
+           //testBounds(origin.z, other.origin.z, origin.z + size.z, other.origin.z + other.size.z)
         ;
     }
 
