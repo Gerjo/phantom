@@ -131,12 +131,10 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
-        FreeTypeFont *font = _game->getDriver()->getFontLibrary()->getFont(txt);
-
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, font->texture->textureID);
+        glBindTexture(GL_TEXTURE_2D, txt->ftfont->texture->textureID);
 
         const Color& fillColor = txt->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -164,7 +162,6 @@ namespace phantom {
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisable(GL_TEXTURE_2D);
         glPopAttrib();
-
     }
 
     void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {

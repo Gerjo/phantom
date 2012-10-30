@@ -2,6 +2,7 @@
 #include <core/PhantomGame.h>
 #include <core/Driver.h>
 #include <iostream>
+#include <graphics/FreeTypeLibrary.h>
 #include <graphics/shapes/Rectangle.h>
 #include <graphics/shapes/Arc.h>
 #include <graphics/shapes/Image.h>
@@ -84,8 +85,10 @@ namespace phantom {
 
     Graphics& Graphics::text(float x, float y, unsigned int size, const char* fontname, string& text) {
         Text* txt = new Text(x, y, size, fontname, text.c_str());
+        
 
         addShape(txt);
+        txt->ftfont = _parent->getPhantomGame()->getDriver()->getFontLibrary()->getFont(txt);
         return *this;
     }
 

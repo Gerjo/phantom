@@ -12,6 +12,8 @@ namespace phantom{
 	public:
         const char *text;
         const char *font;
+        FreeTypeFont *ftfont;
+
         unsigned int size;
         Text(float x, float y, unsigned int size, const char *font, const char *text);
 
