@@ -20,6 +20,8 @@ namespace phantom{
         bool contains(const Vector3& other);
         bool contains(const Vector3* other);
 
+        Vector3 getCenter(void);
+
         Vector3 origin;
         Vector3 size;
         void repair(void);
