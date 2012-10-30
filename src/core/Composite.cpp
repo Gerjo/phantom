@@ -65,6 +65,18 @@ namespace phantom {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             Composite* composite = *iter;
 
+            #ifdef _DEBUG
+                // GCC will break here, unsure about any other compiler.
+                if(*iter == 0) {
+                    throw PhantomException("Components where modified while iterating over them.");
+                }
+
+                // This is where any sane debugger will crash:
+                // If your code breaks here, it *probably* means the "_components"
+                // collection was modified while we were iterating over it. --Gerjo
+                string name = composite->getType();
+            #endif
+
             // Let's make sure we're fit for an update:
             if(!composite->_remove && !composite->_destroy) {
                 composite->update(time);
