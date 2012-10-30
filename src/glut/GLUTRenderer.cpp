@@ -56,7 +56,6 @@ namespace phantom {
         _vboSupport = IsExtensionSupported("GL_ARB_vertex_buffer_object");
         if(_vboSupport) {
 
-            // Yes, i'm lazy.
 #ifdef _WINDOWS
 #   define GetProcAddress(X) wglGetProcAddress(X)
 #else
@@ -88,14 +87,11 @@ namespace phantom {
         Vector3 cameraPosition = _game->getDriver()->getActiveCamera()->getPosition();
         Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
 
-        // Get the iterator and start iterating.
         std::vector<Composite*>::iterator compIt = components.begin();
         while(compIt != components.end()) {
             Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
-            // Get the shapes and start iterating.
             deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
 
-            // Gerjo's double buffer!
             for(int i = 0; i < 2; ++i) {
                 deque<Shape*>::iterator itShape = shapes->begin();
 
@@ -121,20 +117,15 @@ namespace phantom {
                             drawShape((*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
                         }
                     }
-
-                    // Move on to the next shape.
                     ++itShape;
                 }
-
                 shapes = & (*compIt)->getGraphics().getBufferedShapes();
             }
 
-            // If the component has other components attached to it, draw them as well.
             if((*compIt)->getComponents().size() > 0) {
                 drawLoop((*compIt)->getComponents(), offsetRecalculated);
             }
 
-            // Move on to the next component.
             compIt++;
         }
     }
@@ -252,38 +243,6 @@ namespace phantom {
         glFlush();
     }
 
-    // Based Off Of Code Supplied At OpenGL.org
-    bool GLUTRenderer::IsExtensionSupported(std::string szTargetExtensionString )
-    {
-        const char* szTargetExtension = szTargetExtensionString.c_str();
-        const unsigned char *pszExtensions = NULL;
-        const unsigned char *pszStart;
-        unsigned char *pszWhere, *pszTerminator;
-
-        // Extension names should not have spaces
-        pszWhere = (unsigned char *) strchr( szTargetExtension, ' ' );
-        if( pszWhere || *szTargetExtension == '\0' )
-            return false;
-
-        // Get Extensions String
-        pszExtensions = glGetString( GL_EXTENSIONS );
-
-        // Search The Extensions String For An Exact Copy
-        pszStart = pszExtensions;
-        for(;;)
-        {
-            pszWhere = (unsigned char *) strstr( (const char *) pszStart, szTargetExtension );
-            if( !pszWhere )
-                break;
-            pszTerminator = pszWhere + strlen( szTargetExtension );
-            if( pszWhere == pszStart || *( pszWhere - 1 ) == ' ' )
-                if( *pszTerminator == ' ' || *pszTerminator == '\0' )
-                    return true;
-            pszStart = pszTerminator;
-        }
-        return false;
-    }
-
     void GLUTRenderer::buildShape(Shape *shape) {
         // Be sure nothing is left to be deleted.
         destroyShape(shape);
@@ -339,6 +298,26 @@ namespace phantom {
         }
     }
 
+    void GLUTRenderer::destroyShape(Shape *shape) {
+        if(_vboSupport) {
+            if(shape->verticesCount != 0) {
+                glDeleteBuffersARB(1, &shape->vboVertices);
+                glDeleteBuffersARB(1, &shape->vboTexCoords);
+            }
+
+            shape->verticesCount = 0;
+        }
+        else {
+            if(shape->verticesArray != 0)
+                delete [] shape->verticesArray;
+            if(shape->texCoordsArray != 0)
+                delete [] shape->texCoordsArray;
+
+            shape->verticesArray = 0;
+            shape->texCoordsArray = 0;
+        }
+    }
+
     void GLUTRenderer::addTexture(ImageCacheItem *item, bool isText) {
         glEnable(GL_TEXTURE_2D);
         glGenTextures(1, &item->textureID);
@@ -364,23 +343,35 @@ namespace phantom {
         }
     }
 
-    void GLUTRenderer::destroyShape(Shape *shape) {
-        if(_vboSupport) {
-            if(shape->verticesCount != 0) {
-                glDeleteBuffersARB(1, &shape->vboVertices);
-                glDeleteBuffersARB(1, &shape->vboTexCoords);
-            }
+    // Based Off Of Code Supplied At OpenGL.org
+    bool GLUTRenderer::IsExtensionSupported(std::string szTargetExtensionString )
+    {
+        const char* szTargetExtension = szTargetExtensionString.c_str();
+        const unsigned char *pszExtensions = NULL;
+        const unsigned char *pszStart;
+        unsigned char *pszWhere, *pszTerminator;
 
-            shape->verticesCount = 0;
-        }
-        else {
-            if(shape->verticesArray != 0)
-                delete [] shape->verticesArray;
-            if(shape->texCoordsArray != 0)
-                delete [] shape->texCoordsArray;
+        // Extension names should not have spaces
+        pszWhere = (unsigned char *) strchr( szTargetExtension, ' ' );
+        if( pszWhere || *szTargetExtension == '\0' )
+            return false;
 
-            shape->verticesArray = 0;
-            shape->texCoordsArray = 0;
+        // Get Extensions String
+        pszExtensions = glGetString( GL_EXTENSIONS );
+
+        // Search The Extensions String For An Exact Copy
+        pszStart = pszExtensions;
+        for(;;)
+        {
+            pszWhere = (unsigned char *) strstr( (const char *) pszStart, szTargetExtension );
+            if( !pszWhere )
+                break;
+            pszTerminator = pszWhere + strlen( szTargetExtension );
+            if( pszWhere == pszStart || *( pszWhere - 1 ) == ' ' )
+                if( *pszTerminator == ' ' || *pszTerminator == '\0' )
+                    return true;
+            pszStart = pszTerminator;
         }
+        return false;
     }
 }
