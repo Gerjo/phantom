@@ -28,7 +28,7 @@ namespace phantom {
 
             direction.normalize();
 
-            Vector3 newPosition = position + (direction * 100 * time.getElapsed());
+            Vector3 newPosition = position + (direction * 300 * time.getElapsed());
 
             float distanceSq = position.distanceToSq(target);
             float threshold = static_cast<float>(pow(8, 2));
