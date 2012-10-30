@@ -51,9 +51,13 @@ namespace phantom {
     }
 
     void Composite::addComponent(Composite *component) {
-        this->_components.push_back(component);
-        component->onParentChange(this);
-        component->onAnsestorChanged();
+        if(_isUpdating) {
+            _componentsBuffer.push_back(component);
+        } else {
+            this->_components.push_back(component);
+            component->onParentChange(this);
+            component->onAnsestorChanged();
+        }
     }
 
     void Composite::update(const Time& time) {
@@ -86,6 +90,14 @@ namespace phantom {
         }
 
         _isUpdating = false;
+
+        if(!_componentsBuffer.empty()) {
+            for(Composite* composite : _componentsBuffer) {
+                addComponent(composite);
+            }
+
+            _componentsBuffer.clear();
+        }
     }
 
     void Composite::intergrate(const Time& time) {
