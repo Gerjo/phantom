@@ -12,6 +12,18 @@ namespace phantom {
 
     }
 
+    void GameState::disposeObjects() {
+        Layer::disposeObjects();
+
+        for(Composite* composite : getComponents()) {
+            Layer* layer = dynamic_cast<Layer*>(composite);
+            if(layer != 0) {
+                layer->disposeObjects();
+            }
+        }
+
+    }
+
     // void GameState::addComponent(Composite* component) {
     //    if(dynamic_cast<Layer*>(component) == 0) {
     //        throw PhantomException("Only layers can be added to a GameState.");

@@ -6,6 +6,7 @@
         <itemPath>src/core/Camera.h</itemPath>
         <itemPath>src/core/Composite.cpp</itemPath>
         <itemPath>src/core/Composite.h</itemPath>
+        <itemPath>src/core/Driver.cpp</itemPath>
         <itemPath>src/core/Driver.h</itemPath>
         <itemPath>src/core/Entity.cpp</itemPath>
         <itemPath>src/core/Entity.h</itemPath>
