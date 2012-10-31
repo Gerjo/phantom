@@ -10,7 +10,7 @@ namespace phantom{
 
     GLUTDriver::GLUTDriver(PhantomGame* game) : Driver(game) {
         _renderer = new GLUTRenderer(game);
-        _input    = new GLUTInput(game);
+        _input = new GLUTInput(game);
         _fontLibrary = new FreeTypeLibrary(_renderer);
     }
 

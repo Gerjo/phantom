@@ -16,49 +16,21 @@ namespace phantom{
     class FreeTypeLibrary;
     class LIBEXPORT Driver{
     public:
-        Driver(PhantomGame* game) : _game(game) {
-            _camera = 0;
-            _renderer = 0;
-            _fontLibrary = 0;
-        }
-        virtual ~Driver(){}
+        Driver(PhantomGame* game);
+        virtual ~Driver();
 
-        virtual void setWindowTitle(string title) = 0;
+        virtual void setWindowTitle(string title);
 
-        virtual void onUpdate(Time time) {
-            _game->update(time);
-            _input->getKeyboardState()->changes()->clear();
-        }
-
-        virtual void onRender() {
-            _renderer->renderLoop(&_game->getGameStates());
-        };
-
-        Input* getInput() { return _input; }
+        virtual void onUpdate(Time time);
+        virtual void onRender();
 
         virtual Camera* createCamera(void) = 0;
-
-        Camera *getActiveCamera() {
-            if(_camera != 0)
-                return _camera;
-            else
-                throw PhantomException("There is no active camera set yet.");
-        }
-
-        void setActiveCamera(Camera *cam) {
-            if(_camera != 0)
-                _camera->setActive(false);
-            _camera = cam;
-            _camera->setActive(true);
-        }
-
-        Renderer *getRenderer() {
-            return _renderer;
-        }
-
-        FreeTypeLibrary *getFontLibrary() {
-            return _fontLibrary;
-        }
+        Camera *getActiveCamera();
+        void setActiveCamera(Camera *cam);
+        
+        Input* getInput();
+        Renderer *getRenderer();
+        FreeTypeLibrary *getFontLibrary();
 
     protected:
         Renderer* _renderer;

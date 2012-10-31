@@ -6,7 +6,10 @@ namespace phantom {
 
     void KeyboardState::handleEvent(char id, char newValue) {
         _keys[id] = newValue;
-        _changed.push_back(id);
+        if(newValue == 1)
+            _changedDown.push_back(id);
+        else
+            _changedUp.push_back(id);
     }
 
     bool KeyboardState::isKeyDown(char id) {
@@ -24,6 +27,10 @@ namespace phantom {
     }
 
     std::vector<char> *KeyboardState::changes() {
-        return &_changed;
+        return &_changedDown;
+    }
+    
+    std::vector<char> *KeyboardState::changesUp() {
+        return &_changedUp;
     }
 }

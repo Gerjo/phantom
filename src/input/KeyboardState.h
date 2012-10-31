@@ -16,10 +16,12 @@ namespace phantom {
 		bool isKeyUp(char id);
 
         std::vector<char>* changes();
+        std::vector<char>* changesUp();
 
 	private:
 		char _keys[256];
-        std::vector<char> _changed;
+        std::vector<char> _changedDown;
+        std::vector<char> _changedUp;
 	};
 }
 
