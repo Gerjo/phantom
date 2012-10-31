@@ -24,7 +24,11 @@ namespace phantom{
         virtual ~Driver(){}
 
         virtual void setWindowTitle(string title) = 0;
-        virtual void onUpdate(Time time) = 0;
+        virtual void onUpdate(Time time) {
+            _game->update(time);
+            _renderer->renderLoop(&_game->getGameStates());
+            _input->getKeyboardState()->changes()->clear();
+        }
         virtual void onRender() = 0;
 
         Input* getInput() { return _input; }

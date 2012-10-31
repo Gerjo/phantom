@@ -26,8 +26,7 @@ namespace phantom{
     }
 
     void GLUTDriver::onUpdate(Time time){
-        _game->update(time);
-        _renderer->renderLoop(&_game->getGameStates());
+        Driver::onUpdate(time);
     }
 
     void GLUTDriver::onRender() {
