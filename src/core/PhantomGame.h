@@ -45,7 +45,7 @@ namespace phantom {
         bool _running;
     private:
         static PhantomGame* INSTANCE;
-
+        vector<Composite*> _disposables;
         Vector3 _viewPort;
         Vector3 _worldSize;
 
@@ -56,6 +56,7 @@ namespace phantom {
 
         void parseConfigurationFile(const char *configfile);
 
+        void dispose(Composite* composite);
     };
 
 } /* namespace phantom */

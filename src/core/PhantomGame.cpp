@@ -53,7 +53,7 @@ namespace phantom {
             //}
 
             fpscount++;
-            
+
             if (total >= 1) {
                 stringstream stream;
                 stream << "Elephantom [Avg FPS: " << fpscount << " Cur FPS: " << 1.0 / elapsed << "]" << endl;
@@ -74,6 +74,15 @@ namespace phantom {
             if(gameState->doUpdate) {
                 gameState->update(time);
             }
+        }
+
+        if(!_disposables.empty()) {
+            for(Composite* composite : _disposables) {
+                delete composite;
+                composite = 0;
+            }
+
+            _disposables.clear();
         }
     }
 
@@ -175,6 +184,10 @@ namespace phantom {
         }
 
         return messageState;
+    }
+
+    void PhantomGame::dispose(Composite* composite) {
+        _disposables.push_back(composite);
     }
 
 } /* namespace phantom */
