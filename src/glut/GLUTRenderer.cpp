@@ -103,10 +103,6 @@ namespace phantom {
                     if(shapeBox.intersect(cameraBox)) {
                         glLoadIdentity();
 
-                        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                        glEnable(GL_BLEND);
-                        glDisable(GL_COLOR_MATERIAL);
-
                         if((*itShape)->isImage) {
                             drawImage(static_cast<Image *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
                         }
@@ -135,6 +131,8 @@ namespace phantom {
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, txt->ftfont->texture->textureID);
+
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
 
         const Color& fillColor = txt->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -170,7 +168,7 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
 
-        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 0.0f);
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
 
         const Color& fillColor = img->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -226,6 +224,9 @@ namespace phantom {
     void GLUTRenderer::renderLoop(std::deque<GameState*> *states) {
         glClearColor(0.42f, 0.145f, 0.016f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
 
         Vector3 initialOffset(0, 0, 0);
 
