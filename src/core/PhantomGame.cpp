@@ -47,7 +47,7 @@ namespace phantom {
             Time time(static_cast<float>(elapsed), static_cast<float>(total), now);
 
             _driver->onUpdate(time);
-
+            _driver->onRender();
             //if (elapsed < (1.0f / this->_fps)) {
             //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
             //}

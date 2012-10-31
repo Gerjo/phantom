@@ -25,14 +25,6 @@ namespace phantom{
         glutSetWindowTitle(title.c_str());
     }
 
-    void GLUTDriver::onUpdate(Time time){
-        Driver::onUpdate(time);
-    }
-
-    void GLUTDriver::onRender() {
-
-    }
-
     Camera* GLUTDriver::createCamera(void) {
         Camera* cam = new GLUTCamera(0);
         return cam;

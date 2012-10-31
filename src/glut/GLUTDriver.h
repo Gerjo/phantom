@@ -11,8 +11,6 @@ namespace phantom{
 		GLUTDriver(PhantomGame* game);
 		virtual ~GLUTDriver();
 
-		virtual void onUpdate(Time time);
-		virtual void onRender();
         virtual void setWindowTitle(string title);
         virtual Camera* createCamera(void);
 	};
