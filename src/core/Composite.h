@@ -83,6 +83,7 @@ namespace phantom {
     private:
         Composite *_parent;
         std::vector<Composite*> _components;
+        std::vector<Composite*> _componentsBuffer;
         Graphics *_graphics;
         string _type;
 

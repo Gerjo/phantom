@@ -15,6 +15,13 @@ namespace phantom{
 
     }
 
+    Vector3 Box3::getCenter(void) {
+        return Vector3(
+                origin.x + size.x * 0.5,
+                origin.y + size.y * 0.5,
+                origin.z + size.z * 0.5);
+    }
+
     bool Box3::contains(const Vector3& other) {
         // Note: see note at "testBounds".
         return
@@ -48,8 +55,8 @@ namespace phantom{
            testBounds(origin.x, other.origin.x, origin.x + size.x, other.origin.x + other.size.x)
            &&
            testBounds(origin.y, other.origin.y, origin.y + size.y, other.origin.y + other.size.y)
-           &&
-           testBounds(origin.z, other.origin.z, origin.z + size.z, other.origin.z + other.size.z)
+           //&&
+           //testBounds(origin.z, other.origin.z, origin.z + size.z, other.origin.z + other.size.z)
         ;
     }
 
