@@ -15,30 +15,15 @@ namespace phantom {
 
     class LIBEXPORT MouseState {
     public:
-        MouseState() : _buttonCount(5) {
-            for(unsigned int i = 0; i <= _buttonCount; ++i)
-                _buttons.push_back('0');
-        };
-        ~MouseState() { };
+        MouseState();
+        ~MouseState();
 
-        void handleEvent(Vector3 newValue){ _mousePos = newValue;    }
-        void handleEvent(char id, char newValue)  { _buttons[id] = newValue; }
+        void handleEvent(Vector3 newValue);
+        void handleEvent(char id, char newValue);
 
-        Vector3 getMousePosition() { return _mousePos; }
-        bool isButtonDown(unsigned char id) {
-            if(id <= _buttonCount) {
-                //std::cout << "mouse pos: " << _mousePos << std::endl;
-                return _buttons[id] == 1;
-            }
-            else {
-                for(unsigned int i = _buttonCount; i <= id; ++i) {
-                    _buttons.push_back('0');
-                }
-                _buttonCount = id;
-                return _buttons[id] == 1;
-            }
-        }
-        bool isButtonUp  (unsigned char id) { return !isButtonDown(id); }
+        Vector3 getMousePosition();
+        bool isButtonUp(unsigned char id);
+        bool isButtonDown(unsigned char id);
 
     private:
         Vector3 _mousePos;

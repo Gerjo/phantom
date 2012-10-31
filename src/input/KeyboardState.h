@@ -6,13 +6,13 @@
 namespace phantom {
 	class LIBEXPORT KeyboardState {
 	public:
-		KeyboardState() { };
-		~KeyboardState() { };
+		KeyboardState();
+		~KeyboardState();
 
-		void handleEvent(char id, char newValue) { _keys[id] = newValue; }
+		void handleEvent(char id, char newValue);
 
-		bool isKeyDown(char id) { if(_keys[id] == 1) return true; else return false; }
-		bool isKeyUp  (char id) { if(_keys[id] == 0) return true; else return false; }
+		bool isKeyDown(char id);
+		bool isKeyUp(char id);
 
 	private:
 		char _keys[256];
