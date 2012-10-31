@@ -44,7 +44,7 @@ namespace phantom {
     }
 
     void GLUTInput::keyboardSpecialListener(int code, int mouseX, int mouseY) {
-        GLUTInput::INSTANCE->_keyboardState->handleEvent(static_cast<unsigned char> (code), 1);
+        //GLUTInput::INSTANCE->_keyboardState->handleEvent(static_cast<unsigned char> (code), 1);
     }
 
     void GLUTInput::keyboardSpecialUpListener(int code, int mouseX, int mouseY) {
