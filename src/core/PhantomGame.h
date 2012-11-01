@@ -37,14 +37,15 @@ namespace phantom {
 
         virtual MessageState handleMessage(AbstractMessage* message);
 
-        friend class Graphics;
         friend class Composite;
+        friend class Graphics;
     protected:
         virtual void onExit(int returncode);
 
         bool _running;
     private:
         static PhantomGame* INSTANCE;
+        vector<Composite*> _disposables;
         Vector3 _viewPort;
         Vector3 _worldSize;
 
@@ -55,7 +56,7 @@ namespace phantom {
 
         void parseConfigurationFile(const char *configfile);
 
-
+        void dispose(Composite* composite);
     };
 
 } /* namespace phantom */

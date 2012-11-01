@@ -90,6 +90,8 @@ namespace phantom {
         bool _remove;
         bool _destroy;
         bool _isUpdating;
+
+
     };
 
     template <class T>

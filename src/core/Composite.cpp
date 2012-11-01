@@ -86,11 +86,7 @@ namespace phantom {
             if(composite->_remove == true) {
                 composite->_remove = false;
                 if(composite->_destroy) {
-                    if(_layer != 0) {
-                        _layer->dispose(composite);
-                    } else {
-                        delete composite;
-                    }
+                    getPhantomGame()->dispose(composite);
                 }
 
                 // Nifty little feature, erase returns the next available iterator:
@@ -264,11 +260,8 @@ namespace phantom {
 
     void Composite::destroy(void) {
         if(_parent == 0) {
-            if(_layer != 0) {
-                _layer->dispose(this);
-            } else {
-                delete this;
-            }
+            // Called without a parent, save to delete right away.
+            getPhantomGame()->dispose(this);
         } else {
             _destroy = true;
             removeFromParent();
@@ -277,18 +270,12 @@ namespace phantom {
 
     void Composite::destroyComponent(Composite* who) {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-            if (who == *iter) {
-                _components.erase(iter);
-
-                if (_layer != 0) {
-                    _layer->dispose(who);
-                } else {
-                    delete who;
-                }
-                
-                break;
-            }
-        }
+             if(who == *iter) {
+                 _components.erase(iter);
+                 getPhantomGame()->dispose(who);
+                 break;
+             }
+         }
     }
 
     void Composite::removeComponent(Composite* who) {

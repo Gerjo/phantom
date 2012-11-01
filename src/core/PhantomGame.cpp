@@ -48,11 +48,6 @@ namespace phantom {
 
             _driver->onUpdate(time);
             _driver->onRender();
-
-            for(GameState* gamestate : _states) {
-                gamestate->disposeObjects();
-            }
-
             //if (elapsed < (1.0f / this->_fps)) {
             //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
             //}
@@ -79,6 +74,15 @@ namespace phantom {
             if(gameState->doUpdate) {
                 gameState->update(time);
             }
+        }
+
+        if(!_disposables.empty()) {
+            for(Composite* composite : _disposables) {
+                delete composite;
+                composite = 0;
+            }
+
+            _disposables.clear();
         }
     }
 
@@ -180,6 +184,10 @@ namespace phantom {
         }
 
         return messageState;
+    }
+
+    void PhantomGame::dispose(Composite* composite) {
+        _disposables.push_back(composite);
     }
 
 } /* namespace phantom */
