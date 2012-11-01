@@ -135,7 +135,7 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, txt->ftfont->texture->textureID);
 
-        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
+        
 
         const Color& fillColor = txt->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -144,6 +144,7 @@ namespace phantom {
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
         glTranslatef(txt->x + xOffset, txt->y + yOffset, 0.0f);
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, txt->vboVertices);
             glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
@@ -171,7 +172,7 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
 
-        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
+        
 
         const Color& fillColor = img->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
@@ -180,6 +181,7 @@ namespace phantom {
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
         glTranslatef(img->x + xOffset, img->y + yOffset, 0.0f);
+        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, img->vboVertices);
             glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);
@@ -211,6 +213,7 @@ namespace phantom {
         glEnableClientState(GL_VERTEX_ARRAY);
 
         glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
+        glRotatef(composite->getGraphics().getRotation(), 0, 0, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
             glVertexPointer(3, GL_FLOAT, 0, (char *) NULL);

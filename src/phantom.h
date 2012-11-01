@@ -8,6 +8,10 @@
 #include <core/PhantomGame.h>
 #include <core/Driver.h>
 
+#include <input/Input.h>
+#include <input/MouseState.h>
+#include <input/KeyboardState.h>
+
 #include <messaging/Message.h>
 #include <messaging/MessageState.h>
 #include <messaging/AbstractMessage.h>
