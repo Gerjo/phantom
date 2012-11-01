@@ -17,7 +17,7 @@ namespace phantom {
     public:
         Camera(int id) :
             _cameraID(id),
-            _isActive(true),
+            _isActive(false),
             _rotation(0.0f, 0.0f, 0.0f),
             _viewPort(0.0f, 0.0f, 0.0f)
         {
