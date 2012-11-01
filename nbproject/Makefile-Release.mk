@@ -56,6 +56,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/glut/GLUTRenderer.o \
 	${OBJECTDIR}/src/graphics/FreeTypeLibrary.o \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
+	${OBJECTDIR}/src/core/Driver.o \
 	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
@@ -193,6 +194,11 @@ ${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
+
+${OBJECTDIR}/src/core/Driver.o: src/core/Driver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/core
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Driver.o src/core/Driver.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
