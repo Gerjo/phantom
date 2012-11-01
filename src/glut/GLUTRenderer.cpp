@@ -135,8 +135,6 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, txt->ftfont->texture->textureID);
 
-        
-
         const Color& fillColor = txt->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
@@ -205,8 +203,6 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset) {
-        glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
-
         const Color& fillColor = shape->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
