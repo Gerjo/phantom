@@ -10,9 +10,7 @@ namespace phantom {
     namespace maths {
         //static Vector3 rotationToDirection(const float& angle);
         static float directionToRotation(phantom::Vector3* direction) {
-            float dotproduct = cosf(direction->dot(Vector3(1,1,1)));
-            float rotation = dotproduct * 180 / 3.14159f;
-            return rotation;
+            return atan2(direction->y, direction->x) * 180 / 3.14159f;
         }
     }
 }
