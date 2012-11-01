@@ -81,48 +81,51 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawLoop(std::vector<Composite*>& components, Vector3& offset) {
-        if(_game->getDriver()->getActiveCamera() == 0)
+        if(_game->getDriver()->getActiveCameras()->size() == 0)
             return;
 
-        Vector3 cameraPosition = _game->getDriver()->getActiveCamera()->getPosition();
-        Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
+        for(Camera *cam : *_game->getDriver()->getActiveCameras()) {
+            cam->setParams();
+            Vector3 cameraPosition = cam->getPosition();
+            Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
 
-        std::vector<Composite*>::iterator compIt = components.begin();
-        while(compIt != components.end()) {
-            Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
-            deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
+            std::vector<Composite*>::iterator compIt = components.begin();
+            while(compIt != components.end()) {
+                Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
+                deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
 
-            for(int i = 0; i < 2; ++i) {
-                deque<Shape*>::iterator itShape = shapes->begin();
+                for(int i = 0; i < 2; ++i) {
+                    deque<Shape*>::iterator itShape = shapes->begin();
 
-                while(itShape != shapes->end())	{
-                    Box3 shapeBox = (*itShape)->getBounds();
-                    shapeBox.origin.x += offsetRecalculated.x;
-                    shapeBox.origin.y += offsetRecalculated.y;
+                    while(itShape != shapes->end())	{
+                        Box3 shapeBox = (*itShape)->getBounds();
+                        shapeBox.origin.x += offsetRecalculated.x;
+                        shapeBox.origin.y += offsetRecalculated.y;
 
-                    if(shapeBox.intersect(cameraBox)) {
-                        glLoadIdentity();
+                        if(shapeBox.intersect(cameraBox)) {
+                            glLoadIdentity();
 
-                        if((*itShape)->isImage) {
-                            drawImage(static_cast<Image *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                            if((*itShape)->isImage) {
+                                drawImage(static_cast<Image *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                            }
+                            else if((*itShape)->isText) {
+                                drawText(static_cast<Text *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                            }
+                            else {
+                                drawShape((*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
+                            }
                         }
-                        else if((*itShape)->isText) {
-                            drawText(static_cast<Text *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
-                        }
-                        else {
-                            drawShape((*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
-                        }
+                        ++itShape;
                     }
-                    ++itShape;
+                    shapes = & (*compIt)->getGraphics().getBufferedShapes();
                 }
-                shapes = & (*compIt)->getGraphics().getBufferedShapes();
-            }
 
-            if((*compIt)->getComponents().size() > 0) {
-                drawLoop((*compIt)->getComponents(), offsetRecalculated);
-            }
+                if((*compIt)->getComponents().size() > 0) {
+                    drawLoop((*compIt)->getComponents(), offsetRecalculated);
+                }
 
-            compIt++;
+                compIt++;
+            }
         }
     }
 

@@ -63,6 +63,9 @@ namespace phantom {
             _rotation = rot;
         }
 
+        virtual void setParams() {
+        }
+
     private:
         virtual void setActive(bool value) {
             _isActive = value;

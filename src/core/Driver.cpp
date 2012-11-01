@@ -1,9 +1,10 @@
 #include "Driver.h"
 
+#include <algorithm>
+
 namespace phantom{
 
     Driver::Driver(PhantomGame* game) : _game(game) {
-        _camera = 0;
         _renderer = 0;
         _fontLibrary = 0;
     }
@@ -24,18 +25,24 @@ namespace phantom{
         _renderer->renderLoop(&_game->getGameStates());
     }
 
-    Camera* Driver::getActiveCamera() {
-        if(_camera != 0)
-            return _camera;
-        else
-            throw PhantomException("There is no active camera set yet.");
+    vector<Camera*>* Driver::getActiveCameras() {
+        return &_activeCameras;
     }
 
-    void Driver::setActiveCamera(Camera *cam) {
-        if(_camera != 0)
-            _camera->setActive(false);
-        _camera = cam;
-        _camera->setActive(true);
+    void Driver::enableCamera(Camera *cam) {
+        cam->setActive(true);
+        _activeCameras.push_back(cam);
+    }
+
+    void Driver::disableCamera(Camera *cam) {
+        cam->setActive(false);
+        for(vector<Camera*>::iterator it = _activeCameras.begin(); it != _activeCameras.end();) {
+            if(*it == cam) {
+                it = _activeCameras.erase(it);
+            }
+            else
+                ++it;
+        }
     }
 
     Input* Driver::getInput() {
@@ -48,5 +55,9 @@ namespace phantom{
 
     FreeTypeLibrary *Driver::getFontLibrary() {
         return _fontLibrary;
+    }
+
+    void Driver::addCamToList(Camera *cam) {
+        _cameras.push_back(cam);
     }
 }
