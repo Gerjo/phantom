@@ -12,7 +12,8 @@ namespace phantom {
     _remove(false),
     _destroy(false),
     _isUpdating(false),
-    _type("Composite")
+    _type("Composite"),
+    isStatic(false)
     {
         _layer = 0;
         _parent = 0;

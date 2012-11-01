@@ -22,6 +22,8 @@ namespace phantom {
 
     class LIBEXPORT Composite {
     public:
+        bool isStatic;
+
         Composite();
         virtual ~Composite();
 
