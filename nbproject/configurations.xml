@@ -6,6 +6,7 @@
         <itemPath>src/core/Camera.h</itemPath>
         <itemPath>src/core/Composite.cpp</itemPath>
         <itemPath>src/core/Composite.h</itemPath>
+        <itemPath>src/core/Driver.cpp</itemPath>
         <itemPath>src/core/Driver.h</itemPath>
         <itemPath>src/core/Entity.cpp</itemPath>
         <itemPath>src/core/Entity.h</itemPath>
@@ -81,6 +82,7 @@
         <itemPath>src/physics/Vector3.h</itemPath>
       </logicalFolder>
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
+        <itemPath>src/utils/Maths.h</itemPath>
         <itemPath>src/utils/PhantomException.cpp</itemPath>
         <itemPath>src/utils/PhantomException.h</itemPath>
         <itemPath>src/utils/Time.cpp</itemPath>
