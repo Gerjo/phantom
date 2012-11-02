@@ -18,7 +18,7 @@ namespace phantom {
         _layer = 0;
         _parent = 0;
         _graphics = new Graphics(this);
-        _boundingBox.size = Vector3(10, 10, 10);
+        _boundingBox.size = Vector3(10, 10, 0);
     }
 
     Composite::~Composite() {
