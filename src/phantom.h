@@ -1,8 +1,6 @@
 #ifndef PHANTOM_H_
 #define PHANTOM_H_
 
-#define _NO_DEBUG_HEAP 1
-
 #include <core/Composite.h>
 #include <core/Entity.h>
 #include <core/PhantomGame.h>

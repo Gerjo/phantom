@@ -8,7 +8,7 @@ namespace phantom {
     class LIBEXPORT GLUTInput : public Input {
     public:
         GLUTInput(PhantomGame *game);
-        ~GLUTInput();
+        virtual ~GLUTInput();
 
         virtual KeyboardState* getKeyboardState();
         virtual MouseState* getMouseState();

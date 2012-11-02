@@ -281,7 +281,7 @@ namespace phantom {
             delete [] verticesArray;
             if(shape->isImage || shape->isText)
                 delete [] texCoordArray;
-        } else {
+        } else if (!_vboSupport) {
             shape->verticesCount = shape->vertices.size();
 
             // Creating REAL arrays -.-

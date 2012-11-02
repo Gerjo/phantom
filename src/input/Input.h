@@ -12,6 +12,7 @@ namespace phantom {
     class LIBEXPORT Input {
     public:
         Input(PhantomGame *game) { _game = game; }
+        virtual ~Input() {}
         virtual KeyboardState* getKeyboardState() = 0;
         virtual MouseState* getMouseState() = 0;
 
