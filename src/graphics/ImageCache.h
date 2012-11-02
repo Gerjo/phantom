@@ -56,6 +56,8 @@ namespace phantom {
             item->imageData = 0;
             item->row_pointers = 0;
             imageCache.insert(pair<const string, ImageCacheItem>(filename, *item));
+            delete item;
+            item = 0;
         }
 
         ImageCacheItem *getFromCache(const string filename) {

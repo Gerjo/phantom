@@ -167,6 +167,8 @@ namespace phantom {
                 propertyvalue.clear();
             }
         }
+
+        delete[] buffer;
     }
 
     // Since gamestates are not added as child, messages must be manually moved
