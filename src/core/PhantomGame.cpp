@@ -118,6 +118,7 @@ namespace phantom {
     }
 
     void PhantomGame::parseConfigurationFile(const char *configfile) {
+        if(strlen(configfile) == 0) return;
         std::ifstream configuration(configfile);
         configuration.seekg(0, ios::end);
         std::streamoff length = configuration.tellg();
