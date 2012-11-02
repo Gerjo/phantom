@@ -13,6 +13,17 @@ namespace phantom {
     }
 
     FreeTypeLibrary::~FreeTypeLibrary() {
+        for(map<const char *, FreeTypeFont>::iterator it = fontCache.begin(); it != fontCache.end(); ++it) {
+            ImageCacheItem *second = (*it).second.texture;
+            _renderer->removeTexture(second);
+            delete [] second->imageData;
+            second->imageData = 0;
+            delete [] second->row_pointers;
+            second->row_pointers = 0;
+            delete second;
+            second = 0;
+        }
+
         FT_Done_FreeType(lib);
     }
 

@@ -17,8 +17,8 @@ namespace phantom{
     GLUTDriver::~GLUTDriver(){
         delete _input;
         delete ImageCache::getInstance();
-        delete _renderer;
         delete _fontLibrary;
+        delete _renderer;
     }
 
     void GLUTDriver::setWindowTitle(string title) {
