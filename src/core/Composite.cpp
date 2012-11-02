@@ -71,7 +71,7 @@ namespace phantom {
             #ifdef _DEBUG
                 // GCC will break here, unsure about any other compiler.
                 if(*iter == 0) {
-                    throw PhantomException("Components where modified while iterating over them.");
+                    throw PhantomException("Components were modified while iterating over them.");
                 }
 
                 // This is where any sane debugger will crash:

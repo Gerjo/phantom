@@ -79,6 +79,8 @@ namespace phantom {
             charInfo->top = bmpGlyph->top;
             charInfo->advance = face->glyph->advance.x >> 6;
             charInfo->x = maxWidth - charInfo->width;
+
+            FT_Done_Glyph(glyph);
         }
         
         int rval = 1;
