@@ -27,9 +27,7 @@
 #include <physics/Box3.h>
 #include <physics/Mover.h>
 
-#ifdef WIN32
-
-#else
+#ifndef WIN32
     #include <sys/time.h>
     #include <unistd.h>
 #endif
