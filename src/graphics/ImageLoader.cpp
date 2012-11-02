@@ -86,6 +86,7 @@ namespace phantom {
         if (!img->row_pointers) {
             png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
             delete[] img->imageData;
+            img->imageData = 0;
             fclose(fp);
             return 0;
         }

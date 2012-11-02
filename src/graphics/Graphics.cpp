@@ -85,7 +85,7 @@ namespace phantom {
 
     Graphics& Graphics::text(float x, float y, unsigned int size, const char* fontname, string& text) {
         Text* txt = new Text(x, y, size, fontname, text.c_str());
-        
+
 
         addShape(txt);
         txt->ftfont = _parent->getPhantomGame()->getDriver()->getFontLibrary()->getFont(txt);
@@ -148,10 +148,9 @@ namespace phantom {
         deleteShapes(_workspaceShapes);
         deleteShapes(_bufferedShapes);
 
-        if(_polygonBuffer != 0) {
-            delete _polygonBuffer;
-            _polygonBuffer = 0;
-        }
+        delete _polygonBuffer;
+        _polygonBuffer = 0;
+
         return *this;
     }
 
@@ -177,6 +176,7 @@ namespace phantom {
         for(shIt = source.begin(); shIt != source.end(); ++shIt) {
             (*shIt)->destroyShape(_parent->getPhantomGame()->getDriver()->getRenderer());
             delete *shIt;
+            *shIt = 0;
         }
 
         source.clear();

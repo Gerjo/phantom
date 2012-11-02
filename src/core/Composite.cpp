@@ -24,9 +24,11 @@ namespace phantom {
     Composite::~Composite() {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             delete *iter;
+            *iter = 0;
         }
 
         delete _graphics;
+        _graphics = 0;
     }
 
     PhantomGame* Composite::getPhantomGame(void) {

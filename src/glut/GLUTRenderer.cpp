@@ -308,10 +308,8 @@ namespace phantom {
             shape->verticesCount = 0;
         }
         else {
-            if(shape->verticesArray != 0)
-                delete [] shape->verticesArray;
-            if(shape->texCoordsArray != 0)
-                delete [] shape->texCoordsArray;
+            delete [] shape->verticesArray;
+            delete [] shape->texCoordsArray;
 
             shape->verticesArray = 0;
             shape->texCoordsArray = 0;
