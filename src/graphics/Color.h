@@ -30,6 +30,7 @@ namespace phantom{
         static Color CORNFLOWER(-27, 22, 110);
         static Color BROWN(32, 12, -15);
         static Color HOTPINK(127, -107, 20);
+        static Color MIDNIGHTBLUE(-102, -102, -15);
     }
 }
 
