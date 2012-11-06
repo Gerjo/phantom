@@ -9,6 +9,12 @@ namespace phantom {
     Entity::Entity() {
         mover = 0;
         _health = 100.0f;
+        _totalHealth = 100.0f;
+    }
+
+    void Entity::setHealth(float value) {
+        _health = value;
+        _totalHealth = value;
     }
 
     void Entity::addComponent(Composite* component) {

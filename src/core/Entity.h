@@ -18,6 +18,9 @@ namespace phantom {
     protected:
         Mover* mover;
         float _health;
+        float _totalHealth;
+
+        virtual void setHealth(float value);
     };
 
 } /* namespace phantom */
