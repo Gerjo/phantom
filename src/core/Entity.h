@@ -12,7 +12,7 @@ namespace phantom {
     public:
         Entity();
         virtual void addComponent(Composite *component);
-        virtual void removeHealth(float amount);
+        virtual bool removeHealth(float amount);
         virtual void update(const Time& time);
 
     protected:
