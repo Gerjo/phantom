@@ -81,9 +81,9 @@ namespace phantom {
         Layer* _layer;
         void setType(const string& type);
         Driver* getDriver(void);
+        Composite *_parent;
 
     private:
-        Composite *_parent;
         std::vector<Composite*> _components;
         std::vector<Composite*> _componentsBuffer;
         Graphics *_graphics;
