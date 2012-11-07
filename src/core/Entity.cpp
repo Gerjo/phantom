@@ -38,7 +38,7 @@ namespace phantom {
 
     bool Entity::removeHealth(float amount) {
         _health -= amount;
-
+        
         return _health > 0;
     }
 
