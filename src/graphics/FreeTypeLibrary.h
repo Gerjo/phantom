@@ -22,7 +22,7 @@ namespace phantom {
         FT_Library lib;
     private:
         Renderer *_renderer;
-        std::map<const char *, FreeTypeFont> fontCache;
+        std::map<string, FreeTypeFont> fontCache;
         void fillTextureData(unsigned int ch, FreeTypeFont::font_info_t *font, unsigned int textureWidth, unsigned char *textureData);
     };
 }

@@ -13,7 +13,7 @@ namespace phantom {
     }
 
     FreeTypeLibrary::~FreeTypeLibrary() {
-        for(map<const char *, FreeTypeFont>::iterator it = fontCache.begin(); it != fontCache.end(); ++it) {
+        for(map<string, FreeTypeFont>::iterator it = fontCache.begin(); it != fontCache.end(); ++it) {
             ImageCacheItem *second = (*it).second.texture;
             _renderer->removeTexture(second);
             delete [] second->imageData;
@@ -124,18 +124,22 @@ namespace phantom {
         _renderer->addTexture(font->texture, true);
 
         FT_Done_Face(face);
-        fontCache.insert(std::pair<const char *, FreeTypeFont>(fontname, *font));
+        stringstream ss;
+        ss << fontname << size << '\0';
+        fontCache.insert(std::pair<string, FreeTypeFont>(ss.str(), *font));
         delete font;
     }
 
     FreeTypeFont *FreeTypeLibrary::getFont(Text *txt) {
-        if(fontCache.find(txt->font) == fontCache.end())
+        stringstream font;
+        font << txt->font << txt->size << '\0';
+        if(fontCache.find(font.str()) == fontCache.end())
             addFont(txt->font, txt->size);
         if(txt->verticesCount == 0) {
-            txt->genVertices(txt->text, &fontCache.at(txt->font));
+            txt->genVertices(txt->text, &fontCache.at(font.str()));
             txt->buildShape(_renderer);
         }
-        return &fontCache.at(txt->font);
+        return &fontCache.at(font.str());
     }
 
     void FreeTypeLibrary::fillTextureData(unsigned int ch, FreeTypeFont::font_info_t *font, unsigned int textureWidth, unsigned char *textureData) {
