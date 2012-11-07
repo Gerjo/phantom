@@ -120,12 +120,6 @@ namespace phantom {
         }
     }
 
-    void Composite::intergrate(const Time& time) {
-        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-            (*iter)->intergrate(time);
-        }
-    }
-
     MessageState Composite::handleMessage(AbstractMessage* message) {
         MessageState state = IGNORED;
 
@@ -301,17 +295,5 @@ namespace phantom {
 
     bool Composite::isDestroyed() {
         return _destroy;
-    }
-
-    Composite* Composite::traverseFindComponentInTree(const std::string& name) {
-        Composite* composite = _parent;
-        while(composite->getType() != name.c_str()) {
-            if(_parent->getParent() != nullptr)
-                composite = _parent->getParent();
-            else
-                return 0;
-        }
-
-        return composite;
     }
 } /* namespace phantom */

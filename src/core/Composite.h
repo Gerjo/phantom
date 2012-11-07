@@ -27,57 +27,55 @@ namespace phantom {
         Composite();
         virtual ~Composite();
 
+        // Ancestor related functions.
         virtual void onParentChange(Composite *parent);
         virtual void onAnsestorChanged();
         virtual void onLayerChanged(Layer* layer);
-        virtual void addComponent(Composite *component);
-        virtual MessageState handleMessage(AbstractMessage* message);
-        virtual void update(const Time& time);
-        virtual void intergrate(const Time& time);
-        virtual bool canCollideWith(Composite *other);
-        virtual void onCollision(Composite *other);
-
-        std::vector<Composite*>& getComponents();
-        Box3& getBoundingBox();
-        void setBoundingBox(const Box3& boundingBox);
-        Graphics& getGraphics();
-        Vector3 getPosition();
-        virtual void setPosition(Vector3 position);
-        virtual void addPosition(const Vector3& add);
-        virtual void removePosition(const Vector3& subtract);
-        virtual void setDirection(Vector3 direction);
-        const string& getType();
-        bool isType(const string& type);
-        string toString(void);
-        PhantomGame* getPhantomGame(void);
         Composite* getParent();
-        Composite* traverseFindComponentInTree(const std::string& name);
-
-        template <class T>
-        T getGame(void) {
+        PhantomGame* getPhantomGame(void);
+        template <class T> T getGame(void) {
             return static_cast<T>(getPhantomGame());
         }
-
-        template <class T>
-        T* findAnsestor();
-
-        template <class T>
-        T* getComponentByType(int nth);
-
-        virtual void destroy(void);
-        virtual void removeFromParent(void);
-        virtual void setX(float x);
-        virtual void setY(float y);
-
-        // If you are calling these two from you game, consider using:
+        
+        // Composite related functions.
+        virtual void addComponent(Composite *component);
+        std::vector<Composite*>& getComponents();
+        // If you are calling these two from your game, consider using:
         // - removeFromParent();
         // - destroy();
         // Calling "removeComponent" directly may or may not work, depending
         // on cosmic radiation and the alignment of the stars.
         virtual void removeComponent(Composite* who);
         virtual void destroyComponent(Composite* who);
-
+        virtual void destroy(void);
+        virtual void removeFromParent(void);
+        template <class T> T* findAnsestor();
+        template <class T> T* getComponentByType(int nth);
         bool isDestroyed();
+
+        // Iteration based events.
+        virtual MessageState handleMessage(AbstractMessage* message);
+        virtual void update(const Time& time);
+        Graphics& getGraphics();
+
+        // Physics related
+        virtual bool canCollideWith(Composite *other);
+        virtual void onCollision(Composite *other);
+        Box3& getBoundingBox();
+        void setBoundingBox(const Box3& boundingBox);
+        Vector3 getPosition();
+        virtual void setPosition(Vector3 position);
+        virtual void setX(float x);
+        virtual void setY(float y);
+        virtual void addPosition(const Vector3& add);
+        virtual void removePosition(const Vector3& subtract);
+        virtual void setDirection(Vector3 direction);
+
+        // General
+        const string& getType();
+        bool isType(const string& type);
+        string toString(void);
+
     protected:
         Vector3 _position;
         Vector3 _direction;
@@ -90,14 +88,13 @@ namespace phantom {
     private:
         std::vector<Composite*> _components;
         std::vector<Composite*> _componentsBuffer;
+
         Graphics *_graphics;
         string _type;
 
         bool _remove;
         bool _destroy;
         bool _isUpdating;
-
-
     };
 
     template <class T>
