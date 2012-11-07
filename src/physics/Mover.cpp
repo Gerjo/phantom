@@ -7,18 +7,22 @@ namespace phantom {
         _parent = 0;
         setPosition(Vector3(0,0,0));
     }
+    
     void Mover::onAnsestorChanged(){
         Entity* e = dynamic_cast<Entity*>(findAnsestor<Entity>());
         if(e != 0){
             _parent = e;
         }
     }
+
     void Mover::moveTo(Vector3 target){
         _targetList.push_back(target);
     }
+
     void Mover::moveTo(const std::vector<Vector3> *targetList){
         _targetList = *targetList;
     }
+
     void Mover::update(const Time& time){
         Composite::update(time);
         if(!_targetList.empty() && _parent != 0){
@@ -31,12 +35,13 @@ namespace phantom {
             Vector3 newPosition = position + (direction * 300 * time.getElapsed());
 
             float distanceSq = position.distanceToSq(target);
-            float threshold = static_cast<float>(pow(8, 2));
+            float threshold = 64.0f;
 
             if(distanceSq < threshold) {
                 _targetList.pop_back();
             }
 
+            _parent->setDirection(direction);
             _parent->setPosition(newPosition);
         }
     }

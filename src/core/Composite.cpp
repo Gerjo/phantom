@@ -9,6 +9,7 @@ namespace phantom {
 
     Composite::Composite() :
     _position(0, 0, 0),
+    _direction(0, 0, 0),
     _remove(false),
     _destroy(false),
     _isUpdating(false),
@@ -158,6 +159,10 @@ namespace phantom {
 
     void Composite::addPosition(const Vector3& add) {
         _position += add;
+    }
+
+    void Composite::setDirection(Vector3 direction) {
+        _direction = direction;
     }
 
     void Composite::setX(float x) {

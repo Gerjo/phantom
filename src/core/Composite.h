@@ -42,9 +42,10 @@ namespace phantom {
         void setBoundingBox(const Box3& boundingBox);
         Graphics& getGraphics();
         Vector3 getPosition();
-        void setPosition(Vector3 position);
-        void addPosition(const Vector3& add);
-        void removePosition(const Vector3& subtract);
+        virtual void setPosition(Vector3 position);
+        virtual void addPosition(const Vector3& add);
+        virtual void removePosition(const Vector3& subtract);
+        virtual void setDirection(Vector3 direction);
         const string& getType();
         bool isType(const string& type);
         string toString(void);
@@ -78,6 +79,7 @@ namespace phantom {
         bool isDestroyed();
     protected:
         Vector3 _position;
+        Vector3 _direction;
         Box3 _boundingBox;
         Layer* _layer;
         void setType(const string& type);
