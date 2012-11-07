@@ -8,13 +8,13 @@
 namespace phantom {
 
     Composite::Composite() :
-    _position(0, 0, 0),
-    _direction(0, 0, 0),
-    _remove(false),
-    _destroy(false),
-    _isUpdating(false),
-    _type("Composite"),
-    isStatic(false)
+        _position(0, 0, 0),
+        _direction(0, 0, 0),
+        _remove(false),
+        _destroy(false),
+        _isUpdating(false),
+        _type("Composite"),
+        isStatic(false)
     {
         _layer = 0;
         _parent = 0;
@@ -73,17 +73,17 @@ namespace phantom {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             Composite* composite = *iter;
 
-            #ifdef _DEBUG
-                // GCC will break here, unsure about any other compiler.
-                if(*iter == 0) {
-                    throw PhantomException("Components were modified while iterating over them.");
-                }
+#ifdef _DEBUG
+            // GCC will break here, unsure about any other compiler.
+            if(*iter == 0) {
+                throw PhantomException("Components were modified while iterating over them.");
+            }
 
-                // This is where any sane debugger will crash:
-                // If your code breaks here, it *probably* means the "_components"
-                // collection was modified while we were iterating over it. --Gerjo
-                string name = composite->getType();
-            #endif
+            // This is where any sane debugger will crash:
+            // If your code breaks here, it *probably* means the "_components"
+            // collection was modified while we were iterating over it. --Gerjo
+            string name = composite->getType();
+#endif
 
             // Let's make sure we're fit for an update:
             if(!composite->_remove && !composite->_destroy) {
@@ -282,24 +282,36 @@ namespace phantom {
 
     void Composite::destroyComponent(Composite* who) {
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-             if(who == *iter) {
-                 _components.erase(iter);
-                 getPhantomGame()->dispose(who);
-                 break;
-             }
-         }
+            if(who == *iter) {
+                _components.erase(iter);
+                getPhantomGame()->dispose(who);
+                break;
+            }
+        }
     }
 
     void Composite::removeComponent(Composite* who) {
-         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-             if(who == *iter) {
-                 iter = _components.erase(iter);
-                 break;
-             }
-         }
+        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
+            if(who == *iter) {
+                iter = _components.erase(iter);
+                break;
+            }
+        }
     }
 
     bool Composite::isDestroyed() {
         return _destroy;
+    }
+
+    Composite* Composite::traverseFindComponentInTree(const std::string& name) {
+        Composite* composite = _parent;
+        while(composite->getType() != name.c_str()) {
+            if(_parent->getParent() != nullptr)
+                composite = _parent->getParent();
+            else
+                return 0;
+        }
+
+        return composite;
     }
 } /* namespace phantom */

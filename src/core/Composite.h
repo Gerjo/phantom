@@ -51,6 +51,7 @@ namespace phantom {
         string toString(void);
         PhantomGame* getPhantomGame(void);
         Composite* getParent();
+        Composite* traverseFindComponentInTree(const std::string& name);
 
         template <class T>
         T getGame(void) {
