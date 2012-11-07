@@ -39,6 +39,10 @@ namespace phantom {
         }
     }
 
+    Composite* Composite::getParent() {
+        return _parent;
+    }
+
     Driver* Composite::getDriver(void) {
         return getPhantomGame()->getDriver();
     }

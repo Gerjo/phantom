@@ -49,6 +49,7 @@ namespace phantom {
         bool isType(const string& type);
         string toString(void);
         PhantomGame* getPhantomGame(void);
+        Composite* getParent();
 
         template <class T>
         T getGame(void) {
