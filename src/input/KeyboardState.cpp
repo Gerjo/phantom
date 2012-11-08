@@ -1,7 +1,7 @@
 #include "KeyboardState.h"
 
 namespace phantom {
-    KeyboardState::KeyboardState() { };
+    KeyboardState::KeyboardState() { for(unsigned i = 0; i < 255; ++i) _keys[i] = 0; };
     KeyboardState::~KeyboardState() { };
 
     void KeyboardState::handleEvent(char id, char newValue) {
