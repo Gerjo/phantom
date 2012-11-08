@@ -3,11 +3,12 @@
 
 namespace phantom{
 
-    Rectangle::Rectangle(float x, float y, float width, float height, bool isFilled){
+    Rectangle::Rectangle(float x, float y, float width, float height, bool isFilled, float thickness){
         this->x = x;
         this->y = y;
         this->width = width;
         this->height = height;
+        this->thickness = thickness;
 
         if(isFilled) drawFilled();
         else drawOutline();
@@ -24,8 +25,6 @@ namespace phantom{
     }
 
     void Rectangle::drawOutline() {
-        float thickness = 3.0f;
-
         //Top
         addVertex(0.0f, 0.0f);
         addVertex(width, 0.0f);

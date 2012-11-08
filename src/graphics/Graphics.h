@@ -32,8 +32,8 @@ public:
     Graphics& setLineStyle(Color color);
 
     Graphics& line(float startX, float startY, float endX, float endY);
-    Graphics& rect(float x, float y, float width, float height, bool isFilled = true);
-    Graphics& rect(const Box3& box, bool isFilled = true);
+    Graphics& rect(float x, float y, float width, float height, bool isFilled = true, float thickness = 3.0f);
+    Graphics& rect(const Box3& box, bool isFilled = true, float thickness = 3.0f);
     Graphics& arc(float x, float y, float radius, float start, float end);
 
     Graphics& image(const string& fileName, float x, float y, float width, float height);
