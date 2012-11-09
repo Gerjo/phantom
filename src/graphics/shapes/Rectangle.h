@@ -6,8 +6,8 @@
 namespace phantom{
     class LIBEXPORT Rectangle : public Shape {
     public:
-        float width, height;
-        Rectangle(float x, float y, float width, float height, bool isFilled);
+        float width, height, thickness;
+        Rectangle(float x, float y, float width, float height, bool isFilled, float thickness);
     private:
         void drawFilled();
         void drawOutline();

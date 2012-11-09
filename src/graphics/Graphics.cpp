@@ -54,12 +54,12 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::rect(const Box3& box, bool isFilled) {
-        return rect(box.origin.x, box.origin.y, box.size.x, box.size.y, isFilled);
+    Graphics& Graphics::rect(const Box3& box, bool isFilled, float thickness) {
+        return rect(box.origin.x, box.origin.y, box.size.x, box.size.y, isFilled, thickness);
     }
 
-    Graphics& Graphics::rect(float x, float y, float width, float height, bool isFilled) {
-        Rectangle* rectangle = new Rectangle(x, y, width, height, isFilled);
+    Graphics& Graphics::rect(float x, float y, float width, float height, bool isFilled, float thickness) {
+        Rectangle* rectangle = new Rectangle(x, y, width, height, isFilled, thickness);
 
         addShape(rectangle);
         return *this;
