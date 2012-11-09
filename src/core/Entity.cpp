@@ -8,13 +8,6 @@ namespace phantom {
 
     Entity::Entity() {
         mover = 0;
-        _health = 100.0f;
-        _totalHealth = 100.0f;
-    }
-
-    void Entity::setHealth(float value) {
-        _health = value;
-        _totalHealth = value;
     }
 
     void Entity::addComponent(Composite* component) {
@@ -31,15 +24,5 @@ namespace phantom {
 
     void Entity::update(const Time& time) {
         Composite::update(time);
-        if(_health < 1) {
-            destroy();
-        }
     }
-
-    bool Entity::removeHealth(float amount) {
-        _health -= amount;
-        
-        return _health > 0;
-    }
-
 } /* namespace phantom */

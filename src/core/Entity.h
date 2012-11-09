@@ -12,15 +12,11 @@ namespace phantom {
     public:
         Entity();
         virtual void addComponent(Composite *component);
-        virtual bool removeHealth(float amount);
         virtual void update(const Time& time);
 
     protected:
         Mover* mover;
-        float _health;
-        float _totalHealth;
 
-        virtual void setHealth(float value);
     };
 
 } /* namespace phantom */
