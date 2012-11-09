@@ -75,6 +75,30 @@ namespace phantom {
         virtual void destroyComponent(Composite* who);
 
         bool isDestroyed();
+
+        // TODO: move to some sort of event or interface. Right now this is more of
+        // a "proof of concept".
+        void registerDestoryEvent(Composite* subscribee) {
+            auto iter = std::find(_destroyListeners.begin(), _destroyListeners.end(), subscribee);
+
+            if(iter == _destroyListeners.end()) {
+                _destroyListeners.push_back(subscribee);
+            }
+
+        }
+
+        void unregisterDestoryEvent(Composite* subscribee) {
+            auto iter = std::find(_destroyListeners.begin(), _destroyListeners.end(), subscribee);
+
+            if(iter != _destroyListeners.end()) {
+                _destroyListeners.erase(iter);
+            }
+        }
+
+        void onGameObjectDestroyed(Composite* destroyedGameObject) {
+
+        }
+
     protected:
         Vector3 _position;
         Box3 _boundingBox;
@@ -84,6 +108,7 @@ namespace phantom {
         Composite *_parent;
 
     private:
+        std::deque<Composite*> _destroyListeners;
         std::vector<Composite*> _components;
         std::vector<Composite*> _componentsBuffer;
         Graphics *_graphics;
@@ -92,8 +117,6 @@ namespace phantom {
         bool _remove;
         bool _destroy;
         bool _isUpdating;
-
-
     };
 
     template <class T>
