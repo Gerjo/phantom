@@ -24,12 +24,6 @@ namespace phantom {
 
     Composite::~Composite() {
 
-        for(Composite* composite : _destroyListeners) {
-            composite->onGameObjectDestroyed(composite);
-        }
-
-        _destroyListeners.clear();
-
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             delete *iter;
             *iter = 0;

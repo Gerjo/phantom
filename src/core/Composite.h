@@ -77,29 +77,6 @@ namespace phantom {
         bool isType(const string& type);
         string toString(void);
 
-        // TODO: move to some sort of event or interface. Right now this is more of
-        // a "proof of concept".
-        void registerDestoryEvent(Composite* subscribee) {
-            auto iter = std::find(_destroyListeners.begin(), _destroyListeners.end(), subscribee);
-
-            if(iter == _destroyListeners.end()) {
-                _destroyListeners.push_back(subscribee);
-            }
-
-        }
-
-        void unregisterDestoryEvent(Composite* subscribee) {
-            auto iter = std::find(_destroyListeners.begin(), _destroyListeners.end(), subscribee);
-
-            if(iter != _destroyListeners.end()) {
-                _destroyListeners.erase(iter);
-            }
-        }
-
-        void onGameObjectDestroyed(Composite* destroyedGameObject) {
-
-        }
-
     protected:
         Vector3 _position;
         Vector3 _direction;
@@ -110,7 +87,6 @@ namespace phantom {
         Composite *_parent;
 
     private:
-        std::deque<Composite*> _destroyListeners;
         std::vector<Composite*> _components;
         std::vector<Composite*> _componentsBuffer;
 
