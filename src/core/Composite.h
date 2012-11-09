@@ -77,8 +77,6 @@ namespace phantom {
         bool isType(const string& type);
         string toString(void);
 
-        bool isDestroyed();
-
         // TODO: move to some sort of event or interface. Right now this is more of
         // a "proof of concept".
         void registerDestoryEvent(Composite* subscribee) {
