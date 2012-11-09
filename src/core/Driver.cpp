@@ -16,7 +16,6 @@ namespace phantom{
     }
 
     void Driver::onUpdate(Time time) {
-        _game->update(time);
         _input->getKeyboardState()->changes()->clear();
         _input->getKeyboardState()->changesUp()->clear();
     }

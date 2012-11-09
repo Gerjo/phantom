@@ -51,6 +51,7 @@ namespace phantom {
             //if (elapsed < (1.0f / this->_fps)) {
             //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
             //}
+            update(time);
 
             fpscount++;
 
