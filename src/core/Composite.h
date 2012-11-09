@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include <CompileConfig.h>
 #include <physics/Box3.h>
 #include <messaging/MessageState.h>
