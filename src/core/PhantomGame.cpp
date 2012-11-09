@@ -12,7 +12,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(60), fullscreen(false) {
+    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(60), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0)
             PhantomGame::INSTANCE = this;
         else
@@ -46,25 +46,37 @@ namespace phantom {
 
             Time time(static_cast<float>(elapsed), static_cast<float>(total), now);
 
-            _driver->onUpdate(time);
-            _driver->onRender();
-            //if (elapsed < (1.0f / this->_fps)) {
-            //    Util::sleep(ceil(((1.0f / this->_fps) - elapsed) * 1000.0f));
-            //}
             update(time);
+
+            // Server has no _driver. This check is lame, better use a design
+            // solution that is not "flag based programming".
+            if(_driver != nullptr) {
+                _driver->onUpdate(time);
+                _driver->onRender();
+            }
+
+            if (elapsed < (1.0f / this->_fps)) {
+                long duration = ceil(((1.0f / this->_fps) - elapsed) * 1000.0f);
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(duration));
+            }
 
             fpscount++;
 
             if (total >= 1) {
-                stringstream stream;
-                stream << "Elephantom [Avg FPS: " << fpscount << " Cur FPS: " << 1.0 / elapsed << "]" << endl;
-                getDriver()->setWindowTitle(stream.str());
+                if(_driver != nullptr) { // Another lame check. We should make a FPS component.
+                    stringstream stream;
+                    stream << "Elephantom [Avg FPS: " << fpscount << " Cur FPS: " << 1.0 / elapsed << "]" << endl;
+                    getDriver()->setWindowTitle(stream.str());
+                }
                 fpscount = 0;
                 total = 0;
+
             }
 
             last = now;
         }
+
         return 0;
     }
 
@@ -80,7 +92,7 @@ namespace phantom {
         if(!_disposables.empty()) {
             for(Composite* composite : _disposables) {
                 delete composite;
-                composite = 0;
+                composite = nullptr;
             }
 
             _disposables.clear();

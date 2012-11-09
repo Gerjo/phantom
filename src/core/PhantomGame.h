@@ -8,6 +8,8 @@
 #include <core/Renderer.h>
 #include <CompileConfig.h>
 #include <cstdlib>
+#include <thread>
+#include <chrono>
 
 using namespace std;
 
