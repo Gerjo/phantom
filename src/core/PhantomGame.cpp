@@ -48,15 +48,11 @@ namespace phantom {
 
             update(time);
 
-            // Server has no _driver. This check is lame, better use a design
-            // solution that is not "flag based programming".
-            if(_driver != nullptr) {
-                _driver->onUpdate(time);
-                _driver->onRender();
-            }
+            _driver->onUpdate(time);
+            _driver->onRender();
 
             if (elapsed < (1.0f / this->_fps)) {
-                long duration = ceil(((1.0f / this->_fps) - elapsed) * 1000.0f);
+                long duration = (long)ceil(((1.0f / this->_fps) - elapsed) * 1000.0f);
 
                 std::this_thread::sleep_for(std::chrono::milliseconds(duration));
             }
@@ -64,11 +60,10 @@ namespace phantom {
             fpscount++;
 
             if (total >= 1) {
-                if(_driver != nullptr) { // Another lame check. We should make a FPS component.
-                    stringstream stream;
-                    stream << "Elephantom [Avg FPS: " << fpscount << " Cur FPS: " << 1.0 / elapsed << "]" << endl;
-                    getDriver()->setWindowTitle(stream.str());
-                }
+                stringstream stream;
+                stream << "Elephantom [Avg FPS: " << fpscount << " Cur FPS: " << 1.0 / elapsed << "]" << endl;
+                getDriver()->setWindowTitle(stream.str());
+
                 fpscount = 0;
                 total = 0;
 
