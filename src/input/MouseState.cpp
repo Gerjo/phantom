@@ -16,7 +16,7 @@ namespace phantom {
         _buttons[id] = newValue;
     }
 
-    Vector3 MouseState::getMousePosition() {
+    Vector3 MouseState::getPosition() {
         return _mousePos;
     }
 

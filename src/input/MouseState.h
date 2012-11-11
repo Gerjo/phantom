@@ -21,7 +21,7 @@ namespace phantom {
         void handleEvent(Vector3 newValue);
         void handleEvent(char id, char newValue);
 
-        Vector3 getMousePosition();
+        Vector3 getPosition();
         bool isButtonUp(unsigned char id);
         bool isButtonDown(unsigned char id);
 
