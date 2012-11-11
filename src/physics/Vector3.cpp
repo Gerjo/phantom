@@ -129,7 +129,7 @@ namespace phantom{
     std::string Vector3::toString() {
         stringstream ss;
 
-        ss << "phantom::Vector3 (x: " << x << ", y: " << y << ", z: " << z << ".)\n";
+        ss << "phantom::Vector3 (x: " << x << ", y: " << y << ", z: " << z << ")";
 
         return ss.str();
     }
