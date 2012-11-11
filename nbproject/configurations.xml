@@ -73,6 +73,9 @@
         <itemPath>src/messaging/Message.h</itemPath>
         <itemPath>src/messaging/MessageState.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="null" displayName="null" projectFiles="true">
+        <itemPath>src/null/NullDriver.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/Box3.cpp</itemPath>
         <itemPath>src/physics/Box3.h</itemPath>
