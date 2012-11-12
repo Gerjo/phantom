@@ -14,6 +14,8 @@ using namespace std;
 
 namespace phantom{
     class FreeTypeLibrary;
+    class KeyboardListener;
+
     class LIBEXPORT Driver{
     public:
         Driver(PhantomGame* game);
@@ -39,6 +41,7 @@ namespace phantom{
         Input* _input;
         vector<Camera*> _cameras;
         vector<Camera*> _activeCameras;
+        KeyboardListener *_keyboard;
         
         PhantomGame* _game;
 

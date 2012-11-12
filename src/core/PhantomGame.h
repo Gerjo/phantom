@@ -4,6 +4,7 @@
 #include <core/GameState.h>
 #include <core/Composite.h>
 #include <core/Camera.h>
+#include <core/Console.h>
 #include <deque>
 #include <core/Renderer.h>
 #include <CompileConfig.h>
@@ -35,6 +36,7 @@ namespace phantom {
 
         deque<GameState*>& getGameStates();
         Driver* getDriver();
+        Console* getConsole() { return _console; }
         void setDriver(Driver* driver);
 
         virtual MessageState handleMessage(AbstractMessage* message);
@@ -54,6 +56,7 @@ namespace phantom {
         unsigned int _fps;
 
         Driver* _driver;
+        Console* _console;
         std::deque<GameState*> _states;
 
         void parseConfigurationFile(const char *configfile);
