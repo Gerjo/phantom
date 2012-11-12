@@ -6,6 +6,8 @@
         <itemPath>src/core/Camera.h</itemPath>
         <itemPath>src/core/Composite.cpp</itemPath>
         <itemPath>src/core/Composite.h</itemPath>
+        <itemPath>src/core/Console.cpp</itemPath>
+        <itemPath>src/core/Console.h</itemPath>
         <itemPath>src/core/Driver.cpp</itemPath>
         <itemPath>src/core/Driver.h</itemPath>
         <itemPath>src/core/Entity.cpp</itemPath>
@@ -57,6 +59,8 @@
       </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
         <itemPath>src/input/Input.h</itemPath>
+        <itemPath>src/input/KeyboardListener.cpp</itemPath>
+        <itemPath>src/input/KeyboardListener.h</itemPath>
         <itemPath>src/input/KeyboardState.cpp</itemPath>
         <itemPath>src/input/KeyboardState.h</itemPath>
         <itemPath>src/input/MouseState.cpp</itemPath>
