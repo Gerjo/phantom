@@ -26,7 +26,7 @@ namespace phantom {
     PhantomGame::~PhantomGame() {
         delete _driver;
         if(_console != nullptr) {
-            delete _console;
+//            delete _console;
         }
     }
 
@@ -40,6 +40,13 @@ namespace phantom {
 
     int PhantomGame::start(int argc, char *argv[]) {
         _running = true;
+
+        std::function<void()> function = [this] () {
+            _running = false;
+        };
+
+        Console::mapCommand("quit", &function);
+
         double last = Util::getTime();
         double total = 0.0f;
         int fpscount = 0;
