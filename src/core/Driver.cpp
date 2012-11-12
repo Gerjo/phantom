@@ -1,21 +1,26 @@
 #include "Driver.h"
 
 #include <algorithm>
+#include <input/KeyboardListener.h>
 
 namespace phantom{
 
     Driver::Driver(PhantomGame* game) : _game(game) {
         _renderer = 0;
         _fontLibrary = 0;
+
+        _keyboard = new KeyboardListener(this, game);
     }
 
     Driver::~Driver(){
+        delete _keyboard;
     }
 
     void Driver::setWindowTitle(string title) {
     }
 
     void Driver::onUpdate(Time time) {
+        _keyboard->update();
         _input->getKeyboardState()->changes()->clear();
         _input->getKeyboardState()->changesUp()->clear();
     }

@@ -13,8 +13,10 @@ namespace phantom {
     PhantomGame* PhantomGame::INSTANCE = 0;
 
     PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(60), fullscreen(false) {
-        if(PhantomGame::INSTANCE == 0)
+        if(PhantomGame::INSTANCE == 0) {
             PhantomGame::INSTANCE = this;
+            _console = new Console();
+        }
         else
             throw PhantomException("You should not create two games...");
 
@@ -23,6 +25,9 @@ namespace phantom {
 
     PhantomGame::~PhantomGame() {
         delete _driver;
+        if(_console != nullptr) {
+            delete _console;
+        }
     }
 
     void PhantomGame::pushGameState(GameState *state) {
@@ -66,7 +71,6 @@ namespace phantom {
 
                 fpscount = 0;
                 total = 0;
-
             }
 
             last = now;
