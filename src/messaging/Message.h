@@ -3,19 +3,23 @@
 
 #include <messaging/AbstractMessage.h>
 
-template <class T>
-class Message : public AbstractMessage {
-public:
-    Message(std::string type, T data) : AbstractMessage(type) {
-        _data = data;
-    }
+namespace phantom {
 
-    T getData(void) {
-        return _data;
-    }
+    template <class T>
+    class Message : public AbstractMessage {
+    public:
 
-private:
-    T _data;
-};
+        Message(std::string type, T data) : AbstractMessage(type) {
+            _data = data;
+        }
+
+        T getData(void) {
+            return _data;
+        }
+
+    private:
+        T _data;
+    };
+}
 
 #endif	/* MESSAGE_H_PCCS */

@@ -8,12 +8,12 @@
 #ifndef MESSAGESTATES_H
 #define	MESSAGESTATES_H
 
-
-enum MessageState {
-    IGNORED,
-    HANDLED,
-    CONSUMED
-};
-
+namespace phantom {
+    enum MessageState {
+        IGNORED,
+        HANDLED,
+        CONSUMED
+    };
+}
 #endif	/* MESSAGESTATES_H */
 
