@@ -3,33 +3,33 @@
 
 #include "Message.h"
 
+namespace phantom {
+    template <class T>
+    class Message;
 
-template <class T>
-class Message;
+    class AbstractMessage {
+    public:
+        AbstractMessage(std::string type) : _type(type) {
 
-class AbstractMessage {
-public:
-    AbstractMessage(std::string type) : _type(type) {
+        }
 
-    }
+        template <class T3>
+        T3 getPayload() {
+            return static_cast<Message<T3>*> (this)->getData();
+        }
 
-    template <class T3>
-    T3 getPayload() {
-        return static_cast<Message<T3>*>(this)->getData();
-    }
+        bool isType(const std::string& otherType) {
+            return _type.compare(otherType) == 0;
+        }
 
-    bool isType(const std::string& otherType) {
-        return _type.compare(otherType) == 0;
-    }
+        const std::string& getType() {
+            return _type;
+        }
 
-    const std::string& getType() {
-        return _type;
-    }
-
-private:
-    std::string _type;
-};
-
+    private:
+        std::string _type;
+    };
+}
 
 #endif	/* ABSTRACTMESSAGE_H */
 
