@@ -10,7 +10,7 @@ namespace phantom {
     class LIBEXPORT Timer {
     public:
 
-        Timer(double delay) : _delay(delay), _startTime(phantom::Util::getTime(), _isStopped(false)) {
+        Timer(double delay) : _delay(delay), _startTime(phantom::Util::getTime()), _isStopped(false) {
 
         }
 
