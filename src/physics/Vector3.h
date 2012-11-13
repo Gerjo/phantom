@@ -10,6 +10,7 @@ namespace phantom{
     class LIBEXPORT Vector3{
     public: //variables
         float x,y,z;
+
     public:
         Vector3();
         Vector3(float x, float y, float z= 0.0f);
@@ -24,6 +25,8 @@ namespace phantom{
         Vector3 operator/(const Vector3& v);
         Vector3& operator+=(const Vector3& v);
         Vector3& operator-=(const Vector3& v);
+        Vector3& operator*=(const Vector3& v);
+        Vector3& operator*=(const float& v);
 
         Vector3 operator*(const Vector3& v);
         Vector3 operator*(float f);

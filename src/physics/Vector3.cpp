@@ -39,7 +39,7 @@ namespace phantom{
 
         return dotx + doty + dotz;
     }
-    
+
     Vector3 Vector3::operator*(float f){
         return Vector3(x * f, y * f, z * f);
     }
@@ -83,6 +83,22 @@ namespace phantom{
         x -= v.x;
         y -= v.y;
         z -= v.z;
+
+        return *this;
+    }
+
+    Vector3& Vector3::operator*=(const Vector3& v) {
+        x *= v.x;
+        y *= v.y;
+        z *= v.z;
+
+        return *this;
+    }
+
+    Vector3& Vector3::operator*=(const float& v) {
+        x *= v;
+        y *= v;
+        z *= v;
 
         return *this;
     }
