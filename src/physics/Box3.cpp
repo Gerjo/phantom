@@ -1,6 +1,6 @@
 #include "Box3.h"
 namespace phantom{
-    Box3::Box3() {
+    Box3::Box3() : origin(0.0f, 0.0f, 0.0f), size(0.0f, 0.0f, 0.0f) {
 
     }
 
