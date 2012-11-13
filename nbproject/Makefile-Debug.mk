@@ -44,12 +44,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
 	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
-	${OBJECTDIR}/src/input/KeyboardState.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
+	${OBJECTDIR}/src/input/KeyboardState.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/utils/Time.o \
-	${OBJECTDIR}/src/input/KeyboardListener.o \
 	${OBJECTDIR}/src/layer/Layer.o \
+	${OBJECTDIR}/src/input/KeyboardListener.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/ImageCache.o \
 	${OBJECTDIR}/src/graphics/shapes/Image.o \
@@ -58,11 +58,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/FreeTypeLibrary.o \
 	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/core/Driver.o \
-	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/glut/GLUTInput.o \
+	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
-	${OBJECTDIR}/src/input/MouseState.o \
 	${OBJECTDIR}/src/physics/Box3.o \
+	${OBJECTDIR}/src/input/MouseState.o \
 	${OBJECTDIR}/src/physics/Vector3.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
 	${OBJECTDIR}/src/core/Console.o
@@ -137,15 +137,15 @@ ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
 
-${OBJECTDIR}/src/input/KeyboardState.o: src/input/KeyboardState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardState.o src/input/KeyboardState.cpp
-
 ${OBJECTDIR}/src/layer/EntityLayer.o: src/layer/EntityLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/EntityLayer.o src/layer/EntityLayer.cpp
+
+${OBJECTDIR}/src/input/KeyboardState.o: src/input/KeyboardState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardState.o src/input/KeyboardState.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -157,15 +157,15 @@ ${OBJECTDIR}/src/utils/Time.o: src/utils/Time.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/Time.o src/utils/Time.cpp
 
-${OBJECTDIR}/src/input/KeyboardListener.o: src/input/KeyboardListener.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardListener.o src/input/KeyboardListener.cpp
-
 ${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
+
+${OBJECTDIR}/src/input/KeyboardListener.o: src/input/KeyboardListener.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardListener.o src/input/KeyboardListener.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -207,30 +207,30 @@ ${OBJECTDIR}/src/core/Driver.o: src/core/Driver.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Driver.o src/core/Driver.cpp
 
-${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Text.o src/graphics/shapes/Text.cpp
-
 ${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/glut
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInput.o src/glut/GLUTInput.cpp
+
+${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Text.o src/graphics/shapes/Text.cpp
 
 ${OBJECTDIR}/src/graphics/ImageLoader.o: src/graphics/ImageLoader.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageLoader.o src/graphics/ImageLoader.cpp
 
-${OBJECTDIR}/src/input/MouseState.o: src/input/MouseState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/MouseState.o src/input/MouseState.cpp
-
 ${OBJECTDIR}/src/physics/Box3.o: src/physics/Box3.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Box3.o src/physics/Box3.cpp
+
+${OBJECTDIR}/src/input/MouseState.o: src/input/MouseState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/MouseState.o src/input/MouseState.cpp
 
 ${OBJECTDIR}/src/physics/Vector3.o: src/physics/Vector3.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics

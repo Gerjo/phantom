@@ -165,12 +165,12 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
-        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+        glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
 
-        
+
 
         const Color& fillColor = img->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
