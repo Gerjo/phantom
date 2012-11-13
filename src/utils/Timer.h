@@ -43,8 +43,10 @@ namespace phantom {
             return false;
         }
 
-        Time& stop() {
+        Timer& stop() {
             _isStopped = true;
+
+            return *this;
         }
 
         Timer& restart() {
