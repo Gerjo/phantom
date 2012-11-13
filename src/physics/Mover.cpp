@@ -7,7 +7,7 @@ namespace phantom {
         _parent = 0;
         setPosition(Vector3(0,0,0));
     }
-    
+
     void Mover::onAnsestorChanged(){
         Entity* e = dynamic_cast<Entity*>(findAnsestor<Entity>());
         if(e != 0){
@@ -19,14 +19,14 @@ namespace phantom {
         _targetList.push_back(target);
     }
 
-    void Mover::moveTo(const std::vector<Vector3> *targetList){
+    void Mover::moveTo(const std::deque<Vector3> *targetList){
         _targetList = *targetList;
     }
 
     void Mover::update(const Time& time){
         Composite::update(time);
         if(!_targetList.empty() && _parent != 0){
-            Vector3 target    = _targetList.back();
+            Vector3 target    = _targetList.front();
             Vector3 position  = _parent->getPosition();
             Vector3 direction = target - position;
 
@@ -38,7 +38,7 @@ namespace phantom {
             float threshold = 64.0f;
 
             if(distanceSq < threshold) {
-                _targetList.pop_back();
+                _targetList.pop_front();
             }
 
             _parent->setDirection(direction);

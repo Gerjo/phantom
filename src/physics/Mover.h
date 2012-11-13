@@ -3,7 +3,7 @@
 
 #include <core/Composite.h>
 #include <CompileConfig.h>
-#include <vector>
+#include <deque>
 
 namespace phantom {
     class Entity;
@@ -12,14 +12,14 @@ namespace phantom {
     public:
         Mover();
         void moveTo(Vector3 vector);
-        void moveTo(const std::vector<Vector3> *vList);
+        void moveTo(const std::deque<Vector3> *vList);
         virtual void update(const Time& time);
         virtual void onAnsestorChanged();
         void stop();
         bool isStopped();
     private:
-        std::vector<Vector3>::iterator _it;
-        std::vector<Vector3> _targetList;
+        std::deque<Vector3>::iterator _it;
+        std::deque<Vector3> _targetList;
         Vector3 _target;
         Entity* _parent;
     };
