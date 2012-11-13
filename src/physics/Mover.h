@@ -4,6 +4,8 @@
 #include <core/Composite.h>
 #include <CompileConfig.h>
 #include <deque>
+#include <utils/Timer.h>
+#include <iostream>
 
 namespace phantom {
     class Entity;
@@ -17,11 +19,16 @@ namespace phantom {
         virtual void onAnsestorChanged();
         void stop();
         bool isStopped();
+
+        void pause(double delay);
+        bool isPaused();
+
     private:
         std::deque<Vector3>::iterator _it;
         std::deque<Vector3> _targetList;
         Vector3 _target;
         Entity* _parent;
+        Timer _pauseTimer;
     };
 
 } /* namespace phantom */

@@ -3,7 +3,7 @@
 
 namespace phantom {
 
-    Mover::Mover():_target(_position), _targetList(){
+    Mover::Mover():_target(_position), _targetList(), _pauseTimer(0.0) {
         _parent = 0;
         setPosition(Vector3(0,0,0));
     }
@@ -25,24 +25,27 @@ namespace phantom {
 
     void Mover::update(const Time& time){
         Composite::update(time);
-        if(!_targetList.empty() && _parent != 0){
-            Vector3 target    = _targetList.front();
-            Vector3 position  = _parent->getPosition();
-            Vector3 direction = target - position;
 
-            direction.normalize();
+        if(_pauseTimer.hasExpired(time)) {
+            if(!_targetList.empty() && _parent != 0){
+                Vector3 target    = _targetList.front();
+                Vector3 position  = _parent->getPosition();
+                Vector3 direction = target - position;
 
-            Vector3 newPosition = position + (direction * 300 * time.getElapsed());
+                direction.normalize();
 
-            float distanceSq = position.distanceToSq(target);
-            float threshold = 64.0f;
+                Vector3 newPosition = position + (direction * 300 * time.getElapsed());
 
-            if(distanceSq < threshold) {
-                _targetList.pop_front();
+                float distanceSq = position.distanceToSq(target);
+                float threshold = 64.0f;
+
+                if(distanceSq < threshold) {
+                    _targetList.pop_front();
+                }
+
+                _parent->setDirection(direction);
+                _parent->setPosition(newPosition);
             }
-
-            _parent->setDirection(direction);
-            _parent->setPosition(newPosition);
         }
     }
 
@@ -52,5 +55,13 @@ namespace phantom {
 
     bool Mover::isStopped() {
         return _targetList.empty();
+    }
+
+    void Mover::pause(double delay) {
+        _pauseTimer.setDelay(delay).restart();
+    }
+
+    bool Mover::isPaused() {
+        return !_pauseTimer.hasExpired();
     }
 } /* namespace phantom */

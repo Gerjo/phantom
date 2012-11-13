@@ -83,6 +83,7 @@
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/Box3.cpp</itemPath>
         <itemPath>src/physics/Box3.h</itemPath>
+        <itemPath>src/physics/CollisionData.h</itemPath>
         <itemPath>src/physics/Mover.cpp</itemPath>
         <itemPath>src/physics/Mover.h</itemPath>
         <itemPath>src/physics/Vector3.cpp</itemPath>
@@ -94,6 +95,7 @@
         <itemPath>src/utils/PhantomException.h</itemPath>
         <itemPath>src/utils/Time.cpp</itemPath>
         <itemPath>src/utils/Time.h</itemPath>
+        <itemPath>src/utils/Timer.h</itemPath>
         <itemPath>src/utils/util.h</itemPath>
       </logicalFolder>
       <itemPath>src/CompileConfig.h</itemPath>

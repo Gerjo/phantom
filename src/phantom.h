@@ -17,6 +17,8 @@
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>
 #include <utils/util.h>
+#include <utils/Time.h>
+#include <utils/Timer.h>
 
 #include <layer/EntityLayer.h>
 #include <layer/Layer.h>
@@ -24,6 +26,7 @@
 #include <physics/Vector3.h>
 #include <physics/Box3.h>
 #include <physics/Mover.h>
+
 
 #ifndef WIN32
     #include <sys/time.h>
