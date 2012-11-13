@@ -22,7 +22,7 @@ namespace phantom {
         static void log(string log);
         static void log(stringstream log);
 
-        static void mapCommand(string name, function<void()>* function);
+        static void mapCommand(string name, function<void()> function);
 
         template<class mType>
         static void log(Message<mType> log){
@@ -34,7 +34,7 @@ namespace phantom {
     private:
         static Console* INSTANCE;
         deque<string> _logs;
-        map<string, function<void()>*> _commandMap;
+        map<string, function<void()>> _commandMap;
 
         bool _doRedraw;
         bool _enabled;

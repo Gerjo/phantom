@@ -45,7 +45,7 @@ namespace phantom {
             _running = false;
         };
 
-        Console::mapCommand("quit", &function);
+        Console::mapCommand("quit", function);
 
         double last = Util::getTime();
         double total = 0.0f;

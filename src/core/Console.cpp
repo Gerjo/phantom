@@ -78,8 +78,8 @@ namespace phantom {
         g.stroke();
     }
 
-    void Console::mapCommand(string name, function<void()>* function) {
-        Console::INSTANCE->_commandMap.insert(pair<string, std::function<void()>*>(name, function));
+    void Console::mapCommand(string name, function<void()> function) {
+        Console::INSTANCE->_commandMap.insert(pair<string, std::function<void()>>(name, function));
     }
 
     void Console::renderInput() {
@@ -99,8 +99,8 @@ namespace phantom {
                             Console::log("Current position of the mouse is: " + getDriver()->getInput()->getMouseState()->getPosition().toString());
                     }
                     else if(_commandMap.find(_text.substr(1, _text.size())) != _commandMap.end()) {
-                        std::function<void()> *func = _commandMap.at(_text.substr(1, _text.size()));
-                        (*func)();
+                        std::function<void()> &func = _commandMap.at(_text.substr(1, _text.size()));
+                        func();
                     }
                     else {
                         Console::log("Command unknown.");

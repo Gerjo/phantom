@@ -9,6 +9,13 @@ namespace phantom {
             std::cout << "Failed to initialize the freetype library." << std::endl;
         }
 
+        std::function<void()> function = [this] () { 
+            std::stringstream str;
+            str << "Size of font cache: " << fontCache.size();
+            Console::log(str.str());
+        };
+        Console::mapCommand("sizeof FontCache", function);
+
         _renderer = renderer;
     }
 
@@ -63,7 +70,7 @@ namespace phantom {
             for(int j = 0; j < charInfo->height; ++j)
                 for(int i = 0; i < charInfo->width; ++i)
                     charBmp[2*(i+j*charInfo->width)] = charBmp[2*(i+j*charInfo->width)+1] = 
-                        (i>=bmp.width || j>=bmp.rows) ? 0 : bmp.buffer[i + bmp.width*j];
+                    (i>=bmp.width || j>=bmp.rows) ? 0 : bmp.buffer[i + bmp.width*j];
 
             maxWidth += charInfo->width;
             if(maxWidth >= maxTextureWidth) {
@@ -82,11 +89,11 @@ namespace phantom {
 
             FT_Done_Glyph(glyph);
         }
-        
+
         int rval = 1;
         while(rval < font->info.maxHeight*(maxRows+1)) rval<<=1;
         int textureHeight = rval;
-        
+
         unsigned char *textureData = new unsigned char[maxTextureWidth*textureHeight*2];
         for(unsigned int ch = 0; ch < charcount; ++ch) {
             FreeTypeFont::char_info_t *charInfo = &font->info.characters[ch];

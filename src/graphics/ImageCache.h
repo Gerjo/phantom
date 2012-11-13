@@ -21,11 +21,12 @@ namespace phantom {
     {
     public:
         static ImageCache *getInstance() {
-            if(INSTANCE == 0)
+            if(INSTANCE == 0) {
                 INSTANCE = new ImageCache();
+            }
             return INSTANCE;
         }
-        
+
         ~ImageCache() {
             for(map<const string, ImageCacheItem>::iterator it = imageCache.begin(); it != imageCache.end(); ++it) {
                 ImageCacheItem *second = &(*it).second;
@@ -80,7 +81,14 @@ namespace phantom {
         }
 
     private:
-        ImageCache(){ };
+        ImageCache(){
+            std::function<void()> function = [this] () { 
+                std::stringstream str;
+                str << "Size of image cache: " << this->imageCache.size();
+                Console::log(str.str());
+            };
+            Console::mapCommand("sizeof ImageCache", function);
+        };
 
         map<const string, ImageCacheItem> imageCache;
         Renderer *_renderer;
