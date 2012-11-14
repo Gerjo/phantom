@@ -120,7 +120,6 @@ namespace phantom {
 
     void PhantomGame::setDriver(Driver* driver) {
         _driver = driver;
-        //hacky:
         ImageCache::getInstance()->setRenderer(_driver->getRenderer());
     }
 
