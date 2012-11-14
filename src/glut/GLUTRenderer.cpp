@@ -237,6 +237,7 @@ namespace phantom {
                 drawLoop(gamestate->getComponents(), initialOffset);
             }
         }
+        drawLoop(_game->getComponents(), initialOffset);
 
         glutMainLoopEvent();
         glutSwapBuffers();
