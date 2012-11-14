@@ -16,6 +16,7 @@ namespace phantom {
         if(PhantomGame::INSTANCE == 0) {
             PhantomGame::INSTANCE = this;
             _console = new Console();
+            addComponent(_console);
         }
         else
             throw PhantomException("You should not create two games...");
@@ -25,9 +26,6 @@ namespace phantom {
 
     PhantomGame::~PhantomGame() {
         delete _driver;
-        if(_console != nullptr) {
-//            delete _console;
-        }
     }
 
     void PhantomGame::pushGameState(GameState *state) {
@@ -42,7 +40,7 @@ namespace phantom {
         _running = true;
 
         std::function<void()> function = [this] () {
-            _running = false;
+            this->exit(0);
         };
 
         Console::mapCommand("quit", function);
@@ -106,6 +104,7 @@ namespace phantom {
     }
 
     void PhantomGame::exit(int returncode) {
+        _console->destroy();
         onExit(returncode);
         _running = false;
     }
