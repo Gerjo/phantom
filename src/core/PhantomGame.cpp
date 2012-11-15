@@ -104,7 +104,12 @@ namespace phantom {
     }
 
     void PhantomGame::exit(int returncode) {
-        _console->destroy();
+        vector<Composite*> components = getComponents();
+        for(auto component = components.begin(); component != components.end();) {
+            (*component)->destroy();
+            component = components.erase(component);
+        }
+
         onExit(returncode);
         _running = false;
     }
