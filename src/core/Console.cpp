@@ -1,6 +1,7 @@
 #include "Console.h"
 #include <input/KeyboardListener.h>
 #include <core/Driver.h>
+#include <null/NullDriver.h>
 #include <iostream>
 
 namespace phantom {
@@ -41,8 +42,13 @@ namespace phantom {
     void Console::update(const Time& time) {
         Composite::update(time);
 
+        NullDriver* driver = dynamic_cast<NullDriver*>(getDriver());
+        if(driver != nullptr)
+            return;
+
         Vector3 campos = getDriver()->getActiveCameras()->at(0)->getPosition();
         setPosition(campos);
+
         getGraphics().clear();
 
         if(!_enabled && getDriver()->getInput()->getKeyboardState()->isKeyDown('\\')) {
