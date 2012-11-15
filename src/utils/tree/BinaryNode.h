@@ -8,10 +8,11 @@ namespace phantom {
     namespace tree {
         class LIBEXPORT BinaryNode {
         public:
-            int key;
-            BinaryNode *parent;
-            BinaryNode *left;
-            BinaryNode *right;
+            int         key;
+            void        *data;
+            BinaryNode  *parent;
+            BinaryNode  *left;
+            BinaryNode  *right;
         };
     }
 }
