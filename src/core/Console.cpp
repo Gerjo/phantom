@@ -43,7 +43,7 @@ namespace phantom {
         Composite::update(time);
 
         NullDriver* driver = dynamic_cast<NullDriver*>(getDriver());
-        if(driver != nullptr)
+        if(driver != nullptr || getDriver()->getActiveCameras()->size() == 0)
             return;
 
         Vector3 campos = getDriver()->getActiveCameras()->at(0)->getPosition();
@@ -76,7 +76,7 @@ namespace phantom {
         float lineheight = 32;
         float lineOffset = lineheight + lineheight;
 
-        for(string& log : _logs) {
+        for(const string& log : _logs) {
             g.text(0.0f, _height - lineOffset, 16, "fonts/waree.ttf", log);
             lineOffset += lineheight;
         }
@@ -97,7 +97,6 @@ namespace phantom {
                     }
                 }
                 else if(c == '\n' || c == '\r') {
-                    //TODO: Send current command located in _text.
                     if(_text.substr(0, 4) == "\\pos" && _text.size() > 5) {
                         if(_text.substr(5, _text.size()) == "camera")
                             Console::log("Current position of the camera is: " + getDriver()->getActiveCameras()->at(0)->getPosition().toString());
@@ -131,7 +130,6 @@ namespace phantom {
         g.rect(0.0f, 0.0f, _width, _height);
         g.fill();
 
-        renderText(+1, Colors::BLACK);
         renderText( 0, Colors::WHITE);
         renderInput();
     }

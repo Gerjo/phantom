@@ -12,7 +12,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(60), fullscreen(false) {
+    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(62.5), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0) {
             PhantomGame::INSTANCE = this;
             _console = new Console();
@@ -48,6 +48,7 @@ namespace phantom {
         double last = Util::getTime();
         double total = 0.0f;
         int fpscount = 0;
+        Timer timer(1);
 
         while (_running) {
             double now = Util::getTime();
@@ -64,18 +65,21 @@ namespace phantom {
             //long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
             //std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
 
-            fpscount++;
-            if (total >= 1) {
-                stringstream stream;
-                stream << "Elephantom [Avg FPS: " << total / elapsed << " Cur FPS: " << fpscount << "]" << endl;
-                getDriver()->setWindowTitle(stream.str());
-
-                fpscount = 0;
-                total = 0;
+            while(1) {
+                double waitedfor = Util::getTime() - now ;
+                elapsed += waitedfor;
+                if(elapsed > 1 / _fps)
+                    break;
             }
-
-
+            fpscount++;
             last = now;
+            
+            if (timer.hasExpired(time)) {
+                stringstream stream;
+                stream << "Elephantom [FPS: " << (int)(1 / elapsed) << "]" << endl;
+                Console::log(stream.str());//getDriver()->setWindowTitle(stream.str());
+                timer.restart();
+            }
         }
 
         return 0;
