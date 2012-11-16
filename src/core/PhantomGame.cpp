@@ -90,6 +90,10 @@ namespace phantom {
             }
         }
 
+        clearDisposables();
+    }
+
+    void PhantomGame::clearDisposables() {
         if(!_disposables.empty()) {
             for(Composite* composite : _disposables) {
                 delete composite;
@@ -106,6 +110,8 @@ namespace phantom {
             (*component)->destroy();
             component = components.erase(component);
         }
+
+        clearDisposables();
 
         onExit(returncode);
         _running = false;

@@ -62,6 +62,7 @@ namespace phantom {
         Console* _console;
         std::deque<GameState*> _states;
 
+        void clearDisposables();
         void dispose(Composite* composite);
     };
 
