@@ -85,9 +85,9 @@ namespace phantom {
 
     Graphics& Graphics::text(float x, float y, unsigned int size, const char* fontname, const string& text) {
         Text* txt = new Text(x, y, size, fontname, text.c_str());
+        txt->ftfont = _parent->getPhantomGame()->getDriver()->getFontLibrary()->getFont(txt);
 
         addShape(txt);
-        txt->ftfont = _parent->getPhantomGame()->getDriver()->getFontLibrary()->getFont(txt);
         return *this;
     }
 
@@ -136,8 +136,8 @@ namespace phantom {
 
     void Graphics::initializePolygon() {
         if(_polygonBuffer == nullptr) {
-            //_polygonBuffer = new Polygon();
-            //_polygonBuffer->addPoint(_polygonLastX, _polygonLastY);
+            _polygonBuffer = new Polygon();
+            _polygonBuffer->addPoint(_polygonLastX, _polygonLastY);
         }
     }
 
