@@ -178,6 +178,12 @@ namespace phantom {
                     else
                         fullscreen = true;
                 }
+                else if(propertyname.compare("soundvol") == 0) {
+                    soundvol = static_cast<float>(atof(propertyvalue.c_str()));
+                }
+                else if(propertyname.compare("musicvol") == 0) {
+                    musicvol = static_cast<float>(atof(propertyvalue.c_str()));
+                }
                 else if(propertyname.compare("mousecursor") == 0) {
                     if(atoi(propertyvalue.c_str()) == 0)
                         mousecursor = false;

@@ -21,8 +21,11 @@ namespace phantom {
     public:
         bool fullscreen;
         bool mousecursor;
+        float soundvol;
+        float musicvol;
 
         PhantomGame(const char *configfile);
+        void parseConfigurationFile(const char *configfile);
         virtual ~PhantomGame();
 
         void pushGameState(GameState *state);
@@ -58,8 +61,6 @@ namespace phantom {
         Driver* _driver;
         Console* _console;
         std::deque<GameState*> _states;
-
-        void parseConfigurationFile(const char *configfile);
 
         void dispose(Composite* composite);
     };
