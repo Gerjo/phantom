@@ -61,22 +61,19 @@ namespace phantom {
             _driver->onUpdate(time);
             _driver->onRender();
 
-            if (elapsed < (1.0f / this->_fps)) {
-                long duration = (long)ceil(((1.0f / this->_fps) - elapsed) * 1000.0f);
-
-                std::this_thread::sleep_for(std::chrono::milliseconds(duration));
-            }
+            //long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
+            //std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
 
             fpscount++;
-
             if (total >= 1) {
                 stringstream stream;
-                stream << "Elephantom [Avg FPS: " << fpscount << " Cur FPS: " << 1.0 / elapsed << "]" << endl;
+                stream << "Elephantom [Avg FPS: " << total / elapsed << " Cur FPS: " << fpscount << "]" << endl;
                 getDriver()->setWindowTitle(stream.str());
 
                 fpscount = 0;
                 total = 0;
             }
+
 
             last = now;
         }
