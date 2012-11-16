@@ -157,9 +157,9 @@ namespace phantom {
 
     void Graphics::moveShapes(vector<Shape*>& source, vector<Shape*>& target) {
         while(source.size() > 0) {
-            Shape* shape = source.back();
+            Shape* shape = source.front();
 
-            source.pop_back();
+            source.erase(source.begin());
 
             // We're only setting the color at the latest possible moment, in order
             // to comply with the HTML 5 API.
