@@ -92,10 +92,10 @@ namespace phantom {
             std::vector<Composite*>::iterator compIt = components.begin();
             while(compIt != components.end()) {
                 Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
-                deque<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
+                vector<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
 
                 for(int i = 0; i < 2; ++i) {
-                    deque<Shape*>::iterator itShape = shapes->begin();
+                    vector<Shape*>::iterator itShape = shapes->begin();
 
                     while(itShape != shapes->end())	{
                         Box3 shapeBox = (*itShape)->getBounds();

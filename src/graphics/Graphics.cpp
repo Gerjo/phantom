@@ -155,11 +155,11 @@ namespace phantom {
     }
 
 
-    void Graphics::moveShapes(deque<Shape*>& source, deque<Shape*>& target) {
+    void Graphics::moveShapes(vector<Shape*>& source, vector<Shape*>& target) {
         while(source.size() > 0) {
-            Shape* shape = source.front();
+            Shape* shape = source.back();
 
-            source.pop_front();
+            source.pop_back();
 
             // We're only setting the color at the latest possible moment, in order
             // to comply with the HTML 5 API.
@@ -170,8 +170,8 @@ namespace phantom {
         }
     }
 
-    void Graphics::deleteShapes(deque<Shape*>& source) {
-        deque<Shape*>::iterator shIt;
+    void Graphics::deleteShapes(vector<Shape*>& source) {
+        vector<Shape*>::iterator shIt;
 
         for(shIt = source.begin(); shIt != source.end(); ++shIt) {
             (*shIt)->destroyShape(_parent->getPhantomGame()->getDriver()->getRenderer());
@@ -182,11 +182,11 @@ namespace phantom {
         source.clear();
     }
 
-    deque<Shape*>& Graphics::getFinalizedShapes() {
+    vector<Shape*>& Graphics::getFinalizedShapes() {
         return _finalizedShapes;
     }
 
-    deque<Shape*>& Graphics::getBufferedShapes() {
+    vector<Shape*>& Graphics::getBufferedShapes() {
         return _bufferedShapes;
     }
 

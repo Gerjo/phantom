@@ -52,9 +52,9 @@ private:
         // Thou shalt not copy.
     }
 
-    deque<Shape*> _finalizedShapes;
-    deque<Shape*> _workspaceShapes;
-    deque<Shape*> _bufferedShapes;
+    vector<Shape*> _finalizedShapes;
+    vector<Shape*> _workspaceShapes;
+    vector<Shape*> _bufferedShapes;
 
     Composite *_parent;
     Color _fillColor;
@@ -62,14 +62,14 @@ private:
 
     Polygon* _polygonBuffer;
 
-    void deleteShapes(deque<Shape*>& source);
-    void moveShapes(deque<Shape*>& source, deque<Shape*>& target);
+    void deleteShapes(vector<Shape*>& source);
+    void moveShapes(vector<Shape*>& source, vector<Shape*>& target);
     void addShape(Shape* shape);
     void finalizePolygon();
     void initializePolygon();
 
-    deque<Shape*>& getFinalizedShapes();
-    deque<Shape*>& getBufferedShapes();
+    vector<Shape*>& getFinalizedShapes();
+    vector<Shape*>& getBufferedShapes();
 
     float _rotation;
 
