@@ -62,18 +62,23 @@ namespace phantom {
             _driver->onUpdate(time);
             _driver->onRender();
 
-            //long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
-            //std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
+#ifndef _WIN32
+            long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
+            std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
+#else
+while(1) {
+double waitedfor = Util::getTime() - last;
+elapsed += waitedfor;
+if(elapsed > 1.0 / _fps)
+break;
+}
 
- /*           while(1) {
-                double waitedfor = Util::getTime() - last;
-                elapsed += waitedfor;
-                if(elapsed > 1.00 / _fps)
-                    break;
-            }*/
+
+#endif
+
             fpscount++;
             last = now;
-            
+
             if (timer.hasExpired(time)) {
                 stringstream stream;
                 stream << "Elephantom [FPS: " << (int)(1 / elapsed) << "]" << endl;
