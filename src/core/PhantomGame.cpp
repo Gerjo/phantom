@@ -61,9 +61,10 @@ namespace phantom {
             _driver->onUpdate(time);
             _driver->onRender();
 
-            //long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
-            //std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
-
+#ifndef WIN32
+            long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
+            std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
+#endif
             fpscount++;
             if (total >= 1) {
                 stringstream stream;
