@@ -12,7 +12,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(63.0), fullscreen(false) {
+    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(62.5), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0) {
             PhantomGame::INSTANCE = this;
             _console = new Console();
@@ -47,8 +47,10 @@ namespace phantom {
 
         double last = Util::getTime();
         double total = 0.0f;
-        int fpscount = 0;
         Timer timer(1);
+        
+        unsigned int framecount = 0;
+        unsigned int lastframecount = 0;
 
         while (_running) {
             double now = Util::getTime();
@@ -62,27 +64,27 @@ namespace phantom {
             _driver->onUpdate(time);
             _driver->onRender();
 
+            if (timer.hasExpired(time)) {
+                timer.restart();
+
+                stringstream stream;
+                stream << "Elephantom [Current FPS: " << (int)(1 / elapsed) << " Avarage FPS: " << framecount - lastframecount << "]" << endl;
+                getDriver()->setWindowTitle(stream.str());
+                
+                lastframecount = framecount;
+            }
+            
 #ifndef _WIN32
             long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
             std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
 #else
             while(1) {
-                double waitedfor = Util::getTime() - last;
-                elapsed += waitedfor;
-                if(elapsed > 1.0 / _fps)
+                if((Util::getTime() - last) + elapsed > 1.0 / _fps)
                     break;
             }
 #endif
-
-            fpscount++;
+            ++framecount;
             last = now;
-
-            if (timer.hasExpired(time)) {
-                stringstream stream;
-                stream << "Elephantom [FPS: " << (int)(1 / elapsed) << "]" << endl;
-                getDriver()->setWindowTitle(stream.str());
-                timer.restart();
-            }
         }
 
         return 0;
