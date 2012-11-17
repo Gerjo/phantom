@@ -66,14 +66,12 @@ namespace phantom {
             long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
             std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
 #else
-while(1) {
-double waitedfor = Util::getTime() - last;
-elapsed += waitedfor;
-if(elapsed > 1.0 / _fps)
-break;
-}
-
-
+            while(1) {
+                double waitedfor = Util::getTime() - last;
+                elapsed += waitedfor;
+                if(elapsed > 1.0 / _fps)
+                    break;
+            }
 #endif
 
             fpscount++;
