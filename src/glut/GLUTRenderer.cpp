@@ -246,7 +246,7 @@ namespace phantom {
 
     void GLUTRenderer::buildShape(Shape *shape) {
         // Be sure nothing is left to be deleted.
-        destroyShape(shape);
+        //destroyShape(shape);
 
         if(_vboSupport) {
             shape->verticesCount = shape->vertices.size();
@@ -293,7 +293,7 @@ namespace phantom {
 
             for(unsigned int i = 0; i < shape->vertices.size(); ++i) {
                 shape->verticesArray[i] = shape->vertices[i];
-                if(shape->isImage)
+                if(shape->isImage || shape->isText)
                     shape->texCoordsArray[i] = shape->texCoords[i];
             }
         }
@@ -301,10 +301,11 @@ namespace phantom {
 
     void GLUTRenderer::destroyShape(Shape *shape) {
         if(_vboSupport) {
-            if(shape->verticesCount != 0) {
-                glDeleteBuffersARB(1, &shape->vboVertices);
+
+            glDeleteBuffersARB(1, &shape->vboVertices);
+            if(shape->isImage || shape->isText)
                 glDeleteBuffersARB(1, &shape->vboTexCoords);
-            }
+
 
             shape->verticesCount = 0;
         }

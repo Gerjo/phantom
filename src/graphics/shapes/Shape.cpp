@@ -9,8 +9,8 @@ namespace phantom {
     _hasLineColor(false),
     isImage(false),
     isText(false),
-    verticesArray(0),
-    texCoordsArray(0),
+    verticesArray(nullptr),
+    texCoordsArray(nullptr),
     vboTexCoords(0),
     vboVertices(0),
     verticesCount(0)
@@ -19,6 +19,10 @@ namespace phantom {
     }
 
     Shape::~Shape() {
+        if(verticesArray != nullptr)
+            delete [] verticesArray;
+        if(texCoordsArray != nullptr)
+            delete [] texCoordsArray;
     }
 
     void Shape::setFillColor(Color color) {

@@ -144,7 +144,6 @@ namespace phantom {
             addFont(txt->font, txt->size);
         if(txt->verticesCount == 0) {
             txt->genVertices(txt->text, &fontCache.at(font.str()));
-            txt->buildShape(_renderer);
         }
         return &fontCache.at(font.str());
     }

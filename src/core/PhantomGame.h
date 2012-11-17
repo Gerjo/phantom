@@ -56,7 +56,7 @@ namespace phantom {
         Vector3 _viewPort;
         Vector3 _worldSize;
 
-        unsigned int _fps;
+        float _fps;
 
         Driver* _driver;
         Console* _console;
