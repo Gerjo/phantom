@@ -145,7 +145,10 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype</commandLine>
+          <linkerLibItems>
+            <linkerOptionItem>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype</linkerOptionItem>
+          </linkerLibItems>
+          <commandLine>-Werror</commandLine>
         </linkerTool>
       </compileType>
     </conf>
@@ -178,7 +181,10 @@
           <linkerDynSerch>
             <pElem>.</pElem>
           </linkerDynSerch>
-          <commandLine>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype2</commandLine>
+          <linkerLibItems>
+            <linkerOptionItem>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype</linkerOptionItem>
+          </linkerLibItems>
+          <commandLine>-Werror</commandLine>
         </linkerTool>
       </compileType>
     </conf>
