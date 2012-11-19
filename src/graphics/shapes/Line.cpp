@@ -15,7 +15,7 @@ namespace phantom{
 		float x0, x1, x2, x3;
 		float y0, y1, y2, y3;
 		float length;
-		float thickness = 1.0f;
+		float thickness = 3.0f;
 
 		x0 = 0.0f;
 		y0 = 0.0f;
