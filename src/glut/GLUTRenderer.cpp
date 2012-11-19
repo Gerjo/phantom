@@ -80,55 +80,6 @@ namespace phantom {
         glutDestroyWindow(_windowID);
     }
 
-    void GLUTRenderer::drawLoop(std::vector<Composite*>& components, Vector3& offset) {
-        if(_game->getDriver()->getActiveCameras()->size() == 0)
-            return;
-
-        for(Camera *cam : *_game->getDriver()->getActiveCameras()) {
-            cam->setParams();
-            Vector3 cameraPosition = cam->getPosition();
-            Box3 cameraBox(cameraPosition.x, cameraPosition.y, _game->getWorldSize().x, _game->getWorldSize().y);
-
-            std::vector<Composite*>::iterator compIt = components.begin();
-            while(compIt != components.end()) {
-                Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
-                vector<Shape*> *shapes = & (*compIt)->getGraphics().getFinalizedShapes();
-
-                for(int i = 0; i < 2; ++i) {
-                    vector<Shape*>::iterator itShape = shapes->begin();
-
-                    while(itShape != shapes->end())	{
-                        Box3 shapeBox = (*itShape)->getBounds();
-                        shapeBox.origin.x += offsetRecalculated.x;
-                        shapeBox.origin.y += offsetRecalculated.y;
-
-                        if(shapeBox.intersect(cameraBox)) {
-                            glLoadIdentity();
-
-                            if((*itShape)->isImage) {
-                                drawImage(static_cast<Image *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
-                            }
-                            else if((*itShape)->isText) {
-                                drawText(static_cast<Text *>(*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
-                            }
-                            else {
-                                drawShape((*itShape), *compIt, offsetRecalculated.x, offsetRecalculated.y);
-                            }
-                        }
-                        ++itShape;
-                    }
-                    shapes = & (*compIt)->getGraphics().getBufferedShapes();
-                }
-
-                if((*compIt)->getComponents().size() > 0) {
-                    drawLoop((*compIt)->getComponents(), offsetRecalculated);
-                }
-
-                compIt++;
-            }
-        }
-    }
-
     void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -170,8 +121,6 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
 
-
-
         const Color& fillColor = img->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
@@ -202,7 +151,7 @@ namespace phantom {
         glPopAttrib();
     }
 
-    void GLUTRenderer::drawShape(Shape *shape, Composite *composite, float xOffset, float yOffset) {
+    void GLUTRenderer::drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset) {
         const Color& fillColor = shape->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
@@ -223,6 +172,61 @@ namespace phantom {
         glDisableClientState(GL_VERTEX_ARRAY);
     }
 
+    void GLUTRenderer::drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset) {
+        vector<Shape*> *shapes = &composite->getGraphics().getFinalizedShapes();
+
+        for(int i = 0; i < 2; ++i) {
+            vector<Shape*>::iterator itShape = shapes->begin();
+
+            while(itShape != shapes->end())	{
+                Box3 shapeBox = (*itShape)->getBounds();
+                shapeBox.origin.x += xOffset;
+                shapeBox.origin.y += yOffset;
+
+                if(shapeBox.intersect(cameraBox)) {
+                    glLoadIdentity();
+
+                    if((*itShape)->isImage) {
+                        drawImage(static_cast<Image *>(*itShape), composite, xOffset, yOffset);
+                    }
+                    else if((*itShape)->isText) {
+                        drawText(static_cast<Text *>(*itShape), composite, xOffset, yOffset);
+                    }
+                    else {
+                        drawPrime((*itShape), composite, xOffset, yOffset);
+                    }
+                }
+                ++itShape;
+            }
+            shapes = &composite->getGraphics().getBufferedShapes();
+        }
+    }
+
+
+    void GLUTRenderer::drawLoop(std::vector<Composite*> &components, Vector3 &offset) {
+        if(_game->getDriver()->getActiveCameras()->size() == 0)
+            return;
+
+        for(Camera *cam : *_game->getDriver()->getActiveCameras()) {
+            cam->setParams();
+            Vector3 cameraPosition = cam->getPosition();
+            Box3 cameraBox(cam->getPosition(), _game->getWorldSize());
+
+            std::vector<Composite*>::iterator compIt = components.begin();
+            while(compIt != components.end()) {
+                Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
+
+                drawShapes((*compIt), cameraBox, offsetRecalculated.x, offsetRecalculated.y);
+
+                if((*compIt)->getComponents().size() > 0) {
+                    drawLoop((*compIt)->getComponents(), offsetRecalculated);
+                }
+
+                compIt++;
+            }
+        }
+    }
+
     void GLUTRenderer::renderLoop(std::deque<GameState*> *states) {
         glClearColor(0.42f, 0.145f, 0.016f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -235,8 +239,14 @@ namespace phantom {
         for(GameState* gamestate : *states) {
             if(gamestate->doRender) {
                 drawLoop(gamestate->getComponents(), initialOffset);
+                for(Camera *camera : *_game->getDriver()->getActiveCameras()) {
+                    camera->setParams();
+                    Box3 cameraBox(camera->getPosition(), _game->getWorldSize());
+                    drawShapes(gamestate, cameraBox, initialOffset.x, initialOffset.y);
+                }
             }
         }
+
         drawLoop(_game->getComponents(), initialOffset);
 
         glutMainLoopEvent();
