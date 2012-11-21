@@ -129,7 +129,10 @@ namespace phantom {
 
     void Graphics::finalizePolygon() {
         if(_polygonBuffer != 0) {
-            addShape(_polygonBuffer);
+            for(unsigned int i = 0; i < _polygonBuffer->collection.size() - 1; ++i) {
+                const vector<Vertice>& v = _polygonBuffer->collection;
+                line(v[i].x, v[i].y, v[i+1].x, v[i+1].y);
+            }
             _polygonBuffer = 0;
         }
     }

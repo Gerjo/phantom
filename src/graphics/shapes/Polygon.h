@@ -9,7 +9,7 @@ namespace phantom{
 		Polygon();
 
         void addPoint(float x, float y);
-
+        vector<Vertice> collection;
 	};
 }/*namespace phantom*/
 

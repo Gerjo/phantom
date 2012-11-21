@@ -6,6 +6,10 @@ namespace phantom{
 	}
 
     void Polygon::addPoint(float x, float y) {
-        // TODO: store x and y in some sort of collection.
+        Vertice v;
+        v.x = x;
+        v.y = y;
+        v.z = 0.0f;
+        collection.push_back(v);
     }
 }
