@@ -46,8 +46,9 @@ namespace phantom {
 
         const Box3& getBounds();
 
-    private:
+    protected:
         Box3 _bounds;
+    private:
         bool _hasFillColor;
         bool _hasLineColor;
         Color _lineColor;

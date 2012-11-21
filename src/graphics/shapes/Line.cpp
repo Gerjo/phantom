@@ -9,6 +9,8 @@ namespace phantom{
         this->toY = toY;
         
 		drawLine(x, y, toX, toY, 0, 0);
+
+        _bounds = Box3(x, y, toX - x, toY - y);
     }
 
 	void Line::drawLine(float x, float y, float toX, float toY, float offsetX, float offsetY) {

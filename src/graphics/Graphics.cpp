@@ -159,9 +159,9 @@ namespace phantom {
 
     void Graphics::moveShapes(vector<Shape*>& source, vector<Shape*>& target) {
         while(source.size() > 0) {
-            Shape* shape = source.front();
+            Shape* shape = (*source.begin());
 
-            source.erase(source.begin());
+            
 
             // We're only setting the color at the latest possible moment, in order
             // to comply with the HTML 5 API.
@@ -169,6 +169,7 @@ namespace phantom {
             shape->setFillColor(_fillColor);
 
             target.push_back(shape);
+            source.erase(source.begin());
         }
     }
 
