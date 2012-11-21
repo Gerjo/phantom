@@ -1,0 +1,77 @@
+<html>
+<script>
+
+function Vector(x, y) {
+    this.y = y || 0;
+    this.x = x || 0;
+}   
+
+Vector.prototype.dot = function(v) {
+    return this.x * v.x + this.y * v.y;
+};
+
+Vector.prototype.perp = function() {
+    return new Vector(-this.x, this.y);
+};
+
+Vector.prototype.log = function() {
+    console.log("x: " + this.x + ", y: " + this.y);
+    return this;
+};
+
+Vector.prototype.normalized = function() {
+    var len = Math.sqrt(this.lengthSq());
+
+    return new Vector(
+        this.x / len,
+        this.y / len
+    );
+};
+
+Vector.prototype.lengthSq = function() {
+    return Math.pow(this.x, 2) + Math.pow(this.y, 2);
+}
+
+Vector.prototype.projectOnto = function(b) {
+    var dp  = this.dot(b);
+    var len = b.lengthSq();
+    
+    return new Vector(
+        dp / len * b.x,
+        dp / len * b.y
+    );
+};
+
+function Line(a, b) {
+    this.a = a;
+    this.b = b;
+}
+
+Line.prototype.direction = function() {
+    return new Vector(
+        this.b.x - this.a.x,
+        this.b.y - this.a.y);
+};
+
+var a = [
+    new Vector(1, 1),
+    new Vector(4, 1),
+    new Vector(4, 3),
+    new Vector(1, 3)
+];
+
+var b = [
+    new Vector(0, 2),
+    new Vector(3, 2),
+    new Vector(3, 4),
+    new Vector(0, 4)
+];
+
+var axis = new Vector(-3321, 12).normalized();
+var meh  = new Vector(-43, 213);
+
+meh.projectOnto(axis).log();
+
+
+</script>
+</html>
