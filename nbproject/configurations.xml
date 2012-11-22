@@ -83,6 +83,8 @@
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/Box3.cpp</itemPath>
         <itemPath>src/physics/Box3.h</itemPath>
+        <itemPath>src/physics/Line2.cpp</itemPath>
+        <itemPath>src/physics/Line2.h</itemPath>
         <itemPath>src/physics/Mover.cpp</itemPath>
         <itemPath>src/physics/Mover.h</itemPath>
         <itemPath>src/physics/Vector3.cpp</itemPath>
