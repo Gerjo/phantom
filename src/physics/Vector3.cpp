@@ -19,28 +19,19 @@ namespace phantom{
         z = origin.z;
     }
 
-    Vector3 Vector3::operator+(const Vector3& v){
+    Vector3 Vector3::operator+(const Vector3& v) const {
         return Vector3(v.x + x, v.y + y, v.z + z);
     }
 
-    Vector3 Vector3::operator-(const Vector3& v){
+    Vector3 Vector3::operator-(const Vector3& v) const {
         return Vector3(x - v.x, y - v.y, z - v.z);
     }
 
-    Vector3 Vector3::operator%(const Vector3& b){
-
-        const Vector3& a = *this;
-
-        Vector3 cross(
-            a.y * b.z - a.z * b.y,
-            a.z * b.x - a.x * b.z,
-            a.x * b.y - a.y * b.x
-        );
-
-        return cross;
+    Vector3 Vector3::operator%(const Vector3& b) const{
+        return this->cross(b);
     }
 
-    float Vector3::dot(const Vector3& v){
+    float Vector3::dot(const Vector3& v) const{
         float dotx = x * v.x;
         float doty = y * v.y;
         float dotz = z * v.z;
@@ -48,11 +39,11 @@ namespace phantom{
         return dotx + doty + dotz;
     }
 
-    Vector3 Vector3::operator*(float f){
+    Vector3 Vector3::operator*(float f) const {
         return Vector3(x * f, y * f, z * f);
     }
 
-    Vector3 Vector3::operator*(const Vector3& v) {
+    Vector3 Vector3::operator*(const Vector3& v) const {
         Vector3 multiplied(
                 x * v.x,
                 y * v.y,
@@ -62,7 +53,7 @@ namespace phantom{
         return multiplied;
     }
 
-    Vector3 Vector3::operator/(const Vector3& v) {
+    Vector3 Vector3::operator/(const Vector3& v) const {
         Vector3 lol = Vector3(0, 0, 0);
         if(v.x != 0 && x != 0) lol.x = x / v.x;
         if(v.y != 0 && y != 0) lol.y = y / v.y;
@@ -111,26 +102,30 @@ namespace phantom{
         return *this;
     }
 
-    void Vector3::normalize() {
+    Vector3& Vector3::normalize() {
         float len = sqrt(x*x + y*y + z*z);
 
         // What do we do here?
         if(len == 0) {
-            return;
+            return *this;
         }
 
         x /= len;
         y /= len;
         z /= len;
+        
+        return *this;
     }
 
-    void Vector3::absolute() {
+    Vector3& Vector3::absolute() {
         x = abs(x);
         y = abs(y);
         z = abs(z);
+        
+        return *this;
     }
 
-    float Vector3::distanceTo(const Vector3& other) {
+    float Vector3::distanceTo(const Vector3& other) const {
         float diffX = other.x - x;
         float diffY = other.y - y;
         float diffZ = other.z - z;
@@ -138,7 +133,7 @@ namespace phantom{
         return sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
     }
 
-    float Vector3::distanceToSq(const Vector3& other) {
+    float Vector3::distanceToSq(const Vector3& other) const {
         float diffX = other.x - x;
         float diffY = other.y - y;
         float diffZ = other.z - z;
@@ -146,7 +141,7 @@ namespace phantom{
         return diffX * diffX + diffY * diffY + diffZ * diffZ;
     }
 
-    float Vector3::getLengthSq(void) {
+    float Vector3::getLengthSq(void) const {
         return x*x + y*y + z*z;
     }
 
@@ -158,7 +153,7 @@ namespace phantom{
         return ss.str();
     }
 
-    Vector3 Vector3::perp(void) {
+    Vector3 Vector3::perp(void)const {
         if(this->z != 0) {
             throw PhantomException(
                     "Vector3::perp: The perpendicular method only works"
@@ -168,11 +163,37 @@ namespace phantom{
 
         // Left hand side, right hand side... does it really matter?
         Vector3 perp(
-            -this->y,
-             this->x,
+            -y,
+             x,
              0.0f
         );
 
         return perp;
+    }
+    
+    Vector3 Vector3::projectOnto(const Vector3& b) const {
+        const float dp  = dot(b);
+        const float len = b.getLengthSq();
+    
+        Vector3 projection(
+            dp / len * this->x,
+            dp / len * this->y,
+            dp / len * this->z
+        );
+        
+        return projection;
+    }
+    
+    Vector3 Vector3::cross(const Vector3& b) const {
+    
+        const Vector3& a = *this;
+
+        Vector3 cross(
+            a.y * b.z - a.z * b.y,
+            a.z * b.x - a.x * b.z,
+            a.x * b.y - a.y * b.x
+        );
+        
+        return cross;
     }
 }
