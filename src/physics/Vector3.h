@@ -19,30 +19,33 @@ namespace phantom{
 
         Vector3(const Vector3& origin);
 
-        Vector3 operator+(const Vector3& v);
-        Vector3 operator-(const Vector3& v);
-        Vector3 operator%(const Vector3& b);
-        Vector3 operator/(const Vector3& v);
+        Vector3 operator+(const Vector3& v) const;
+        Vector3 operator-(const Vector3& v) const;
+        Vector3 operator%(const Vector3& b) const;
+        Vector3 operator/(const Vector3& v) const;
+        Vector3 operator*(const Vector3& v) const;
+        Vector3 operator*(float f) const;
+        
         Vector3& operator+=(const Vector3& v);
         Vector3& operator-=(const Vector3& v);
         Vector3& operator*=(const Vector3& v);
         Vector3& operator*=(const float& v);
-        Vector3 perp(void);
-
-        Vector3 operator*(const Vector3& v);
-        Vector3 operator*(float f);
 
         bool operator== (const Vector3& v) const;
         bool operator!= (const Vector3& v) const;
 
-        void absolute();
-        void normalize();
+        Vector3& absolute();
+        Vector3& normalize();
 
-        float distanceTo(const Vector3& other);
-        float distanceToSq(const Vector3& other);
-        float getLengthSq(void);
-        float dot(const Vector3& v);
-
+        float distanceTo(const Vector3& other) const;
+        float distanceToSq(const Vector3& other) const;
+        float getLengthSq(void) const;
+        float dot(const Vector3& v) const;
+        
+        Vector3 perp(void) const;
+        Vector3 cross(const Vector3& b) const;
+        Vector3 projectOnto(const Vector3& b) const;
+        
         std::string toString();
 
         friend std::ostream& operator<<(std::ostream& o, const Vector3& v){
