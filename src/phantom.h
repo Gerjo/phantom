@@ -26,6 +26,7 @@
 #include <physics/Vector3.h>
 #include <physics/Box3.h>
 #include <physics/Mover.h>
+#include <physics/Line2.h>
 
 
 #ifndef WIN32
