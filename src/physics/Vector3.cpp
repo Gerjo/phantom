@@ -27,9 +27,17 @@ namespace phantom{
         return Vector3(x - v.x, y - v.y, z - v.z);
     }
 
-    Vector3 Vector3::operator%(const Vector3& v){
-        throw PhantomException("We're too lazy to implement this.");
-        return Vector3(0,0,0);
+    Vector3 Vector3::operator%(const Vector3& b){
+
+        const Vector3& a = *this;
+
+        Vector3 cross(
+            a.y * b.z - a.z * b.y,
+            a.z * b.x - a.x * b.z,
+            a.x * b.y - a.y * b.x
+        );
+
+        return cross;
     }
 
     float Vector3::dot(const Vector3& v){
