@@ -44,13 +44,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
 	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
-	${OBJECTDIR}/src/input/KeyboardState.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
+	${OBJECTDIR}/src/input/KeyboardState.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
-	${OBJECTDIR}/src/utils/tree/BinaryTree.o \
 	${OBJECTDIR}/src/utils/Time.o \
 	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/input/KeyboardListener.o \
+	${OBJECTDIR}/src/utils/tree/BinaryTree.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/ImageCache.o \
 	${OBJECTDIR}/src/graphics/shapes/Image.o \
@@ -138,25 +138,20 @@ ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Mover.o src/physics/Mover.cpp
 
-${OBJECTDIR}/src/input/KeyboardState.o: src/input/KeyboardState.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardState.o src/input/KeyboardState.cpp
-
 ${OBJECTDIR}/src/layer/EntityLayer.o: src/layer/EntityLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/EntityLayer.o src/layer/EntityLayer.cpp
 
+${OBJECTDIR}/src/input/KeyboardState.o: src/input/KeyboardState.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardState.o src/input/KeyboardState.cpp
+
 ${OBJECTDIR}/src/graphics/shapes/Arc.o: src/graphics/shapes/Arc.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Arc.o src/graphics/shapes/Arc.cpp
-
-${OBJECTDIR}/src/utils/tree/BinaryTree.o: src/utils/tree/BinaryTree.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/utils/tree
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/tree/BinaryTree.o src/utils/tree/BinaryTree.cpp
 
 ${OBJECTDIR}/src/utils/Time.o: src/utils/Time.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/utils
@@ -172,6 +167,11 @@ ${OBJECTDIR}/src/input/KeyboardListener.o: src/input/KeyboardListener.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardListener.o src/input/KeyboardListener.cpp
+
+${OBJECTDIR}/src/utils/tree/BinaryTree.o: src/utils/tree/BinaryTree.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/utils/tree
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/tree/BinaryTree.o src/utils/tree/BinaryTree.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
