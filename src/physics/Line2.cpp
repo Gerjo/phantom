@@ -46,27 +46,28 @@ namespace phantom {
         );
     }
 
-    bool Line2::eitherFit(const Line2& him, const Line2& her) {
+    bool Line2::eitherFit(const Line2& him, const Line2& her) const {
         // TODO: can we cache data here?
+
         return (
             ((
-                max(him.a.x, him.b.x) > max(her.a.x, her.b.x)
+                std::max<float>(him.a.x, him.b.x) > std::max<float>(her.a.x, her.b.x)
                 &&
-                min(him.a.x, him.b.x) < min(her.a.x, her.b.x)
+                std::min<float>(him.a.x, him.b.x) < std::min<float>(her.a.x, her.b.x)
             ) || (
-                max(him.a.x, him.b.x) < max(her.a.x, her.b.x)
+                std::max<float>(him.a.x, him.b.x) < std::max<float>(her.a.x, her.b.x)
                 &&
-                min(him.a.x, him.b.x) > min(her.a.x, her.b.x)
+                std::min<float>(him.a.x, him.b.x) > std::min<float>(her.a.x, her.b.x)
             ))
             &&
             ((
-                max(him.a.y, him.b.y) > max(her.a.y, her.b.y)
+                std::max<float>(him.a.y, him.b.y) > std::max<float>(her.a.y, her.b.y)
                 &&
-                min(him.a.y, him.b.y) < min(her.a.y, her.b.y)
+                std::min<float>(him.a.y, him.b.y) < std::min<float>(her.a.y, her.b.y)
             ) || (
-                max(him.a.y, him.b.y) < max(her.a.y, her.b.y)
+                std::max<float>(him.a.y, him.b.y) < std::max<float>(her.a.y, her.b.y)
                 &&
-                min(him.a.y, him.b.y) > min(her.a.y, her.b.y)
+                std::min<float>(him.a.y, him.b.y) > std::min<float>(her.a.y, her.b.y)
             ))
         );
     }
@@ -75,8 +76,8 @@ namespace phantom {
         Vector3 normalA = getNormal();
         Vector3 normalB = other.getNormal();
 
-        return  eitherFit(a.projectOnto(normalB), b.projectOnto(normalB))
+        return  eitherFit(projectOnto(normalB), other.projectOnto(normalB))
                    &&
-                eitherFit(a.projectOnto(normalA), b.projectOnto(normalA));
+                eitherFit(projectOnto(normalA), other.projectOnto(normalA));
     }
 }

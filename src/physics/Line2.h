@@ -1,7 +1,9 @@
 #ifndef LINE2_H_PHANTOM
 #define	LINE2_H_PHANTOM
 
+#include <algorithm>
 #include <physics/Line2.h>
+#include "Vector3.h"
 
 namespace phantom {
     class Line2 {
@@ -20,7 +22,7 @@ namespace phantom {
         Vector3 b;
 
         // If you're using this, you are probably doing something wrong.
-        bool eitherFit(const Line2& him, const Line2& her);
+        bool eitherFit(const Line2& him, const Line2& her) const;
     };
 }
 #endif	/* LINE2_H_PHANTOM */
