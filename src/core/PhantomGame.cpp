@@ -48,7 +48,7 @@ namespace phantom {
         double last = Util::getTime();
         double total = 0.0f;
         Timer timer(1);
-        
+
         unsigned int framecount = 0;
         unsigned int lastframecount = 0;
 
@@ -70,10 +70,10 @@ namespace phantom {
                 stringstream stream;
                 stream << "Elephantom [Current FPS: " << (int)(1 / elapsed) << " Avarage FPS: " << framecount - lastframecount << "]" << endl;
                 getDriver()->setWindowTitle(stream.str());
-                
+
                 lastframecount = framecount;
             }
-            
+
 #ifndef _WIN32
             long sleepDuration = static_cast<long>(((1.0 / this->_fps) - elapsed) * 1000000000);
             std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
@@ -93,7 +93,10 @@ namespace phantom {
     void PhantomGame::update(const Time& time) {
         Composite::update(time);
 
-        for(GameState* gameState : _states) {
+        // We make a copy since the states can change during the component updates.
+        deque<GameState*> states = _states;
+
+        for(GameState* gameState : states) {
             if(gameState->doUpdate) {
                 gameState->update(time);
             }
