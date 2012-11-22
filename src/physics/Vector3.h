@@ -25,7 +25,7 @@ namespace phantom{
         Vector3 operator/(const Vector3& v) const;
         Vector3 operator*(const Vector3& v) const;
         Vector3 operator*(float f) const;
-        
+
         Vector3& operator+=(const Vector3& v);
         Vector3& operator-=(const Vector3& v);
         Vector3& operator*=(const Vector3& v);
@@ -41,17 +41,18 @@ namespace phantom{
         float distanceToSq(const Vector3& other) const;
         float getLengthSq(void) const;
         float dot(const Vector3& v) const;
-        
+
         Vector3 perp(void) const;
         Vector3 cross(const Vector3& b) const;
         Vector3 projectOnto(const Vector3& b) const;
-        
+
         std::string toString();
 
         friend std::ostream& operator<<(std::ostream& o, const Vector3& v){
             o << "[Vector3] (x: " << v.x << ", y: " << v.y << ", z: " << v.z;
             return o;
         }
+
     };
 
 } /* namespace phantom */
