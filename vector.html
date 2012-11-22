@@ -1,21 +1,38 @@
 <html>
 <script>
 
-function Vector(x, y) {
+function Vector(x, y, z) {
     this.y = y || 0;
     this.x = x || 0;
-}   
+    this.z = z || 0;
+}
 
 Vector.prototype.dot = function(v) {
-    return this.x * v.x + this.y * v.y;
+    return this.x * v.x + this.y * v.y + this.z * v.z;
+};
+
+Vector.prototype.cross = function(b) {
+    var cross = new Vector();
+    var a     = this;
+
+    cross.x = a.y * b.z - a.z * b.y;
+    cross.y = a.z * b.x - a.x * b.z;
+    cross.z = a.x * b.y - a.y * b.x;
+
+    return cross;
 };
 
 Vector.prototype.perp = function() {
-    return new Vector(-this.x, this.y);
+    if(z != 0) {
+        throw Error("perp only works on 2D vectors.");
+    }
+
+    return new Vector(-this.y, this.x, 0);
 };
 
-Vector.prototype.log = function() {
-    console.log("x: " + this.x + ", y: " + this.y);
+Vector.prototype.log = function(prefix) {
+    prefix = prefix || "";
+    console.log(prefix + " x: " + this.x + ", y: " + this.y + ", z: " + this.z);
     return this;
 };
 
@@ -24,21 +41,23 @@ Vector.prototype.normalized = function() {
 
     return new Vector(
         this.x / len,
-        this.y / len
+        this.y / len,
+        this.z / len
     );
 };
 
 Vector.prototype.lengthSq = function() {
-    return Math.pow(this.x, 2) + Math.pow(this.y, 2);
+    return Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2);
 }
 
 Vector.prototype.projectOnto = function(b) {
     var dp  = this.dot(b);
     var len = b.lengthSq();
-    
+
     return new Vector(
         dp / len * b.x,
-        dp / len * b.y
+        dp / len * b.y,
+        dp / len * b.z
     );
 };
 
@@ -67,10 +86,14 @@ var b = [
     new Vector(0, 4)
 ];
 
-var axis = new Vector(-3321, 12).normalized();
-var meh  = new Vector(-43, 213);
 
-meh.projectOnto(axis).log();
+var pane = new Vector(1, 1, 0);
+
+
+var axis = pane.normalized().log("normalized pane:");
+var meh  = new Vector(-43, 213, 0);
+
+meh.projectOnto(axis).log("projected:");
 
 
 </script>
