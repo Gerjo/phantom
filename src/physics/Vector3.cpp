@@ -157,4 +157,22 @@ namespace phantom{
 
         return ss.str();
     }
+
+    Vector3 Vector3::perp(void) {
+        if(this->z != 0) {
+            throw PhantomException(
+                    "Vector3::perp: The perpendicular method only works"
+                    " on 2D vectors. Use the cross produced with a pane"
+                    " instead for 3D operations.");
+        }
+
+        // Left hand side, right hand side... does it really matter?
+        Vector3 perp(
+            -this->y,
+             this->x,
+             0.0f
+        );
+
+        return perp;
+    }
 }

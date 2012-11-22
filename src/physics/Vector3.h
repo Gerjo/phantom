@@ -27,6 +27,7 @@ namespace phantom{
         Vector3& operator-=(const Vector3& v);
         Vector3& operator*=(const Vector3& v);
         Vector3& operator*=(const float& v);
+        Vector3 perp(void);
 
         Vector3 operator*(const Vector3& v);
         Vector3 operator*(float f);
