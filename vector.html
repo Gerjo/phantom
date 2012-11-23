@@ -58,6 +58,8 @@ Vector.prototype.projectOnto = function(b) {
     console.log("dp", dp);
     console.log("len", len);
 
+    console.log("math: ", dp, "/", len, "*",b.x);
+
     return new Vector(
         dp / len * b.x,
         dp / len * b.y,
@@ -108,13 +110,13 @@ Line.prototype.log = function(prefix) {
 };
 
 var a = new Line(
-    new Vector(0, 0),
-    new Vector(100, 100)
+    new Vector(100, 0),
+    new Vector(290, 120)
 );
 
 var b = new Line(
-    new Vector(100, 0),
-    new Vector(0, 100)
+    new Vector(200, 0),
+    new Vector(100, 120)
 );
 
 // Find the normals, we shall project all vertices on these:
