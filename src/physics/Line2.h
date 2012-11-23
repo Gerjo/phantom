@@ -5,6 +5,11 @@
 #include <physics/Line2.h>
 #include "Vector3.h"
 
+// tmp
+#include <iostream>
+using std::cout;
+using std::endl;
+
 namespace phantom {
     class Line2 {
     public:
@@ -17,6 +22,7 @@ namespace phantom {
         Line2 projectOnto(const Vector3& axis) const;
         bool intersects(const Line2& other) const;
 
+        std::string toString(void) const;
     private:
         Vector3 a;
         Vector3 b;

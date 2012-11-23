@@ -113,7 +113,7 @@ namespace phantom{
         x /= len;
         y /= len;
         z /= len;
-        
+
         return *this;
     }
 
@@ -121,7 +121,7 @@ namespace phantom{
         x = abs(x);
         y = abs(y);
         z = abs(z);
-        
+
         return *this;
     }
 
@@ -145,10 +145,18 @@ namespace phantom{
         return x*x + y*y + z*z;
     }
 
-    std::string Vector3::toString() {
+    std::string Vector3::toString() const {
         stringstream ss;
 
         ss << "phantom::Vector3 (x: " << x << ", y: " << y << ", z: " << z << ")";
+
+        return ss.str();
+    }
+
+    std::string Vector3::toString2() const {
+        stringstream ss;
+
+        ss << "vector(" << x << ", " << y << ")";
 
         return ss.str();
     }
@@ -170,22 +178,25 @@ namespace phantom{
 
         return perp;
     }
-    
+
     Vector3 Vector3::projectOnto(const Vector3& b) const {
         const float dp  = dot(b);
         const float len = b.getLengthSq();
-    
+
+        cout << "dp: " << dp << endl;
+        cout << "len" << len << endl;
+
         Vector3 projection(
             dp / len * this->x,
             dp / len * this->y,
             dp / len * this->z
         );
-        
+
         return projection;
     }
-    
+
     Vector3 Vector3::cross(const Vector3& b) const {
-    
+
         const Vector3& a = *this;
 
         Vector3 cross(
@@ -193,7 +204,7 @@ namespace phantom{
             a.z * b.x - a.x * b.z,
             a.x * b.y - a.y * b.x
         );
-        
+
         return cross;
     }
 }

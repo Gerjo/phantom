@@ -40,6 +40,9 @@ namespace phantom {
         const Vector3 aProjected = a.projectOnto(axis);
         const Vector3 bProjected = b.projectOnto(axis);
 
+        cout << "a on axis" << aProjected.toString();
+        cout << "b on axis" << bProjected.toString();
+
         return Line2(
             aProjected,
             bProjected
@@ -79,5 +82,13 @@ namespace phantom {
         return  eitherFit(projectOnto(normalB), other.projectOnto(normalB))
                    &&
                 eitherFit(projectOnto(normalA), other.projectOnto(normalA));
+    }
+
+    std::string Line2::toString(void) const {
+        return "line(" +
+                std::to_string(a.x) + "," +
+                std::to_string(a.y) + "," +
+                std::to_string(b.x) + "," +
+                std::to_string(b.y) + ")\n";
     }
 }

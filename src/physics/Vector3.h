@@ -5,6 +5,11 @@
 #include <sstream>
 #include <cmath>
 
+// tmp:
+#include <iostream>
+using std::cout;
+using std::endl;
+
 namespace phantom{
 
     class LIBEXPORT Vector3{
@@ -46,7 +51,8 @@ namespace phantom{
         Vector3 cross(const Vector3& b) const;
         Vector3 projectOnto(const Vector3& b) const;
 
-        std::string toString();
+        std::string toString() const;
+        std::string toString2() const;
 
         friend std::ostream& operator<<(std::ostream& o, const Vector3& v){
             o << "[Vector3] (x: " << v.x << ", y: " << v.y << ", z: " << v.z;
