@@ -40,9 +40,6 @@ namespace phantom {
         const Vector3 aProjected = a.projectOnto(axis);
         const Vector3 bProjected = b.projectOnto(axis);
 
-        cout << "a on axis" << aProjected.toString();
-        cout << "b on axis" << bProjected.toString();
-
         return Line2(
             aProjected,
             bProjected
@@ -54,23 +51,23 @@ namespace phantom {
 
         return (
             ((
-                std::max<float>(him.a.x, him.b.x) > std::max<float>(her.a.x, her.b.x)
+                std::max<float>(him.a.x, him.b.x) >= std::max<float>(her.a.x, her.b.x)
                 &&
-                std::min<float>(him.a.x, him.b.x) < std::min<float>(her.a.x, her.b.x)
+                std::min<float>(him.a.x, him.b.x) <= std::min<float>(her.a.x, her.b.x)
             ) || (
-                std::max<float>(him.a.x, him.b.x) < std::max<float>(her.a.x, her.b.x)
+                std::max<float>(him.a.x, him.b.x) <= std::max<float>(her.a.x, her.b.x)
                 &&
-                std::min<float>(him.a.x, him.b.x) > std::min<float>(her.a.x, her.b.x)
+                std::min<float>(him.a.x, him.b.x) >= std::min<float>(her.a.x, her.b.x)
             ))
             &&
             ((
-                std::max<float>(him.a.y, him.b.y) > std::max<float>(her.a.y, her.b.y)
+                std::max<float>(him.a.y, him.b.y) >= std::max<float>(her.a.y, her.b.y)
                 &&
-                std::min<float>(him.a.y, him.b.y) < std::min<float>(her.a.y, her.b.y)
+                std::min<float>(him.a.y, him.b.y) <= std::min<float>(her.a.y, her.b.y)
             ) || (
-                std::max<float>(him.a.y, him.b.y) < std::max<float>(her.a.y, her.b.y)
+                std::max<float>(him.a.y, him.b.y) <= std::max<float>(her.a.y, her.b.y)
                 &&
-                std::min<float>(him.a.y, him.b.y) > std::min<float>(her.a.y, her.b.y)
+                std::min<float>(him.a.y, him.b.y) >= std::min<float>(her.a.y, her.b.y)
             ))
         );
     }
