@@ -183,13 +183,10 @@ namespace phantom{
         const float dp  = dot(b);
         const float len = b.getLengthSq();
 
-        cout << "dp: " << dp << endl;
-        cout << "len" << len << endl;
-
         Vector3 projection(
-            dp / len * this->x,
-            dp / len * this->y,
-            dp / len * this->z
+            dp / len * b.x,
+            dp / len * b.y,
+            dp / len * b.z
         );
 
         return projection;
