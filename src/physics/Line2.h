@@ -23,10 +23,10 @@ namespace phantom {
         bool intersects(const Line2& other) const;
 
         std::string toString(void) const;
-    private:
+
         Vector3 a;
         Vector3 b;
-
+    private:
         // If you're using this, you are probably doing something wrong.
         bool eitherFit(const Line2& him, const Line2& her) const;
     };
