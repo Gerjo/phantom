@@ -81,7 +81,14 @@ namespace phantom{
         stringstream ss;
         ss << "[Box3] (x: " << origin.x << ", y:"  << origin.y << ", z:"  << origin.z;
         ss << ", width:" << size.x << ", height:" << size.y << ", depth:" << size.z << ")";
-        ss << endl;
+
+        return ss.str();
+    }
+
+    string Box3::toString2() {
+        stringstream ss;
+        ss << "box(" << origin.x << ", "  << origin.y;
+        ss << ", " << size.x << ", " << size.y << ")";
         return ss.str();
     }
 
