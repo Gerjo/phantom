@@ -76,6 +76,11 @@ namespace phantom {
         Vector3 normalA = getNormal();
         Vector3 normalB = other.getNormal();
 
+        // Account for A->dot(B) == 0.
+        if(normalA == normalB) {
+            return eitherFit(*this, other);
+        }
+
         return  eitherFit(projectOnto(normalB), other.projectOnto(normalB))
                    &&
                 eitherFit(projectOnto(normalA), other.projectOnto(normalA));

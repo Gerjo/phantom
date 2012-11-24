@@ -30,9 +30,10 @@ Vector.prototype.perp = function() {
     return new Vector(-this.y, this.x, 0);
 };
 
-Vector.prototype.log = function(prefix) {
+Vector.prototype.log = function(prefix, type) {
+    type   = type || "vector"
     prefix = prefix || "";
-    console.log(prefix + " vector(" + this.x + ", " + this.y + ")");
+    console.log(prefix, type + "(" + this.x + ", " + this.y + ")");
     return this;
 };
 
@@ -46,6 +47,14 @@ Vector.prototype.normalized = function() {
     );
 };
 
+Vector.prototype.subtract = function(b) {
+    return new Vector(
+        this.x - b.x,
+        this.y - b.y,
+        this.z - b.z
+    );
+}
+
 Vector.prototype.lengthSq = function() {
     return Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2);
 }
@@ -56,15 +65,18 @@ Vector.prototype.projectOnto = function(b) {
     var len = b.lengthSq();
 
     console.log("dp", dp);
-    console.log("len", len);
-
-    console.log("math: ", dp, "/", len, "*",b.x);
+    //console.log("len", len);
+    //console.log("math: ", dp, "/", len, "*",b.x);
 
     return new Vector(
         dp / len * b.x,
         dp / len * b.y,
         dp / len * b.z
     );
+};
+
+Vector.prototype.equals = function(b) {
+    return this.x == b.x && this.y == b.y && this.z == b.z;
 };
 
 function Line(a, b) {
@@ -94,8 +106,8 @@ Line.prototype.projectOnto = function(axis) {
     var aProjected = this.a.projectOnto(axis);
     var bProjected = this.b.projectOnto(axis);
 
-    aProjected.log("aProjected:");
-    bProjected.log("bProjected");
+    //aProjected.log("aProjected:");
+    //bProjected.log("bProjected");
 
     return new Line(
         aProjected,
@@ -103,36 +115,149 @@ Line.prototype.projectOnto = function(axis) {
     );
 };
 
-Line.prototype.log = function(prefix) {
+Line.prototype.log = function(prefix, type) {
     prefix = prefix || "";
-    console.log(prefix + " line(" + this.a.x + ", " + this.a.y  + ", " + this.b.x  + ", " + this.b.y + ")");
+    type   = type || "line"
+    console.log(prefix, type + "(" + this.a.x + ", " + this.a.y  + ", " + this.b.x  + ", " + this.b.y + ")");
     return this;
 };
 
+Line.prototype.intersects = function(b) {
+    var a = this;
+
+    // Find the normals, we shall project all vertices on these:
+    var normalA = a.normal().normalized().log("normal a:","ray");
+    var normalB = b.normal().normalized().log("normal b:","ray");
+    
+    if(normalA.equals(normalB)) {
+        return eitherFit(a, b);
+    }
+    
+    return eitherFit(a.projectOnto(normalB), b.projectOnto(normalB))
+               &&
+           eitherFit(a.projectOnto(normalA), b.projectOnto(normalA));
+};
+
+function Polygon(arr) {
+    this.vectors = arr || [];
+}
+
+Polygon.prototype.normals = function() {
+    var last;
+    var normals = [];
+    for(var k in this.vectors) {
+        var current = this.vectors[k];
+        if(!last) {
+            last = current;
+            continue;
+        }
+        
+        var normal = current.subtract(last).normalized().perp();
+        normals.push(normal);
+        
+        last = current;
+    }
+    
+    return normals;
+};
+
+Polygon.prototype.projectOnto = function(axis) {
+    var max = new Vector(-Infinity, -Infinity);
+    var min = new Vector(+Infinity, +Infinity);
+    
+    // Each vertex is to be projected onto axis (or pane for 3D)
+    for(var k in this.vectors) {
+        var current   = this.vectors[k];
+        var projected = current.projectOnto(axis);//.log("merge these", "point");
+        
+        if(projected.x > max.x) {
+            max = projected;
+        }
+        
+        if(projected.x < min.x) {
+            min = projected;
+        }
+    }
+    
+    return new Line(min, max);
+};
+
+Polygon.prototype.log = function(tag) {
+    tag = tag || "";
+    var coords = "";
+    
+    this.vectors.forEach(function (v) {
+        coords += v.x + "," + v.y + ",";
+    });
+    
+    if(coords.length > 0) {
+        coords = coords.substr(0, coords.length -1);
+    }
+
+    console.log(tag, "polygon(", coords, ")");
+
+    return this;
+}
+
 var a = new Line(
-    new Vector(100, 0),
-    new Vector(290, 120)
-);
+    new Vector(0, 0),
+    new Vector(90, 90)
+).log("test a");
 
 var b = new Line(
-    new Vector(200, 0),
-    new Vector(100, 120)
-);
+    new Vector(100, 100),
+    new Vector(150, 150)
+).log("test b");
 
-// Find the normals, we shall project all vertices on these:
-var normalA = a.normal().normalized().log("line a normal normalized:");
-var normalB = b.normal().normalized().log("line b normal normalized:");
 
-if(
-    eitherFit(a.projectOnto(normalB), b.projectOnto(normalB))
-        &&
-    eitherFit(a.projectOnto(normalA), b.projectOnto(normalA))
+if( 
+    a.intersects(b)
 ) {
     console.log("It fits!");
 } else {
     console.log("It does not quite fit.");
 }
 
+if(false) {
+var p1 = new Polygon(
+    [
+        new Vector(100, 0), 
+        new Vector(0, 100),
+        new Vector(60, 110),
+        new Vector(100,0)
+    ]
+).log("p1");
+
+var p2 = new Polygon(
+    [
+        new Vector(10, 10), 
+        new Vector(100,100), 
+        new Vector(200, 40), 
+        new Vector(10, 10)
+    ]
+).log("p2");
+
+var normals = p1.normals();
+
+var allOK = true;
+// Project P2 onto each normal of P1
+for(var k in normals) {
+    var normal = normals[k].log("side", "ray");
+    
+    var projectionA = p2.projectOnto(normal);
+    var projectionB = p1.projectOnto(normal);
+    
+    if(!projectionA.intersects(projectionB)) {
+        projectionA.log("no joy");
+        projectionB.log("no joy");
+        allOK = false;
+        break;
+    }
+    
+}   
+
+console.log("intersection?", allOK);
+}
 function eitherFit(her, him) {
     return (
         ((
@@ -156,17 +281,6 @@ function eitherFit(her, him) {
         ))
     );
 }
-
-//var bOna = b.projectOnto(normalA);
-//bOna.log("bOna");
-
-/*
-var axis = pane.normalized().log("normalized pane:");
-var meh  = new Vector(-43, 213, 0);
-
-meh.projectOnto(axis).log("projected:");
-*/
-
 </script>
 
 </html>
