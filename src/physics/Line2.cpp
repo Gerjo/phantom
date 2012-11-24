@@ -93,4 +93,15 @@ namespace phantom {
                 std::to_string(b.x) + "," +
                 std::to_string(b.y) + ")\n";
     }
+
+
+    bool Line2::operator== (const Line2& v) const {
+        return  a.x == v.a.x && a.y == v.a.y && a.z == v.a.z
+                &&
+                b.x == v.b.x && b.y == v.b.y && b.z == v.b.z;
+    }
+
+    bool Line2::operator!= (const Line2& v) const {
+        return !(*this == v);
+    }
 }

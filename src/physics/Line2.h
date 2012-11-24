@@ -17,6 +17,9 @@ namespace phantom {
         Line2(const float x1, const float y1, const float x2, const float y2);
         Line2(const Vector3& a, const Vector3& b);
 
+        bool operator== (const Line2& v) const;
+        bool operator!= (const Line2& v) const;
+
         Vector3 getNormal(void) const;
         Vector3 getDirection(void) const;
         Line2 projectOnto(const Vector3& axis) const;
