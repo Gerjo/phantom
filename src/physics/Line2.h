@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <physics/Line2.h>
 #include "Vector3.h"
+#include <CompileConfig.h>
 
 // tmp
 #include <iostream>
@@ -11,7 +12,7 @@ using std::cout;
 using std::endl;
 
 namespace phantom {
-    class Line2 {
+    class LIBEXPORT Line2 {
     public:
         Line2(void);
         Line2(const float x1, const float y1, const float x2, const float y2);
