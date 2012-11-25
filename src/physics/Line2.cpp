@@ -48,7 +48,8 @@ namespace phantom {
 
     bool Line2::eitherFit(const Line2& him, const Line2& her) const {
         // TODO: can we cache data here?
-
+        cout << "test- " << him.toString() << endl;
+        cout << "test- " << her.toString() << endl;
         return (
             ((
                 std::max<float>(him.a.x, him.b.x) >= std::max<float>(her.a.x, her.b.x)
@@ -91,7 +92,7 @@ namespace phantom {
                 std::to_string(a.x) + "," +
                 std::to_string(a.y) + "," +
                 std::to_string(b.x) + "," +
-                std::to_string(b.y) + ")\n";
+                std::to_string(b.y) + ")";
     }
 
 
@@ -103,5 +104,9 @@ namespace phantom {
 
     bool Line2::operator!= (const Line2& v) const {
         return !(*this == v);
+    }
+
+    bool Line2::naiveContains(const Line2& other) {
+        return eitherFit(*this, other);
     }
 }

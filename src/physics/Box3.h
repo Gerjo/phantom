@@ -6,6 +6,8 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
+#include <physics/Line2.h>
+#include <limits>
 
 using namespace std;
 
@@ -17,6 +19,7 @@ namespace phantom{
 
         Box3(Vector3 origin, Vector3 size);
         bool intersect(const Box3& other);
+        bool intersect(const Line2& other);
         bool contains(const Vector3& other);
         bool contains(const Vector3* other);
 

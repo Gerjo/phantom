@@ -1,4 +1,5 @@
 #include "Box3.h"
+#include "Line2.h"
 namespace phantom{
     Box3::Box3() : origin(0.0f, 0.0f, 0.0f), size(0.0f, 0.0f, 0.0f) {
 
@@ -47,6 +48,49 @@ namespace phantom{
                 aMin >= bMin && aMin <= bMax
                 ||
                 bMin >= aMin && bMin <= aMax;
+    }
+
+    bool Box3::intersect(const Line2& other) {
+        // The axis along which we shall project.
+        Vector3 axis = other.getNormal();
+
+        // All vertices
+        Vector3 vertices[] = {
+            Vector3(origin.x, origin.y),
+            Vector3(origin.x, origin.y + size.y),
+            Vector3(origin.x + size.x, origin.y),
+            Vector3(origin.x + size.x, origin.y + size.y)
+        };
+
+        const float inf = numeric_limits<float>::infinity();
+        Vector3 max(-inf, -inf, 0.0f);
+        Vector3 min(inf, inf, 0.0f);
+
+        // Project each vertex on the axis, and determine the upper and lower bound.
+        for(const Vector3& vertex : vertices) {
+            Vector3 projection = vertex.projectOnto(axis);
+
+            if(projection.x > max.x) {
+                max = projection;
+            }
+
+            if(projection.x < min.x) {
+                min = projection;
+            }
+        }
+
+        // Upper and lower bound form a line segment.
+        Line2 line(min, max);
+        Line2 meh(other.a.projectOnto(axis), other.b.projectOnto(axis));
+
+        cout << line.toString() << endl;
+        cout << meh.toString() << endl;
+
+        bool r = line.naiveContains(meh);
+
+        cout << "r" << r << endl;
+
+        return line.naiveContains(meh);
     }
 
     bool Box3::intersect(const Box3& other) {
