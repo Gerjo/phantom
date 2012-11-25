@@ -8,6 +8,7 @@
 #include <cmath>
 #include <physics/Line2.h>
 #include <limits>
+#include <physics/Projection.h>
 
 using namespace std;
 

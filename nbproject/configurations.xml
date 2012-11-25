@@ -89,6 +89,7 @@
         <itemPath>src/physics/Mover.h</itemPath>
         <itemPath>src/physics/Polygon2.cpp</itemPath>
         <itemPath>src/physics/Polygon2.h</itemPath>
+        <itemPath>src/physics/Projection.h</itemPath>
         <itemPath>src/physics/Vector3.cpp</itemPath>
         <itemPath>src/physics/Vector3.h</itemPath>
       </logicalFolder>

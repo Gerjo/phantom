@@ -51,46 +51,38 @@ namespace phantom{
     }
 
     bool Box3::intersect(const Line2& other) {
-        // The axis along which we shall project.
-        Vector3 axis = other.getNormal();
-
-        // All vertices
-        Vector3 vertices[] = {
-            Vector3(origin.x, origin.y),
-            Vector3(origin.x, origin.y + size.y),
-            Vector3(origin.x + size.x, origin.y),
-            Vector3(origin.x + size.x, origin.y + size.y)
+        
+        Vector3 normals[] = {
+            other.getNormal(),
+            
+            // Hardcoded normals for an axis aligned box
+            Vector3(0.0f, 1.0f, 0.0f),
+            Vector3(1.0f, 0.0f, 0.0f)
         };
 
-        const float inf = numeric_limits<float>::infinity();
-        Vector3 max(-inf, -inf, 0.0f);
-        Vector3 min(inf, inf, 0.0f);
+        Projection::Group boxVertices;
+        boxVertices.push_back(Vector3(origin.x, origin.y));
+        boxVertices.push_back(Vector3(origin.x, origin.y + size.y));
+        boxVertices.push_back(Vector3(origin.x + size.x, origin.y));
+        boxVertices.push_back(Vector3(origin.x + size.x, origin.y + size.y));
 
-        // Project each vertex on the axis, and determine the upper and lower bound.
-        for(const Vector3& vertex : vertices) {
-            Vector3 projection = vertex.projectOnto(axis);
-
-            if(projection.x > max.x) {
-                max = projection;
-            }
-
-            if(projection.x < min.x) {
-                min = projection;
+        
+        Projection::Group lineVertices;
+        lineVertices.push_back(other.a);
+        lineVertices.push_back(other.b);
+        
+        for(const Vector3& axis : normals) {
+            Line2 a = Projection::project(axis, boxVertices);
+            Line2 b = Projection::project(axis, lineVertices);
+        
+            cout << a.naiveContains(b) << " for " << a.toString() << "vs" << b.toString() << endl;
+        
+            if(a.naiveContains(b)) {
+                return false;
             }
         }
-
-        // Upper and lower bound form a line segment.
-        Line2 line(min, max);
-        Line2 meh(other.a.projectOnto(axis), other.b.projectOnto(axis));
-
-        cout << line.toString() << endl;
-        cout << meh.toString() << endl;
-
-        bool r = line.naiveContains(meh);
-
-        cout << "r" << r << endl;
-
-        return line.naiveContains(meh);
+        
+        return true;
     }
 
     bool Box3::intersect(const Box3& other) {
