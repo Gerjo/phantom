@@ -76,9 +76,9 @@ namespace phantom{
             Line2 a = Projection::project(axis, boxVertices);
             Line2 b = Projection::project(axis, lineVertices);
 
-            cout << a.naiveContains(b) << " for " << a.toString() << "vs" << b.toString() << endl;
 
             if(!a.naiveContains(b)) {
+                cout << "failed: " << " for " << a.toString() << " vs " << b.toString() << endl;
                 return false;
             }
         }
