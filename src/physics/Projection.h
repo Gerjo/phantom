@@ -29,17 +29,21 @@ public:
 
             if(projection.x > maximum.x) {
                 maximum = projection;
+            } else if(projection.x == maximum.x && projection.y > maximum.y) {
+                maximum = projection;
             }
 
             if(projection.x < minimum.x) {
                 minimum = projection;
+            } else if(projection.x == minimum.x && projection.y < minimum.y) {
+                minimum = projection;
             }
-            
+
             std::string meh = projection.toString2();
-            
-            cout << "point" << meh.substr(6, meh.length()) << endl;
+
+            //cout << "point" << meh.substr(6, meh.length()) << endl;
         }
-        
+
         return Line2(minimum, maximum);
     }
 };

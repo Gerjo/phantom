@@ -48,8 +48,8 @@ namespace phantom {
 
     bool Line2::eitherFit(const Line2& him, const Line2& her) const {
         // TODO: can we cache data here?
-        cout << "test- " << him.toString() << endl;
-        cout << "test- " << her.toString() << endl;
+        //cout << "test- " << him.toString() << endl;
+        //cout << "test- " << her.toString() << endl;
         return (
             ((
                 std::max<float>(him.a.x, him.b.x) >= std::max<float>(her.a.x, her.b.x)
