@@ -19,18 +19,18 @@ namespace phantom{
         Box3(float x, float y, float width, float height);
 
         Box3(Vector3 origin, Vector3 size);
-        bool intersect(const Box3& other);
-        bool intersect(const Line2& other);
-        bool contains(const Vector3& other);
-        bool contains(const Vector3* other);
+        bool intersect(const Box3& other) const;
+        bool intersect(const Line2& other) const;
+        bool contains(const Vector3& other) const;
+        bool contains(const Vector3* other) const;
 
         // This function is naive b.c. it assumes both boxes are repaired
         // and actually have an intersection. If neither conditions are met,
         // then you should not use this, continue with writing a "not so naive"
         // method to solve this problem. -- Gerjo
-        Box3 getIntersectionNaive(const Box3& other);
+        Box3 getIntersectionNaive(const Box3& other) const;
 
-        Vector3 getCenter(void);
+        Vector3 getCenter(void) const;
 
         Vector3 origin;
         Vector3 size;
