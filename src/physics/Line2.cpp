@@ -1,5 +1,6 @@
 #include "Line2.h"
 #include "Vector3.h"
+#include "Projection.h"
 
 namespace phantom {
 
@@ -46,45 +47,18 @@ namespace phantom {
         );
     }
 
-    bool Line2::eitherFit(const Line2& him, const Line2& her) const {
-        // TODO: can we cache data here?
-        //cout << "test- " << him.toString() << endl;
-        //cout << "test- " << her.toString() << endl;
-        return (
-            ((
-                std::max<float>(him.a.x, him.b.x) >= std::max<float>(her.a.x, her.b.x)
-                &&
-                std::min<float>(him.a.x, him.b.x) <= std::min<float>(her.a.x, her.b.x)
-            ) || (
-                std::max<float>(him.a.x, him.b.x) <= std::max<float>(her.a.x, her.b.x)
-                &&
-                std::min<float>(him.a.x, him.b.x) >= std::min<float>(her.a.x, her.b.x)
-            ))
-            &&
-            ((
-                std::max<float>(him.a.y, him.b.y) >= std::max<float>(her.a.y, her.b.y)
-                &&
-                std::min<float>(him.a.y, him.b.y) <= std::min<float>(her.a.y, her.b.y)
-            ) || (
-                std::max<float>(him.a.y, him.b.y) <= std::max<float>(her.a.y, her.b.y)
-                &&
-                std::min<float>(him.a.y, him.b.y) >= std::min<float>(her.a.y, her.b.y)
-            ))
-        );
-    }
-
     bool Line2::intersects(const Line2& other) const {
         Vector3 normalA = getNormal();
         Vector3 normalB = other.getNormal();
 
         // Account for A->dot(B) == 0.
         if(normalA == normalB) {
-            return eitherFit(*this, other);
+            return Projection::projectedLineIntersection(*this, other);
         }
 
-        return  eitherFit(projectOnto(normalB), other.projectOnto(normalB))
-                   &&
-                eitherFit(projectOnto(normalA), other.projectOnto(normalA));
+        return Projection::projectedLineIntersection(projectOnto(normalB), other.projectOnto(normalB))
+                &&
+               Projection::projectedLineIntersection(projectOnto(normalA), other.projectOnto(normalA));
     }
 
     std::string Line2::toString(void) const {
@@ -104,9 +78,5 @@ namespace phantom {
 
     bool Line2::operator!= (const Line2& v) const {
         return !(*this == v);
-    }
-
-    bool Line2::naiveContains(const Line2& other) {
-        return eitherFit(*this, other);
     }
 }

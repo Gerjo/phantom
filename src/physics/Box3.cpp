@@ -77,9 +77,11 @@ namespace phantom{
             Line2 b = Projection::project(axis, lineVertices);
 
 
-            if(!a.naiveContains(b)) {
-                cout << "failed: " << " for " << a.toString() << " vs " << b.toString() << endl;
+            if(!Projection::projectedLineIntersection(a, b)) {
+                // cout << "false: " << " for " << a.toString() << " vs " << b.toString() << endl;
                 return false;
+            } else {
+                //cout << "true: " << " for " << a.toString() << " vs " << b.toString() << endl;
             }
         }
 

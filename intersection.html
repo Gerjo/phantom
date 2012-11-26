@@ -16,33 +16,45 @@ function makeLine(x1, y1, x2, y2) {
     };
 }
 
-var a = makeLine(0, 100, 0, 100);
-var b = makeLine(0, 100, 0, 200);
+var a = makeLine(1.013653,-0.082747,108.460899,-8.853951) ;
+var b = makeLine(18.245760,-1.489450,18.245764,-1.489450);
 
 console.log(eitherFit(a, b));
 
-function eitherFit(her, him) {
-    return (
-        ((
-            Math.max(him.a.x, him.b.x) >= Math.max(her.a.x, her.b.x)
-            &&
-            Math.min(him.a.x, him.b.x) <= Math.min(her.a.x, her.b.x)
+function modifier(num) {
+    return num;
+}
+
+function eitherFit(him, her) {
+    var himMax_x = modifier(Math.max(him.a.x, him.b.x));
+    var himMax_y = modifier(Math.max(him.a.y, him.b.y));
+    var himMin_x = modifier(Math.min(him.a.x, him.b.x));
+    var himMin_y = modifier(Math.min(him.a.y, him.b.y));
+
+    var herMax_x = modifier(Math.max(her.a.x, her.b.x));
+    var herMax_y = modifier(Math.max(her.a.y, her.b.y));
+    var herMin_x = modifier(Math.min(her.a.x, her.b.x));
+    var herMin_y = modifier(Math.min(her.a.y, her.b.y));
+
+    var asString  = himMax_x + " <= " + herMax_x + " && " + himMax_x + " >= " + herMin_x;
+        asString += " || " + herMax_x + " <= " + himMax_x + " && " + herMax_x + " >= " + himMin_x;
+        asString += "\n --- AND ---- \n"
+        asString += himMax_y + " <= " + herMax_y + " && " + himMax_y + " >= " + herMin_y;
+        asString += " || " + herMax_y + " <= " + himMax_y + " && " + herMax_y + " >= " + himMin_y;
+
+
+    console.log(asString);
+
+    return ((
+        himMax_y <= herMax_y && himMax_y >= herMin_y
         ) || (
-            Math.max(him.a.x, him.b.x) <= Math.max(her.a.x, her.b.x)
-            &&
-            Math.min(him.a.x, him.b.x) >= Math.min(her.a.x, her.b.x)
-        ))
-        &&
-        ((
-            Math.max(him.a.y, him.b.y) >= Math.max(her.a.y, her.b.y)
-            &&
-            Math.min(him.a.y, him.b.y) <= Math.min(her.a.y, her.b.y)
+        herMax_y <= himMax_y && herMax_y >= himMin_y
+        )) && ((
+        himMax_x <= herMax_x && himMax_x >= herMin_x
         ) || (
-            Math.max(him.a.y, him.b.y) <= Math.max(her.a.y, her.b.y)
-            &&
-            Math.min(him.a.y, him.b.y) >= Math.min(her.a.y, her.b.y)
+        herMax_x <= himMax_x && herMax_x >= himMin_x
         ))
-    );
+    ;
 }
 </script>
 </head>
