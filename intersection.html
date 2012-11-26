@@ -1,0 +1,49 @@
+<html>
+<head>
+<script>
+
+
+function makeLine(x1, y1, x2, y2) {
+    return {
+        "a": {
+            "x": x1,
+            "y": y1
+        },
+        "b": {
+            "x": x2,
+            "y": y2
+        }
+    };
+}
+
+var a = makeLine(0, 100, 0, 100);
+var b = makeLine(0, 100, 0, 200);
+
+console.log(eitherFit(a, b));
+
+function eitherFit(her, him) {
+    return (
+        ((
+            Math.max(him.a.x, him.b.x) >= Math.max(her.a.x, her.b.x)
+            &&
+            Math.min(him.a.x, him.b.x) <= Math.min(her.a.x, her.b.x)
+        ) || (
+            Math.max(him.a.x, him.b.x) <= Math.max(her.a.x, her.b.x)
+            &&
+            Math.min(him.a.x, him.b.x) >= Math.min(her.a.x, her.b.x)
+        ))
+        &&
+        ((
+            Math.max(him.a.y, him.b.y) >= Math.max(her.a.y, her.b.y)
+            &&
+            Math.min(him.a.y, him.b.y) <= Math.min(her.a.y, her.b.y)
+        ) || (
+            Math.max(him.a.y, him.b.y) <= Math.max(her.a.y, her.b.y)
+            &&
+            Math.min(him.a.y, him.b.y) >= Math.min(her.a.y, her.b.y)
+        ))
+    );
+}
+</script>
+</head>
+</html>
