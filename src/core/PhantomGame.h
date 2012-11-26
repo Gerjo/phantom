@@ -31,7 +31,7 @@ namespace phantom {
         void pushGameState(GameState *state);
         void popGameState();
         int start(int argc, char *argv[]);
-        virtual void update(const Time& time);
+        virtual void update(const PhantomTime& time);
         void exit(int returncode);
 
         Vector3 getViewPort() const;

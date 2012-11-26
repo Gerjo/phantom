@@ -51,10 +51,10 @@ namespace phantom{
     }
 
     bool Box3::intersect(const Line2& other) {
-        
+
         Vector3 normals[] = {
             other.getNormal(),
-            
+
             // Hardcoded normals for an axis aligned box
             Vector3(0.0f, 1.0f, 0.0f),
             Vector3(1.0f, 0.0f, 0.0f)
@@ -66,22 +66,23 @@ namespace phantom{
         boxVertices.push_back(Vector3(origin.x + size.x, origin.y));
         boxVertices.push_back(Vector3(origin.x + size.x, origin.y + size.y));
 
-        
+
         Projection::Group lineVertices;
         lineVertices.push_back(other.a);
         lineVertices.push_back(other.b);
-        
+
         for(const Vector3& axis : normals) {
+            //cout << "ray" << axis.toString2().substr(6, axis.toString2().length()) << endl;
             Line2 a = Projection::project(axis, boxVertices);
             Line2 b = Projection::project(axis, lineVertices);
-        
+
             cout << a.naiveContains(b) << " for " << a.toString() << "vs" << b.toString() << endl;
-        
-            if(a.naiveContains(b)) {
+
+            if(!a.naiveContains(b)) {
                 return false;
             }
         }
-        
+
         return true;
     }
 

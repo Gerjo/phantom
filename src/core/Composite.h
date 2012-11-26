@@ -56,7 +56,7 @@ namespace phantom {
 
         // Iteration based events.
         virtual MessageState handleMessage(AbstractMessage* message);
-        virtual void update(const Time& time);
+        virtual void update(const PhantomTime& time);
         Graphics& getGraphics();
 
         // Physics related

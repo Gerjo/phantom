@@ -9,7 +9,7 @@
 namespace phantom{
     class LIBEXPORT EntityLayer: public Layer {
     public:
-        virtual void update(const Time &time);
+        virtual void update(const PhantomTime &time);
         virtual void addComponent(Composite* component);
 
     protected:

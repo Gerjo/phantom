@@ -7,6 +7,10 @@
 #include <physics/Box3.h>
 #include <deque>
 #include <limits>
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 using namespace phantom;
 
@@ -30,6 +34,10 @@ public:
             if(projection.x < min.x) {
                 min = projection;
             }
+            
+            std::string meh = projection.toString2();
+            
+            cout << "point" << meh.substr(6, meh.length()) << endl;
         }
         
         return Line2(min, max);

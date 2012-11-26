@@ -8,7 +8,7 @@ namespace phantom {
     public:
         NullDriver(PhantomGame *game) : Driver(game) { }
 
-        void onUpdate(Time time) { }
+        void onUpdate(PhantomTime time) { }
         void onRender() { }
 
         Camera* createCamera() { return new Camera(0); }

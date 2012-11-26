@@ -23,14 +23,14 @@ namespace phantom{
 
         virtual void setWindowTitle(string title);
 
-        virtual void onUpdate(Time time);
+        virtual void onUpdate(PhantomTime time);
         virtual void onRender();
 
         virtual Camera* createCamera() = 0;
         vector<Camera*> *getActiveCameras();
         void enableCamera(Camera *cam);
         void disableCamera(Camera *cam);
-        
+
         Input* getInput();
         Renderer *getRenderer();
         FreeTypeLibrary *getFontLibrary();
@@ -42,7 +42,7 @@ namespace phantom{
         vector<Camera*> _cameras;
         vector<Camera*> _activeCameras;
         KeyboardListener *_keyboard;
-        
+
         PhantomGame* _game;
 
         void addCamToList(Camera *cam);
