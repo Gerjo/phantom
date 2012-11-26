@@ -38,10 +38,6 @@ public:
             } else if(projection.x == minimum.x && projection.y < minimum.y) {
                 minimum = projection;
             }
-
-            std::string meh = projection.toString2();
-
-            //cout << "point" << meh.substr(6, meh.length()) << endl;
         }
 
         return Line2(minimum, maximum);
