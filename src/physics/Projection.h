@@ -20,19 +20,19 @@ public:
 
     static Line2 project(const Vector3 axis, const Group& vertices) {
         const float inf = std::numeric_limits<float>::infinity();
-        Vector3 max(-inf, -inf, 0.0f);
-        Vector3 min(inf, inf, 0.0f);
+        Vector3 maximum(-inf, -inf, 0.0f);
+        Vector3 minimum(inf, inf, 0.0f);
 
         // Project each vertex on the axis, and determine the upper and lower bound.
         for(const Vector3& vertex : vertices) {
             Vector3 projection = vertex.projectOnto(axis);
 
-            if(projection.x > max.x) {
-                max = projection;
+            if(projection.x > maximum.x) {
+                maximum = projection;
             }
 
-            if(projection.x < min.x) {
-                min = projection;
+            if(projection.x < minimum.x) {
+                minimum = projection;
             }
             
             std::string meh = projection.toString2();
@@ -40,7 +40,7 @@ public:
             cout << "point" << meh.substr(6, meh.length()) << endl;
         }
         
-        return Line2(min, max);
+        return Line2(minimum, maximum);
     }
 };
 
