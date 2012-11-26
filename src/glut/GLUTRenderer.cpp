@@ -66,9 +66,9 @@ namespace phantom {
 #   endif
 #endif
 
-            glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) GetProcAddress("glGenBuffersARB");
-            glBindBufferARB = (PFNGLBINDBUFFERARBPROC) GetProcAddress("glBindBufferARB");
-            glBufferDataARB = (PFNGLBUFFERDATAARBPROC) GetProcAddress("glBufferDataARB");
+            glGenBuffersARB    = (PFNGLGENBUFFERSARBPROC)    GetProcAddress("glGenBuffersARB");
+            glBindBufferARB    = (PFNGLBINDBUFFERARBPROC)    GetProcAddress("glBindBufferARB");
+            glBufferDataARB    = (PFNGLBUFFERDATAARBPROC)    GetProcAddress("glBufferDataARB");
             glDeleteBuffersARB = (PFNGLDELETEBUFFERSARBPROC) GetProcAddress("glDeleteBuffersARB");
         }
         else{
