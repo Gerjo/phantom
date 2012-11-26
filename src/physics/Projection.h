@@ -55,11 +55,11 @@ public:
         const float herMin_x = std::min<float>(her.a.x, her.b.x);
         const float herMin_y = std::min<float>(her.a.y, her.b.y);
 
-        return (
+        return
             ((himMax_x <= herMax_x && himMax_x >= herMin_x) || (herMax_x <= himMax_x && herMax_x >= himMin_x))
             &&
             ((himMax_y <= herMax_y && himMax_y >= herMin_y) || (herMax_y <= himMax_y && herMax_y >= himMin_y))
-        );
+        ;
     }
 };
 
