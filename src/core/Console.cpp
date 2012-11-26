@@ -39,7 +39,7 @@ namespace phantom {
         Console::log(log.str());
     }
 
-    void Console::update(const Time& time) {
+    void Console::update(const PhantomTime& time) {
         Composite::update(time);
 
         NullDriver* driver = dynamic_cast<NullDriver*>(getDriver());

@@ -4,10 +4,10 @@
 #include <CompileConfig.h>
 
 namespace phantom {
-    class LIBEXPORT Time {
+    class LIBEXPORT PhantomTime {
     public:
-        Time(float elapsed, float totalGameTime, double currentTime);
-        ~Time();
+        PhantomTime(float elapsed, float totalGameTime, double currentTime);
+        ~PhantomTime();
 
         float getElapsed() const;
         float getTotalGameTime() const;

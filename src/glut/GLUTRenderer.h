@@ -9,6 +9,13 @@
 #include <physics/Vector3.h>
 #include <string>
 #include <graphics/FreeTypeLibrary.h>
+#include <GL/freeglut.h>
+#include <GL/glext.h>
+
+#ifndef _WINDOWS
+#   include <GL/glx.h>
+#endif
+
 
 namespace phantom {
     class Image;
@@ -21,7 +28,7 @@ namespace phantom {
         virtual ~GLUTRenderer();
 
         virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset);
-        virtual void renderLoop(std::deque<GameState*>* states);       
+        virtual void renderLoop(std::deque<GameState*>* states);
 
         virtual void buildShape(Shape *shape);
         virtual void destroyShape(Shape *shape);

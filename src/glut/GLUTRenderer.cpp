@@ -7,12 +7,6 @@
 #include <graphics/shapes/Text.h>
 #include <png.h>
 #include <graphics/ImageCache.h>
-#include <GL/freeglut.h>
-#include <GL/glext.h>
-
-#ifndef _WINDOWS
-#   include <GL/glx.h>
-#endif
 
 namespace phantom {
 

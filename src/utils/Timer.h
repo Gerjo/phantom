@@ -16,7 +16,7 @@ namespace phantom {
 
         // Slightly more efficient overload. The update loop of your game
         // supplies a Time object.
-        bool hasExpired(const Time& time) {
+        bool hasExpired(const PhantomTime& time) {
             if(_isStopped) {
                 return false;
             }

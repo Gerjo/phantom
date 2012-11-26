@@ -69,7 +69,7 @@ namespace phantom {
         }
     }
 
-    void Composite::update(const Time& time) {
+    void Composite::update(const PhantomTime& time) {
         _isUpdating = true;
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
             Composite* composite = *iter;

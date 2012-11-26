@@ -2,7 +2,7 @@
 #include <iostream>
 
 namespace phantom{
-    void EntityLayer::update(const Time &time){
+    void EntityLayer::update(const PhantomTime &time){
         Composite::update(time);
 
         vector<Composite*>& entities = getComponents();

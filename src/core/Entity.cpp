@@ -22,7 +22,7 @@ namespace phantom {
         }
     }
 
-    void Entity::update(const Time& time) {
+    void Entity::update(const PhantomTime& time) {
         Composite::update(time);
     }
 } /* namespace phantom */

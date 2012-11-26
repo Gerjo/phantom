@@ -57,7 +57,7 @@ namespace phantom {
             double elapsed = now - last;
             total += elapsed;
 
-            Time time(static_cast<float>(elapsed), static_cast<float>(total), now);
+            PhantomTime time(static_cast<float>(elapsed), static_cast<float>(total), now);
 
             update(time);
 
@@ -90,7 +90,7 @@ namespace phantom {
         return 0;
     }
 
-    void PhantomGame::update(const Time& time) {
+    void PhantomGame::update(const PhantomTime& time) {
         Composite::update(time);
 
         // We make a copy since the states can change during the component updates.

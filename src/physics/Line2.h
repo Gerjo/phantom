@@ -30,6 +30,9 @@ namespace phantom {
 
         Vector3 a;
         Vector3 b;
+
+        bool naiveContains(const Line2& other);
+
     private:
         // If you're using this, you are probably doing something wrong.
         bool eitherFit(const Line2& him, const Line2& her) const;

@@ -19,7 +19,7 @@ namespace phantom{
     void Driver::setWindowTitle(string title) {
     }
 
-    void Driver::onUpdate(Time time) {
+    void Driver::onUpdate(PhantomTime time) {
         _keyboard->update();
         _input->getKeyboardState()->changes()->clear();
         _input->getKeyboardState()->changesUp()->clear();

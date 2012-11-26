@@ -23,7 +23,7 @@ namespace phantom {
         _targetList = *targetList;
     }
 
-    void Mover::update(const Time& time){
+    void Mover::update(const PhantomTime& time){
         Composite::update(time);
 
         if(_pauseTimer.hasExpired(time)) {

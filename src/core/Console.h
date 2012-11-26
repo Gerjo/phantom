@@ -16,7 +16,7 @@ namespace phantom {
     class LIBEXPORT Console : public Composite {
     public:
         Console();
-        
+
         void addLog(string log);
 
         static void log(string log);
@@ -30,7 +30,7 @@ namespace phantom {
             Console::log(log.getData());
         }
 
-        virtual void update(const Time& time);
+        virtual void update(const PhantomTime& time);
     private:
         static Console* INSTANCE;
         deque<string> _logs;
@@ -49,7 +49,7 @@ namespace phantom {
         unsigned int _maxLines;
         int _logCount;
         string _text;
-    };   
+    };
 }
 
 #endif	/* CONSOLE_H */
