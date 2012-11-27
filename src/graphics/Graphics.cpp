@@ -97,11 +97,19 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::line(float startX, float startY, float endX, float endY) {
+    Graphics& Graphics::line(const float& startX, const float& startY, const float& endX, const float& endY) {
         Line* line = new Line(startX, startY, endX, endY);
 
         addShape(line);
         return *this;
+    }
+
+    Graphics& Graphics::line(const Line2& line) {
+        return this->line(line.a.x, line.a.y, line.b.x, line.b.y);
+    }
+
+    Graphics& Graphics::line(const Vector3& start, const Vector3& end) {
+        return this->line(start.x, start.y, end.x, end.y);
     }
 
     Graphics& Graphics::moveTo(float x, float y) {
@@ -161,7 +169,7 @@ namespace phantom {
         while(source.size() > 0) {
             Shape* shape = (*source.begin());
 
-            
+
 
             // We're only setting the color at the latest possible moment, in order
             // to comply with the HTML 5 API.

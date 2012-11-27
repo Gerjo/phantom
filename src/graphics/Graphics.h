@@ -8,6 +8,7 @@
 #include <graphics/Color.h>
 #include <graphics/shapes/Shape.h>
 #include <graphics/shapes/Polygon.h>
+#include <physics/Line2.h>
 
 using namespace std;
 
@@ -31,7 +32,9 @@ public:
     Graphics& setFillStyle(Color color);
     Graphics& setLineStyle(Color color);
 
-    Graphics& line(float startX, float startY, float endX, float endY);
+    Graphics& line(const float& startX, const float& startY, const float& endX, const float& endY);
+    Graphics& line(const Line2& line);
+    Graphics& line(const Vector3& start, const Vector3& end);
     Graphics& rect(float x, float y, float width, float height, bool isFilled = true, float thickness = 3.0f);
     Graphics& rect(const Box3& box, bool isFilled = true, float thickness = 3.0f);
     Graphics& arc(float x, float y, float radius, float start, float end);
