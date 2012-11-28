@@ -117,6 +117,7 @@ namespace phantom {
     }
 
     void PhantomGame::exit(int returncode) {
+        _running = false;
         vector<Composite*> components = getComponents();
         for(auto component = components.begin(); component != components.end();) {
             (*component)->destroy();
@@ -126,7 +127,6 @@ namespace phantom {
         clearDisposables();
 
         onExit(returncode);
-        _running = false;
     }
 
     void PhantomGame::onExit(int returncode) {

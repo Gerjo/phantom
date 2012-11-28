@@ -46,6 +46,7 @@ namespace phantom {
 
         friend class Composite;
         friend class Graphics;
+
     protected:
         virtual void onExit(int returncode);
 

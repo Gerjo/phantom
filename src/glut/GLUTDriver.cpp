@@ -8,10 +8,14 @@
 
 namespace phantom{
 
+    PhantomGame *GLUTDriver::_staticgame = nullptr;
+
     GLUTDriver::GLUTDriver(PhantomGame* game) : Driver(game) {
         _renderer = new GLUTRenderer(game);
+        glutCloseFunc(closeListener);
         _input = new GLUTInput(game);
         _fontLibrary = new FreeTypeLibrary(_renderer);
+        _staticgame = game;
     }
 
     GLUTDriver::~GLUTDriver(){
@@ -28,6 +32,10 @@ namespace phantom{
     Camera* GLUTDriver::createCamera(void) {
         Camera* cam = new GLUTCamera(0);
         return cam;
+    }
+
+    void GLUTDriver::closeListener() {
+        _staticgame->exit(0);
     }
 
 } /* namespace phantom */

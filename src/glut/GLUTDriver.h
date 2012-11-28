@@ -13,7 +13,10 @@ namespace phantom{
 
         virtual void setWindowTitle(string title);
         virtual Camera* createCamera(void);
-	};
+    private:
+        static PhantomGame *_staticgame;
+        static void closeListener();
+    };
 
 } /* namespace phantom */
 

@@ -24,7 +24,7 @@ namespace phantom {
         glutInit(&i, 0);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
         glutInitWindowSize(static_cast<int>(viewPort.x), static_cast<int>(viewPort.y));
-
+       
         if(!game->fullscreen) {
             _windowID = glutCreateWindow("Elephantom");
         }
