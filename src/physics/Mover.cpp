@@ -1,6 +1,7 @@
 #include "Mover.h"
 #include <core/Entity.h>
 
+
 namespace phantom {
 
     Mover::Mover():_target(_position), _targetList(), _pauseTimer(0.0) {
@@ -28,16 +29,30 @@ namespace phantom {
 
         if(_pauseTimer.hasExpired(time)) {
             if(!_targetList.empty() && _parent != 0){
-                Vector3 target    = _targetList.front();
-                Vector3 position  = _parent->getPosition();
-                Vector3 direction = target - position;
+                const Vector3& target    = _targetList.front();
+                const Vector3& position  = _parent->getPosition();
+                Vector3 direction        = target - position;
+                const bool wasXpositive  = direction.x >= 0;
+                const bool wasYpositive  = direction.y >= 0;
 
                 direction.normalize();
 
-                Vector3 newPosition = position + (direction * 300 * time.getElapsed());
+                Vector3 newPosition  = position + (direction * 300 * time.getElapsed());
+                Vector3 newDirection = target - newPosition;
 
-                float distanceSq = position.distanceToSq(target);
-                float threshold = 64.0f;
+                const bool isXpositive  = newDirection.x >= 0;
+                const bool isYpositive  = newDirection.y >= 0;
+
+                if(isXpositive != wasXpositive) {
+                    newPosition.x = target.x;
+                }
+
+                if(isYpositive != wasYpositive) {
+                    newPosition.y = target.y;
+                }
+
+                float distanceSq = newPosition.distanceToSq(target);
+                float threshold  = 64.0f;
 
                 if(distanceSq < threshold) {
                     _targetList.pop_front();
