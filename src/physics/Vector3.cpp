@@ -70,6 +70,13 @@ namespace phantom{
         return !(*this == v);
     }
 
+    bool Vector3::operator<(const Vector3& v) const{
+        return (this->getLengthSq() < v.getLengthSq());
+    }
+    bool Vector3::operator>(const Vector3& v) const{
+        return (this->getLengthSq() > v.getLengthSq());
+    }
+
     Vector3& Vector3::operator+=(const Vector3& v) {
         x += v.x;
         y += v.y;

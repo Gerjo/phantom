@@ -35,9 +35,11 @@ namespace phantom{
         Vector3& operator-=(const Vector3& v);
         Vector3& operator*=(const Vector3& v);
         Vector3& operator*=(const float& v);
-
+        
         bool operator== (const Vector3& v) const;
         bool operator!= (const Vector3& v) const;
+        bool operator< (const Vector3& v) const;
+        bool operator> (const Vector3& v) const;
 
         Vector3& absolute();
         Vector3& normalize();
@@ -58,7 +60,7 @@ namespace phantom{
             o << "[Vector3] (x: " << v.x << ", y: " << v.y << ", z: " << v.z;
             return o;
         }
-
+        
     };
 
 } /* namespace phantom */
