@@ -30,6 +30,10 @@ namespace phantom {
         // BSP and pathfinding experimental gimmicks:
         unsigned solidState;
         unsigned solidType;
+
+        float distanceTo(Entity* gob);
+        float distanceToSq(Entity* gob);
+        Vector3 directionTo(Entity* gob);
     protected:
         Mover* mover;
 
