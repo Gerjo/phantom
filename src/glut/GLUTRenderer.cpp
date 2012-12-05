@@ -10,7 +10,6 @@
 
 namespace phantom {
 
-    // Makes my life a bit easier
     PFNGLGENBUFFERSARBPROC glGenBuffersARB = NULL;
     PFNGLBINDBUFFERARBPROC glBindBufferARB = NULL;
     PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
@@ -26,7 +25,7 @@ namespace phantom {
         glutInitWindowSize(static_cast<int>(viewPort.x), static_cast<int>(viewPort.y));
        
         if(!game->fullscreen) {
-            _windowID = glutCreateWindow("Elephantom");
+            _windowID = glutCreateWindow("CpPhantom");
         }
         else if(game->fullscreen) {
             std::stringstream stream;
@@ -255,7 +254,6 @@ namespace phantom {
         if(_vboSupport) {
             shape->verticesCount = shape->vertices.size();
 
-            // Creating REAL arrays -.-
             Vertice *verticesArray = new Vertice[shape->verticesCount];
             TexCoord *texCoordArray;
             if(shape->isImage || shape->isText)
@@ -279,7 +277,6 @@ namespace phantom {
                 glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
             }
 
-            // Everything is safe in the videocard... hopefully :)
             shape->vertices.clear();
             shape->texCoords.clear();
 
@@ -288,10 +285,8 @@ namespace phantom {
                 delete [] texCoordArray;
         } else if (!_vboSupport) {
             shape->verticesCount = shape->vertices.size();
-
-            // Creating REAL arrays -.-
+ 
             shape->verticesArray = new Vertice[shape->vertices.size()];
-
             if(shape->isImage || shape->isText)
                 shape->texCoordsArray = new TexCoord[shape->vertices.size()];
 
