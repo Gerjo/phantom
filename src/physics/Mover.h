@@ -14,7 +14,7 @@ namespace phantom {
     public:
         Mover();
         void moveTo(Vector3 vector);
-        void moveTo(const std::deque<Vector3> *vList);
+        void moveTo(const std::deque<Vector3> vList);
         virtual void update(const PhantomTime& time);
         virtual void onAnsestorChanged();
         void stop();

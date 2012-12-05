@@ -20,8 +20,8 @@ namespace phantom {
         _targetList.push_back(target);
     }
 
-    void Mover::moveTo(const std::deque<Vector3> *targetList){
-        _targetList = *targetList;
+    void Mover::moveTo(const std::deque<Vector3> targetList){
+        _targetList = targetList;
     }
 
     void Mover::update(const PhantomTime& time){
