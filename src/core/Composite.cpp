@@ -14,11 +14,11 @@ namespace phantom {
         _destroy(false),
         _isUpdating(false),
         _type("Composite"),
-        isStatic(false)
+        isStatic(false),
+        _graphics(this)
     {
         _layer = 0;
         _parent = 0;
-        _graphics = new Graphics(this);
         _boundingBox.size = Vector3(10, 10, 0);
     }
 
@@ -28,9 +28,6 @@ namespace phantom {
             delete *iter;
             *iter = 0;
         }
-
-        delete _graphics;
-        _graphics = 0;
     }
 
     PhantomGame* Composite::getPhantomGame(void) {
@@ -238,7 +235,7 @@ namespace phantom {
     }
 
     Graphics& Composite::getGraphics() {
-        return *_graphics;
+        return _graphics;
     }
 
     void Composite::removeFromParent(void) {
