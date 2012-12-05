@@ -297,4 +297,8 @@ namespace phantom {
     bool Composite::isDestroyed() {
         return _destroy;
     }
+
+    Layer* Composite::getLayer() {
+        return _layer;
+    }
 } /* namespace phantom */

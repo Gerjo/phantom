@@ -76,7 +76,7 @@ namespace phantom {
         const string& getType();
         bool isType(const string& type);
         string toString(void);
-
+        Layer* getLayer();
     protected:
         Vector3 _position;
         Vector3 _direction;
