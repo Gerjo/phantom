@@ -11,6 +11,7 @@
 #include <messaging/MessageState.h>
 #include <messaging/Message.h>
 #include <messaging/AbstractMessage.h>
+#include <messaging/IHandleMessage.h>
 #include <utils/Time.h>
 
 using namespace std;
@@ -21,7 +22,7 @@ namespace phantom {
     class Driver;
     class Layer;
 
-    class LIBEXPORT Composite {
+    class LIBEXPORT Composite : public IHandleMessage {
     public:
         bool isStatic;
 

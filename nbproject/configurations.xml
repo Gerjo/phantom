@@ -74,6 +74,7 @@
       </logicalFolder>
       <logicalFolder name="messaging" displayName="messaging" projectFiles="true">
         <itemPath>src/messaging/AbstractMessage.h</itemPath>
+        <itemPath>src/messaging/IHandleMessage.h</itemPath>
         <itemPath>src/messaging/Message.h</itemPath>
         <itemPath>src/messaging/MessageState.h</itemPath>
       </logicalFolder>
