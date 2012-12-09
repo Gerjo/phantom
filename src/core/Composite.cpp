@@ -121,8 +121,8 @@ namespace phantom {
     MessageState Composite::handleMessage(AbstractMessage* message) {
         MessageState state = IGNORED;
 
-        for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-            state = (*iter)->handleMessage(message);
+        for(Composite* composite : _components) {
+            state = composite->handleMessage(message);
             if (state == MessageState::CONSUMED) {
                 return state;
             }
