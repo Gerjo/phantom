@@ -122,12 +122,10 @@ namespace phantom {
         MessageState state = IGNORED;
 
         for (auto iter = _components.begin(); iter != _components.end(); ++iter) {
-            MessageState r = (*iter)->handleMessage(message);
-            if (r == MessageState::CONSUMED) {
-                return r;
+            state = (*iter)->handleMessage(message);
+            if (state == MessageState::CONSUMED) {
+                return state;
             }
-
-            state = r;
         }
 
         return state;
