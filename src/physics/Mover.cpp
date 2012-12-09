@@ -1,4 +1,5 @@
 #include "Mover.h"
+#include "utils/PhantomException.h"
 #include <core/Entity.h>
 
 
@@ -78,5 +79,15 @@ namespace phantom {
 
     bool Mover::isPaused() {
         return !_pauseTimer.hasExpired();
+    }
+
+    Vector3 Mover::getTarget() {
+
+        // Return current center position if the entity is not moving.
+        if(_targetList.empty()) {
+            return _parent->getBoundingBox().getCenter();
+        }
+
+        return _targetList.back();
     }
 } /* namespace phantom */
