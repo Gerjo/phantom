@@ -19,7 +19,7 @@ namespace phantom {
         virtual void onAnsestorChanged();
         void stop();
         bool isStopped();
-
+        Vector3 getTarget();
         void pause(double delay);
         bool isPaused();
 
