@@ -87,7 +87,7 @@ namespace phantom {
                 str << "Size of image cache: " << this->imageCache.size();
                 Console::log(str.str());
             };
-            Console::mapCommand("sizeof ImageCache", function);
+            Console::mapCommand("sizeof(ImageCache)", function);
         };
 
         map<const string, ImageCacheItem> imageCache;

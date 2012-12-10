@@ -14,7 +14,7 @@ namespace phantom {
             str << "Size of font cache: " << fontCache.size();
             Console::log(str.str());
         };
-        Console::mapCommand("sizeof FontCache", function);
+        Console::mapCommand("sizeof(FontCache)", function);
 
         _renderer = renderer;
     }
