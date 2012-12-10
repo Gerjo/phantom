@@ -84,8 +84,8 @@ namespace phantom {
         g.stroke();
     }
 
-    void Console::mapCommand(string name, function<void()> function) {
-        Console::INSTANCE->_commandMap.insert(pair<string, std::function<void()>>(name, function));
+    void Console::mapCommand(string name, function<void(string args)> function) {
+        Console::INSTANCE->_commandMap.insert(pair<string, std::function<void(string args)>>(name, function));
     }
 
     void Console::renderInput() {
@@ -97,15 +97,20 @@ namespace phantom {
                     }
                 }
                 else if(c == '\n' || c == '\r') {
+                    std::string::size_type argumentStart = _text.find(' ');
+
                     if(_text.substr(0, 4) == "\\pos" && _text.size() > 5) {
                         if(_text.substr(5, _text.size()) == "camera")
                             Console::log("Current position of the camera is: " + getDriver()->getActiveCameras()->at(0)->getPosition().toString());
                         else if(_text.substr(5, _text.size()) == "mouse")
                             Console::log("Current position of the mouse is: " + getDriver()->getInput()->getMouseState()->getPosition().toString());
                     }
-                    else if(_commandMap.find(_text.substr(1, _text.size())) != _commandMap.end()) {
-                        std::function<void()> &func = _commandMap.at(_text.substr(1, _text.size()));
-                        func();
+                    else if(_commandMap.find(_text.substr(1, argumentStart-1)) != _commandMap.end()) {
+                        std::function<void(string args)> &func = _commandMap.at(_text.substr(1, argumentStart-1));
+                        string argument = "";
+                        if(argumentStart != _text.size());
+                            argument = _text.substr(argumentStart+1, _text.size());
+                        func(argument);
                     }
                     else {
                         Console::log("Command unknown.");

@@ -9,7 +9,7 @@ namespace phantom {
             std::cout << "Failed to initialize the freetype library." << std::endl;
         }
 
-        std::function<void()> function = [this] () { 
+        std::function<void(string args)> function = [this] (string args) { 
             std::stringstream str;
             str << "Size of font cache: " << fontCache.size();
             Console::log(str.str());

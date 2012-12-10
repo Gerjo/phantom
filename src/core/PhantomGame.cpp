@@ -39,7 +39,7 @@ namespace phantom {
     int PhantomGame::start(int argc, char *argv[]) {
         _running = true;
 
-        std::function<void()> function = [this] () {
+        std::function<void(string args)> function = [this] (string args) {
             this->exit(0);
         };
 
