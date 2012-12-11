@@ -172,8 +172,11 @@ namespace phantom{
         if(this->z != 0) {
             throw PhantomException(
                     "Vector3::perp: The perpendicular method only works"
-                    " on 2D vectors. Use the cross produced with a pane"
-                    " instead for 3D operations.");
+                    " on 2D vectors. Use the cross product with a pane"
+                    " instead for 3D operations. In addition to that, it"
+                    " might also be possible that you're trying to calculate"
+                    " the perp of a nullptr Vector3, GCC let's you do that."
+            );
         }
 
         // Left hand side, right hand side... does it really matter?
