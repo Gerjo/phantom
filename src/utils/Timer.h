@@ -64,6 +64,10 @@ namespace phantom {
             return _isStopped;
         }
 
+        bool expire(void) {
+            _startTime = -1;
+        }
+
     private:
         double _startTime;
         double _delay;
