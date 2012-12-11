@@ -171,12 +171,20 @@ namespace phantom {
         _type = type;
     }
 
-    const string& Composite::getType() {
+    const string& Composite::getType() const {
         return _type;
     }
 
-    bool Composite::isType(const string& type) {
+    bool Composite::isType(const string& type) const {
         return _type.compare(type) == 0;
+    }
+
+    bool Composite::isType(const Composite& other) const {
+        return isType(other.getType());
+    }
+
+    bool Composite::isType(const Composite* other) const {
+        return isType(other->getType());
     }
 
     string Composite::toString(void) {

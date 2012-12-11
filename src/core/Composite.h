@@ -74,8 +74,11 @@ namespace phantom {
         virtual void setDirection(Vector3 direction);
 
         // General
-        const string& getType();
-        bool isType(const string& type);
+        const string& getType() const;
+        bool isType(const string& type) const;
+        bool isType(const Composite& other) const;
+        bool isType(const Composite* other) const;
+
         string toString(void);
         Layer* getLayer();
     protected:
