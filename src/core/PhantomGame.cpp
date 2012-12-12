@@ -12,7 +12,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _viewPort(1280, 720, 0), _worldSize(1920, 1080, 0), _fps(62.5), fullscreen(false) {
+    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _screenSize(1280, 720, 0), _viewPort(1920, 1080, 0), _worldSize(5000, 5000), _fps(62.5), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0) {
             PhantomGame::INSTANCE = this;
             _console = new Console();
@@ -150,6 +150,10 @@ namespace phantom {
         return _viewPort;
     }
 
+    Vector3 PhantomGame::getScreenSize() const {
+        return _screenSize;
+    }
+
     Vector3 PhantomGame::getWorldSize() const {
         return _worldSize;
     }
@@ -182,10 +186,10 @@ namespace phantom {
                 readingValue = false;
 
                 if(propertyname.compare("screenWidth") == 0) {
-                    _viewPort.x = static_cast<float>(atoi(propertyvalue.c_str()));
+                    _screenSize.x = static_cast<float>(atoi(propertyvalue.c_str()));
                 }
                 else if(propertyname.compare("screenHeight") == 0) {
-                    _viewPort.y = static_cast<float>(atoi(propertyvalue.c_str()));
+                    _screenSize.y = static_cast<float>(atoi(propertyvalue.c_str()));
                 }
                 else if(propertyname.compare("fullscreen") == 0) {
                     if(atoi(propertyvalue.c_str()) == 0)

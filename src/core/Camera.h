@@ -19,7 +19,8 @@ namespace phantom {
             _cameraID(id),
             _isActive(false),
             _rotation(0.0f, 0.0f, 0.0f),
-            _viewPort(0.0f, 0.0f, 0.0f)
+            _viewPort(0.0f, 0.0f, 0.0f),
+            _screenSize(0.0f, 0.0f, 0.0f)
         {
 
         }
@@ -35,12 +36,12 @@ namespace phantom {
             return _isActive;
         }
 
-        Vector3 getWorldCoordinates(Vector3 viewCoordinate) {
-            return _position + viewCoordinate;
+        Vector3 getViewCoordinates(Vector3 screenCoordinate) {
+            return _position + screenCoordinate;
         }
 
-        Vector3& getWorldSize() {
-            return _worldSize;
+        Vector3& getScreenSize() {
+            return _screenSize;
         }
 
         Vector3& getViewPort() {
@@ -51,8 +52,8 @@ namespace phantom {
             return _rotation;
         }
 
-        virtual void setWorldSize(Vector3 ws) {
-            _worldSize = ws;
+        virtual void setScreenSize(Vector3 s) {
+            _screenSize = s;
         }
 
         virtual void setViewPort(Vector3 vp) {
@@ -75,7 +76,7 @@ namespace phantom {
         int _cameraID;
         Vector3 _rotation;
         Vector3 _viewPort;
-        Vector3 _worldSize;
+        Vector3 _screenSize;
     };
 }
 #endif // !CAMERA_H_

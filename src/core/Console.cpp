@@ -11,8 +11,8 @@ namespace phantom {
         setType("Console");
         Console::INSTANCE = this;
 
-        _width    = getPhantomGame()->getWorldSize().x;
-        _height   = getPhantomGame()->getWorldSize().y / 2;
+        _width    = getPhantomGame()->getViewPort().x;
+        _height   = getPhantomGame()->getViewPort().y / 2;
         _maxLines = 30;
 
         _keyboard = nullptr;

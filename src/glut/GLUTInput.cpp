@@ -57,7 +57,7 @@ namespace phantom {
 
     void GLUTInput::mouseMotionListener(int mouseX, int mouseY) {
         Vector3 mouseTranslated(mouseX, mouseY, 0);
-        mouseTranslated = mouseTranslated / (GLUTInput::INSTANCE->_game->getViewPort() / GLUTInput::INSTANCE->_game->getWorldSize());
+        mouseTranslated = mouseTranslated / (GLUTInput::INSTANCE->_game->getScreenSize() / GLUTInput::INSTANCE->_game->getViewPort());
         GLUTInput::INSTANCE->_mouseState->handleEvent(mouseTranslated);
     }
 }

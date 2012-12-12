@@ -17,12 +17,12 @@ namespace phantom {
 
     GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
         std::cout << "Initializing GLUT renderer..." << std::endl;
-        Vector3 viewPort = game->getViewPort();
+        Vector3 screenSize = game->getScreenSize();
 
         int i = 0;
         glutInit(&i, 0);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
-        glutInitWindowSize(static_cast<int>(viewPort.x), static_cast<int>(viewPort.y));
+        glutInitWindowSize(static_cast<int>(screenSize.x), static_cast<int>(screenSize.y));
        
         if(!game->fullscreen) {
             _windowID = glutCreateWindow("CpPhantom");
@@ -31,7 +31,7 @@ namespace phantom {
             std::stringstream stream;
             std::string gamemodeStr;
 
-            stream << viewPort.x << "x" << viewPort.y << ":32@60";
+            stream << screenSize.x << "x" << screenSize.y << ":32@60";
 
             gamemodeStr = stream.str();
 
@@ -203,7 +203,7 @@ namespace phantom {
         for(Camera *cam : *_game->getDriver()->getActiveCameras()) {
             cam->setParams();
             Vector3 cameraPosition = cam->getPosition();
-            Box3 cameraBox(cam->getPosition(), _game->getWorldSize());
+            Box3 cameraBox(cam->getPosition(), _game->getViewPort());
 
             std::vector<Composite*>::iterator compIt = components.begin();
             while(compIt != components.end()) {
@@ -234,7 +234,7 @@ namespace phantom {
                 drawLoop(gamestate->getComponents(), initialOffset);
                 for(Camera *camera : *_game->getDriver()->getActiveCameras()) {
                     camera->setParams();
-                    Box3 cameraBox(camera->getPosition(), _game->getWorldSize());
+                    Box3 cameraBox(camera->getPosition(), _game->getViewPort());
                     drawShapes(gamestate, cameraBox, initialOffset.x, initialOffset.y);
                 }
             }

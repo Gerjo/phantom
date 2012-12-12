@@ -5,7 +5,7 @@
 namespace phantom {
     GLUTCamera::GLUTCamera(int id) : Camera(id) {
         setViewPort(getPhantomGame()->getViewPort());
-        setWorldSize(getPhantomGame()->getWorldSize());
+        setScreenSize(getPhantomGame()->getScreenSize());
     }
 
     GLUTCamera::~GLUTCamera() {
@@ -14,14 +14,14 @@ namespace phantom {
     void GLUTCamera::setParams() {
         const Vector3& pos = getPosition();
 
+        const Vector3& screenSize = getScreenSize();
         const Vector3& viewPort = getViewPort();
-        const Vector3& worldSize = getWorldSize();
 
-        glViewport(0, 0, static_cast<int>(viewPort.x), static_cast<int>(viewPort.y));
+        glViewport(0, 0, static_cast<int>(screenSize.x), static_cast<int>(screenSize.y));
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
 
-        glOrtho(0, worldSize.x, worldSize.y, 0, -100, 100);
+        glOrtho(0, viewPort.x, viewPort.y, 0, -100, 100);
         glTranslatef(-pos.x, -pos.y, -pos.z);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();

@@ -35,6 +35,7 @@ namespace phantom {
         void exit(int returncode);
 
         Vector3 getViewPort() const;
+        Vector3 getScreenSize() const;
         Vector3 getWorldSize() const;
 
         deque<GameState*>& getGameStates();
@@ -55,6 +56,7 @@ namespace phantom {
         static PhantomGame* INSTANCE;
         vector<Composite*> _disposables;
         Vector3 _viewPort;
+        Vector3 _screenSize;
         Vector3 _worldSize;
 
         float _fps;
