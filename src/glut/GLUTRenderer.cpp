@@ -249,7 +249,7 @@ namespace phantom {
 
     void GLUTRenderer::buildShape(Shape *shape) {
         // Be sure nothing is left to be deleted.
-        //destroyShape(shape);
+        destroyShape(shape);
 
         if(_vboSupport) {
             shape->verticesCount = shape->vertices.size();

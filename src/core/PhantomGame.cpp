@@ -28,6 +28,22 @@ namespace phantom {
         delete _driver;
     }
 
+    void PhantomGame::mapConsoleFunctions() {
+        std::function<void(string args)> shapes = [this] (string args) {
+            stringstream s;
+            s << "Current ammount of shapes: " << Shape::getShapecount();
+            Console::log(s.str());
+        };
+
+        Console::mapCommand("sizeof(shapes)", shapes);
+
+        std::function<void(string args)> quit = [this] (string args) {
+            this->exit(0);
+        };
+
+        Console::mapCommand("quit", quit);
+    }
+
     void PhantomGame::pushGameState(GameState *state) {
         _states.push_back(state);
     }
@@ -38,12 +54,8 @@ namespace phantom {
 
     int PhantomGame::start(int argc, char *argv[]) {
         _running = true;
-
-        std::function<void(string args)> function = [this] (string args) {
-            this->exit(0);
-        };
-
-        Console::mapCommand("quit", function);
+        
+        mapConsoleFunctions();
 
         double last = Util::getTime();
         double total = 0.0f;
@@ -68,7 +80,7 @@ namespace phantom {
                 timer.restart();
 
                 stringstream stream;
-                stream << "Elephantom [Current FPS: " << (int)(1 / elapsed) << " Avarage FPS: " << framecount - lastframecount << "]" << endl;
+                stream << "Elephantom [Current FPS: " << (int)(1 / elapsed) << " Average FPS: " << framecount - lastframecount << "]" << endl;
                 getDriver()->setWindowTitle(stream.str());
 
                 lastframecount = framecount;

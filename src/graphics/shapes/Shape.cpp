@@ -3,6 +3,7 @@
 
 namespace phantom {
     const float Shape::TEX_COORD_UNUSED = -999.0f;
+    unsigned int Shape::shapecount = 0;
 
     Shape::Shape() :
     _hasFillColor(false),
@@ -15,7 +16,7 @@ namespace phantom {
     vboVertices(0),
     verticesCount(0)
     {
-        
+        shapecount++;
     }
 
     Shape::~Shape() {
@@ -23,6 +24,11 @@ namespace phantom {
             delete [] verticesArray;
         if(texCoordsArray != nullptr)
             delete [] texCoordsArray;
+        shapecount--;
+    }
+
+    unsigned Shape::getShapecount() {
+        return shapecount;
     }
 
     void Shape::setFillColor(Color color) {
