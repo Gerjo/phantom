@@ -108,7 +108,7 @@ namespace phantom {
                     else if(_commandMap.find(_text.substr(1, argumentStart-1)) != _commandMap.end()) {
                         std::function<void(string args)> &func = _commandMap.at(_text.substr(1, argumentStart-1));
                         string argument = "";
-                        if(argumentStart != _text.size());
+                        if(argumentStart != _text.size())
                             argument = _text.substr(argumentStart+1, _text.size());
                         func(argument);
                     }
