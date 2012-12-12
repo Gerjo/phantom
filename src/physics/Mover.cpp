@@ -5,9 +5,13 @@
 
 namespace phantom {
 
-    Mover::Mover():_target(_position), _targetList(), _pauseTimer(0.0) {
+    Mover::Mover():_target(_position), _targetList(), _pauseTimer(0.0), _movementSpeed(250.0f) {
         _parent = 0;
         setPosition(Vector3(0,0,0));
+    }
+
+    void Mover::setMovementSpeed(float value) {
+        _movementSpeed = value;
     }
 
     void Mover::onAnsestorChanged(){
@@ -38,7 +42,7 @@ namespace phantom {
 
                 direction.normalize();
 
-                Vector3 newPosition  = position + (direction * 300 * time.getElapsed());
+                Vector3 newPosition  = position + (direction * _movementSpeed * time.getElapsed());
                 Vector3 newDirection = target - newPosition;
 
                 const bool isXpositive  = newDirection.x >= 0;

@@ -13,6 +13,7 @@ namespace phantom {
     class LIBEXPORT Mover: public phantom::Composite{
     public:
         Mover();
+        void setMovementSpeed(float value);
         void moveTo(Vector3 vector);
         void moveTo(const std::deque<Vector3> vList);
         virtual void update(const PhantomTime& time);
@@ -29,6 +30,7 @@ namespace phantom {
         Vector3 _target;
         Entity* _parent;
         Timer _pauseTimer;
+        float _movementSpeed;
     };
 
 } /* namespace phantom */
