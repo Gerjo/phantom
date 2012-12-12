@@ -36,8 +36,8 @@ namespace phantom {
             return _isActive;
         }
 
-        Vector3 getViewCoordinates(Vector3 screenCoordinate) {
-            return _position + screenCoordinate;
+        Vector3 getViewCoordinates(Vector3 viewCoordinate) {
+            return _position + viewCoordinate;
         }
 
         Vector3& getScreenSize() {
