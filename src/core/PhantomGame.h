@@ -37,6 +37,7 @@ namespace phantom {
         Vector3 getViewPort() const;
         Vector3 getScreenSize() const;
         Vector3 getWorldSize() const;
+        void setWorldSize(float x, float y);
 
         deque<GameState*>& getGameStates();
         Driver* getDriver();

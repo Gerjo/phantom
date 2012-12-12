@@ -12,7 +12,7 @@ namespace phantom {
 
     PhantomGame* PhantomGame::INSTANCE = 0;
 
-    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _screenSize(1280, 720, 0), _viewPort(1920, 1080, 0), _worldSize(5000, 5000), _fps(62.5), fullscreen(false) {
+    PhantomGame::PhantomGame(const char *configfile) : _driver(nullptr), _screenSize(1280, 720, 0), _viewPort(1920, 1080, 0), _worldSize(1920, 1080), _fps(62.5), fullscreen(false) {
         if(PhantomGame::INSTANCE == 0) {
             PhantomGame::INSTANCE = this;
             _console = new Console();
@@ -156,6 +156,11 @@ namespace phantom {
 
     Vector3 PhantomGame::getWorldSize() const {
         return _worldSize;
+    }
+
+    void PhantomGame::setWorldSize(float x, float y) {
+        _worldSize.x = x;
+        _worldSize.y = y;
     }
 
     void PhantomGame::parseConfigurationFile(const char *configfile) {
