@@ -17,6 +17,19 @@ namespace phantom{
         float x,y,z;
 
     public:
+        struct MapLessComparefunctor {
+             bool operator()(const Vector3& a, const Vector3& b) {
+                if(a.x == b.x) {
+                    if(a.y == b.y) {
+                        return a.z < b.z;
+                    }
+                    return a.y < b.y;
+                }
+
+                return a.x < b.x;
+             }
+        };
+
         Vector3();
         Vector3(float x, float y, float z= 0.0f);
         Vector3(int x, int y, int z = 0);
@@ -38,7 +51,6 @@ namespace phantom{
         
         bool operator== (const Vector3& v) const;
         bool operator!= (const Vector3& v) const;
-        bool operator< (const Vector3& v) const;
 
         Vector3& absolute();
         Vector3& normalize();
