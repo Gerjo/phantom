@@ -39,7 +39,6 @@ namespace phantom{
         bool operator== (const Vector3& v) const;
         bool operator!= (const Vector3& v) const;
         bool operator< (const Vector3& v) const;
-        bool operator> (const Vector3& v) const;
 
         Vector3& absolute();
         Vector3& normalize();
