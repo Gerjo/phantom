@@ -36,7 +36,7 @@ namespace phantom {
             return _isActive;
         }
 
-        Vector3 getViewCoordinates(Vector3 viewCoordinate) {
+        Vector3 getWorldCoordinates(Vector3 viewCoordinate) {
             return _position + viewCoordinate;
         }
 
