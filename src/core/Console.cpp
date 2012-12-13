@@ -73,11 +73,11 @@ namespace phantom {
     void Console::renderText(int offset, Color color) {
         Graphics& g = getGraphics().beginPath().setFillStyle(color);
 
-        float lineheight = 32;
+        float lineheight = 40;
         float lineOffset = lineheight + lineheight;
 
         for(const string& log : _logs) {
-            g.text(0.0f, _height - lineOffset, 16, "fonts/waree.ttf", log);
+            g.text(0.0f, _height - lineOffset, 20, "fonts/arial.ttf", log);
             lineOffset += lineheight;
         }
 
@@ -123,7 +123,7 @@ namespace phantom {
                 }
             }
 
-            getGraphics().beginPath().text(0.0f, _height - 32, 16, "fonts/waree.ttf", _text).stroke();
+            getGraphics().beginPath().text(0.0f, _height - 40, 20, "fonts/arial.ttf", _text).stroke();
         }
     }
 
