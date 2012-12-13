@@ -10,31 +10,31 @@
 using std::cout;
 using std::endl;
 
-namespace phantom{
+namespace phantom {
 
-    class LIBEXPORT Vector3{
+    class LIBEXPORT Vector3 {
     public: //variables
-        float x,y,z;
+        float x, y, z;
 
     public:
+
+        // Pass this as the 3rd argument to the std::map ctor.
         struct MapLessComparefunctor {
-             bool operator()(const Vector3& a, const Vector3& b) {
-                if(a.x == b.x) {
-                    if(a.y == b.y) {
+            bool operator()(const Vector3& a, const Vector3 & b) {
+                if (a.x == b.x) {
+                    if (a.y == b.y) {
                         return a.z < b.z;
                     }
                     return a.y < b.y;
                 }
-
                 return a.x < b.x;
-             }
+            }
         };
 
         Vector3();
-        Vector3(float x, float y, float z= 0.0f);
+        Vector3(float x, float y, float z = 0.0f);
         Vector3(int x, int y, int z = 0);
         Vector3(double x, double y, double z = 0.0);
-
         Vector3(const Vector3& origin);
 
         Vector3 operator+(const Vector3& v) const;
@@ -48,9 +48,9 @@ namespace phantom{
         Vector3& operator-=(const Vector3& v);
         Vector3& operator*=(const Vector3& v);
         Vector3& operator*=(const float& v);
-        
-        bool operator== (const Vector3& v) const;
-        bool operator!= (const Vector3& v) const;
+
+        bool operator==(const Vector3& v) const;
+        bool operator!=(const Vector3& v) const;
 
         Vector3& absolute();
         Vector3& normalize();
@@ -67,11 +67,11 @@ namespace phantom{
         std::string toString() const;
         std::string toString2() const;
 
-        friend std::ostream& operator<<(std::ostream& o, const Vector3& v){
+        friend std::ostream& operator<<(std::ostream& o, const Vector3& v) {
             o << "[Vector3] (x: " << v.x << ", y: " << v.y << ", z: " << v.z;
             return o;
         }
-        
+
     };
 
 } /* namespace phantom */
