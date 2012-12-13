@@ -10,10 +10,6 @@ namespace phantom {
         GLUTInput(PhantomGame *game);
         virtual ~GLUTInput();
 
-        virtual KeyboardState* getKeyboardState();
-        virtual MouseState* getMouseState();
-
-
     private:
 		static void keyboardListener			(unsigned char keycode, int mouseX, int mouseY);
 		static void keyboardUpListener			(unsigned char keycode, int mouseX, int mouseY);
@@ -23,10 +19,6 @@ namespace phantom {
 		static void mouseMotionListener			(int mouseX, int mouseY);
 
         static GLUTInput* INSTANCE;
-
-        MouseState* _mouseState;
-        KeyboardState* _keyboardState;
-
     };
 }
 

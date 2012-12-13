@@ -13,8 +13,8 @@ namespace phantom {
     public:
         Input(PhantomGame *game) { _game = game; }
         virtual ~Input() {}
-        virtual KeyboardState* getKeyboardState() = 0;
-        virtual MouseState* getMouseState() = 0;
+        virtual KeyboardState* getKeyboardState() { return _keyboardState; }
+        virtual MouseState* getMouseState() { return _mouseState; }
 
         // *hint* *hint*
         // virtual void getWiiMoteState(const int index);
@@ -22,6 +22,8 @@ namespace phantom {
         
     protected:
         PhantomGame *_game;
+        KeyboardState *_keyboardState;
+        MouseState *_mouseState;
     private:
         Input(const Input& input) {}
     };

@@ -12,6 +12,8 @@ namespace phantom {
 
 		void handleEvent(char id, char newValue);
 
+        unsigned char *getBuffer();
+
 		bool isKeyDown(char id);
 		bool isKeyUp(char id);
 
@@ -19,7 +21,7 @@ namespace phantom {
         std::vector<char>* changesUp();
 
 	private:
-		char _keys[256];
+		unsigned char _keys[256];
         std::vector<char> _changedDown;
         std::vector<char> _changedUp;
 	};

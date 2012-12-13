@@ -1,7 +1,7 @@
 #include "KeyboardState.h"
 
 namespace phantom {
-    KeyboardState::KeyboardState() { for(unsigned i = 0; i < 255; ++i) _keys[i] = 0; };
+    KeyboardState::KeyboardState() { for(unsigned i = 0; i < 256; ++i) _keys[i] = 0; };
     KeyboardState::~KeyboardState() { };
 
     void KeyboardState::handleEvent(char id, char newValue) {
@@ -10,6 +10,10 @@ namespace phantom {
             _changedDown.push_back(id);
         else
             _changedUp.push_back(id);
+    }
+
+    unsigned char *KeyboardState::getBuffer() {
+        return _keys;
     }
 
     bool KeyboardState::isKeyDown(char id) {

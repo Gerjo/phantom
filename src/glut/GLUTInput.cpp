@@ -27,14 +27,6 @@ namespace phantom {
         delete _mouseState;
     }
 
-    KeyboardState* GLUTInput::getKeyboardState() {
-        return _keyboardState;
-    }
-
-    MouseState* GLUTInput::getMouseState() {
-        return _mouseState;
-    }
-
     void GLUTInput::keyboardListener(unsigned char keycode, int mouseX, int mouseY) {
         GLUTInput::INSTANCE->_keyboardState->handleEvent(keycode, 1);
     }
