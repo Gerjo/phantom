@@ -71,10 +71,11 @@ namespace phantom{
     }
 
     bool Vector3::operator<(const Vector3& v) const{
-        return (this->getLengthSq() < v.getLengthSq());
+        return x < v.x && y < v.y && z < v.z;
     }
+
     bool Vector3::operator>(const Vector3& v) const{
-        return (this->getLengthSq() > v.getLengthSq());
+        return x > v.x && y > v.y && z > v.z;
     }
 
     Vector3& Vector3::operator+=(const Vector3& v) {
