@@ -113,7 +113,10 @@ namespace phantom{
     Vector3& Vector3::normalize() {
         float len = sqrt(x*x + y*y + z*z);
 
-        // What do we do here?
+        // It's OK to do nothing here. In fact, things such as project will
+        // break if you pull random gimmicks here, EG: it fine to project
+        // a line onto a 0,0 ray - we actually rely on this behavior.
+
         if(len == 0) {
             return *this;
         }
