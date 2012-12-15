@@ -45,9 +45,12 @@ namespace phantom {
         Vector3 operator*(float f) const;
 
         Vector3& operator+=(const Vector3& v);
+        Vector3& operator+=(const float& v);
         Vector3& operator-=(const Vector3& v);
         Vector3& operator*=(const Vector3& v);
         Vector3& operator*=(const float& v);
+        Vector3& operator/=(const Vector3& v);
+        Vector3& operator/=(const float& v);
 
         bool operator==(const Vector3& v) const;
         bool operator!=(const Vector3& v) const;
