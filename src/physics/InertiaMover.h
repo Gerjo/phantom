@@ -41,8 +41,6 @@ namespace phantom {
                 Pulse pulse = message->getPayload<Pulse>();
                 addPulse(pulse);
 
-                //cout << "Added pulse via message broadcast. " << endl;
-
                 return CONSUMED;
             }
         }
