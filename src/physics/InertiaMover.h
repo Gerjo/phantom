@@ -11,14 +11,14 @@
 namespace phantom {
     class InertiaMover : public Composite  {
     public:
-        virtual void addPulse(Pulse pulse);
-        virtual MessageState handleMessage(AbstractMessage* message);
+
+        void addPulse(Pulse pulse);
         void clear();
         virtual void update(const PhantomTime& time);
+        virtual MessageState handleMessage(AbstractMessage* message);
 
     private:
         std::deque<Pulse> _pulses;
-
     };
 }
 
