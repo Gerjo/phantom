@@ -77,12 +77,13 @@ namespace phantom {
                     speed       += pulse.speed * elapsed;
                     direction   += pulse.direction;
                     ++numPulses;
+
+                     // Post update removal, this means we can create one-off pulses.
+                    pulse.speed -= 2 * pulse.friction * pulse.friction * elapsed;
                 } else {
                     erase    = true;
                 }
 
-                // Post update removal, this means we can create one-off pulses.
-                pulse.speed -= 2 * pulse.friction * pulse.friction * elapsed;
 
                 if(erase) {
                     it = _pulses.erase(it);
