@@ -176,7 +176,7 @@ namespace phantom{
     std::string Vector3::toString() const {
         stringstream ss;
 
-        ss << "phantom::Vector3 (x: " << x << ", y: " << y << ", z: " << z << ")";
+        ss << "phantom::Vector3 (x: " << std::fixed << x << ", y: " << y << ", z: " << z << ")";
 
         return ss.str();
     }
