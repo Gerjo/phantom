@@ -43,6 +43,16 @@ namespace phantom {
 
                 return CONSUMED;
             }
+
+            if(message->isType("clear-pulses")) {
+                clear();
+
+                return CONSUMED;
+            }
+        }
+
+        void clear() {
+            _pulses.clear();
         }
 
         virtual void update(const PhantomTime& time) {
