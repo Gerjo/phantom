@@ -138,6 +138,10 @@ namespace phantom{
             return *this;
         }
 
+        if(len == 1) {
+            return *this;
+        }
+
         x /= len;
         y /= len;
         z /= len;
