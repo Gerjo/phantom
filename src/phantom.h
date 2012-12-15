@@ -27,7 +27,8 @@
 #include <physics/Box3.h>
 #include <physics/Mover.h>
 #include <physics/Line2.h>
-
+#include <physics/InertiaMover.h>
+#include <physics/CollisionData.h>
 
 #ifndef WIN32
     #include <sys/time.h>

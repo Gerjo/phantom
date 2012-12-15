@@ -66,8 +66,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/input/MouseState.o \
 	${OBJECTDIR}/src/physics/Vector3.o \
-	${OBJECTDIR}/src/physics/Polygon2.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
+	${OBJECTDIR}/src/physics/Polygon2.o \
 	${OBJECTDIR}/src/core/Console.o
 
 
@@ -250,15 +250,15 @@ ${OBJECTDIR}/src/physics/Vector3.o: src/physics/Vector3.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Vector3.o src/physics/Vector3.cpp
 
-${OBJECTDIR}/src/physics/Polygon2.o: src/physics/Polygon2.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Polygon2.o src/physics/Polygon2.cpp
-
 ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
+
+${OBJECTDIR}/src/physics/Polygon2.o: src/physics/Polygon2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Polygon2.o src/physics/Polygon2.cpp
 
 ${OBJECTDIR}/src/core/Console.o: src/core/Console.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core

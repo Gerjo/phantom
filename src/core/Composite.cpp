@@ -131,7 +131,7 @@ namespace phantom {
         return state;
     }
 
-    void Composite::onCollision(Composite *other) {
+    void Composite::onCollision(Composite *other, CollisionData& collisionData) {
 
     }
 
