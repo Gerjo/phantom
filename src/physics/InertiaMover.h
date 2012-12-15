@@ -50,6 +50,9 @@ namespace phantom {
         virtual void update(const PhantomTime& time) {
             Composite::update(time);
 
+            if(_pulses.empty()) {
+                return;
+            }
 
             Vector3 speed(0, 0, 0);
             Vector3 direction(0, 0, 0);
