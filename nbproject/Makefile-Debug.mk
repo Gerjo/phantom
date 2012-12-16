@@ -42,33 +42,35 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/core/GameState.o \
+	${OBJECTDIR}/src/input/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
-	${OBJECTDIR}/src/glut/GLUTCamera.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/input/KeyboardState.o \
+	${OBJECTDIR}/src/opengl/GLRenderer.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
 	${OBJECTDIR}/src/physics/Line2.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/utils/tree/BinaryTree.o \
 	${OBJECTDIR}/src/utils/Time.o \
-	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/input/KeyboardListener.o \
+	${OBJECTDIR}/src/layer/Layer.o \
+	${OBJECTDIR}/src/opengl/GLCamera.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/ImageCache.o \
 	${OBJECTDIR}/src/graphics/shapes/Image.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
-	${OBJECTDIR}/src/glut/GLUTRenderer.o \
+	${OBJECTDIR}/src/graphics/particles/Particles.o \
 	${OBJECTDIR}/src/graphics/FreeTypeLibrary.o \
-	${OBJECTDIR}/src/glut/GLUTDriver.o \
 	${OBJECTDIR}/src/core/Driver.o \
-	${OBJECTDIR}/src/glut/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
-	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/input/MouseState.o \
+	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/physics/Vector3.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
+	${OBJECTDIR}/src/input/WinInput.o \
 	${OBJECTDIR}/src/physics/Polygon2.o \
+	${OBJECTDIR}/src/opengl/GLDriver.o \
 	${OBJECTDIR}/src/core/Console.o
 
 
@@ -131,15 +133,15 @@ ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
+${OBJECTDIR}/src/input/GLUTInput.o: src/input/GLUTInput.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/GLUTInput.o src/input/GLUTInput.cpp
+
 ${OBJECTDIR}/src/graphics/shapes/Rectangle.o: src/graphics/shapes/Rectangle.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Rectangle.o src/graphics/shapes/Rectangle.cpp
-
-${OBJECTDIR}/src/glut/GLUTCamera.o: src/glut/GLUTCamera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTCamera.o src/glut/GLUTCamera.cpp
 
 ${OBJECTDIR}/src/physics/Mover.o: src/physics/Mover.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
@@ -150,6 +152,11 @@ ${OBJECTDIR}/src/input/KeyboardState.o: src/input/KeyboardState.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardState.o src/input/KeyboardState.cpp
+
+${OBJECTDIR}/src/opengl/GLRenderer.o: src/opengl/GLRenderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/opengl
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/opengl/GLRenderer.o src/opengl/GLRenderer.cpp
 
 ${OBJECTDIR}/src/layer/EntityLayer.o: src/layer/EntityLayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
@@ -176,15 +183,20 @@ ${OBJECTDIR}/src/utils/Time.o: src/utils/Time.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/Time.o src/utils/Time.cpp
 
+${OBJECTDIR}/src/input/KeyboardListener.o: src/input/KeyboardListener.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardListener.o src/input/KeyboardListener.cpp
+
 ${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/layer
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
 
-${OBJECTDIR}/src/input/KeyboardListener.o: src/input/KeyboardListener.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/input
+${OBJECTDIR}/src/opengl/GLCamera.o: src/opengl/GLCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/opengl
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardListener.o src/input/KeyboardListener.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/opengl/GLCamera.o src/opengl/GLCamera.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Shape.o: src/graphics/shapes/Shape.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -206,30 +218,20 @@ ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
 
-${OBJECTDIR}/src/glut/GLUTRenderer.o: src/glut/GLUTRenderer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
+${OBJECTDIR}/src/graphics/particles/Particles.o: src/graphics/particles/Particles.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics/particles
 	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTRenderer.o src/glut/GLUTRenderer.cpp
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/particles/Particles.o src/graphics/particles/Particles.cpp
 
 ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o: src/graphics/FreeTypeLibrary.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o src/graphics/FreeTypeLibrary.cpp
 
-${OBJECTDIR}/src/glut/GLUTDriver.o: src/glut/GLUTDriver.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTDriver.o src/glut/GLUTDriver.cpp
-
 ${OBJECTDIR}/src/core/Driver.o: src/core/Driver.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Driver.o src/core/Driver.cpp
-
-${OBJECTDIR}/src/glut/GLUTInput.o: src/glut/GLUTInput.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/glut
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/glut/GLUTInput.o src/glut/GLUTInput.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -241,15 +243,15 @@ ${OBJECTDIR}/src/graphics/ImageLoader.o: src/graphics/ImageLoader.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageLoader.o src/graphics/ImageLoader.cpp
 
-${OBJECTDIR}/src/physics/Box3.o: src/physics/Box3.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Box3.o src/physics/Box3.cpp
-
 ${OBJECTDIR}/src/input/MouseState.o: src/input/MouseState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/MouseState.o src/input/MouseState.cpp
+
+${OBJECTDIR}/src/physics/Box3.o: src/physics/Box3.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Box3.o src/physics/Box3.cpp
 
 ${OBJECTDIR}/src/physics/Vector3.o: src/physics/Vector3.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
@@ -261,10 +263,20 @@ ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
 
+${OBJECTDIR}/src/input/WinInput.o: src/input/WinInput.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/input
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/WinInput.o src/input/WinInput.cpp
+
 ${OBJECTDIR}/src/physics/Polygon2.o: src/physics/Polygon2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Polygon2.o src/physics/Polygon2.cpp
+
+${OBJECTDIR}/src/opengl/GLDriver.o: src/opengl/GLDriver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/opengl
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/opengl/GLDriver.o src/opengl/GLDriver.cpp
 
 ${OBJECTDIR}/src/core/Console.o: src/core/Console.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
