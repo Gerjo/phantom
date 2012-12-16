@@ -167,14 +167,14 @@ namespace phantom {
     }
 
     void GLUTRenderer::drawParticles(Particles *particles, float xOffset, float yOffset) {
-        const vector<Particle*>& p = particles->getParticles();
-
-        for(auto *particle : p) {
+        const vector<Particle*>* p = particles->getParticles();
+        glLoadIdentity();
+        glTranslatef(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
+        for(auto *particle : *p) {
             glPushMatrix();
             glColor3b(particle->color.r, particle->color.g, particle->color.b);
             glTranslatef(particle->position.x, particle->position.y, particle->position.z);
-            glScalef(particle->scale.x*10, particle->scale.y*10, particle->scale.z*10);
-
+            glScalef(particle->scale.x, particle->scale.y, particle->scale.z);
 
             if(particles->texture != nullptr) {
                 glBlendFunc (GL_DST_COLOR, GL_ZERO);

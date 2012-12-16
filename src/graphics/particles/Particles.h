@@ -17,15 +17,16 @@ namespace phantom {
         Color color;
         ImageCacheItem *texture;
 
-        Particles(unsigned count = 100, string texturename = "", Color color = Colors::WHITE, float lifetime = 0.5f, float speed = 50.0f, Vector3 scale = Vector3(1.0f, 1.0f, 1.0f), float density = 1.0f);
+        Particles(unsigned count = 5, string texturename = "", Color color = Colors::WHITE, float lifetime = 1.5f, float speed = 5.0f, Vector3 scale = Vector3(5.0f, 5.0f, 1.0f), float density = 0.25f);
         ~Particles();
 
         void update(const phantom::PhantomTime& time);
 
-        vector<Particle*> getParticles() { return _particles; };
+        vector<Particle*> *getParticles() { return &_particles; };
     
     private:
         vector<Particle*> _particles;
+        float _currentdensity;
 
         void createNewParticle();
     };

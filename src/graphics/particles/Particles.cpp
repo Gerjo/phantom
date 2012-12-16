@@ -31,22 +31,26 @@ namespace phantom {
     }
 
     void Particles::update(const phantom::PhantomTime& time) {
+        this->_currentdensity -= time.getElapsed();
         for(auto particle = _particles.begin(); particle != _particles.end();) {
             (*particle)->lifetime -= time.getElapsed();
             if((*particle)->lifetime < 0.0f) {
                 delete (*particle);
                 particle = _particles.erase(particle);
-                
+                createNewParticle();
+
                 continue;
             }
 
-            (*particle)->velocity += (*particle)->acceleration * (float)((rand() % 10) * 0.1) * this->density;
-            (*particle)->position += (*particle)->velocity;
+            (*particle)->acceleration = Vector3(1.0f, 0.0f);
+            (*particle)->velocity += (*particle)->acceleration;
+            (*particle)->position += (*particle)->velocity * time.getElapsed();
 
             ++particle;
         }
 
-        while(_particles.size() < count) {
+        if(_particles.size() < count && this->_currentdensity < 0) {
+            this->_currentdensity = this->density;
             createNewParticle();
         }
     }
