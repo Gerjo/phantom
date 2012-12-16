@@ -6,7 +6,6 @@
 #include <graphics/shapes/Image.h>
 #include <graphics/shapes/Text.h>
 #include <graphics/particles/Particles.h>
-#include <png.h>
 #include <graphics/ImageCache.h>
 
 namespace phantom {

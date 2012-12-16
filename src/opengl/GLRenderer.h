@@ -1,16 +1,16 @@
 #ifndef GLUTRENDERER_H
 #define GLUTRENDERER_H
 
-#include <core/Renderer.h>
-#include <CompileConfig.h>
-#include <core/GameState.h>
-#include <core/Composite.h>
 #include <deque>
-#include <physics/Vector3.h>
 #include <string>
-#include <graphics/FreeTypeLibrary.h>
 #include <GL/freeglut.h>
 #include <GL/glext.h>
+#include <CompileConfig.h>
+#include <core/Renderer.h>
+#include <core/GameState.h>
+#include <core/Composite.h>
+#include <physics/Vector3.h>
+#include <graphics/FreeTypeLibrary.h>
 
 #ifndef _WINDOWS
 #   include <GL/glx.h>
