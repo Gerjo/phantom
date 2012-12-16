@@ -10,7 +10,7 @@ namespace phantom {
     struct Pulse {
         static const int FOREVER = -1;
 
-        Pulse() : direction(0, 0, 0), speed(0), friction(0) {
+        Pulse() : direction(0, 0, 0), speed(0), friction(0), weight(1) {
 
         }
 
@@ -22,6 +22,7 @@ namespace phantom {
         Vector3 direction;
         float speed;
         float friction;
+        char weight;
 
         string toString(void) {
             stringstream ss;

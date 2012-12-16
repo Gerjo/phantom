@@ -42,18 +42,22 @@ namespace phantom {
 
         const float elapsed = static_cast<float> (time.getElapsed());
 
+        unsigned totalWeight = 0;
+
         for (auto it = _pulses.begin(); it != _pulses.end(); ++it) {
             bool erase = false;
             Pulse& pulse = *it;
 
             if (pulse.speed > 0) {
+                totalWeight += pulse.weight;
+
                 // Accumulate all forces.
-                speed += pulse.speed * elapsed;
+                speed += pulse.weight * pulse.speed * elapsed;
                 direction += pulse.direction;
                 ++numPulses;
 
                 // Post update removal, this means we can create one-off pulses.
-                pulse.speed -= 2 * pulse.friction * pulse.friction * elapsed;
+                pulse.speed -= pulse.weight * 2 * pulse.friction * pulse.friction * elapsed;
             } else {
                 erase = true;
             }
@@ -67,27 +71,29 @@ namespace phantom {
         }
 
         if (numPulses > 0) {
-            // Averages of all:
-            speed /= numPulses;
-            direction /= numPulses;
+            // We're using a weighted average:
+            speed /= totalWeight;
+            direction /= totalWeight;
         }
 
         // Quite possibly move this to a sub class, it's rather specific for a
         // certain purpose.
         if(dominant.speed > 0) {
-            speed     += dominant.speed;
+
             direction += dominant.direction;
+            direction /= 2;
 
             if(numPulses > 0) {
-                speed /= 2;
-                direction /= 2;
+                speed += dominant.speed * dominant.weight;
+                speed /= 1 + dominant.weight;
+            } else {
+                speed += dominant.speed;
             }
+
         }
 
         const Vector3 velocity = direction * speed;
 
         getParent()->addPosition(velocity);
-
-
     }
 }
