@@ -1,7 +1,6 @@
 #include "GLDriver.h"
 #include "GLRenderer.h"
 
-#include <GL/freeglut.h>
 #include <opengl/GLCamera.h>
 #include <input/GLUTInput.h>
 #include <graphics/ImageCache.h>
