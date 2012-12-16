@@ -11,7 +11,8 @@
 namespace phantom {
     class InertiaMover : public Composite  {
     public:
-
+        Pulse dominant;
+        
         void addPulse(Pulse pulse);
         void clear();
         virtual void update(const PhantomTime& time);

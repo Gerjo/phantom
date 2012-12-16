@@ -19,7 +19,14 @@ namespace phantom {
 
             return CONSUMED;
         }
+
+        if (message->isType("set-dominant-pulse")) {
+            dominant = message->getPayload<Pulse>();
+            //cout << "set-dominant-pulse: " << dominant.toString() << endl;
+            return CONSUMED;
+        }
     }
+
 
     void InertiaMover::clear() {
         _pulses.clear();
@@ -28,9 +35,6 @@ namespace phantom {
     void InertiaMover::update(const PhantomTime& time) {
         Composite::update(time);
 
-        if (_pulses.empty()) {
-            return;
-        }
 
         Vector3 speed(0, 0, 0);
         Vector3 direction(0, 0, 0);
@@ -62,16 +66,28 @@ namespace phantom {
             }
         }
 
-        if (numPulses == 0) {
-            return;
+        if (numPulses > 0) {
+            // Averages of all:
+            speed /= numPulses;
+            direction /= numPulses;
         }
 
-        // Averages of all:
-        speed /= numPulses;
-        direction /= numPulses;
+        // Quite possibly move this to a sub class, it's rather specific for a
+        // certain purpose.
+        if(dominant.speed > 0) {
+            speed     += dominant.speed;
+            direction += dominant.direction;
 
-        const Vector3 velocity = speed * direction;
+            if(numPulses > 0) {
+                speed /= 2;
+                direction /= 2;
+            }
+        }
+
+        const Vector3 velocity = direction * speed;
 
         getParent()->addPosition(velocity);
+
+
     }
 }
