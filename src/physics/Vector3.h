@@ -59,6 +59,7 @@ namespace phantom {
         Vector3& normalize();
         Vector3& reverse();
 
+        Vector3 directionTo(const Vector3& other) const;
         float distanceTo(const Vector3& other) const;
         float distanceToSq(const Vector3& other) const;
         float getLengthSq(void) const;

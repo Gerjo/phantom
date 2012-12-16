@@ -162,8 +162,20 @@ namespace phantom{
         x = -x;
         y = -y;
         z = -z;
-        
+
         return *this;
+    }
+
+    Vector3 Vector3::directionTo(const Vector3& other) const {
+        Vector3 direction(
+            other.x - x,
+            other.y - y,
+            other.z - z
+        );
+
+        direction.normalize();
+
+        return direction;
     }
 
     float Vector3::distanceTo(const Vector3& other) const {
