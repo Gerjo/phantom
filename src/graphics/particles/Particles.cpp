@@ -7,7 +7,7 @@ namespace phantom {
     Particles::Particles(unsigned count, string texturename, Color color, float lifetime, float speed, Vector3 scale, Vector3 direction, float density, unsigned randomness) {
         this->count = count;
         this->scale = scale;
-        this->direction = direction.normalize();
+        this->direction = direction;
         this->density = density;
         this->lifetime = lifetime;
         this->texture = nullptr;
