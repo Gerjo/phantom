@@ -172,40 +172,25 @@ namespace phantom {
         glTranslatef(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
         for(auto *particle : *p) {
             glPushMatrix();
-            glColor3b(particle->color.r, particle->color.g, particle->color.b);
+            glColor4b(particle->color.r, particle->color.g, particle->color.b, particle->color.a);
             glTranslatef(particle->position.x, particle->position.y, particle->position.z);
             glScalef(particle->scale.x, particle->scale.y, particle->scale.z);
 
             if(particles->texture != nullptr) {
-                glBlendFunc (GL_DST_COLOR, GL_ZERO);
-                glBindTexture (GL_TEXTURE_2D, particles->texture->textureID);
+                glBlendFunc(GL_DST_COLOR, GL_ZERO);
+                glBindTexture(GL_TEXTURE_2D, particles->texture->textureID);
             }
 
-            glBegin (GL_QUADS);
-            glTexCoord2d (0, 0);
-            glVertex3f (-1, -1, 0);
-            glTexCoord2d (1, 0);
-            glVertex3f (1, -1, 0);
-            glTexCoord2d (1, 1);
-            glVertex3f (1, 1, 0);
-            glTexCoord2d (0, 1);
-            glVertex3f (-1, 1, 0);
-            glEnd();
-
-            if(particles->texture != nullptr) {
-                glBlendFunc (GL_ONE, GL_ONE);
-                glBindTexture (GL_TEXTURE_2D, particles->texture->textureID);
-            }
-            
-            glBegin (GL_QUADS);
-            glTexCoord2d (0, 0);
-            glVertex3f (-1, -1, 0);
-            glTexCoord2d (1, 0);
-            glVertex3f (1, -1, 0);
-            glTexCoord2d (1, 1);
-            glVertex3f (1, 1, 0);
-            glTexCoord2d (0, 1);
-            glVertex3f (-1, 1, 0);
+            // Should be added to VBO's
+            glBegin(GL_QUADS);
+            glTexCoord2d(0, 0);
+            glVertex3f(-1, -1, 0);
+            glTexCoord2d(1, 0);
+            glVertex3f(1, -1, 0);
+            glTexCoord2d(1, 1);
+            glVertex3f(1, 1, 0);
+            glTexCoord2d(0, 1);
+            glVertex3f(-1, 1, 0);
             glEnd();
 
             glPopMatrix();
@@ -300,6 +285,16 @@ namespace phantom {
         glFlush();
     }
 
+    void GLRenderer::createVBO(GLuint *buffer, GLuint size, GLvoid *data) {
+        glGenBuffersARB(1, buffer);
+        glBindBufferARB(GL_ARRAY_BUFFER_ARB, *buffer);
+        glBufferDataARB(GL_ARRAY_BUFFER_ARB, size, data, GL_STATIC_DRAW_ARB);
+    }
+
+    void GLRenderer::destroyVBO(GLuint *buffer) {
+        glDeleteBuffersARB(1, buffer);
+    }
+
     void GLRenderer::buildShape(Shape *shape) {
         // Be sure nothing is left to be deleted.
         destroyShape(shape);
@@ -318,16 +313,10 @@ namespace phantom {
                     texCoordArray[i] = shape->texCoords[i];
             }
 
-            // Vertices
-            glGenBuffersARB(1, &shape->vboVertices);
-            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-            glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
+            createVBO(&shape->vboVertices, shape->verticesCount * 3 * sizeof(float), verticesArray);
 
-            // Texcoords
             if(shape->isImage || shape->isText) {
-                glGenBuffersARB(1, &shape->vboTexCoords);
-                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-                glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
+                createVBO(&shape->vboTexCoords, shape->verticesCount * 2 * sizeof(float), texCoordArray);
             }
 
             shape->vertices.clear();
@@ -353,11 +342,9 @@ namespace phantom {
 
     void GLRenderer::destroyShape(Shape *shape) {
         if(_vboSupport) {
-
-            glDeleteBuffersARB(1, &shape->vboVertices);
+            destroyVBO(&shape->vboVertices);
             if(shape->isImage || shape->isText)
-                glDeleteBuffersARB(1, &shape->vboTexCoords);
-
+                destroyVBO(&shape->vboTexCoords);
 
             shape->verticesCount = 0;
         }

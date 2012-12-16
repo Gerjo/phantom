@@ -41,6 +41,9 @@ namespace phantom {
         int _windowID;
         bool _vboSupport;
         bool IsExtensionSupported(std::string szTargetExtensionString);
+
+        void createVBO(GLuint *buffer, GLuint size, GLvoid *data);
+        void destroyVBO(GLuint *buffer);
         void drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset);
         void drawText(Text *shape, Composite *composite, float xOffset, float yOffset);
         void drawImage(Image *image, Composite *composite, float xOffset, float yOffset);
