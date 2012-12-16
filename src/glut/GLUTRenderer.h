@@ -20,6 +20,7 @@
 namespace phantom {
     class Image;
     class Text;
+    class Particles;
 
     class LIBEXPORT GLUTRenderer : public Renderer
     {
@@ -44,6 +45,7 @@ namespace phantom {
         void drawText(Text *shape, Composite *composite, float xOffset, float yOffset);
         void drawImage(Image *image, Composite *composite, float xOffset, float yOffset);
         void drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset);
+        void drawParticles(Particles *particles, float xOffset, float yOffset);
     };
 }
 #endif // GLUTRENDERER_H

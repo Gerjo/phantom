@@ -5,6 +5,7 @@
 #include <graphics/VerticeData.h>
 #include <graphics/shapes/Image.h>
 #include <graphics/shapes/Text.h>
+#include <graphics/particles/Particles.h>
 #include <png.h>
 #include <graphics/ImageCache.h>
 
@@ -23,7 +24,7 @@ namespace phantom {
         glutInit(&i, 0);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
         glutInitWindowSize(static_cast<int>(screenSize.x), static_cast<int>(screenSize.y));
-       
+
         if(!game->fullscreen) {
             _windowID = glutCreateWindow("CpPhantom");
         }
@@ -165,6 +166,52 @@ namespace phantom {
         glDisableClientState(GL_VERTEX_ARRAY);
     }
 
+    void GLUTRenderer::drawParticles(Particles *particles, float xOffset, float yOffset) {
+        const vector<Particle*>& p = particles->getParticles();
+
+        for(auto *particle : p) {
+            glPushMatrix();
+            glColor3b(particle->color.r, particle->color.g, particle->color.b);
+            glTranslatef(particle->position.x, particle->position.y, particle->position.z);
+            glScalef(particle->scale.x*10, particle->scale.y*10, particle->scale.z*10);
+
+
+            if(particles->texture != nullptr) {
+                glBlendFunc (GL_DST_COLOR, GL_ZERO);
+                glBindTexture (GL_TEXTURE_2D, particles->texture->textureID);
+            }
+
+            glBegin (GL_QUADS);
+            glTexCoord2d (0, 0);
+            glVertex3f (-1, -1, 0);
+            glTexCoord2d (1, 0);
+            glVertex3f (1, -1, 0);
+            glTexCoord2d (1, 1);
+            glVertex3f (1, 1, 0);
+            glTexCoord2d (0, 1);
+            glVertex3f (-1, 1, 0);
+            glEnd();
+
+            if(particles->texture != nullptr) {
+                glBlendFunc (GL_ONE, GL_ONE);
+                glBindTexture (GL_TEXTURE_2D, particles->texture->textureID);
+            }
+            
+            glBegin (GL_QUADS);
+            glTexCoord2d (0, 0);
+            glVertex3f (-1, -1, 0);
+            glTexCoord2d (1, 0);
+            glVertex3f (1, -1, 0);
+            glTexCoord2d (1, 1);
+            glVertex3f (1, 1, 0);
+            glTexCoord2d (0, 1);
+            glVertex3f (-1, 1, 0);
+            glEnd();
+
+            glPopMatrix();
+        }
+    }
+
     void GLUTRenderer::drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset) {
         vector<Shape*> *shapes = &composite->getGraphics().getFinalizedShapes();
 
@@ -209,7 +256,13 @@ namespace phantom {
             while(compIt != components.end()) {
                 Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
 
-                drawShapes((*compIt), cameraBox, offsetRecalculated.x, offsetRecalculated.y);
+                Particles *particles = nullptr;
+                if((particles = dynamic_cast<Particles*>(*compIt)) != nullptr) {
+                    drawParticles(particles, offsetRecalculated.x, offsetRecalculated.y);
+                }
+                else {
+                    drawShapes((*compIt), cameraBox, offsetRecalculated.x, offsetRecalculated.y);
+                }
 
                 if((*compIt)->getComponents().size() > 0) {
                     drawLoop((*compIt)->getComponents(), offsetRecalculated);
@@ -285,7 +338,7 @@ namespace phantom {
                 delete [] texCoordArray;
         } else if (!_vboSupport) {
             shape->verticesCount = shape->vertices.size();
- 
+
             shape->verticesArray = new Vertice[shape->vertices.size()];
             if(shape->isImage || shape->isText)
                 shape->texCoordsArray = new TexCoord[shape->vertices.size()];
