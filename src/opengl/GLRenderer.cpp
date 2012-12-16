@@ -1,11 +1,11 @@
-#include "GLUTRenderer.h"
+#include "GLRenderer.h"
 #include <iostream>
 #include <core/Driver.h>
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>
 #include <graphics/shapes/Image.h>
 #include <graphics/shapes/Text.h>
-#include <png.h>
+#include <graphics/particles/Particles.h>
 #include <graphics/ImageCache.h>
 
 namespace phantom {
@@ -15,15 +15,15 @@ namespace phantom {
     PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
     PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
 
-    GLUTRenderer::GLUTRenderer(PhantomGame *game) : Renderer(game) {
-        std::cout << "Initializing GLUT renderer..." << std::endl;
+    GLRenderer::GLRenderer(PhantomGame *game) : Renderer(game) {
+        std::cout << "Initializing GL renderer..." << std::endl;
         Vector3 screenSize = game->getScreenSize();
 
         int i = 0;
         glutInit(&i, 0);
         glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
         glutInitWindowSize(static_cast<int>(screenSize.x), static_cast<int>(screenSize.y));
-       
+
         if(!game->fullscreen) {
             _windowID = glutCreateWindow("CpPhantom");
         }
@@ -69,11 +69,11 @@ namespace phantom {
         }
     }
 
-    GLUTRenderer::~GLUTRenderer() {
+    GLRenderer::~GLRenderer() {
         glutDestroyWindow(_windowID);
     }
 
-    void GLUTRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
+    void GLRenderer::drawText(Text *txt, Composite *composite, float xOffset, float yOffset) {
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glEnable(GL_TEXTURE_2D);
@@ -108,7 +108,7 @@ namespace phantom {
         glPopAttrib();
     }
 
-    void GLUTRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
+    void GLRenderer::drawImage(Image *img, Composite *composite, float xOffset, float yOffset) {
         glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glEnable(GL_TEXTURE_2D);
@@ -144,7 +144,7 @@ namespace phantom {
         glPopAttrib();
     }
 
-    void GLUTRenderer::drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset) {
+    void GLRenderer::drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset) {
         const Color& fillColor = shape->getFillColor();
         glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
@@ -165,7 +165,38 @@ namespace phantom {
         glDisableClientState(GL_VERTEX_ARRAY);
     }
 
-    void GLUTRenderer::drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset) {
+    void GLRenderer::drawParticles(Particles *particles, float xOffset, float yOffset) {
+        const vector<Particle*>* p = particles->getParticles();
+        glLoadIdentity();
+        glTranslatef(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
+        for(auto *particle : *p) {
+            glPushMatrix();
+            glColor4b(particle->color.r, particle->color.g, particle->color.b, particle->color.a);
+            glTranslatef(particle->position.x, particle->position.y, particle->position.z);
+            glScalef(particle->scale.x, particle->scale.y, particle->scale.z);
+
+            if(particles->texture != nullptr) {
+                glBlendFunc(GL_DST_COLOR, GL_ZERO);
+                glBindTexture(GL_TEXTURE_2D, particles->texture->textureID);
+            }
+
+            // Should be added to VBO's
+            glBegin(GL_QUADS);
+            glTexCoord2d(0, 0);
+            glVertex3f(-1, -1, 0);
+            glTexCoord2d(1, 0);
+            glVertex3f(1, -1, 0);
+            glTexCoord2d(1, 1);
+            glVertex3f(1, 1, 0);
+            glTexCoord2d(0, 1);
+            glVertex3f(-1, 1, 0);
+            glEnd();
+
+            glPopMatrix();
+        }
+    }
+
+    void GLRenderer::drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset) {
         vector<Shape*> *shapes = &composite->getGraphics().getFinalizedShapes();
 
         for(int i = 0; i < 2; ++i) {
@@ -196,7 +227,7 @@ namespace phantom {
     }
 
 
-    void GLUTRenderer::drawLoop(std::vector<Composite*> &components, Vector3 &offset) {
+    void GLRenderer::drawLoop(std::vector<Composite*> &components, Vector3 &offset) {
         if(_game->getDriver()->getActiveCameras()->size() == 0)
             return;
 
@@ -209,7 +240,13 @@ namespace phantom {
             while(compIt != components.end()) {
                 Vector3 offsetRecalculated = offset + (*compIt)->getPosition();
 
-                drawShapes((*compIt), cameraBox, offsetRecalculated.x, offsetRecalculated.y);
+                Particles *particles = nullptr;
+                if((particles = dynamic_cast<Particles*>(*compIt)) != nullptr) {
+                    drawParticles(particles, offsetRecalculated.x, offsetRecalculated.y);
+                }
+                else {
+                    drawShapes((*compIt), cameraBox, offsetRecalculated.x, offsetRecalculated.y);
+                }
 
                 if((*compIt)->getComponents().size() > 0) {
                     drawLoop((*compIt)->getComponents(), offsetRecalculated);
@@ -220,7 +257,7 @@ namespace phantom {
         }
     }
 
-    void GLUTRenderer::renderLoop(std::deque<GameState*> *states) {
+    void GLRenderer::renderLoop(std::deque<GameState*> *states) {
         glClearColor(0.42f, 0.145f, 0.016f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -247,7 +284,17 @@ namespace phantom {
         glFlush();
     }
 
-    void GLUTRenderer::buildShape(Shape *shape) {
+    void GLRenderer::createVBO(GLuint *buffer, GLuint size, GLvoid *data) {
+        glGenBuffersARB(1, buffer);
+        glBindBufferARB(GL_ARRAY_BUFFER_ARB, *buffer);
+        glBufferDataARB(GL_ARRAY_BUFFER_ARB, size, data, GL_STATIC_DRAW_ARB);
+    }
+
+    void GLRenderer::destroyVBO(GLuint *buffer) {
+        glDeleteBuffersARB(1, buffer);
+    }
+
+    void GLRenderer::buildShape(Shape *shape) {
         // Be sure nothing is left to be deleted.
         destroyShape(shape);
 
@@ -265,16 +312,10 @@ namespace phantom {
                     texCoordArray[i] = shape->texCoords[i];
             }
 
-            // Vertices
-            glGenBuffersARB(1, &shape->vboVertices);
-            glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
-            glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 3 * sizeof(float), verticesArray, GL_STATIC_DRAW_ARB);
+            createVBO(&shape->vboVertices, shape->verticesCount * 3 * sizeof(float), verticesArray);
 
-            // Texcoords
             if(shape->isImage || shape->isText) {
-                glGenBuffersARB(1, &shape->vboTexCoords);
-                glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboTexCoords);
-                glBufferDataARB(GL_ARRAY_BUFFER_ARB, shape->verticesCount * 2 * sizeof(float), texCoordArray, GL_STATIC_DRAW_ARB);
+                createVBO(&shape->vboTexCoords, shape->verticesCount * 2 * sizeof(float), texCoordArray);
             }
 
             shape->vertices.clear();
@@ -285,7 +326,7 @@ namespace phantom {
                 delete [] texCoordArray;
         } else if (!_vboSupport) {
             shape->verticesCount = shape->vertices.size();
- 
+
             shape->verticesArray = new Vertice[shape->vertices.size()];
             if(shape->isImage || shape->isText)
                 shape->texCoordsArray = new TexCoord[shape->vertices.size()];
@@ -298,13 +339,11 @@ namespace phantom {
         }
     }
 
-    void GLUTRenderer::destroyShape(Shape *shape) {
+    void GLRenderer::destroyShape(Shape *shape) {
         if(_vboSupport) {
-
-            glDeleteBuffersARB(1, &shape->vboVertices);
+            destroyVBO(&shape->vboVertices);
             if(shape->isImage || shape->isText)
-                glDeleteBuffersARB(1, &shape->vboTexCoords);
-
+                destroyVBO(&shape->vboTexCoords);
 
             shape->verticesCount = 0;
         }
@@ -317,7 +356,7 @@ namespace phantom {
         }
     }
 
-    void GLUTRenderer::addTexture(ImageCacheItem *item, bool isText) {
+    void GLRenderer::addTexture(ImageCacheItem *item, bool isText) {
         glEnable(GL_TEXTURE_2D);
         glGenTextures(1, &item->textureID);
         glBindTexture(GL_TEXTURE_2D, item->textureID);
@@ -335,7 +374,7 @@ namespace phantom {
         glDisable(GL_TEXTURE_2D);
     }
 
-    void GLUTRenderer::removeTexture(ImageCacheItem *item) {
+    void GLRenderer::removeTexture(ImageCacheItem *item) {
         if(item->textureID != 0) {
             glDeleteTextures(1, &item->textureID);
             item->textureID = 0;
@@ -343,7 +382,7 @@ namespace phantom {
     }
 
     // Based Off Of Code Supplied At OpenGL.org
-    bool GLUTRenderer::IsExtensionSupported(std::string szTargetExtensionString )
+    bool GLRenderer::IsExtensionSupported(std::string szTargetExtensionString )
     {
         const char* szTargetExtension = szTargetExtensionString.c_str();
         const unsigned char *pszExtensions = NULL;

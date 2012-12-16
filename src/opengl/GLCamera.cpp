@@ -1,17 +1,17 @@
 #include <GL/freeglut.h>
-#include "GLUTCamera.h"
+#include "GLCamera.h"
 #include "core/PhantomGame.h"
 
 namespace phantom {
-    GLUTCamera::GLUTCamera(int id) : Camera(id) {
+    GLCamera::GLCamera(int id) : Camera(id) {
         setViewPort(getPhantomGame()->getViewPort());
         setScreenSize(getPhantomGame()->getScreenSize());
     }
 
-    GLUTCamera::~GLUTCamera() {
+    GLCamera::~GLCamera() {
     }
 
-    void GLUTCamera::setParams() {
+    void GLCamera::setParams() {
         const Vector3& pos = getPosition();
 
         const Vector3& screenSize = getScreenSize();
