@@ -1,6 +1,11 @@
 #ifndef PULSE_H
 #define	PULSE_H
 
+#include <sstream>
+#include <string>
+using std::stringstream;
+using std::string;
+
 namespace phantom {
     struct Pulse {
         static const int FOREVER = -1;
@@ -17,6 +22,14 @@ namespace phantom {
         Vector3 direction;
         float speed;
         float friction;
+
+        string toString(void) {
+            stringstream ss;
+            ss << "Direction: " << std::fixed << direction.x << " " << direction.y << " " << direction.z;
+            ss << " speed: " << speed << " friction: " << friction;
+
+            return ss.str();
+        }
     };
 }
 
