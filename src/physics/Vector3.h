@@ -72,7 +72,7 @@ namespace phantom {
         std::string toString2() const;
 
         friend std::ostream& operator<<(std::ostream& o, const Vector3& v) {
-            o << "[Vector3] (x: " << v.x << ", y: " << v.y << ", z: " << v.z;
+            o << "[Vector3] (x: " << std::fixed << v.x << ", y: " << v.y << ", z: " << v.z << ")";
             return o;
         }
 
