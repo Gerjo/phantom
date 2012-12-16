@@ -6,10 +6,10 @@
 
 namespace phantom{
 
-    class LIBEXPORT GLUTDriver: public Driver {
+    class LIBEXPORT GLDriver: public Driver {
 	public:
-		GLUTDriver(PhantomGame* game);
-		virtual ~GLUTDriver();
+		GLDriver(PhantomGame* game);
+		virtual ~GLDriver();
 
         virtual void setWindowTitle(string title);
         virtual Camera* createCamera(void);

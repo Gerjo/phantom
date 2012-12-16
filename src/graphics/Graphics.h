@@ -18,7 +18,7 @@ class Composite;
 
 class LIBEXPORT Graphics {
 public:
-	friend class GLUTRenderer;
+	friend class GLRenderer;
 
     Graphics(phantom::Composite *parent);
 

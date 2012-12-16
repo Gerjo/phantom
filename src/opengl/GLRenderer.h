@@ -22,11 +22,11 @@ namespace phantom {
     class Text;
     class Particles;
 
-    class LIBEXPORT GLUTRenderer : public Renderer
+    class LIBEXPORT GLRenderer : public Renderer
     {
     public:
-        GLUTRenderer(PhantomGame *game);
-        virtual ~GLUTRenderer();
+        GLRenderer(PhantomGame *game);
+        virtual ~GLRenderer();
 
         virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset);
         virtual void renderLoop(std::deque<GameState*>* states);
