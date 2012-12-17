@@ -7,9 +7,10 @@
 #include <deque>
 #include <functional>
 #include <physics/Pulse.h>
+#include <CompileConfig.h>
 
 namespace phantom {
-    class InertiaMover : public Composite  {
+    class LIBEXPORT InertiaMover : public Composite  {
     public:
         Pulse dominant;
         
