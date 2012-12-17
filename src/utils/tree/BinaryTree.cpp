@@ -15,7 +15,7 @@ namespace phantom {
         }
 
         void BinaryTree::push(int key) {
-            if(_root = nullptr) {
+            if(_root == nullptr) {
                 _root        = new BinaryNode();
                 _root->parent= nullptr;
                 _root->key   = key;

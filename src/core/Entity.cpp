@@ -6,7 +6,7 @@
 
 namespace phantom {
 
-    Entity::Entity() : solidState(SolidStateBits::NOT_SOLID) {
+    Entity::Entity() : solidState(SolidStateBits::NOT_SOLID), solidType(0) {
         mover = 0;
     }
 

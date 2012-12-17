@@ -7,10 +7,8 @@ namespace phantom {
 
     KeyboardListener *KeyboardListener::INSTANCE = nullptr;
 
-    KeyboardListener::KeyboardListener(Driver *driver, PhantomGame *game) : _locked(false) {
+    KeyboardListener::KeyboardListener(Driver *driver, PhantomGame *game) : _locked(false), _driver(driver), _game(game), _key(nullptr) {
         if(INSTANCE == 0) {
-            _driver = driver;
-            _game = game;
             INSTANCE = this;
         }
         else

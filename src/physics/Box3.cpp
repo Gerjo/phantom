@@ -45,9 +45,9 @@ namespace phantom{
 
         // Two tests, a may fit in b, or b may fit in a.
         return
-                aMin >= bMin && aMin <= bMax
+                (aMin >= bMin && aMin <= bMax)
                 ||
-                bMin >= aMin && bMin <= aMax;
+                (bMin >= aMin && bMin <= aMax);
     }
 
     bool Box3::intersect(const Line2& other) const {

@@ -51,7 +51,7 @@ public:
     float getRotation() { return _rotation; }
 
 private:
-    Graphics(Graphics& orig) {
+    Graphics(Graphics& orig) : _parent(nullptr), _polygonLastX(0), _polygonLastY(0), _rotation(0), _polygonBuffer(0) {
         // Thou shalt not copy.
     }
 
