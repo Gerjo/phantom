@@ -1,5 +1,6 @@
 #include "EntityLayer.h"
 #include <iostream>
+#include <physics/CollisionData.h>
 
 namespace phantom{
     void EntityLayer::update(const PhantomTime &time){
@@ -26,13 +27,15 @@ namespace phantom{
             // to test B against A, henceforth this offset.
             std::advance(itB, offset);
 
+            CollisionData collisionData;
+
             for(; itB != subEntities.end(); ++itB) {
                 Entity* entityB = static_cast<Entity*>(*itB);
 
                 if(entityA->canCollideWith(entityB)) {
                     if(calculateCollision(entityA, entityB)) {
-                        entityA->onCollision(*itB);
-                        entityB->onCollision(*itA);
+                        entityA->onCollision(*itB, collisionData);
+                        entityB->onCollision(*itA, collisionData);
                     }
                 }
             }

@@ -70,10 +70,19 @@ namespace phantom{
         return !(*this == v);
     }
 
+
     Vector3& Vector3::operator+=(const Vector3& v) {
         x += v.x;
         y += v.y;
         z += v.z;
+
+        return *this;
+    }
+
+    Vector3& Vector3::operator+=(const float& v) {
+        x += v;
+        y += v;
+        z += v;
 
         return *this;
     }
@@ -102,6 +111,22 @@ namespace phantom{
         return *this;
     }
 
+    Vector3& Vector3::operator/=(const Vector3& v) {
+        x /= v.x;
+        y /= v.y;
+        z /= v.z;
+
+        return *this;
+    }
+
+    Vector3& Vector3::operator/=(const float& v) {
+        x /= v;
+        y /= v;
+        z /= v;
+
+        return *this;
+    }
+
     Vector3& Vector3::normalize() {
         float len = sqrt(x*x + y*y + z*z);
 
@@ -110,6 +135,10 @@ namespace phantom{
         // a line onto a 0,0 ray - we actually rely on this behavior.
 
         if(len == 0) {
+            return *this;
+        }
+
+        if(len == 1) {
             return *this;
         }
 
@@ -126,6 +155,27 @@ namespace phantom{
         z = abs(z);
 
         return *this;
+    }
+
+    Vector3& Vector3::reverse() {
+        // TODO: does this play OK with zero?
+        x = -x;
+        y = -y;
+        z = -z;
+
+        return *this;
+    }
+
+    Vector3 Vector3::directionTo(const Vector3& other) const {
+        Vector3 direction(
+            other.x - x,
+            other.y - y,
+            other.z - z
+        );
+
+        direction.normalize();
+
+        return direction;
     }
 
     float Vector3::distanceTo(const Vector3& other) const {
@@ -151,7 +201,7 @@ namespace phantom{
     std::string Vector3::toString() const {
         stringstream ss;
 
-        ss << "phantom::Vector3 (x: " << x << ", y: " << y << ", z: " << z << ")";
+        ss << "phantom::Vector3 (x: " << std::fixed << x << ", y: " << y << ", z: " << z << ")";
 
         return ss.str();
     }

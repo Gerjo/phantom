@@ -13,6 +13,7 @@
 #include <messaging/AbstractMessage.h>
 #include <messaging/IHandleMessage.h>
 #include <utils/Time.h>
+#include <physics/CollisionData.h>
 
 using namespace std;
 
@@ -62,7 +63,7 @@ namespace phantom {
 
         // Physics related
         virtual bool canCollideWith(Composite *other);
-        virtual void onCollision(Composite *other);
+        virtual void onCollision(Composite *other, CollisionData& collisionData);
         Box3& getBoundingBox();
         void setBoundingBox(const Box3& boundingBox);
         Vector3 getPosition();

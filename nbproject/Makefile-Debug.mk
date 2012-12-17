@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/physics/InertiaMover.o \
 	${OBJECTDIR}/src/utils/PhantomException.o \
 	${OBJECTDIR}/src/core/Entity.o \
 	${OBJECTDIR}/src/core/Composite.o \
@@ -66,8 +67,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/input/MouseState.o \
 	${OBJECTDIR}/src/physics/Vector3.o \
-	${OBJECTDIR}/src/physics/Polygon2.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
+	${OBJECTDIR}/src/physics/Polygon2.o \
 	${OBJECTDIR}/src/core/Console.o
 
 
@@ -94,6 +95,11 @@ LDLIBSOPTIONS=-Wl,-rpath,. -Werror -lglut -lGL -lGLU -lpng15 -lfreetype
 ../dist/libphantom.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ../dist
 	${LINK.cc} -Werror -shared -o ../dist/libphantom.${CND_DLIB_EXT} -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+
+${OBJECTDIR}/src/physics/InertiaMover.o: src/physics/InertiaMover.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/InertiaMover.o src/physics/InertiaMover.cpp
 
 ${OBJECTDIR}/src/utils/PhantomException.o: src/utils/PhantomException.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/utils
@@ -250,15 +256,15 @@ ${OBJECTDIR}/src/physics/Vector3.o: src/physics/Vector3.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Vector3.o src/physics/Vector3.cpp
 
-${OBJECTDIR}/src/physics/Polygon2.o: src/physics/Polygon2.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Polygon2.o src/physics/Polygon2.cpp
-
 ${OBJECTDIR}/src/graphics/shapes/Polygon.o: src/graphics/shapes/Polygon.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
 	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/shapes/Polygon.o src/graphics/shapes/Polygon.cpp
+
+${OBJECTDIR}/src/physics/Polygon2.o: src/physics/Polygon2.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
+	${RM} $@.d
+	$(COMPILE.cc) -g -Iinclude -Isrc -I/usr/include/freetype2 -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Polygon2.o src/physics/Polygon2.cpp
 
 ${OBJECTDIR}/src/core/Console.o: src/core/Console.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core

@@ -84,6 +84,9 @@
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/Box3.cpp</itemPath>
         <itemPath>src/physics/Box3.h</itemPath>
+        <itemPath>src/physics/CollisionData.h</itemPath>
+        <itemPath>src/physics/InertiaMover.cpp</itemPath>
+        <itemPath>src/physics/InertiaMover.h</itemPath>
         <itemPath>src/physics/Line2.cpp</itemPath>
         <itemPath>src/physics/Line2.h</itemPath>
         <itemPath>src/physics/Mover.cpp</itemPath>
@@ -91,6 +94,7 @@
         <itemPath>src/physics/Polygon2.cpp</itemPath>
         <itemPath>src/physics/Polygon2.h</itemPath>
         <itemPath>src/physics/Projection.h</itemPath>
+        <itemPath>src/physics/Pulse.h</itemPath>
         <itemPath>src/physics/Vector3.cpp</itemPath>
         <itemPath>src/physics/Vector3.h</itemPath>
       </logicalFolder>

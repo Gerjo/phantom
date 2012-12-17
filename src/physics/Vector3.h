@@ -45,16 +45,21 @@ namespace phantom {
         Vector3 operator*(float f) const;
 
         Vector3& operator+=(const Vector3& v);
+        Vector3& operator+=(const float& v);
         Vector3& operator-=(const Vector3& v);
         Vector3& operator*=(const Vector3& v);
         Vector3& operator*=(const float& v);
+        Vector3& operator/=(const Vector3& v);
+        Vector3& operator/=(const float& v);
 
         bool operator==(const Vector3& v) const;
         bool operator!=(const Vector3& v) const;
 
         Vector3& absolute();
         Vector3& normalize();
+        Vector3& reverse();
 
+        Vector3 directionTo(const Vector3& other) const;
         float distanceTo(const Vector3& other) const;
         float distanceToSq(const Vector3& other) const;
         float getLengthSq(void) const;
@@ -68,7 +73,7 @@ namespace phantom {
         std::string toString2() const;
 
         friend std::ostream& operator<<(std::ostream& o, const Vector3& v) {
-            o << "[Vector3] (x: " << v.x << ", y: " << v.y << ", z: " << v.z;
+            o << "[Vector3] (x: " << std::fixed << v.x << ", y: " << v.y << ", z: " << v.z << ")";
             return o;
         }
 
