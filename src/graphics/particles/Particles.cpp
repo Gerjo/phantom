@@ -4,13 +4,17 @@
 
 
 namespace phantom {
-    Particles::Particles(unsigned count, string texturename, Color color, float lifetime, float speed, Vector3 scale, float density) {
+    Particles::Particles(unsigned count, string texturename, Color color, float lifetime, float speed, Vector3 scale, Vector3 direction, float density, unsigned randomness) {
         this->count = count;
         this->scale = scale;
+        this->direction = direction;
         this->density = density;
         this->lifetime = lifetime;
         this->texture = nullptr;
         this->color = color;
+        this->speed = speed;
+        this->randomness = randomness + 1;
+        this->randomnessHalf = this->randomness / 2.0f;
 
         ImageCache *imagecache = ImageCache::getInstance();
 
@@ -41,10 +45,13 @@ namespace phantom {
 
                 continue;
             }
-
-            (*particle)->acceleration = Vector3(1.0f, 0.0f);
-            (*particle)->velocity += (*particle)->acceleration;
-            (*particle)->position += (*particle)->velocity * time.getElapsed();
+            Vector3 random((float)(rand() % randomness) - randomnessHalf, (float)(rand() % randomness) - randomnessHalf, (float)(rand() % randomness) - randomnessHalf);
+            random.x = random.x / 100.0f;
+            random.y = random.y / 100.0f;
+            random.z = random.z / 100.0f;
+            (*particle)->acceleration = this->direction + random;
+            (*particle)->velocity += (*particle)->acceleration * speed * time.getElapsed();
+            (*particle)->position += (*particle)->velocity;
 
             ++particle;
         }

@@ -23,7 +23,7 @@ namespace phantom {
     private:
         static KeyboardListener *INSTANCE;
 
-        KeyboardListener(const KeyboardListener& copy){ }
+        KeyboardListener(const KeyboardListener& copy) : _locked(false), _key(nullptr), _driver(nullptr), _game(nullptr), _thread(nullptr){ }
         KeyboardListener* operator=(const KeyboardListener& copy){ return 0; }
 
         bool _locked;

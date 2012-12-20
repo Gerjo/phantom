@@ -12,7 +12,7 @@
 
 namespace phantom {
 
-    Graphics::Graphics(phantom::Composite *parent) : _polygonLastX(0), _polygonLastY(0), _rotation(0) {
+    Graphics::Graphics(phantom::Composite *parent) : _polygonLastX(0), _polygonLastY(0), _rotation(0), _polygonBuffer(0) {
         _parent = parent;
         _polygonBuffer = nullptr;
     }

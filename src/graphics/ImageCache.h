@@ -81,7 +81,7 @@ namespace phantom {
         }
 
     private:
-        ImageCache(){
+        ImageCache() : _renderer(nullptr) {
             std::function<void(string args)> function = [this] (string args) { 
                 std::stringstream str;
                 str << "Size of image cache: " << this->imageCache.size();

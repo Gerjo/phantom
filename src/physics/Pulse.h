@@ -15,7 +15,7 @@ namespace phantom {
         }
 
         Pulse(Vector3 _direction, float _speed, float _friction = 0.0)
-        : direction(_direction), speed(_speed), friction(_friction) {
+        : direction(_direction), speed(_speed), friction(_friction), weight((char)0) {
 
         }
 

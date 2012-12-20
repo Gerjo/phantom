@@ -169,16 +169,17 @@ namespace phantom {
         const vector<Particle*>* p = particles->getParticles();
         glLoadIdentity();
         glTranslatef(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
+        
+        if(particles->texture != nullptr) {
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, particles->texture->textureID);
+        }
+
         for(auto *particle : *p) {
             glPushMatrix();
             glColor4b(particle->color.r, particle->color.g, particle->color.b, particle->color.a);
             glTranslatef(particle->position.x, particle->position.y, particle->position.z);
             glScalef(particle->scale.x, particle->scale.y, particle->scale.z);
-
-            if(particles->texture != nullptr) {
-                glBlendFunc(GL_DST_COLOR, GL_ZERO);
-                glBindTexture(GL_TEXTURE_2D, particles->texture->textureID);
-            }
 
             // Should be added to VBO's
             glBegin(GL_QUADS);
@@ -193,6 +194,10 @@ namespace phantom {
             glEnd();
 
             glPopMatrix();
+        }
+
+        if(particles->texture != nullptr) {
+            glDisable(GL_TEXTURE_2D);
         }
     }
 

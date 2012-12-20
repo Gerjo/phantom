@@ -25,6 +25,8 @@ namespace phantom {
             //cout << "set-dominant-pulse: " << dominant.toString() << endl;
             return CONSUMED;
         }
+
+        return Composite::handleMessage(message);
     }
 
 
@@ -72,8 +74,8 @@ namespace phantom {
 
         if (numPulses > 0) {
             // We're using a weighted average:
-            speed /= totalWeight;
-            direction /= totalWeight;
+            speed /= static_cast<float>(totalWeight);
+            direction /= static_cast<float>(totalWeight);
         }
 
         // Quite possibly move this to a sub class, it's rather specific for a
@@ -85,7 +87,7 @@ namespace phantom {
 
             if(numPulses > 0) {
                 speed += dominant.speed * dominant.weight;
-                speed /= 1 + dominant.weight;
+                speed /= static_cast<float>(1 + dominant.weight);
             } else {
                 speed += dominant.speed;
             }

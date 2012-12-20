@@ -11,7 +11,7 @@ using namespace std;
 namespace phantom {
     class LIBEXPORT Input {
     public:
-        Input(PhantomGame *game) { _game = game; }
+        Input(PhantomGame *game) : _game(game), _keyboardState(nullptr), _mouseState(nullptr) { }
         virtual ~Input() {}
         virtual KeyboardState* getKeyboardState() { return _keyboardState; }
         virtual MouseState* getMouseState() { return _mouseState; }
@@ -25,7 +25,7 @@ namespace phantom {
         KeyboardState *_keyboardState;
         MouseState *_mouseState;
     private:
-        Input(const Input& input) {}
+        Input(const Input& input) : _game(nullptr), _keyboardState(nullptr), _mouseState(nullptr) {}
     };
 }
 

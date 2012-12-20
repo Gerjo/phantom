@@ -10,14 +10,17 @@ namespace phantom {
     class LIBEXPORT Particles : public Composite {
     public:
         float density;
+        unsigned randomness;
+        float randomnessHalf;
         unsigned count;
         float lifetime;
         float speed;
         Vector3 scale;
+        Vector3 direction;
         Color color;
         ImageCacheItem *texture;
 
-        Particles(unsigned count = 5, string texturename = "", Color color = Colors::WHITE, float lifetime = 1.5f, float speed = 5.0f, Vector3 scale = Vector3(5.0f, 5.0f, 1.0f), float density = 0.25f);
+        Particles(unsigned count = 500, string texturename = "", Color color = Colors::WHITE, float lifetime = 1.5f, float speed = 5.0f, Vector3 scale = Vector3(5.0f, 5.0f, 1.0f), Vector3 direction = Vector3(0.0f, -0.5f), float density = 0.015f, unsigned randomness = 200);
         ~Particles();
 
         void update(const phantom::PhantomTime& time);

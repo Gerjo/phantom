@@ -14,7 +14,9 @@ namespace phantom {
     texCoordsArray(nullptr),
     vboTexCoords(0),
     vboVertices(0),
-    verticesCount(0)
+    verticesCount(0),
+    x(0.0f),
+    y(0.0f)
     {
         shapecount++;
     }
