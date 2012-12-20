@@ -6,6 +6,10 @@ namespace phantom {
         _pulses.push_back(pulse);
     }
 
+    Vector3 InertiaMover::getDirection(void) {
+        return _direction;
+    }
+
     MessageState InertiaMover::handleMessage(AbstractMessage* message) {
         if (message->isType("add-pulse")) {
             Pulse pulse = message->getPayload<Pulse > ();
@@ -20,9 +24,19 @@ namespace phantom {
             return CONSUMED;
         }
 
+        if (message->isType("clear-dominant")) {
+            dominant.speed = 0.0f;
+            return CONSUMED;
+        }
+
+        if (message->isType("halt")) {
+            clear();
+            dominant.speed = 0.0f;
+            return CONSUMED;
+        }
+
         if (message->isType("set-dominant-pulse")) {
             dominant = message->getPayload<Pulse>();
-            //cout << "set-dominant-pulse: " << dominant.toString() << endl;
             return CONSUMED;
         }
 
@@ -91,11 +105,13 @@ namespace phantom {
             } else {
                 speed += dominant.speed;
             }
-
         }
 
         const Vector3 velocity = direction * speed;
 
         getParent()->addPosition(velocity);
+
+        _direction = direction;
+        _direction.normalize();
     }
 }
