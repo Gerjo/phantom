@@ -96,7 +96,7 @@ namespace phantom {
             glUniform4f             = (PFNGLUNIFORM4FPROC)          GetProcAddress("glUniform4f");
             glGetUniformLocation    = (PFNGLGETUNIFORMLOCATIONPROC) GetProcAddress("glGetUniformLocation");
 
-            insertShader("shaders/default.vert", "shaders/default.frag");
+            insertShader("shaders/defaultvert.glsl", "shaders/defaultfrag.glsl");
         }
         else {
             cout << "There is no shader support." << endl;
@@ -420,7 +420,12 @@ namespace phantom {
 
     void GLRenderer::applyColor(const Color &color) {
         if(_shaderSupport) {
-            glUniform4f(glGetUniformLocation(_program, "color"), (float)color.r / 127.0f, (float)color.g / 127.0f, (float)color.b / 127.0f, (float)color.a / 127.0f);
+            float r = color.r / 127.0f;
+            float g = color.g / 127.0f;
+            float b = color.b / 127.0f;
+            float a = color.a / 127.0f;
+
+            glUniform4f(glGetUniformLocation(_program, "color"), r, g, b, a);
         }
         else {
             glColor4b(color.r, color.g, color.b, color.a);
