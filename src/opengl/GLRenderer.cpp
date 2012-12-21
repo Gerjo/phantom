@@ -31,7 +31,7 @@ namespace phantom {
     PFNGLUNIFORM1FPROC glUniform1f = NULL;
     PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 
-    GLRenderer::GLRenderer(PhantomGame *game) : Renderer(game), _programscount(0), _shaderSupport(true) {
+    GLRenderer::GLRenderer(PhantomGame *game) : Renderer(game), _programscount(0), _shaderSupport(false), _vboSupport(false) {
         std::cout << "Initializing GL renderer..." << std::endl;
         Vector3 screenSize = game->getScreenSize();
 
@@ -82,6 +82,11 @@ namespace phantom {
         }
         else{
             cout << "There is no VBO support." << endl;
+        }
+
+        const unsigned char *version = glGetString(GL_VERSION);
+        if((version[0] - 48) > 2) {
+            _shaderSupport = true;
         }
 
         if(_shaderSupport) {
