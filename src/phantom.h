@@ -16,7 +16,6 @@
 
 #include <graphics/Graphics.h>
 #include <graphics/Color.h>
-#include <utils/util.h>
 #include <utils/Time.h>
 #include <utils/Timer.h>
 

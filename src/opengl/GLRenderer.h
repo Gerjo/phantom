@@ -40,8 +40,12 @@ namespace phantom {
     private:
         int _windowID;
         bool _vboSupport;
-        bool IsExtensionSupported(std::string szTargetExtensionString);
+        bool _shaderSupport;
+        GLint _programscount;
+        GLint _programs[1];
+        GLuint _program;
 
+        bool IsExtensionSupported(std::string szTargetExtensionString);
         void createVBO(GLuint *buffer, GLuint size, GLvoid *data);
         void destroyVBO(GLuint *buffer);
         void drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset);
@@ -49,6 +53,8 @@ namespace phantom {
         void drawImage(Image *image, Composite *composite, float xOffset, float yOffset);
         void drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset);
         void drawParticles(Particles *particles, float xOffset, float yOffset);
+        void applyColor(const Color &color);
+        void insertShader(char *vertex, char *fragment);
     };
 }
 #endif // GLUTRENDERER_H
