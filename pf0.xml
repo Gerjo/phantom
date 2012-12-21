@@ -77,7 +77,7 @@
     <PostBuildEvent>
       <Command>
         xcopy $(TargetPath) $(SolutionDir)dist /Y
-        xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y /D
+        xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -101,7 +101,7 @@
     <PostBuildEvent>
       <Command>
         xcopy $(TargetPath) $(SolutionDir)dist /Y
-        xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y /D
+        xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

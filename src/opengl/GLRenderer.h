@@ -53,7 +53,7 @@ namespace phantom {
         void drawImage(Image *image, Composite *composite, float xOffset, float yOffset);
         void drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset);
         void drawParticles(Particles *particles, float xOffset, float yOffset);
-        void applyColor(const Color &color);
+        void applyColor(const Color &color, float hasTex = 1.0f);
         void translateShape(float x, float y, float z);
         void insertShader(char *vertex, char *fragment);
     };

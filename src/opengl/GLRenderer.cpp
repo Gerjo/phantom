@@ -28,6 +28,7 @@ namespace phantom {
 
     PFNGLUNIFORM4FPROC glUniform4f = NULL;
     PFNGLUNIFORM3FPROC glUniform3f = NULL;
+    PFNGLUNIFORM1FPROC glUniform1f = NULL;
     PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 
     GLRenderer::GLRenderer(PhantomGame *game) : Renderer(game), _programscount(0), _shaderSupport(true) {
@@ -96,6 +97,7 @@ namespace phantom {
 
             glUniform4f             = (PFNGLUNIFORM4FPROC)          GetProcAddress("glUniform4f");
             glUniform3f             = (PFNGLUNIFORM3FPROC)          GetProcAddress("glUniform3f");
+            glUniform1f             = (PFNGLUNIFORM1FPROC)          GetProcAddress("glUniform1f");
             glGetUniformLocation    = (PFNGLGETUNIFORMLOCATIONPROC) GetProcAddress("glGetUniformLocation");
 
             insertShader("shaders/defaultvert.glsl", "shaders/defaultfrag.glsl");
@@ -179,7 +181,7 @@ namespace phantom {
     }
 
     void GLRenderer::drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset) {
-        applyColor(shape->getFillColor());
+        applyColor(shape->getFillColor(), 0.0f);
 
         glEnableClientState(GL_VERTEX_ARRAY);
         translateShape(shape->x + xOffset, shape->y + yOffset, 0.0f);
@@ -420,13 +422,13 @@ namespace phantom {
         }
     }
 
-    void GLRenderer::applyColor(const Color &color) {
+    void GLRenderer::applyColor(const Color &color, float hasTex) {
         if(_shaderSupport) {
             float r = color.r / 127.0f;
             float g = color.g / 127.0f;
             float b = color.b / 127.0f;
             float a = color.a / 127.0f;
-
+            glUniform1f(glGetUniformLocation(_programs[_activeprogram], "hasTex"), hasTex);
             glUniform4f(glGetUniformLocation(_programs[_activeprogram], "color"), r, g, b, a);
         }
         else {
@@ -436,7 +438,7 @@ namespace phantom {
 
     void GLRenderer::translateShape(float x, float y, float z) {
         if(_shaderSupport) {
-            glUniform3f(glGetUniformLocation(_programs[_activeprogram], "translation"), x, y, z);
+            glUniform4f(glGetUniformLocation(_programs[_activeprogram], "translation"), x, y, z, 0.0f);
         }
         else {
             glTranslatef(x, y, z);
@@ -475,6 +477,12 @@ namespace phantom {
         glGetShaderiv(vertexshader, GL_COMPILE_STATUS, &success[0]);
         glGetShaderiv(fragmentshader, GL_COMPILE_STATUS, &success[1]);
         glGetProgramiv(_programs[_activeprogram], GL_LINK_STATUS, &success[2]);
+
+        if(success[0] != 1 || success[1] != 1 || success[2] != 1) {
+            __asm {
+                int 3
+            }
+        }
     }
 
     // Based Off Of Code Supplied At OpenGL.org
