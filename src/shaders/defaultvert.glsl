@@ -1,4 +1,4 @@
-uniform vec3 translation;
+uniform vec4 translation;
 
 void main() {
 	gl_TexCoord[0] = gl_MultiTexCoord0;
