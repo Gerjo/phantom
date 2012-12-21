@@ -478,10 +478,14 @@ namespace phantom {
         glGetShaderiv(fragmentshader, GL_COMPILE_STATUS, &success[1]);
         glGetProgramiv(_programs[_activeprogram], GL_LINK_STATUS, &success[2]);
 
-        if(success[0] != 1 || success[1] != 1 || success[2] != 1) {
-            __asm {
-                int 3
-            }
+        if(success[0] != 1) {
+            throw PhantomException("Failed compiling a shader.");
+        }
+        if(success[1] != 1) {
+            throw PhantomException("Failed compiling a shader.");
+        }
+        if(success[2] != 1) {
+            throw PhantomException("Failed linking the shader.");
         }
     }
 
