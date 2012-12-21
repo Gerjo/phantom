@@ -27,6 +27,7 @@ namespace phantom {
     PFNGLGETPROGRAMIVPROC glGetProgramiv = NULL;
 
     PFNGLUNIFORM4FPROC glUniform4f = NULL;
+    PFNGLUNIFORM3FPROC glUniform3f = NULL;
     PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
 
     GLRenderer::GLRenderer(PhantomGame *game) : Renderer(game), _programscount(0), _shaderSupport(true) {
@@ -94,6 +95,7 @@ namespace phantom {
             glGetProgramiv          = (PFNGLGETPROGRAMIVPROC)       GetProcAddress("glGetProgramiv");
 
             glUniform4f             = (PFNGLUNIFORM4FPROC)          GetProcAddress("glUniform4f");
+            glUniform3f             = (PFNGLUNIFORM3FPROC)          GetProcAddress("glUniform3f");
             glGetUniformLocation    = (PFNGLGETUNIFORMLOCATIONPROC) GetProcAddress("glGetUniformLocation");
 
             insertShader("shaders/defaultvert.glsl", "shaders/defaultfrag.glsl");
@@ -118,7 +120,7 @@ namespace phantom {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        glTranslatef(txt->x + xOffset, txt->y + yOffset, 0.0f);
+        translateShape(txt->x + xOffset, txt->y + yOffset, 0.0f);
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, txt->vboVertices);
@@ -152,7 +154,7 @@ namespace phantom {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        glTranslatef(img->x + xOffset, img->y + yOffset, 0.0f);
+        translateShape(img->x + xOffset, img->y + yOffset, 0.0f);
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, img->vboVertices);
@@ -180,8 +182,8 @@ namespace phantom {
         applyColor(shape->getFillColor());
 
         glEnableClientState(GL_VERTEX_ARRAY);
+        translateShape(shape->x + xOffset, shape->y + yOffset, 0.0f);
 
-        glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
         glRotatef(composite->getGraphics().getRotation(), 0, 0, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
@@ -199,7 +201,7 @@ namespace phantom {
     void GLRenderer::drawParticles(Particles *particles, float xOffset, float yOffset) {
         const vector<Particle*>* p = particles->getParticles();
         glLoadIdentity();
-        glTranslatef(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
+        translateShape(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
 
         if(particles->texture != nullptr) {
             glEnable(GL_TEXTURE_2D);
@@ -210,7 +212,7 @@ namespace phantom {
             glPushMatrix();
             applyColor(particle->color);
 
-            glTranslatef(particle->position.x, particle->position.y, particle->position.z);
+            translateShape(particle->position.x, particle->position.y, particle->position.z);
             glScalef(particle->scale.x, particle->scale.y, particle->scale.z);
 
             // Should be added to VBO's
@@ -425,10 +427,19 @@ namespace phantom {
             float b = color.b / 127.0f;
             float a = color.a / 127.0f;
 
-            glUniform4f(glGetUniformLocation(_program, "color"), r, g, b, a);
+            glUniform4f(glGetUniformLocation(_programs[_activeprogram], "color"), r, g, b, a);
         }
         else {
             glColor4b(color.r, color.g, color.b, color.a);
+        }
+    }
+
+    void GLRenderer::translateShape(float x, float y, float z) {
+        if(_shaderSupport) {
+            glUniform3f(glGetUniformLocation(_programs[_activeprogram], "translation"), x, y, z);
+        }
+        else {
+            glTranslatef(x, y, z);
         }
     }
 
@@ -452,23 +463,18 @@ namespace phantom {
         delete [] vertex_shader;
         delete [] fragment_shader;
 
-        /* _programs[_programscount] = glCreateProgram();
+        _programs[_programscount] = glCreateProgram();
         glAttachShader(_programs[_programscount], vertexshader);
         glAttachShader(_programs[_programscount], fragmentshader);
         glLinkProgram(_programs[_programscount]);
         glUseProgram(_programs[_programscount]);
-        _programscount++; */
-
-        _program = glCreateProgram();
-        glAttachShader(_program, vertexshader);
-        glAttachShader(_program, fragmentshader);
-        glLinkProgram(_program);
-        glUseProgram(_program);
+        _activeprogram = _programscount;
+        _programscount++;
 
         GLint success[3];
         glGetShaderiv(vertexshader, GL_COMPILE_STATUS, &success[0]);
         glGetShaderiv(fragmentshader, GL_COMPILE_STATUS, &success[1]);
-        glGetProgramiv(_program, GL_LINK_STATUS, &success[2]);
+        glGetProgramiv(_programs[_activeprogram], GL_LINK_STATUS, &success[2]);
     }
 
     // Based Off Of Code Supplied At OpenGL.org

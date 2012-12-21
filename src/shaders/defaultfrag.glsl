@@ -6,5 +6,5 @@ void main() {
 
 	texel = texture2D(tex, gl_TexCoord[0].st);
 
-	gl_FragColor = vec4(color.r * texel.r, color.g * tex.g, color.b * tex.b, color.a * tex.a);
+	gl_FragColor = vec4(texel.xyz * color.xyz, texel.w * color.w);
 }
