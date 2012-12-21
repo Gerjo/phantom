@@ -75,7 +75,10 @@
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib; MSVCRT.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)dist /Y</Command>
+      <Command>
+        xcopy $(TargetPath) $(SolutionDir)dist /Y
+        xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y /D
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,6 +99,9 @@
       <AdditionalLibraryDirectories>lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)dist /Y</Command>
+      <Command>
+        xcopy $(TargetPath) $(SolutionDir)dist /Y
+        xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y /D
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
