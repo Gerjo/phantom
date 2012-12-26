@@ -7,6 +7,7 @@
 #include <graphics/shapes/Text.h>
 #include <graphics/particles/Particles.h>
 #include <graphics/ImageCache.h>
+#include <utils/util.h>
 
 namespace phantom {
 
@@ -15,7 +16,22 @@ namespace phantom {
     PFNGLBUFFERDATAARBPROC glBufferDataARB = NULL;
     PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB = NULL;
 
-    GLRenderer::GLRenderer(PhantomGame *game) : Renderer(game) {
+    PFNGLCREATESHADERPROC glCreateShader = NULL;
+    PFNGLCREATEPROGRAMPROC glCreateProgram = NULL;
+    PFNGLSHADERSOURCEPROC glShaderSource = NULL;
+    PFNGLCOMPILESHADERPROC glCompileShader = NULL;
+    PFNGLATTACHSHADERPROC glAttachShader = NULL;
+    PFNGLLINKPROGRAMPROC glLinkProgram = NULL;
+    PFNGLUSEPROGRAMPROC glUseProgram = NULL;
+    PFNGLGETSHADERIVPROC glGetShaderiv = NULL;
+    PFNGLGETPROGRAMIVPROC glGetProgramiv = NULL;
+
+    PFNGLUNIFORM4FPROC glUniform4f = NULL;
+    PFNGLUNIFORM3FPROC glUniform3f = NULL;
+    PFNGLUNIFORM1FPROC glUniform1f = NULL;
+    PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation = NULL;
+
+    GLRenderer::GLRenderer(PhantomGame *game) : Renderer(game), _programscount(0), _shaderSupport(false), _vboSupport(false) {
         std::cout << "Initializing GL renderer..." << std::endl;
         Vector3 screenSize = game->getScreenSize();
 
@@ -67,6 +83,33 @@ namespace phantom {
         else{
             cout << "There is no VBO support." << endl;
         }
+
+        const unsigned char *version = glGetString(GL_VERSION);
+        if((version[0] - 48) > 2) {
+            _shaderSupport = true;
+        }
+
+        if(_shaderSupport) {
+            glCreateShader          = (PFNGLCREATESHADERPROC)       GetProcAddress("glCreateShader");
+            glCreateProgram         = (PFNGLCREATEPROGRAMPROC)      GetProcAddress("glCreateProgram");
+            glShaderSource          = (PFNGLSHADERSOURCEPROC)       GetProcAddress("glShaderSource");
+            glCompileShader         = (PFNGLCOMPILESHADERPROC)      GetProcAddress("glCompileShader");
+            glAttachShader          = (PFNGLATTACHSHADERPROC)       GetProcAddress("glAttachShader");
+            glLinkProgram           = (PFNGLLINKPROGRAMPROC)        GetProcAddress("glLinkProgram");
+            glUseProgram            = (PFNGLUSEPROGRAMPROC)         GetProcAddress("glUseProgram");
+            glGetShaderiv           = (PFNGLGETSHADERIVPROC)        GetProcAddress("glGetShaderiv");
+            glGetProgramiv          = (PFNGLGETPROGRAMIVPROC)       GetProcAddress("glGetProgramiv");
+
+            glUniform4f             = (PFNGLUNIFORM4FPROC)          GetProcAddress("glUniform4f");
+            glUniform3f             = (PFNGLUNIFORM3FPROC)          GetProcAddress("glUniform3f");
+            glUniform1f             = (PFNGLUNIFORM1FPROC)          GetProcAddress("glUniform1f");
+            glGetUniformLocation    = (PFNGLGETUNIFORMLOCATIONPROC) GetProcAddress("glGetUniformLocation");
+
+            insertShader("shaders/defaultvert.glsl", "shaders/defaultfrag.glsl");
+        }
+        else {
+            cout << "There is no shader support." << endl;
+        }
     }
 
     GLRenderer::~GLRenderer() {
@@ -79,13 +122,12 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, txt->ftfont->texture->textureID);
 
-        const Color& fillColor = txt->getFillColor();
-        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+        applyColor(txt->getFillColor());
 
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        glTranslatef(txt->x + xOffset, txt->y + yOffset, 0.0f);
+        translateShape(txt->x + xOffset, txt->y + yOffset, 0.0f);
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, txt->vboVertices);
@@ -114,13 +156,12 @@ namespace phantom {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, img->getImage()->textureID);
 
-        const Color& fillColor = img->getFillColor();
-        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+        applyColor(img->getFillColor());
 
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-        glTranslatef(img->x + xOffset, img->y + yOffset, 0.0f);
+        translateShape(img->x + xOffset, img->y + yOffset, 0.0f);
         glRotatef(composite->getGraphics().getRotation(), 0.0f, 0.0f, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, img->vboVertices);
@@ -145,12 +186,11 @@ namespace phantom {
     }
 
     void GLRenderer::drawPrime(Shape *shape, Composite *composite, float xOffset, float yOffset) {
-        const Color& fillColor = shape->getFillColor();
-        glColor4b(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+        applyColor(shape->getFillColor(), 0.0f);
 
         glEnableClientState(GL_VERTEX_ARRAY);
+        translateShape(shape->x + xOffset, shape->y + yOffset, 0.0f);
 
-        glTranslatef(shape->x + xOffset, shape->y + yOffset, 0.0f);
         glRotatef(composite->getGraphics().getRotation(), 0, 0, 1.0f);
         if(_vboSupport) {
             glBindBufferARB(GL_ARRAY_BUFFER_ARB, shape->vboVertices);
@@ -168,8 +208,8 @@ namespace phantom {
     void GLRenderer::drawParticles(Particles *particles, float xOffset, float yOffset) {
         const vector<Particle*>* p = particles->getParticles();
         glLoadIdentity();
-        glTranslatef(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
-        
+        translateShape(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
+
         if(particles->texture != nullptr) {
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, particles->texture->textureID);
@@ -177,8 +217,9 @@ namespace phantom {
 
         for(auto *particle : *p) {
             glPushMatrix();
-            glColor4b(particle->color.r, particle->color.g, particle->color.b, particle->color.a);
-            glTranslatef(particle->position.x, particle->position.y, particle->position.z);
+            applyColor(particle->color);
+
+            translateShape(particle->position.x, particle->position.y, particle->position.z);
             glScalef(particle->scale.x, particle->scale.y, particle->scale.z);
 
             // Should be added to VBO's
@@ -383,6 +424,82 @@ namespace phantom {
         if(item->textureID != 0) {
             glDeleteTextures(1, &item->textureID);
             item->textureID = 0;
+        }
+    }
+
+    void GLRenderer::applyColor(const Color &color, float hasTex) {
+        if(_shaderSupport) {
+            float r = color.r / 127.0f;
+            float g = color.g / 127.0f;
+            float b = color.b / 127.0f;
+            float a = color.a / 127.0f;
+            glUniform1f(glGetUniformLocation(_programs[_activeprogram], "hasTex"), hasTex);
+            glUniform4f(glGetUniformLocation(_programs[_activeprogram], "color"), r, g, b, a);
+        }
+        else {
+            glColor4b(color.r, color.g, color.b, color.a);
+        }
+    }
+
+    void GLRenderer::translateShape(float x, float y, float z) {
+        if(_shaderSupport) {
+            glUniform4f(glGetUniformLocation(_programs[_activeprogram], "translation"), x, y, z, 0.0f);
+        }
+        else {
+            glTranslatef(x, y, z);
+        }
+    }
+
+    void GLRenderer::insertShader(const string& vertex, const string& fragment) {
+        char *vertex_shader   = nullptr;
+        char *fragment_shader = nullptr;
+        unsigned int size     = 0;
+
+        Util::readfile(vertex.c_str(), &vertex_shader, &size);
+
+        if(size == 0) {
+            throw PhantomException("GLRenderer::insertShader(): cannot open vertex shader file: '" + vertex + "'.");
+        }
+
+        Util::readfile(fragment.c_str(), &fragment_shader, &size);
+
+        if(size == 0) {
+            throw PhantomException("GLRenderer::insertShader(): cannot open fragment shader file: '" + fragment + "'.");
+        }
+
+        GLuint vertexshader = glCreateShader(GL_VERTEX_SHADER);
+        GLuint fragmentshader = glCreateShader(GL_FRAGMENT_SHADER);
+        glShaderSource(vertexshader, 1, (const char**)(&vertex_shader), NULL);
+        glShaderSource(fragmentshader, 1, (const char**)(&fragment_shader), NULL);
+
+        glCompileShader(vertexshader);
+        glCompileShader(fragmentshader);
+
+        // No longer need these.
+        delete [] vertex_shader;
+        delete [] fragment_shader;
+
+        _programs[_programscount] = glCreateProgram();
+        glAttachShader(_programs[_programscount], vertexshader);
+        glAttachShader(_programs[_programscount], fragmentshader);
+        glLinkProgram(_programs[_programscount]);
+        glUseProgram(_programs[_programscount]);
+        _activeprogram = _programscount;
+        _programscount++;
+
+        GLint success[3];
+        glGetShaderiv(vertexshader, GL_COMPILE_STATUS, &success[0]);
+        glGetShaderiv(fragmentshader, GL_COMPILE_STATUS, &success[1]);
+        glGetProgramiv(_programs[_activeprogram], GL_LINK_STATUS, &success[2]);
+
+        if(success[0] != 1) {
+            throw PhantomException("Failed compiling a shader.");
+        }
+        if(success[1] != 1) {
+            throw PhantomException("Failed compiling a shader.");
+        }
+        if(success[2] != 1) {
+            throw PhantomException("Failed linking the shader.");
         }
     }
 

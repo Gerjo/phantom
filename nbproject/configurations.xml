@@ -105,6 +105,10 @@
         <itemPath>src/physics/Vector3.cpp</itemPath>
         <itemPath>src/physics/Vector3.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="shaders" displayName="shaders" projectFiles="true">
+        <itemPath>src/shaders/defaultfrag.glsl</itemPath>
+        <itemPath>src/shaders/defaultvert.glsl</itemPath>
+      </logicalFolder>
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
         <logicalFolder name="tree" displayName="tree" projectFiles="true">
           <itemPath>src/utils/tree/BinaryNode.h</itemPath>
