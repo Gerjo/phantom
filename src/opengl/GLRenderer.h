@@ -16,6 +16,7 @@
 #   include <GL/glx.h>
 #endif
 
+using std::string;
 
 namespace phantom {
     class Image;
@@ -55,7 +56,7 @@ namespace phantom {
         void drawParticles(Particles *particles, float xOffset, float yOffset);
         void applyColor(const Color &color, float hasTex = 1.0f);
         void translateShape(float x, float y, float z);
-        void insertShader(char *vertex, char *fragment);
+        void insertShader(const string& vertex, const string& fragment);
     };
 }
 #endif // GLUTRENDERER_H

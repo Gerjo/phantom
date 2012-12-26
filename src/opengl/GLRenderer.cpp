@@ -450,13 +450,22 @@ namespace phantom {
         }
     }
 
-    void GLRenderer::insertShader(char *vertex, char *fragment) {
-        char *vertex_shader;
-        char *fragment_shader;
-        unsigned int size;
+    void GLRenderer::insertShader(const string& vertex, const string& fragment) {
+        char *vertex_shader   = nullptr;
+        char *fragment_shader = nullptr;
+        unsigned int size     = 0;
 
-        Util::readfile(vertex, &vertex_shader, &size);
-        Util::readfile(fragment, &fragment_shader, &size);
+        Util::readfile(vertex.c_str(), &vertex_shader, &size);
+
+        if(size == 0) {
+            throw PhantomException("GLRenderer::insertShader(): cannot open vertex shader file: '" + vertex + "'.");
+        }
+
+        Util::readfile(fragment.c_str(), &fragment_shader, &size);
+
+        if(size == 0) {
+            throw PhantomException("GLRenderer::insertShader(): cannot open fragment shader file'" + fragment + "'.");
+        }
 
         GLuint vertexshader = glCreateShader(GL_VERTEX_SHADER);
         GLuint fragmentshader = glCreateShader(GL_FRAGMENT_SHADER);
