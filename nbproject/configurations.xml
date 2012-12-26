@@ -18,17 +18,12 @@
         <itemPath>src/core/PhantomGame.h</itemPath>
         <itemPath>src/core/Renderer.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="glut" displayName="glut" projectFiles="true">
-        <itemPath>src/glut/GLUTCamera.cpp</itemPath>
-        <itemPath>src/glut/GLUTCamera.h</itemPath>
-        <itemPath>src/glut/GLUTDriver.cpp</itemPath>
-        <itemPath>src/glut/GLUTDriver.h</itemPath>
-        <itemPath>src/glut/GLUTInput.cpp</itemPath>
-        <itemPath>src/glut/GLUTInput.h</itemPath>
-        <itemPath>src/glut/GLUTRenderer.cpp</itemPath>
-        <itemPath>src/glut/GLUTRenderer.h</itemPath>
-      </logicalFolder>
       <logicalFolder name="graphics" displayName="graphics" projectFiles="true">
+        <logicalFolder name="particles" displayName="particles" projectFiles="true">
+          <itemPath>src/graphics/particles/Particle.h</itemPath>
+          <itemPath>src/graphics/particles/Particles.cpp</itemPath>
+          <itemPath>src/graphics/particles/Particles.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="shapes" displayName="shapes" projectFiles="true">
           <itemPath>src/graphics/shapes/Arc.cpp</itemPath>
           <itemPath>src/graphics/shapes/Arc.h</itemPath>
@@ -58,6 +53,8 @@
         <itemPath>src/graphics/VerticeData.h</itemPath>
       </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
+        <itemPath>src/input/GLUTInput.cpp</itemPath>
+        <itemPath>src/input/GLUTInput.h</itemPath>
         <itemPath>src/input/Input.h</itemPath>
         <itemPath>src/input/KeyboardListener.cpp</itemPath>
         <itemPath>src/input/KeyboardListener.h</itemPath>
@@ -65,6 +62,8 @@
         <itemPath>src/input/KeyboardState.h</itemPath>
         <itemPath>src/input/MouseState.cpp</itemPath>
         <itemPath>src/input/MouseState.h</itemPath>
+        <itemPath>src/input/WinInput.cpp</itemPath>
+        <itemPath>src/input/WinInput.h</itemPath>
       </logicalFolder>
       <logicalFolder name="layer" displayName="layer" projectFiles="true">
         <itemPath>src/layer/EntityLayer.cpp</itemPath>
@@ -80,6 +79,14 @@
       </logicalFolder>
       <logicalFolder name="null" displayName="null" projectFiles="true">
         <itemPath>src/null/NullDriver.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="opengl" displayName="opengl" projectFiles="true">
+        <itemPath>src/opengl/GLCamera.cpp</itemPath>
+        <itemPath>src/opengl/GLCamera.h</itemPath>
+        <itemPath>src/opengl/GLDriver.cpp</itemPath>
+        <itemPath>src/opengl/GLDriver.h</itemPath>
+        <itemPath>src/opengl/GLRenderer.cpp</itemPath>
+        <itemPath>src/opengl/GLRenderer.h</itemPath>
       </logicalFolder>
       <logicalFolder name="physics" displayName="physics" projectFiles="true">
         <itemPath>src/physics/Box3.cpp</itemPath>
@@ -97,6 +104,10 @@
         <itemPath>src/physics/Pulse.h</itemPath>
         <itemPath>src/physics/Vector3.cpp</itemPath>
         <itemPath>src/physics/Vector3.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="shaders" displayName="shaders" projectFiles="true">
+        <itemPath>src/shaders/defaultfrag.glsl</itemPath>
+        <itemPath>src/shaders/defaultvert.glsl</itemPath>
       </logicalFolder>
       <logicalFolder name="utils" displayName="utils" projectFiles="true">
         <logicalFolder name="tree" displayName="tree" projectFiles="true">
