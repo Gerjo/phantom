@@ -464,7 +464,7 @@ namespace phantom {
         Util::readfile(fragment.c_str(), &fragment_shader, &size);
 
         if(size == 0) {
-            throw PhantomException("GLRenderer::insertShader(): cannot open fragment shader file'" + fragment + "'.");
+            throw PhantomException("GLRenderer::insertShader(): cannot open fragment shader file: '" + fragment + "'.");
         }
 
         GLuint vertexshader = glCreateShader(GL_VERTEX_SHADER);

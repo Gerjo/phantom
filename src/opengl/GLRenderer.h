@@ -46,7 +46,7 @@ namespace phantom {
         GLint _activeprogram;
         GLint _programs[1];
 
-        bool IsExtensionSupported(std::string szTargetExtensionString);
+        bool IsExtensionSupported(string szTargetExtensionString);
         void createVBO(GLuint *buffer, GLuint size, GLvoid *data);
         void destroyVBO(GLuint *buffer);
         void drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset);
