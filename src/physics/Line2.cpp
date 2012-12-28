@@ -61,6 +61,41 @@ namespace phantom {
                Projection::projectedLineIntersection(projectOnto(normalA), other.projectOnto(normalA));
     }
 
+    Vector3 Line2::intersection(const Line2& other) const {
+        Vector3 b = getDirection();
+        Vector3 d = other.getDirection();
+        //float dot = b.perp().dot(d);
+        // An optimized version of the above line. The unit tests approve.
+        float dot = b.x * d.y - b.y * d.x;
+
+        // Check for parallel lines:
+        if (dot != 0) {
+            Vector3 c = other.a - a;
+
+            float t  = (c.x * d.y - c.y * d.x) / dot;
+
+            // No solution possible. 1
+            if(t > 0 && t < 1) {
+                float u = (c.x * b.y - c.y * b.x) / dot;
+
+                // No solution possible. 2
+                if(u > 0 && u < 1) {
+                    return Vector3(
+                        a.x + t * b.x,
+                        a.y + t * b.y
+                    );
+                }
+            }
+        }
+
+        // We can't quite return "NULL" here.
+        return Vector3(
+            std::numeric_limits<float>::infinity(),
+            std::numeric_limits<float>::infinity(),
+            std::numeric_limits<float>::infinity()
+        );
+    }
+
     std::string Line2::toString(void) const {
         return "line(" +
                 std::to_string(a.x) + "," +

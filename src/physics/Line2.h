@@ -26,6 +26,8 @@ namespace phantom {
         Line2 projectOnto(const Vector3& axis) const;
         bool intersects(const Line2& other) const;
 
+        Vector3 intersection(const Line2& other) const;
+
         std::string toString(void) const;
 
         Vector3 a;
