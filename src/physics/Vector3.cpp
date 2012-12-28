@@ -168,9 +168,9 @@ namespace phantom{
     }
 
     Vector3& Vector3::absolute() {
-        x = abs(x);
-        y = abs(y);
-        z = abs(z);
+        x = std::abs(x);
+        y = std::abs(y);
+        z = std::abs(z);
 
         return *this;
     }
