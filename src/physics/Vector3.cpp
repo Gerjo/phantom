@@ -184,6 +184,43 @@ namespace phantom{
         return *this;
     }
 
+    Vector3& Vector3::clamp(const Vector3& limit) {
+        clampHelper(x, limit.x, -limit.x);
+        clampHelper(y, limit.y, -limit.y);
+        clampHelper(z, limit.z, -limit.z);
+        return *this;
+    }
+
+    Vector3& Vector3::clamp(const float& limit) {
+        clampHelper(x, limit, -limit);
+        clampHelper(x, limit, -limit);
+        clampHelper(y, limit, -limit);
+        return *this;
+    }
+
+    Vector3& Vector3::clamp(const Vector3& min, const Vector3& max) {
+        clampHelper(x, min.x, max.x);
+        clampHelper(y, min.y, max.y);
+        clampHelper(z, min.z, max.z);
+        return *this;
+    }
+
+    Vector3& Vector3::clamp(const float& min, const float& max) {
+        clampHelper(x, min, max);
+        clampHelper(y, min, max);
+        clampHelper(z, min, max);
+        return *this;
+    }
+
+    void Vector3::clampHelper(float& num, const float& min, const float& max) {
+        // NB: Not trying to reset the reference, we're changing the value.
+        if(num > max) {
+            num = max;
+        } else if(num < min) {
+            num = min;
+        }
+    }
+
     Vector3 Vector3::directionTo(const Vector3& other) const {
         Vector3 direction(
             other.x - x,

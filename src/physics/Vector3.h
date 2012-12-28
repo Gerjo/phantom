@@ -57,6 +57,10 @@ namespace phantom {
         Vector3& absolute();
         Vector3& normalize();
         Vector3& reverse();
+        Vector3& clamp(const Vector3& limit);
+        Vector3& clamp(const float& limit);
+        Vector3& clamp(const Vector3& min, const Vector3& max);
+        Vector3& clamp(const float& min, const float& max);
 
         Vector3 directionTo(const Vector3& other) const;
         float distanceTo(const Vector3& other) const;
@@ -65,9 +69,11 @@ namespace phantom {
         float dot(const Vector3& v) const;
         float getAngleXOY() const;
 
+
         Vector3 perp(void) const;
         Vector3 cross(const Vector3& b) const;
         Vector3 projectOnto(const Vector3& b) const;
+
 
         std::string toString() const;
         std::string toString2() const;
@@ -78,6 +84,9 @@ namespace phantom {
         }
 
         float x, y, z;
+
+    private:
+        void clampHelper(float& num, const float& min, const float& max);
     };
 
 } /* namespace phantom */
