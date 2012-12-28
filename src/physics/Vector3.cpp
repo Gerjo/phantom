@@ -39,6 +39,11 @@ namespace phantom{
         return dotx + doty + dotz;
     }
 
+    float Vector3::getAngleXOY() const {
+        // NB: y and x are intentionally flipped.
+        return atan2(y, x) * 180 / 3.14159f;
+    }
+    
     Vector3 Vector3::operator*(float f) const {
         return Vector3(x * f, y * f, z * f);
     }

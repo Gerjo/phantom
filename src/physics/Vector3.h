@@ -64,6 +64,7 @@ namespace phantom {
         float distanceToSq(const Vector3& other) const;
         float getLengthSq(void) const;
         float dot(const Vector3& v) const;
+        float getAngleXOY() const;
 
         Vector3 perp(void) const;
         Vector3 cross(const Vector3& b) const;
