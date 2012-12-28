@@ -55,23 +55,23 @@ namespace phantom {
     void InertiaMover::update(const PhantomTime& time) {
         Composite::update(time);
 
-        float speed = 0;
         Vector3 direction(0, 0, 0);
-        unsigned numPulses = 0;
-
+        float speed         = 0;
+        unsigned numPulses  = 0;
+        float totalWeight   = 0;
         const float elapsed = static_cast<float> (time.getElapsed());
 
-        float totalWeight = 0;
+
 
         for (auto it = _pulses.begin(); it != _pulses.end(); ++it) {
-            bool erase = false;
+            bool erase   = false;
             Pulse& pulse = *it;
 
             if (pulse.speed > 0) {
                 totalWeight += static_cast<float>(pulse.weight);
 
                 // Accumulate all forces.
-                speed += pulse.weight * pulse.speed * elapsed;
+                speed     += pulse.weight * pulse.speed * elapsed;
                 direction += pulse.direction;
                 ++numPulses;
 
@@ -110,13 +110,12 @@ namespace phantom {
             }
         }
 
-        _velocity = direction * speed;
-        _speed    = speed;
-
-        getParent()->addPosition(_velocity);
-
+        _velocity  = direction * speed;
+        _speed     = speed;
         _direction = direction;
         _direction.normalize();
+
+        getParent()->addPosition(_velocity);
     }
 
     bool InertiaMover::isMoving() const {
