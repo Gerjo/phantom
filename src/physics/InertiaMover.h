@@ -20,9 +20,14 @@ namespace phantom {
         virtual MessageState handleMessage(AbstractMessage* message);
         const Vector3& getDirection(void);
         const Vector3& getDominantDirection(void);
+
+        bool isMoving() const;
+
     private:
         std::deque<Pulse> _pulses;
         Vector3 _direction;
+        Vector3 _velocity;
+        float _speed;
     };
 }
 

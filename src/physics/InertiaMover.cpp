@@ -110,11 +110,17 @@ namespace phantom {
             }
         }
 
-        const Vector3 velocity = direction * speed;
+        _velocity = direction * speed;
+        _speed    = speed;
 
-        getParent()->addPosition(velocity);
+        getParent()->addPosition(_velocity);
 
         _direction = direction;
         _direction.normalize();
+    }
+
+    bool InertiaMover::isMoving() const {
+        const float epsilon = 0.001f;
+        return _speed > epsilon;
     }
 }
