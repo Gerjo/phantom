@@ -185,16 +185,16 @@ namespace phantom{
     }
 
     Vector3& Vector3::clamp(const Vector3& limit) {
-        clampHelper(x, limit.x, -limit.x);
-        clampHelper(y, limit.y, -limit.y);
-        clampHelper(z, limit.z, -limit.z);
+        clampHelper(x, -limit.x, limit.x);
+        clampHelper(y, -limit.y, limit.y);
+        clampHelper(z, -limit.z, limit.z);
         return *this;
     }
 
     Vector3& Vector3::clamp(const float& limit) {
-        clampHelper(x, limit, -limit);
-        clampHelper(x, limit, -limit);
-        clampHelper(y, limit, -limit);
+        clampHelper(x, -limit, limit);
+        clampHelper(x, -limit, limit);
+        clampHelper(y, -limit, limit);
         return *this;
     }
 
