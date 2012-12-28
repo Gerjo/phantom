@@ -117,8 +117,12 @@ namespace phantom {
         getParent()->addPosition(_velocity);
     }
 
-    bool InertiaMover::isMoving() const {
+    bool InertiaMover::isMoving(void) const {
         const float epsilon = 0.001f;
         return _speed > epsilon;
+    }
+
+    bool InertiaMover::isStopped(void) const {
+        return !isMoving();
     }
 }

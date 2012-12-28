@@ -21,7 +21,8 @@ namespace phantom {
         const Vector3& getDirection(void);
         const Vector3& getDominantDirection(void);
 
-        bool isMoving() const;
+        bool isMoving(void) const;
+        bool isStopped(void) const;
 
     private:
         std::deque<Pulse> _pulses;
