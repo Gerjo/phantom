@@ -21,6 +21,12 @@ namespace phantom{
         z = origin.z;
     }
 
+    Vector3::Vector3(const Vector3* origin) {
+        x = origin->x;
+        y = origin->y;
+        z = origin->z;
+    }
+
     Vector3 Vector3::operator+(const Vector3& v) const {
         return Vector3(x + v.x, y + v.y, z + v.z);
     }

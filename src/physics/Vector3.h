@@ -33,6 +33,7 @@ namespace phantom {
         Vector3(int x, int y, int z = 0);
         Vector3(double x, double y, double z = 0.0);
         Vector3(const Vector3& origin);
+        Vector3(const Vector3* origin);
 
         Vector3 operator+(const Vector3& v) const;
         Vector3 operator-(const Vector3& v) const;
