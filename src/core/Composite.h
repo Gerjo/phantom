@@ -54,7 +54,7 @@ namespace phantom {
         virtual void destroy(void);
         virtual void removeFromParent(void);
         template <class T> T* findAnsestor();
-        template <class T> T* getComponentByType(int nth);
+        template <class T> T* getComponentByType(int nth = 0);
         bool isDestroyed();
 
         // Iteration based events.
