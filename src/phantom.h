@@ -5,6 +5,7 @@
 #include <core/Entity.h>
 #include <core/PhantomGame.h>
 #include <core/Driver.h>
+#include <core/IUpdateable.h>
 
 #include <input/Input.h>
 #include <input/MouseState.h>

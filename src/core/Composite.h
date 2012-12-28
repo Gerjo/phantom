@@ -14,6 +14,7 @@
 #include <messaging/IHandleMessage.h>
 #include <utils/Time.h>
 #include <physics/CollisionData.h>
+#include <core/IUpdateable.h>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ namespace phantom {
     class Driver;
     class Layer;
 
-    class LIBEXPORT Composite : public IHandleMessage {
+    class LIBEXPORT Composite : public IHandleMessage, public IUpdateable {
     public:
         bool isStatic;
 
