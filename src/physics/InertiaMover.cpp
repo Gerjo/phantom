@@ -98,11 +98,10 @@ namespace phantom {
         // Quite possibly move this to a sub class, it's rather specific for a
         // certain purpose.
         if(_dominant.speed > 0) {
-
             direction += _dominant.direction;
-            direction /= 2;
 
             if(numPulses > 0) {
+                direction /= 2;
                 speed += _dominant.speed * _dominant.weight;
                 speed /= static_cast<float>(1 + _dominant.weight);
             } else {
