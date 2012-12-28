@@ -78,11 +78,11 @@ namespace phantom{
     }
 
     bool Vector3::isFinite(void) const {
-        return abs(x) != std::numeric_limits<float>::infinity()
+        return std::abs(x) != std::numeric_limits<float>::infinity()
                  &&
-               abs(y) != std::numeric_limits<float>::infinity()
+               std::abs(y) != std::numeric_limits<float>::infinity()
                  &&
-               abs(y) != std::numeric_limits<float>::infinity();
+               std::abs(y) != std::numeric_limits<float>::infinity();
     }
 
     bool Vector3::isInfinite(void) const{
