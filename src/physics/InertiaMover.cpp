@@ -56,7 +56,7 @@ namespace phantom {
         Composite::update(time);
 
 
-        Vector3 speed(0, 0, 0);
+        float speed = 0;
         Vector3 direction(0, 0, 0);
         unsigned numPulses = 0;
 
