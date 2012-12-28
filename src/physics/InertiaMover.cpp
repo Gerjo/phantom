@@ -6,8 +6,12 @@ namespace phantom {
         _pulses.push_back(pulse);
     }
 
-    Vector3 InertiaMover::getDirection(void) {
+    const Vector3& InertiaMover::getDirection(void) {
         return _direction;
+    }
+
+    const Vector3& InertiaMover::getDominantDirection(void) {
+        return _dominant.direction;
     }
 
     MessageState InertiaMover::handleMessage(AbstractMessage* message) {
@@ -25,18 +29,18 @@ namespace phantom {
         }
 
         if (message->isType("clear-dominant")) {
-            dominant.speed = 0.0f;
+            _dominant.speed = 0.0f;
             return CONSUMED;
         }
 
         if (message->isType("halt")) {
             clear();
-            dominant.speed = 0.0f;
+            _dominant.speed = 0.0f;
             return CONSUMED;
         }
 
         if (message->isType("set-dominant-pulse")) {
-            dominant = message->getPayload<Pulse>();
+            _dominant = message->getPayload<Pulse>();
             return CONSUMED;
         }
 
@@ -94,16 +98,16 @@ namespace phantom {
 
         // Quite possibly move this to a sub class, it's rather specific for a
         // certain purpose.
-        if(dominant.speed > 0) {
+        if(_dominant.speed > 0) {
 
-            direction += dominant.direction;
+            direction += _dominant.direction;
             direction /= 2;
 
             if(numPulses > 0) {
-                speed += dominant.speed * dominant.weight;
-                speed /= static_cast<float>(1 + dominant.weight);
+                speed += _dominant.speed * _dominant.weight;
+                speed /= static_cast<float>(1 + _dominant.weight);
             } else {
-                speed += dominant.speed;
+                speed += _dominant.speed;
             }
         }
 
