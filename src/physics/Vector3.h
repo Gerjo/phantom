@@ -54,6 +54,8 @@ namespace phantom {
 
         bool operator==(const Vector3& v) const;
         bool operator!=(const Vector3& v) const;
+        bool isFinite(void) const;
+        bool isInfinite(void) const;
 
         Vector3& absolute();
         Vector3& normalize();

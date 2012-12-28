@@ -1,3 +1,5 @@
+#include <limits>
+
 #include "Vector3.h"
 #include "utils/PhantomException.h"
 namespace phantom{
@@ -43,7 +45,7 @@ namespace phantom{
         // NB: y and x are intentionally flipped.
         return atan2(y, x) * 180 / 3.14159f;
     }
-    
+
     Vector3 Vector3::operator*(float f) const {
         return Vector3(x * f, y * f, z * f);
     }
@@ -75,6 +77,17 @@ namespace phantom{
         return !(*this == v);
     }
 
+    bool Vector3::isFinite(void) const {
+        return abs(x) != std::numeric_limits<float>::infinity()
+                 &&
+               abs(y) != std::numeric_limits<float>::infinity()
+                 &&
+               abs(y) != std::numeric_limits<float>::infinity();
+    }
+
+    bool Vector3::isInfinite(void) const{
+        return !isFinite();
+    }
 
     Vector3& Vector3::operator+=(const Vector3& v) {
         x += v.x;
