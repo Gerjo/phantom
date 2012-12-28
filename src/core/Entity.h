@@ -20,6 +20,7 @@ namespace phantom {
 
     class EntityLayer;
     class Mover;
+    class InertiaMover;
 
     class LIBEXPORT Entity : public Composite {
     public:
@@ -34,6 +35,9 @@ namespace phantom {
         float distanceTo(Entity* gob);
         float distanceToSq(Entity* gob);
         Vector3 directionTo(Entity* gob);
+
+        // To be renamed to "mover" once it works.
+        InertiaMover* inertia;
     protected:
         Mover* mover;
 

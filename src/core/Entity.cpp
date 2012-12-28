@@ -3,22 +3,29 @@
 #include <physics/Mover.h>
 #include <graphics/shapes/Shape.h>
 #include <utils/PhantomException.h>
-
+#include <physics/InertiaMover.h>
 namespace phantom {
 
-    Entity::Entity() : solidState(SolidStateBits::NOT_SOLID), solidType(0) {
-        mover = 0;
+    Entity::Entity() : inertia(nullptr), solidState(SolidStateBits::NOT_SOLID), solidType(0), mover(nullptr) {
+
     }
 
     void Entity::addComponent(Composite* component) {
         Composite::addComponent(component);
-        Mover* m = dynamic_cast<Mover*> (component);
-        if (m != 0) {
-            if (mover != 0) {
+
+        if(dynamic_cast<Mover*>(component)) {
+            if (mover != nullptr) {
                 mover->destroy();
             }
 
-            mover = m;
+            mover = static_cast<Mover*>(component);
+            
+        } else if(dynamic_cast<InertiaMover*>(component)) {
+            if (inertia != nullptr) {
+                inertia->destroy();
+            }
+
+            inertia = static_cast<InertiaMover*>(component);
         }
     }
 
