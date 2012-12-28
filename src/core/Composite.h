@@ -67,7 +67,7 @@ namespace phantom {
         virtual void onCollision(Composite *other, CollisionData& collisionData);
         Box3& getBoundingBox();
         void setBoundingBox(const Box3& boundingBox);
-        Vector3 getPosition();
+        const Vector3& getPosition();
         virtual void setPosition(Vector3 position);
         virtual void setX(float x);
         virtual void setY(float y);

@@ -139,7 +139,7 @@ namespace phantom {
         return true;
     }
 
-    Vector3 Composite::getPosition() {
+    const Vector3& Composite::getPosition() {
         return _position;
     }
 
