@@ -13,9 +13,6 @@ using std::endl;
 namespace phantom {
 
     class LIBEXPORT Vector3 {
-    public: //variables
-        float x, y, z;
-
     public:
 
         // Pass this as the 3rd argument to the std::map ctor.
@@ -80,6 +77,7 @@ namespace phantom {
             return o;
         }
 
+        float x, y, z;
     };
 
 } /* namespace phantom */
