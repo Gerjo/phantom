@@ -253,7 +253,7 @@ namespace phantom {
                 shapeBox.origin.x += xOffset;
                 shapeBox.origin.y += yOffset;
 
-                if(shapeBox.intersect(cameraBox)) {
+                if(shapeBox.intersects(cameraBox)) {
                     glLoadIdentity();
 
                     if((*itShape)->isImage) {

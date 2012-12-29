@@ -45,7 +45,7 @@ namespace phantom{
 
     bool EntityLayer::calculateCollision(Entity* a, Entity* b) {
         // TODO: fancier shape testing, please!
-        return a->getBoundingBox().intersect(b->getBoundingBox());;
+        return a->getBoundingBox().intersects(b->getBoundingBox());;
     }
 
     void EntityLayer::addComponent(Composite* component) {

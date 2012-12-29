@@ -17,12 +17,12 @@ namespace phantom{
     public:
         Box3();
         Box3(float x, float y, float width, float height);
-
         Box3(Vector3 origin, Vector3 size);
-        bool intersect(const Box3& other) const;
-        bool intersect(const Line2& other) const;
-        bool contains(const Vector3& other) const;
-        bool contains(const Vector3* other) const;
+        
+        bool intersects(const Box3& other) const;
+        bool intersects(const Line2& other) const;
+        bool intersects(const Vector3& other) const;
+        bool intersects(const Vector3* other) const;
 
         // This function is naive b.c. it assumes both boxes are repaired
         // and actually have an intersection. If neither conditions are met,

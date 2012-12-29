@@ -23,7 +23,7 @@ namespace phantom{
                 origin.z + size.z * 0.5);
     }
 
-    bool Box3::contains(const Vector3& other) const {
+    bool Box3::intersects(const Vector3& other) const {
         // Note: see note at "testBounds".
         return
             other.x >= origin.x && other.x <= origin.x + size.x
@@ -33,8 +33,8 @@ namespace phantom{
             other.z >= origin.z && other.z <= origin.z + size.z;
     }
 
-    bool Box3::contains(const Vector3* other) const {
-        return contains(*other);
+    bool Box3::intersects(const Vector3* other) const {
+        return intersects(*other);
     }
 
     bool Box3::testBounds(const float& aMin, const float& bMin, const float& aMax, const float& bMax) const {
@@ -50,7 +50,7 @@ namespace phantom{
                 (bMin >= aMin && bMin <= aMax);
     }
 
-    bool Box3::intersect(const Line2& other) const {
+    bool Box3::intersects(const Line2& other) const {
 
         Vector3 normals[] = {
             other.getNormal(),
@@ -88,7 +88,7 @@ namespace phantom{
         return true;
     }
 
-    bool Box3::intersect(const Box3& other) const {
+    bool Box3::intersects(const Box3& other) const {
         // Test each dimension:
         return
            testBounds(origin.x, other.origin.x, origin.x + size.x, other.origin.x + other.size.x)
