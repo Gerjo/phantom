@@ -116,7 +116,7 @@ namespace phantom{
         }
     }
 
-    string Box3::toString() {
+    string Box3::toString() const {
         stringstream ss;
         ss << "[Box3] (x: " << origin.x << ", y:"  << origin.y << ", z:"  << origin.z;
         ss << ", width:" << size.x << ", height:" << size.y << ", depth:" << size.z << ")";
@@ -124,7 +124,7 @@ namespace phantom{
         return ss.str();
     }
 
-    string Box3::toString2() {
+    string Box3::toString2() const {
         stringstream ss;
         ss << "box(" << origin.x << ", "  << origin.y;
         ss << ", " << size.x << ", " << size.y << ")";

@@ -37,8 +37,8 @@ namespace phantom{
         Vector3 origin;
         Vector3 size;
         void repair(void);
-        string toString(void);
-        string toString2(void);
+        string toString(void) const;
+        string toString2(void) const;
 
         friend ostream& operator<<(ostream& o, const Box3& b){
             o << "[Box3] (x: " << b.origin.x << ", y:"  << b.origin.y << ", z:"  << b.origin.z;
