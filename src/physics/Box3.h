@@ -9,6 +9,7 @@
 #include <physics/Line2.h>
 #include <limits>
 #include <physics/Projection.h>
+#include <array>
 
 using namespace std;
 
@@ -29,6 +30,7 @@ namespace phantom{
         // then you should not use this, continue with writing a "not so naive"
         // method to solve this problem. -- Gerjo
         Box3 intersection(const Box3& other) const;
+        Vector3 intersection(const Line2& other) const;
 
         Vector3 getCenter(void) const;
 

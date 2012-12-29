@@ -140,4 +140,53 @@ namespace phantom{
             min(size.y, other.size.y)
         );
     }
+
+
+    /*           0
+     *          TOP
+     *     +-----------+
+     *   R |           | L
+     * 3 I |           | E 1
+     *   G |           | F
+     *   H |           | T
+     *   T |           |
+     *     +-----------+
+     *         BOTTOM
+     *            2
+     *
+     * We generate these line segments on the fly, which does leave room
+     * for optimization. Quite possibly we could export a box to a polygon
+     * and reuse that polygon within our math calculations. For now this is
+     * OK since it's just an experiment. -- Gerjo
+     *
+     */
+    Vector3 Box3::intersection(const Line2& other) const {
+        std::array<Line2, 4> edges;
+        edges[0].a   = origin;
+        edges[0].b.x = origin.x + size.x;
+        edges[0].b.x = origin.y;
+
+        edges[1].a   = edges[0].b;
+        edges[1].b.x = edges[0].b.x;
+        edges[1].b.y = origin.y + size.y;
+
+        edges[3].a   = origin;
+        edges[3].b.x = origin.x;
+        edges[3].b.y = origin.y + size.y;
+
+        edges[2].a  = edges[3].b;
+        edges[2].b  = edges[1].b;
+
+        Vector3 intersection;
+
+        for(const Line2& edge : edges) {
+            intersection = other.intersection(edge);
+
+            if(intersection.isFinite()) {
+                return intersection;
+            }
+        }
+
+        return intersection;
+    }
 }
