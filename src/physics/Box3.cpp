@@ -131,7 +131,7 @@ namespace phantom{
         return ss.str();
     }
 
-    Box3 Box3::getIntersectionNaive(const Box3& other) const {
+    Box3 Box3::intersection(const Box3& other) const {
         return Box3(
             max(origin.x, other.origin.x),
             max(origin.y, other.origin.y),
