@@ -2,6 +2,10 @@
 
 namespace phantom {
 
+    InertiaMover::InertiaMover(void) : _maxVelocity(3.0f, 3.0f, 0.0f) {
+
+    }
+
     void InertiaMover::addPulse(Pulse pulse) {
         _pulses.push_back(pulse);
     }
@@ -44,6 +48,19 @@ namespace phantom {
             return CONSUMED;
         }
 
+        if (message->isType("add-dominant-direction")) {
+            const Vector3& direction = message->getPayload<Vector3>();
+
+            _dominant.direction += direction;
+            _dominant.direction *= 0.5;
+            _dominant.direction.normalize();
+            _dominant.speed  = 40.0f; // tmp code. need not be here.
+            _dominant.weight = 1; // tmp code. need not be here.
+            //cout << _dominant.toString() << endl;
+
+            return CONSUMED;
+        }
+
         return Composite::handleMessage(message);
     }
 
@@ -60,7 +77,6 @@ namespace phantom {
         unsigned numPulses  = 0;
         float totalWeight   = 0;
         const float elapsed = static_cast<float> (time.getElapsed());
-
 
 
         for (auto it = _pulses.begin(); it != _pulses.end(); ++it) {
@@ -110,6 +126,8 @@ namespace phantom {
         }
 
         _velocity  = direction * speed;
+        _velocity.clamp(_maxVelocity);
+
         _speed     = speed;
         _direction = direction;
         _direction.normalize();

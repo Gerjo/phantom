@@ -12,7 +12,7 @@
 namespace phantom {
     class LIBEXPORT InertiaMover : public Composite  {
     public:
-        Pulse _dominant;
+        InertiaMover(void);
 
         void addPulse(Pulse pulse);
         void clear();
@@ -29,6 +29,9 @@ namespace phantom {
         Vector3 _direction;
         Vector3 _velocity;
         float _speed;
+        Pulse _dominant;
+
+        Vector3 _maxVelocity;
     };
 }
 
