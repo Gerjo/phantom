@@ -75,11 +75,11 @@ namespace phantom {
             float t  = (c.x * d.y - c.y * d.x) / dot;
 
             // No solution possible. 1
-            if(t > 0 && t < 1) {
+            if(t >= 0 && t <= 1) {
                 float u = (c.x * b.y - c.y * b.x) / dot;
 
                 // No solution possible. 2
-                if(u > 0 && u < 1) {
+                if(u >= 0 && u <= 1) {
                     return Vector3(
                         a.x + t * b.x,
                         a.y + t * b.y
