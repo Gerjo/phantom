@@ -164,7 +164,7 @@ namespace phantom{
         std::array<Line2, 4> edges;
         edges[0].a   = origin;
         edges[0].b.x = origin.x + size.x;
-        edges[0].b.x = origin.y;
+        edges[0].b.y = origin.y;
 
         edges[1].a   = edges[0].b;
         edges[1].b.x = edges[0].b.x;
