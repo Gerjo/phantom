@@ -7,6 +7,9 @@
 #include <core/Driver.h>
 #include <core/IUpdateable.h>
 
+#include <guicomponents/Button.h>
+#include <guicomponents/InputField.h>
+
 #include <input/Input.h>
 #include <input/MouseState.h>
 #include <input/KeyboardState.h>
