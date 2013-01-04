@@ -2,7 +2,7 @@
 #define IMAGECACHE_H_
 
 #include <string>
-#include <map>
+#include <hash_map>
 #include <png.h>
 #include <core/Renderer.h>
 
@@ -28,7 +28,7 @@ namespace phantom {
         }
 
         ~ImageCache() {
-            for(map<const string, ImageCacheItem>::iterator it = imageCache.begin(); it != imageCache.end(); ++it) {
+            for(hash_map<const string, ImageCacheItem>::iterator it = imageCache.begin(); it != imageCache.end(); ++it) {
                 ImageCacheItem *second = &(*it).second;
                 _renderer->removeTexture(second);
                 delete [] second->imageData;
@@ -62,12 +62,14 @@ namespace phantom {
         }
 
         ImageCacheItem *getFromCache(const string filename) {
-            if(imageCache.find(filename) == imageCache.end()) {
-                return 0;
+            ImageCacheItem *returnvalue = nullptr;
+            try {
+                returnvalue = &imageCache.at(filename);
+            } catch(out_of_range &e) {
+                Console::log("Is cached is not used for: " + filename + e.what());
+                returnvalue = nullptr;
             }
-            else {
-                return &imageCache.at(filename);
-            }
+            return returnvalue;
         }
 
         void removeFromCache(const string filename) {
@@ -90,7 +92,7 @@ namespace phantom {
             Console::mapCommand("sizeof(ImageCache)", function);
         };
 
-        map<const string, ImageCacheItem> imageCache;
+        hash_map<const string, ImageCacheItem> imageCache;
         Renderer *_renderer;
 
         static ImageCache *INSTANCE;
