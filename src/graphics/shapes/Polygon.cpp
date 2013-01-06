@@ -1,3 +1,4 @@
+#include <pch.h>
 #include "Polygon.h"
 
 namespace phantom{

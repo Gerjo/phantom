@@ -1,3 +1,4 @@
+#include <pch.h>
 #include "Box3.h"
 #include "Line2.h"
 namespace phantom{

@@ -1,8 +1,6 @@
+#include <pch.h>
 #include "Image.h"
 #include <graphics/ImageCache.h>
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <graphics/ImageLoader.h>
 
 namespace phantom

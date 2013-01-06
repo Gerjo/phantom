@@ -2,7 +2,6 @@
 #define NODE_H_
 
 #include <CompileConfig.h>
-#include <vector>
 
 namespace phantom {
     namespace tree {

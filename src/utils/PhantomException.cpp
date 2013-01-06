@@ -1,5 +1,5 @@
+#include <pch.h>
 #include "PhantomException.h"
-#include <iostream>
 
 namespace phantom{
     PhantomException::PhantomException(const string error):_error(error) {

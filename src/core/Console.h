@@ -1,10 +1,7 @@
 #ifndef CONSOLE_H
 #define	CONSOLE_H
 
-#include <deque>
-#include <map>
-#include <sstream>
-#include <functional>
+#include <pch.h>
 #include <core/Composite.h>
 #include <CompileConfig.h>
 

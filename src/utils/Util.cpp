@@ -1,5 +1,6 @@
+#include <pch.h>
+#include <phantom.h>
 #include "Util.h"
-#include <stdio.h>
 
 namespace phantom {
     double Util::frequency = 0;

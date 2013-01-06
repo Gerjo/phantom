@@ -2,7 +2,6 @@
 #define IMAGELOADER_H_
 
 #include <string>
-#include <map>
 #include "ImageCache.h"
 
 using namespace std;

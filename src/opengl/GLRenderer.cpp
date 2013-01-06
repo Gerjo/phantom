@@ -1,5 +1,5 @@
+#include <pch.h>
 #include "GLRenderer.h"
-#include <iostream>
 #include <core/Driver.h>
 #include <graphics/Graphics.h>
 #include <graphics/VerticeData.h>

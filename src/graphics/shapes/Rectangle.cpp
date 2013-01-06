@@ -1,3 +1,4 @@
+#include <pch.h>
 #include "Rectangle.h"
 #include "Line.h"
 

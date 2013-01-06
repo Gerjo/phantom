@@ -34,9 +34,4 @@
 #include <physics/Pulse.h>
 #include <physics/CollisionData.h>
 
-#ifndef WIN32
-    #include <sys/time.h>
-    #include <unistd.h>
-#endif
-
 #endif /* PHANTOM_H_ */

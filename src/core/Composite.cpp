@@ -1,5 +1,5 @@
+#include <pch.h>
 #include "Composite.h"
-#include <iostream>
 #include "PhantomGame.h"
 #include <utils/PhantomException.h>
 #include <core/Driver.h>

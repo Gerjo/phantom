@@ -1,3 +1,4 @@
+#include <pch.h>
 #include <limits>
 
 #include "Vector3.h"

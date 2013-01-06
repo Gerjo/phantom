@@ -1,6 +1,6 @@
+#include <pch.h>
 #include "Driver.h"
 
-#include <algorithm>
 #include <input/KeyboardListener.h>
 
 namespace phantom{

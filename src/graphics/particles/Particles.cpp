@@ -1,3 +1,4 @@
+#include <pch.h>
 #include "Particles.h"
 #include <graphics/ImageLoader.h>
 #include <graphics/ImageCache.h>

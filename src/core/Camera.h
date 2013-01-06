@@ -4,7 +4,6 @@
 #include <CompileConfig.h>
 #include <core/Composite.h>
 #include <physics/Vector3.h>
-#include <iostream>
 #include <physics/Vector3.h>
 
 #include "Entity.h"

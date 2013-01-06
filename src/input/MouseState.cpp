@@ -1,3 +1,4 @@
+#include <pch.h>
 #include "MouseState.h"
 
 namespace phantom {

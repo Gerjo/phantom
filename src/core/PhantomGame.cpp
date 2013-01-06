@@ -1,7 +1,6 @@
+#include <pch.h>
 #include "PhantomGame.h"
-#include <iostream>
-#include <fstream>
-#include <ctime>
+
 #include <phantom.h>
 #include <core/Driver.h>
 #include <graphics/ImageCache.h>
@@ -91,7 +90,7 @@ namespace phantom {
             std::this_thread::sleep_for(std::chrono::nanoseconds(sleepDuration));
 #else
             if(elapsed < 0.016)
-                Sleep(16 - (elapsed * 1000));
+                Sleep(static_cast<int>(16 - (elapsed * 1000)));
 #endif
             ++framecount;
             last = now;

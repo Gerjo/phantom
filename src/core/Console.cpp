@@ -1,8 +1,8 @@
+#include <pch.h>
 #include "Console.h"
 #include <input/KeyboardListener.h>
 #include <core/Driver.h>
 #include <null/NullDriver.h>
-#include <iostream>
 
 namespace phantom {
     Console* Console::INSTANCE = 0;
