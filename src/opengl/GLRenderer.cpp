@@ -37,7 +37,7 @@ namespace phantom {
 
         int i = 0;
         glutInit(&i, 0);
-        glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
+        glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
         glutInitWindowSize(static_cast<int>(screenSize.x), static_cast<int>(screenSize.y));
 
         if(!game->fullscreen) {
@@ -208,7 +208,11 @@ namespace phantom {
     void GLRenderer::drawParticles(Particles *particles, float xOffset, float yOffset) {
         const vector<Particle*>* p = particles->getParticles();
         glLoadIdentity();
-        translateShape(particles->getPosition().x + xOffset, particles->getPosition().y + yOffset, particles->getPosition().z);
+        Vector3 offset(
+            particles->getPosition().x + xOffset,
+            particles->getPosition().y + yOffset,
+            particles->getPosition().z
+            );
 
         if(particles->texture != nullptr) {
             glEnable(GL_TEXTURE_2D);
@@ -219,19 +223,19 @@ namespace phantom {
             glPushMatrix();
             applyColor(particle->color);
 
-            translateShape(particle->position.x, particle->position.y, particle->position.z);
-            glScalef(particle->scale.x, particle->scale.y, particle->scale.z);
+            Vector3 scale = particle->scale;
+            translateShape(particle->position.x + offset.x, particle->position.y + offset.y, particle->position.z + offset.z);
 
             // Should be added to VBO's
             glBegin(GL_QUADS);
             glTexCoord2d(0, 0);
-            glVertex3f(-1, -1, 0);
+            glVertex3f(-1 * scale.x, -1 * scale.y, 0);
             glTexCoord2d(1, 0);
-            glVertex3f(1, -1, 0);
+            glVertex3f(1 * scale.x, -1 * scale.y, 0);
             glTexCoord2d(1, 1);
-            glVertex3f(1, 1, 0);
+            glVertex3f(1 * scale.x, 1 * scale.y, 0);
             glTexCoord2d(0, 1);
-            glVertex3f(-1, 1, 0);
+            glVertex3f(-1 * scale.x, 1 * scale.y, 0);
             glEnd();
 
             glPopMatrix();
@@ -326,7 +330,7 @@ namespace phantom {
         drawLoop(_game->getComponents(), initialOffset);
 
         glutMainLoopEvent();
-        glutSwapBuffers();
+        //glutSwapBuffers();
         glFlush();
     }
 

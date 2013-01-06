@@ -60,7 +60,7 @@ namespace phantom {
         Vector3 _screenSize;
         Vector3 _worldSize;
 
-        float _fps;
+        double _fps;
 
         Driver* _driver;
         Console* _console;
