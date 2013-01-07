@@ -6,6 +6,7 @@
 #include <CompileConfig.h>
 #include <core/Camera.h>
 #include <core/Renderer.h>
+#include <audio/AudioEngine.h>
 #include <utils/PhantomException.h>
 #include <input/Input.h>
 #include <utils/Time.h>
@@ -33,10 +34,12 @@ namespace phantom{
 
         Input* getInput();
         Renderer *getRenderer();
+        AudioEngine *getAudio();
         FreeTypeLibrary *getFontLibrary();
 
     protected:
         Renderer* _renderer;
+        AudioEngine* _audioEngine;
         FreeTypeLibrary* _fontLibrary;
         Input* _input;
         vector<Camera*> _cameras;

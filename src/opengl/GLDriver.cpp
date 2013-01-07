@@ -5,6 +5,7 @@
 #include <opengl/GLCamera.h>
 #include <input/GLUTInput.h>
 #include <graphics/ImageCache.h>
+#include <openal/OpenALEngine.h>
 
 namespace phantom{
 
@@ -12,6 +13,7 @@ namespace phantom{
 
     GLDriver::GLDriver(PhantomGame* game) : Driver(game) {
         _renderer = new GLRenderer(game);
+        _audioEngine = new OpenALEngine();
         glutCloseFunc(closeListener);
         _input = new GLUTInput(game);
         _fontLibrary = new FreeTypeLibrary(_renderer);
@@ -23,6 +25,7 @@ namespace phantom{
         delete ImageCache::getInstance();
         delete _fontLibrary;
         delete _renderer;
+        delete _audioEngine;
     }
 
     void GLDriver::setWindowTitle(string title) {

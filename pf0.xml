@@ -61,7 +61,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>FREEGLUT_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;includeWin;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)includeWin;$(ProjectDir)src</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
@@ -70,7 +70,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freetype2410MT.lib;freeglut_static.lib;libpng15.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenAL32.lib;libvorbis.lib;freetype2410MT.lib;freeglut_static.lib;libpng15.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib\x86</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib; MSVCRT.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -78,6 +78,7 @@
       <Command>
         xcopy $(TargetPath) $(SolutionDir)dist /Y
         xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y
+        xcopy.exe "$(SolutionDir)phantom\lib\x86\*.dll" "$(SolutionDir)dist" /R /Y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -89,7 +90,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>FREEGLUT_STATIC;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>include;includeWin;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)includeWin;$(ProjectDir)src</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -97,13 +98,14 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>freetype2410MT.lib;freeglut_static.lib;libpng15.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenAL32.lib;libvorbis.lib;freetype2410MT.lib;freeglut_static.lib;libpng15.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>
         xcopy $(TargetPath) $(SolutionDir)dist /Y
         xcopy.exe "$(SolutionDir)phantom\src\shaders" "$(SolutionDir)dist\shaders" /E /I /H /R /Y
+        xcopy.exe "$(SolutionDir)phantom\lib\x86\*.dll" "$(SolutionDir)dist" /R /Y
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

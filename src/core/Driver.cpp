@@ -8,7 +8,7 @@ namespace phantom{
     Driver::Driver(PhantomGame* game) : _game(game) {
         _renderer = 0;
         _fontLibrary = 0;
-
+        _audioEngine = 0;
         _keyboard = new KeyboardListener(this, game);
     }
 
@@ -55,6 +55,10 @@ namespace phantom{
 
     Renderer *Driver::getRenderer() {
         return _renderer;
+    }
+
+    AudioEngine *Driver::getAudio() {
+        return _audioEngine;
     }
 
     FreeTypeLibrary *Driver::getFontLibrary() {
