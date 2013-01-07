@@ -4,14 +4,11 @@
 #include <CompileConfig.h>
 #include <core/Composite.h>
 #include <physics/Vector3.h>
-#include <physics/Vector3.h>
-
-#include "Entity.h"
 
 using namespace std;
 
 namespace phantom {
-    class LIBEXPORT Camera : public Entity {
+    class LIBEXPORT Camera : public Composite {
         friend class Driver;
     public:
         Camera(int id) :

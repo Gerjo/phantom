@@ -43,7 +43,7 @@ namespace phantom {
         Composite::update(time);
 
         NullDriver* driver = dynamic_cast<NullDriver*>(getDriver());
-        if(driver != nullptr || getDriver()->getActiveCameras()->size() == 0)
+        if(driver != nullptr || getDriver()->getActiveCameras()->size() == 0) // Check if the camera is not a NULL driver and if we have a camera we can use.
             return;
 
         Vector3 campos = getDriver()->getActiveCameras()->at(0)->getPosition();
