@@ -53,6 +53,14 @@
         <itemPath>src/graphics/ImageLoader.h</itemPath>
         <itemPath>src/graphics/VerticeData.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="guicomponents"
+                     displayName="guicomponents"
+                     projectFiles="true">
+        <itemPath>src/guicomponents/Button.cpp</itemPath>
+        <itemPath>src/guicomponents/Button.h</itemPath>
+        <itemPath>src/guicomponents/InputField.cpp</itemPath>
+        <itemPath>src/guicomponents/InputField.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="input" displayName="input" projectFiles="true">
         <itemPath>src/input/GLUTInput.cpp</itemPath>
         <itemPath>src/input/GLUTInput.h</itemPath>
@@ -121,9 +129,12 @@
         <itemPath>src/utils/Time.cpp</itemPath>
         <itemPath>src/utils/Time.h</itemPath>
         <itemPath>src/utils/Timer.h</itemPath>
+        <itemPath>src/utils/util.cpp</itemPath>
         <itemPath>src/utils/util.h</itemPath>
       </logicalFolder>
       <itemPath>src/CompileConfig.h</itemPath>
+      <itemPath>src/pch.cpp</itemPath>
+      <itemPath>src/pch.h</itemPath>
       <itemPath>src/phantom.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"

@@ -9,9 +9,11 @@
 #   include <chrono>
 #endif
 
+#include <CompileConfig.h>
+
 #ifdef WIN32
 #   include <Windows.h>
-#   include <CompileConfig.h>
+
 #else
 #   include <sys/time.h>
 #   include <unistd.h>
@@ -22,12 +24,7 @@ namespace phantom{
     public:
         static void     readfile(const char *filename, char **filecontent, unsigned int *length);
         static double   getTime();
-    private:
-#ifdef WIN32
-#ifndef C11AVAILABLE
-        static double   frequency;
-#endif
-#endif
+
     };
 }
 #endif

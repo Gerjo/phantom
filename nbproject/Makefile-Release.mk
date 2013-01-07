@@ -42,29 +42,33 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/core/PhantomGame.o \
 	${OBJECTDIR}/src/graphics/shapes/Line.o \
 	${OBJECTDIR}/src/core/GameState.o \
+	${OBJECTDIR}/src/pch.o \
 	${OBJECTDIR}/src/input/GLUTInput.o \
 	${OBJECTDIR}/src/graphics/shapes/Rectangle.o \
 	${OBJECTDIR}/src/physics/Mover.o \
 	${OBJECTDIR}/src/input/KeyboardState.o \
 	${OBJECTDIR}/src/layer/EntityLayer.o \
 	${OBJECTDIR}/src/opengl/GLRenderer.o \
+	${OBJECTDIR}/src/utils/util.o \
 	${OBJECTDIR}/src/physics/Line2.o \
 	${OBJECTDIR}/src/graphics/shapes/Arc.o \
 	${OBJECTDIR}/src/utils/tree/BinaryTree.o \
 	${OBJECTDIR}/src/utils/Time.o \
-	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/input/KeyboardListener.o \
+	${OBJECTDIR}/src/layer/Layer.o \
 	${OBJECTDIR}/src/opengl/GLCamera.o \
 	${OBJECTDIR}/src/graphics/shapes/Shape.o \
 	${OBJECTDIR}/src/graphics/ImageCache.o \
+	${OBJECTDIR}/src/guicomponents/InputField.o \
 	${OBJECTDIR}/src/graphics/shapes/Image.o \
 	${OBJECTDIR}/src/graphics/Graphics.o \
-	${OBJECTDIR}/src/graphics/FreeTypeLibrary.o \
 	${OBJECTDIR}/src/graphics/particles/Particles.o \
+	${OBJECTDIR}/src/graphics/FreeTypeLibrary.o \
 	${OBJECTDIR}/src/core/Driver.o \
+	${OBJECTDIR}/src/guicomponents/Button.o \
+	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/graphics/shapes/Text.o \
 	${OBJECTDIR}/src/graphics/ImageLoader.o \
-	${OBJECTDIR}/src/physics/Box3.o \
 	${OBJECTDIR}/src/input/MouseState.o \
 	${OBJECTDIR}/src/physics/Vector3.o \
 	${OBJECTDIR}/src/graphics/shapes/Polygon.o \
@@ -133,6 +137,11 @@ ${OBJECTDIR}/src/core/GameState.o: src/core/GameState.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/GameState.o src/core/GameState.cpp
 
+${OBJECTDIR}/src/pch.o: src/pch.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/pch.o src/pch.cpp
+
 ${OBJECTDIR}/src/input/GLUTInput.o: src/input/GLUTInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
@@ -163,6 +172,11 @@ ${OBJECTDIR}/src/opengl/GLRenderer.o: src/opengl/GLRenderer.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/opengl/GLRenderer.o src/opengl/GLRenderer.cpp
 
+${OBJECTDIR}/src/utils/util.o: src/utils/util.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/utils
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/util.o src/utils/util.cpp
+
 ${OBJECTDIR}/src/physics/Line2.o: src/physics/Line2.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/physics
 	${RM} $@.d
@@ -183,15 +197,15 @@ ${OBJECTDIR}/src/utils/Time.o: src/utils/Time.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/utils/Time.o src/utils/Time.cpp
 
-${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/layer
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
-
 ${OBJECTDIR}/src/input/KeyboardListener.o: src/input/KeyboardListener.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/input/KeyboardListener.o src/input/KeyboardListener.cpp
+
+${OBJECTDIR}/src/layer/Layer.o: src/layer/Layer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/layer
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/layer/Layer.o src/layer/Layer.cpp
 
 ${OBJECTDIR}/src/opengl/GLCamera.o: src/opengl/GLCamera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/opengl
@@ -208,6 +222,11 @@ ${OBJECTDIR}/src/graphics/ImageCache.o: src/graphics/ImageCache.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageCache.o src/graphics/ImageCache.cpp
 
+${OBJECTDIR}/src/guicomponents/InputField.o: src/guicomponents/InputField.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/guicomponents
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/guicomponents/InputField.o src/guicomponents/InputField.cpp
+
 ${OBJECTDIR}/src/graphics/shapes/Image.o: src/graphics/shapes/Image.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
 	${RM} $@.d
@@ -218,20 +237,30 @@ ${OBJECTDIR}/src/graphics/Graphics.o: src/graphics/Graphics.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/Graphics.o src/graphics/Graphics.cpp
 
-${OBJECTDIR}/src/graphics/FreeTypeLibrary.o: src/graphics/FreeTypeLibrary.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/graphics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o src/graphics/FreeTypeLibrary.cpp
-
 ${OBJECTDIR}/src/graphics/particles/Particles.o: src/graphics/particles/Particles.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/particles
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/particles/Particles.o src/graphics/particles/Particles.cpp
 
+${OBJECTDIR}/src/graphics/FreeTypeLibrary.o: src/graphics/FreeTypeLibrary.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/graphics
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/FreeTypeLibrary.o src/graphics/FreeTypeLibrary.cpp
+
 ${OBJECTDIR}/src/core/Driver.o: src/core/Driver.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/core
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/core/Driver.o src/core/Driver.cpp
+
+${OBJECTDIR}/src/guicomponents/Button.o: src/guicomponents/Button.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/guicomponents
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/guicomponents/Button.o src/guicomponents/Button.cpp
+
+${OBJECTDIR}/src/physics/Box3.o: src/physics/Box3.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/physics
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Box3.o src/physics/Box3.cpp
 
 ${OBJECTDIR}/src/graphics/shapes/Text.o: src/graphics/shapes/Text.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/graphics/shapes
@@ -242,11 +271,6 @@ ${OBJECTDIR}/src/graphics/ImageLoader.o: src/graphics/ImageLoader.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/graphics
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/graphics/ImageLoader.o src/graphics/ImageLoader.cpp
-
-${OBJECTDIR}/src/physics/Box3.o: src/physics/Box3.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/physics
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Iinclude -Isrc -std=c++11 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/physics/Box3.o src/physics/Box3.cpp
 
 ${OBJECTDIR}/src/input/MouseState.o: src/input/MouseState.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/input
