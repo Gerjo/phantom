@@ -6,7 +6,7 @@ namespace phantom {
     class SoundLoader
     {
     public:
-        static void *loadVorbis(char *file, SoundData *data);
+        static void loadVorbis(char *file, SoundData *data);
     };
 }
 

@@ -7,12 +7,13 @@
 #include <vorbis/vorbisfile.h>
 
 namespace phantom {
-    void *SoundLoader::loadVorbis(char *filename, SoundData *data) {
+    void SoundLoader::loadVorbis(char *filename, SoundData *data) {
         const int   BUFFSIZE = 2048;
         int         bstream;
         char        tempArray[BUFFSIZE];
         long        bytes = 0;
         FILE        *file;
+
 #ifndef WIN32
         fopen(filename, "rb");
 #else
