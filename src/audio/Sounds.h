@@ -4,7 +4,7 @@
 #include <core/Composite.h>
 
 namespace phantom {
-
+    class SoundData;
     class LIBEXPORT Sounds : public Composite
     {
     public:
@@ -18,7 +18,7 @@ namespace phantom {
         bool    isCached(const string &filename);
         void    insertIntoCache(const string &filename);
 
-        std::map<const std::string, int*> _soundMap;
+        std::map<const std::string, SoundData*> _soundMap;
     };
 
 }

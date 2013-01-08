@@ -12,11 +12,12 @@ namespace phantom {
         ~OpenALEngine(void);
 
         virtual void createSound(SoundData *data);
+        virtual void destroySound(SoundData *data);
 
-        virtual bool playSound(SoundData *data) { return false; }
-        virtual bool playMusic(SoundData *data) { return false; }
-        virtual bool stopSound(SoundData *data) { return false; }
-        virtual bool stopMusic(SoundData *data) { return false; }
+        virtual void playSound(SoundData *data);
+        virtual void playMusic(SoundData *data);
+        virtual void stopSound(SoundData *data);
+        virtual void stopMusic(SoundData *data);
 
     private:
         ALCdevice   *_device;

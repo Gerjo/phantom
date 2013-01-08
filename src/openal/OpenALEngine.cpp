@@ -30,11 +30,27 @@ namespace phantom {
         alGenBuffers(1, &data->bufferID);
 
         alBufferData(data->bufferID, data->format, &data->bufferData[0], static_cast<ALsizei>(data->bufferData.size()), data->freq);
-
         alSourcei(data->sourceID, AL_BUFFER, data->bufferID);
-        alSourcePlay(data->sourceID);
+    }
 
+    void OpenALEngine::destroySound(SoundData *data) {
         alDeleteBuffers(1, &data->bufferID);
         alDeleteSources(1, &data->sourceID);
+    }
+
+    void OpenALEngine::playSound(SoundData *data) {
+        alSourcePlay(data->sourceID);
+    }
+
+    void OpenALEngine::stopSound(SoundData *data) {
+        alSourceStop(data->sourceID);
+    }
+
+    void OpenALEngine::playMusic(SoundData *data) {
+        playSound(data);
+    }
+
+    void OpenALEngine::stopMusic(SoundData *data) {
+        stopSound(data);
     }
 }

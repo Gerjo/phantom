@@ -9,11 +9,12 @@ namespace phantom {
     {
     public:
         virtual void createSound(SoundData *data) = 0;
+        virtual void destroySound(SoundData *data) = 0;
 
-        virtual bool playSound(SoundData *data) = 0;
-        virtual bool playMusic(SoundData *data) = 0;
-        virtual bool stopSound(SoundData *data) = 0;
-        virtual bool stopMusic(SoundData *data) = 0;
+        virtual void playSound(SoundData *data) = 0;
+        virtual void playMusic(SoundData *data) = 0;
+        virtual void stopSound(SoundData *data) = 0;
+        virtual void stopMusic(SoundData *data) = 0;
     };
 }
 
