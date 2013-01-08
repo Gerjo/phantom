@@ -1,10 +1,12 @@
 #ifndef IMAGECACHE_H_
 #define IMAGECACHE_H_
 
+
+#include <map>
 #include <string>
-#include <hash_map>
 #include <png.h>
 #include <core/Renderer.h>
+#include <stdexcept>
 
 using namespace std;
 namespace phantom {
@@ -28,7 +30,7 @@ namespace phantom {
         }
 
         ~ImageCache() {
-            for(hash_map<const string, ImageCacheItem>::iterator it = imageCache.begin(); it != imageCache.end(); ++it) {
+            for(map<const string, ImageCacheItem>::iterator it = imageCache.begin(); it != imageCache.end(); ++it) {
                 ImageCacheItem *second = &(*it).second;
                 _renderer->removeTexture(second);
                 delete [] second->imageData;
@@ -84,7 +86,7 @@ namespace phantom {
 
     private:
         ImageCache() : _renderer(nullptr) {
-            std::function<void(string args)> function = [this] (string args) { 
+            std::function<void(string args)> function = [this] (string args) {
                 std::stringstream str;
                 str << "Size of image cache: " << this->imageCache.size();
                 Console::log(str.str());
@@ -92,7 +94,7 @@ namespace phantom {
             Console::mapCommand("sizeof(ImageCache)", function);
         };
 
-        hash_map<const string, ImageCacheItem> imageCache;
+        map<const string, ImageCacheItem> imageCache;
         Renderer *_renderer;
 
         static ImageCache *INSTANCE;

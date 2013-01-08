@@ -1,9 +1,9 @@
 #include <pch.h>
 #include <phantom.h>
-#include "Util.h"
+#include "util.h"
 
 namespace phantom {
-    double Util::frequency = 0;
+
 
     void Util::readfile(const char *filename, char **filecontent, unsigned int *length) {
         FILE *fp;
@@ -43,10 +43,10 @@ namespace phantom {
 
         total = tv.tv_sec;
         total += tv.tv_usec / 1000000.0;
-        
+
         return total;
 #else
-        return timeGetTime() * 0.001; 
+        return timeGetTime() * 0.001;
 
         /*SYSTEMTIME *lpSystemTime = new SYSTEMTIME();
         GetLocalTime(lpSystemTime);
