@@ -5,6 +5,7 @@
 #include <vorbis/codec.h>
 #include <vorbis/vorbisenc.h>
 #include <vorbis/vorbisfile.h>
+#include <utils/PhantomException.h>
 
 namespace phantom {
     void SoundLoader::loadVorbis(const char *filename, SoundData *data) {
@@ -12,18 +13,13 @@ namespace phantom {
         int         bstream;
         char        tempArray[BUFFSIZE];
         long        bytes = 0;
-        FILE        *file;
-
-#ifndef WIN32
-        fopen(filename, "rb");
-#else
-        fopen_s(&file, filename, "rb");
-#endif
 
         vorbis_info *info;
         OggVorbis_File vorbisFile;
 
-        ov_open(file, &vorbisFile, nullptr, 0);
+        if(ov_fopen(filename, &vorbisFile) != 0) {
+            throw PhantomException(string("Opening ogg file for decoding failed. ").append(filename));
+        }
 
         info = ov_info(&vorbisFile, -1);
         data->channels  = info->channels;

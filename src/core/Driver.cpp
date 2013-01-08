@@ -9,10 +9,12 @@ namespace phantom{
         _renderer = 0;
         _fontLibrary = 0;
         _audioEngine = 0;
+        _audio = new Sounds();
         _keyboard = new KeyboardListener(this, game);
     }
 
     Driver::~Driver(){
+        delete _audio;
         delete _keyboard;
     }
 
@@ -57,7 +59,11 @@ namespace phantom{
         return _renderer;
     }
 
-    AudioEngine *Driver::getAudio() {
+    Sounds *Driver::getAudio() {
+        return _audio;
+    }
+
+    AudioEngine *Driver::getAudioEngine() {
         return _audioEngine;
     }
 

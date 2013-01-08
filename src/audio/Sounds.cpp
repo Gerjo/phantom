@@ -22,7 +22,7 @@ namespace phantom {
             insertIntoCache(filename);
         }
 
-        getDriver()->getAudio()->playSound(_soundMap.at(filename));
+        getDriver()->getAudioEngine()->playSound(_soundMap.at(filename));
 
         return 0;
     }
@@ -47,6 +47,6 @@ namespace phantom {
 
         _soundMap.insert(pair<const string, SoundData*>(filename, data));
 
-        getDriver()->getAudio()->createSound(data);
+        getDriver()->getAudioEngine()->createSound(data);
     }
 }

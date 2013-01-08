@@ -1,18 +1,17 @@
 #ifndef SOUNDDATA_H_
 #define SOUNDDATA_H_
 
-#include <AL/al.h>
 #include <vector>
 
 namespace phantom {
     class SoundData
     {
     public:
-        ALint state;
-        ALuint bufferID;
-        ALuint sourceID;
-        ALenum format;
-        ALsizei freq;
+        int state;
+        unsigned int bufferID;
+        unsigned int sourceID;
+        int format;
+        int freq;
 
         int channels;
         int bitsPerSample;
