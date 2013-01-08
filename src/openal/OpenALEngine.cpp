@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "OpenALEngine.h"
-
 #include <utils/PhantomException.h>
 
 namespace phantom {
-    OpenALEngine::OpenALEngine(void) {
+    OpenALEngine::OpenALEngine(PhantomGame *game) : AudioEngine(game) {
         _device = alcOpenDevice(nullptr);
         if(!_device) throw PhantomException("Failed to create OpenAL device.");
 
@@ -39,6 +38,7 @@ namespace phantom {
     }
 
     void OpenALEngine::playSound(SoundData *data) {
+        alSourcef(data->sourceID, AL_GAIN, _game->soundvol);
         alSourcePlay(data->sourceID);
     }
 
@@ -47,8 +47,9 @@ namespace phantom {
     }
 
     void OpenALEngine::playMusic(SoundData *data) {
+        alSourcef(data->sourceID, AL_GAIN, _game->musicvol);
         alSourcei(data->sourceID, AL_LOOPING, AL_TRUE);
-        playSound(data);
+        alSourcePlay(data->sourceID);
     }
 
     void OpenALEngine::stopMusic(SoundData *data) {

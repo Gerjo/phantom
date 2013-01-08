@@ -13,7 +13,7 @@ namespace phantom{
 
     GLDriver::GLDriver(PhantomGame* game) : Driver(game) {
         _renderer = new GLRenderer(game);
-        _audioEngine = new OpenALEngine();
+        _audioEngine = new OpenALEngine(game);
         glutCloseFunc(closeListener);
         _input = new GLUTInput(game);
         _fontLibrary = new FreeTypeLibrary(_renderer);

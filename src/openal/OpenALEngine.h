@@ -8,7 +8,7 @@ namespace phantom {
     class OpenALEngine : public AudioEngine
     {
     public:
-        OpenALEngine(void);
+        OpenALEngine(PhantomGame *game);
         ~OpenALEngine(void);
 
         virtual void createSound(SoundData *data);
