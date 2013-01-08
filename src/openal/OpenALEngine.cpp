@@ -47,6 +47,7 @@ namespace phantom {
     }
 
     void OpenALEngine::playMusic(SoundData *data) {
+        alSourcei(data->sourceID, AL_LOOPING, AL_TRUE);
         playSound(data);
     }
 

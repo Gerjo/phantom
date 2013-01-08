@@ -11,8 +11,11 @@ namespace phantom {
         Sounds(void);
         ~Sounds(void);
 
-        int     playSounds(const string &filename);
-        bool    stopSounds(int id);
+        int     playSound(const string &filename);
+        bool    stopSound(int id);
+
+        int     playMusic(const string &filename);
+        bool    stopMusic(const string &filename);
 
     private:
         bool    isCached(const string &filename);

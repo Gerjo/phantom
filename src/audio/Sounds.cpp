@@ -10,14 +10,14 @@ namespace phantom {
     }
 
     Sounds::~Sounds(void) {
-        for(auto sound = _soundMap.begin(); sound != _soundMap.end(); ) {
+        for(auto sound = _soundMap.begin(); sound != _soundMap.end(); ++sound) {
             delete sound->second;
             sound->second = nullptr;
         }
         _soundMap.clear();
     }
 
-    int Sounds::playSounds(const string &filename) {
+    int Sounds::playSound(const string &filename) {
         if(!isCached(filename)) {
             insertIntoCache(filename);
         }
@@ -27,8 +27,24 @@ namespace phantom {
         return 0;
     }
 
-    bool Sounds::stopSounds(int id) {
+    bool Sounds::stopSound(int id) {
         throw PhantomException("The lazy bastard hasn't implemented this OH NOOOES");
+    }
+
+    int Sounds::playMusic(const string &filename) {
+        if(!isCached(filename)) {
+            insertIntoCache(filename);
+        }
+
+        getDriver()->getAudioEngine()->playMusic(_soundMap.at(filename));
+
+        return 0;
+    }
+
+    bool Sounds::stopMusic(const string &filename) {
+        getDriver()->getAudioEngine()->stopMusic(_soundMap.at(filename));
+
+        return true;
     }
 
     bool Sounds::isCached(const string &filename) {
