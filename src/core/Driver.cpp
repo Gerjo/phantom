@@ -25,6 +25,10 @@ namespace phantom{
         _keyboard->update();
         _input->getKeyboardState()->changes()->clear();
         _input->getKeyboardState()->changesUp()->clear();
+
+        if(!_activeCameras.empty()) {
+            _audioEngine->setPosition(_activeCameras[0]->getPosition());
+        }
     }
 
     void Driver::onRender() {

@@ -2,6 +2,7 @@
 #define SOUNDDATA_H_
 
 #include <vector>
+#include <deque>
 
 namespace phantom {
     class SoundData
@@ -9,7 +10,7 @@ namespace phantom {
     public:
         int state;
         unsigned int bufferID;
-        unsigned int sourceID;
+        std::deque<unsigned int> sourceID;
         int format;
         int freq;
 

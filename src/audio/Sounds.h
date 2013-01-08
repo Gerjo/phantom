@@ -11,7 +11,7 @@ namespace phantom {
         Sounds(void);
         ~Sounds(void);
 
-        int     playSound(const string &filename);
+        int     playSound(const string &filename, const Vector3 &position);
         bool    stopSound(int id);
 
         int     playMusic(const string &filename);

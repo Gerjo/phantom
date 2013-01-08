@@ -14,14 +14,18 @@ namespace phantom {
         virtual void createSound(SoundData *data);
         virtual void destroySound(SoundData *data);
 
-        virtual void playSound(SoundData *data);
+        virtual unsigned int playSound(SoundData *data, const Vector3 &position);
         virtual void playMusic(SoundData *data);
-        virtual void stopSound(SoundData *data);
+        virtual void stopSound(unsigned int id);
         virtual void stopMusic(SoundData *data);
+
+        virtual void setPosition(const Vector3& position);
 
     private:
         ALCdevice   *_device;
         ALCcontext  *_context;
+
+        unsigned int *createSource(SoundData *data);
     };
 }
 

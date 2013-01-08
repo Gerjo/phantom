@@ -16,10 +16,12 @@ namespace phantom {
         virtual void createSound(SoundData *data) = 0;
         virtual void destroySound(SoundData *data) = 0;
 
-        virtual void playSound(SoundData *data) = 0;
+        virtual unsigned int playSound(SoundData *data, const Vector3 &position) = 0;
         virtual void playMusic(SoundData *data) = 0;
-        virtual void stopSound(SoundData *data) = 0;
+        virtual void stopSound(unsigned int id) = 0;
         virtual void stopMusic(SoundData *data) = 0;
+
+        virtual void setPosition(const Vector3& position) = 0;
 
     protected:
         PhantomGame *_game;

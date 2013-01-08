@@ -17,12 +17,12 @@ namespace phantom {
         _soundMap.clear();
     }
 
-    int Sounds::playSound(const string &filename) {
+    int Sounds::playSound(const string &filename, const Vector3 &position) {
         if(!isCached(filename)) {
             insertIntoCache(filename);
         }
 
-        getDriver()->getAudioEngine()->playSound(_soundMap.at(filename));
+        getDriver()->getAudioEngine()->playSound(_soundMap.at(filename), position);
 
         return 0;
     }
