@@ -1,21 +1,24 @@
 #ifndef AL_AL_H
 #define AL_AL_H
 
-
-
 #if defined(__cplusplus)
 extern "C" {
 #endif
 
-#if defined(_WIN32) && !defined(_XBOX)
- /* _OPENAL32LIB is deprecated */
- #if defined(AL_BUILD_LIBRARY) || defined (_OPENAL32LIB)
+#if defined(AL_LIBTYPE_STATIC)
+ #define AL_API
+#elif defined(_WIN32) && !defined(_XBOX)
+ #if defined(AL_BUILD_LIBRARY)
   #define AL_API __declspec(dllexport)
  #else
   #define AL_API __declspec(dllimport)
  #endif
 #else
- #define AL_API extern
+ #if defined(AL_BUILD_LIBRARY) && defined(HAVE_GCC_VISIBILITY)
+  #define AL_API __attribute__((visibility("protected")))
+ #else
+  #define AL_API extern
+ #endif
 #endif
 
 #if defined(_WIN32)
@@ -24,15 +27,21 @@ extern "C" {
  #define AL_APIENTRY
 #endif
 
-#if TARGET_OS_MAC
+#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
  #pragma export on
 #endif
 
-/* The OPENAL, ALAPI, and ALAPIENTRY macros are deprecated, but are included for applications porting code
-   from AL 1.0 */
+/*
+ * The OPENAL, ALAPI, ALAPIENTRY, AL_INVALID, AL_ILLEGAL_ENUM, and
+ * AL_ILLEGAL_COMMAND macros are deprecated, but are included for
+ * applications porting code from AL 1.0
+ */
 #define OPENAL
 #define ALAPI AL_API
 #define ALAPIENTRY AL_APIENTRY
+#define AL_INVALID                                (-1)
+#define AL_ILLEGAL_ENUM                           AL_INVALID_ENUM
+#define AL_ILLEGAL_COMMAND                        AL_INVALID_OPERATION
 
 #define AL_VERSION_1_0
 #define AL_VERSION_1_1
@@ -45,7 +54,7 @@ typedef char ALboolean;
 typedef char ALchar;
 
 /** signed 8-bit 2's complement integer */
-typedef char ALbyte;
+typedef signed char ALbyte;
 
 /** unsigned 8-bit integer */
 typedef unsigned char ALubyte;
@@ -80,9 +89,7 @@ typedef void ALvoid;
 
 /* Enumerant values begin at column 50. No tabs. */
 
-/* bad value */
-#define AL_INVALID                                -1
-
+/* "no distance model" or "no buffer" */
 #define AL_NONE                                   0
 
 /* Boolean False. */
@@ -111,8 +118,7 @@ typedef void ALvoid;
 #define AL_CONE_OUTER_ANGLE                       0x1002
 
 /**
- * Specify the pitch to be applied, either at source,
- *  or on mixer results, at listener.
+ * Specify the pitch to be applied at source.
  * Range:   [0.5-2.0]
  * Default: 1.0
  */
@@ -188,14 +194,6 @@ typedef void ALvoid;
  * at/up 
  */
 #define AL_ORIENTATION                            0x100F
-
-/**
- * Specify the channel mask. (Creative)
- * Type: ALuint
- * Range: [0 - 255]
- */
-#define AL_CHANNEL_MASK                           0x3000
-
 
 /**
  * Source state information.
@@ -305,7 +303,6 @@ typedef void ALvoid;
 /** 
  * Invalid parameter passed to AL call.
  */
-#define AL_ILLEGAL_ENUM                           0xA002
 #define AL_INVALID_ENUM                           0xA002
 
 /** 
@@ -316,7 +313,6 @@ typedef void ALvoid;
 /** 
  * Illegal call.
  */
-#define AL_ILLEGAL_COMMAND                        0xA004
 #define AL_INVALID_OPERATION                      0xA004
 
   
@@ -363,9 +359,6 @@ typedef void ALvoid;
 #define AL_LINEAR_DISTANCE_CLAMPED                0xD004
 #define AL_EXPONENT_DISTANCE                      0xD005
 #define AL_EXPONENT_DISTANCE_CLAMPED              0xD006
-
-
-#if !defined(AL_NO_PROTOTYPES)
 
 /*
  * Renderer State management
@@ -643,8 +636,9 @@ AL_API void AL_APIENTRY alSpeedOfSound( ALfloat value );
 
 AL_API void AL_APIENTRY alDistanceModel( ALenum distanceModel );
 
-#else /* AL_NO_PROTOTYPES */
-
+/*
+ * Pointer-to-function types, useful for dynamically getting AL entry points.
+ */
 typedef void           (AL_APIENTRY *LPALENABLE)( ALenum capability );
 typedef void           (AL_APIENTRY *LPALDISABLE)( ALenum capability ); 
 typedef ALboolean      (AL_APIENTRY *LPALISENABLED)( ALenum capability ); 
@@ -719,9 +713,7 @@ typedef void           (AL_APIENTRY *LPALDOPPLERVELOCITY)( ALfloat value );
 typedef void           (AL_APIENTRY *LPALSPEEDOFSOUND)( ALfloat value );
 typedef void           (AL_APIENTRY *LPALDISTANCEMODEL)( ALenum distanceModel );
 
-#endif /* AL_NO_PROTOTYPES */
-
-#if TARGET_OS_MAC
+#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
  #pragma export off
 #endif
 
