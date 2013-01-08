@@ -17,7 +17,7 @@ namespace phantom {
         int channels;
         int bitsPerSample;
 
-        std::vector<char> bufferData;
+        std::vector<char> *bufferData;
 
         SoundData(void);
         ~SoundData(void);

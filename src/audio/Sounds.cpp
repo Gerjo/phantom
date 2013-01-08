@@ -44,6 +44,12 @@ namespace phantom {
     bool Sounds::stopMusic(const string &filename) {
         getDriver()->getAudioEngine()->stopMusic(_soundMap.at(filename));
 
+        // We don't want to have the entire music file cached the whole time.
+        getDriver()->getAudioEngine()->destroySound(_soundMap.at(filename));
+
+        delete _soundMap.at(filename);
+        _soundMap.erase(_soundMap.find(filename));
+
         return true;
     }
 

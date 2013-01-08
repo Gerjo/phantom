@@ -24,11 +24,14 @@ namespace phantom {
         else if(data->channels == 2) {
             data->format = data->bitsPerSample == 8 ? AL_FORMAT_STEREO8 : AL_FORMAT_STEREO16;
         }
-
         
         alGenBuffers(1, &data->bufferID);
 
-        alBufferData(data->bufferID, data->format, &data->bufferData[0], static_cast<ALsizei>(data->bufferData.size()), data->freq);
+        alBufferData(data->bufferID, data->format, &data->bufferData->at(0), static_cast<ALsizei>(data->bufferData->size()), data->freq);
+
+        // We don't need the bufferData anymore.
+        delete data->bufferData;
+        data->bufferData = nullptr;
     }
 
     unsigned int *OpenALEngine::createSource(SoundData *data) {

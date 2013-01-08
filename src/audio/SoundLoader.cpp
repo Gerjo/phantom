@@ -28,7 +28,7 @@ namespace phantom {
         do
         {
             bytes = ov_read(&vorbisFile, tempArray, BUFFSIZE, 0, 2, 1, &bstream);
-            data->bufferData.insert(data->bufferData.end(), tempArray, tempArray + bytes);
+            data->bufferData->insert(data->bufferData->end(), tempArray, tempArray + bytes);
         } while (bytes > 0);
 
         ov_clear(&vorbisFile);
