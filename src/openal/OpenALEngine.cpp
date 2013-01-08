@@ -10,6 +10,14 @@ namespace phantom {
         _context = alcCreateContext(_device, NULL);
         alcMakeContextCurrent(_context);
         if(!_context) throw PhantomException("Failed to create OpenAL context.");
+
+        alDistanceModel(AL_INVERSE_DISTANCE);
+        ALfloat lvelocity[] = { 0.f, 0.f, 0.f };
+        ALfloat lorientation[] = { 0.f, 0.f, -1.f, 0.f, 1.f, 0.f };
+ 
+        alListenerfv(AL_VELOCITY, lvelocity);
+        alListenerfv(AL_ORIENTATION, lorientation);
+    
     }
 
     OpenALEngine::~OpenALEngine(void) {
@@ -54,8 +62,10 @@ namespace phantom {
     unsigned int OpenALEngine::playSound(SoundData *data, const Vector3 &position) {
         const unsigned int &sourceID = *createSource(data);
         alSourcef(sourceID, AL_GAIN, _game->soundvol);
-        alSource3f(sourceID, AL_MAX_DISTANCE, 3000.0f, 3000.0f, 3000.0f);
         alSource3f(sourceID, AL_POSITION, position.x, position.y, position.z);
+        alSourcef(sourceID, AL_ROLLOFF_FACTOR, 0.75f);
+        ALfloat svelocity[] = { 0.0f, 0.0f, 0.0f };
+        alSourcefv(sourceID, AL_VELOCITY, svelocity);
         alSourcePlay(sourceID);
 
         return sourceID;
