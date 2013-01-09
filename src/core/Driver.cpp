@@ -27,7 +27,8 @@ namespace phantom{
         _input->getKeyboardState()->changesUp()->clear();
 
         if(!_activeCameras.empty()) {
-            _audioEngine->setPosition(_activeCameras[0]->getPosition());
+            Camera *cam = _activeCameras[0];
+            _audioEngine->setPosition(cam->getPosition() + cam->getViewPort() * 0.5);
         }
     }
 

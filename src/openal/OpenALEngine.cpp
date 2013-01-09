@@ -3,23 +3,25 @@
 #include <utils/PhantomException.h>
 
 namespace phantom {
-    OpenALEngine::OpenALEngine(PhantomGame *game) : AudioEngine(game) {
+
+    OpenALEngine::OpenALEngine(PhantomGame *game) : AudioEngine(game), _device(nullptr), _context(nullptr) {
         _device = alcOpenDevice(nullptr);
-        if(!_device) throw PhantomException("Failed to create OpenAL device.");
+        if(_device) {
+            _context = alcCreateContext(_device, NULL);
+            alcMakeContextCurrent(_context);
+        }
+        if(!_context)
+            throw PhantomException("Failed to create OpenAL context.");
 
-        _context = alcCreateContext(_device, NULL);
-        alcMakeContextCurrent(_context);
-        if(!_context) throw PhantomException("Failed to create OpenAL context.");
-
+        ALfloat lorientation[] = { 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f }; // First 3 are the at vector and last 3 are the up vector
         ALfloat lvelocity[] = { 0.0f, 0.0f, 0.0f };
-        ALfloat lorientation[] = { 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f };
- 
-        alListenerfv(AL_VELOCITY, lvelocity);
+        alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
         alListenerfv(AL_ORIENTATION, lorientation);
-        alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
+        alListenerf(AL_GAIN, 1.0f); // Master volume
     }
 
     OpenALEngine::~OpenALEngine(void) {
+        alcMakeContextCurrent(nullptr);
         alcDestroyContext(_context);
         alcCloseDevice(_device);
     }
@@ -31,7 +33,7 @@ namespace phantom {
         else if(data->channels == 2) {
             data->format = data->bitsPerSample == 8 ? AL_FORMAT_STEREO8 : AL_FORMAT_STEREO16;
         }
-        
+
         alGenBuffers(1, &data->bufferID);
 
         alBufferData(data->bufferID, data->format, &data->bufferData->at(0), static_cast<ALsizei>(data->bufferData->size()), data->freq);
@@ -60,14 +62,11 @@ namespace phantom {
 
     unsigned int OpenALEngine::playSound(SoundData *data, const Vector3 &position) {
         const unsigned int &sourceID = *createSource(data);
+
         alSourcef(sourceID, AL_GAIN, _game->soundvol);
-        alSource3f(sourceID, AL_DIRECTION, 0.0f, 0.0f, 1.0f);
         alSource3f(sourceID, AL_POSITION, position.x, position.y, position.z);
-        alSourcef(sourceID, AL_REFERENCE_DISTANCE, 2000.0f);
-        alSourcef(sourceID, AL_ROLLOFF_FACTOR, 0.75f);
-        alSourcef(sourceID, AL_MAX_DISTANCE, 3000.0f);
-        ALfloat svelocity[] = { 0.0f, 0.0f, 0.0f };
-        alSourcefv(sourceID, AL_VELOCITY, svelocity);
+        alSourcef(sourceID, AL_REFERENCE_DISTANCE, _game->getViewPort().x);
+
         alSourcePlay(sourceID);
 
         return sourceID;
