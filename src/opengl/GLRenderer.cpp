@@ -292,7 +292,7 @@ namespace phantom {
 
                 Particles *particles = nullptr;
                 if((particles = dynamic_cast<Particles*>(*compIt)) != nullptr) {
-                    drawParticles(particles, offsetRecalculated.x, offsetRecalculated.y);
+                    drawParticles(particles, 0.0f, 0.0f);
                 }
                 else {
                     drawShapes((*compIt), cameraBox, offsetRecalculated.x, offsetRecalculated.y);
