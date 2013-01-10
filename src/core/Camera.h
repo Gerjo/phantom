@@ -11,62 +11,22 @@ namespace phantom {
     class LIBEXPORT Camera : public Composite {
         friend class Driver;
     public:
-        Camera(int id) :
-            _cameraID(id),
-            _isActive(false),
-            _rotation(0.0f, 0.0f, 0.0f),
-            _viewPort(0.0f, 0.0f, 0.0f),
-            _screenSize(0.0f, 0.0f, 0.0f)
-        {
+        Camera(int id);
+        virtual ~Camera();
 
-        }
-
-        virtual ~Camera() {
-        }
-
-        int getCameraID() {
-            return _cameraID;
-        }
-
-        bool isActive() {
-            return _isActive;
-        }
-
-        Vector3 getWorldCoordinates(Vector3 viewCoordinate) {
-            return _position + viewCoordinate;
-        }
-
-        Vector3& getScreenSize() {
-            return _screenSize;
-        }
-
-        Vector3& getViewPort() {
-            return _viewPort;
-        }
-
-        Vector3& getRotation() {
-            return _rotation;
-        }
-
-        virtual void setScreenSize(Vector3 s) {
-            _screenSize = s;
-        }
-
-        virtual void setViewPort(Vector3 vp) {
-            _viewPort = vp;
-        }
-
-        virtual void setRotation(Vector3 rot) {
-            _rotation = rot;
-        }
-
-        virtual void setParams() {
-        }
+        int getCameraID();
+        bool isActive();
+        Vector3 getWorldCoordinates(Vector3 viewCoordinate);
+        Vector3& getScreenSize();
+        Vector3& getViewPort();
+        Vector3& getRotation();
+        virtual void setScreenSize(Vector3 s);
+        virtual void setViewPort(Vector3 vp);
+        virtual void setRotation(Vector3 rot);
+        virtual void setParams();
 
     private:
-        virtual void setActive(bool value) {
-            _isActive = value;
-        }
+        virtual void setActive(bool value);
 
         bool _isActive;
         int _cameraID;

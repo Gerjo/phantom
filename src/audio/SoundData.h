@@ -17,10 +17,14 @@ namespace phantom {
         int channels;
         int bitsPerSample;
 
-        std::vector<char> *bufferData;
+        std::vector<char> *bufferData; // The buffer containing the audio sample in RAW format.
 
-        SoundData(void);
-        ~SoundData(void);
+        SoundData();
+        ~SoundData();
+
+    private:
+        // Copying is not allowed since the buffer won't be recreated.
+        SoundData(const SoundData& data) { }
     };
 }
 #endif // !SOUNDDATA_H_
