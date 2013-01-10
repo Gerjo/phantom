@@ -6,18 +6,18 @@
 
 namespace phantom {
     Particles::Particles(unsigned count, string texturename, Color color, float lifetime, float totalLifetime, float speed, Vector3 scale, Vector3 direction, float density, unsigned randomness) {
-        this->count = count;
-        this->scale = scale;
-        this->direction = direction;
-        this->density = density;
-        this->lifetime = lifetime;
-        this->currentLifetime = 0;
-        this->totalLifetime = totalLifetime;
-        this->texture = nullptr;
-        this->color = color;
-        this->speed = speed;
-        this->randomness = randomness + 1;
-        this->randomnessHalf = this->randomness / 2.0f;
+        this->count             = count;
+        this->scale             = scale;
+        this->direction         = direction;
+        this->density           = density;
+        this->lifetime          = lifetime;
+        this->currentLifetime   = 0;
+        this->totalLifetime     = totalLifetime;
+        this->texture           = nullptr;
+        this->color             = color;
+        this->speed             = speed;
+        this->randomness        = randomness + 1;
+        this->randomnessHalf    = this->randomness / 2.0f;
 
         ImageCache *imagecache = ImageCache::getInstance();
 
@@ -54,9 +54,9 @@ namespace phantom {
             random.x = random.x / 100.0f;
             random.y = random.y / 100.0f;
             random.z = random.z / 100.0f;
-            (*particle)->acceleration = this->direction + random;
-            (*particle)->velocity += (*particle)->acceleration * speed * time.getElapsed();
-            (*particle)->position += (*particle)->velocity;
+            (*particle)->acceleration   = this->direction + random;
+            (*particle)->velocity       += (*particle)->acceleration * speed * time.getElapsed();
+            (*particle)->position       += (*particle)->velocity;
 
             ++particle;
         }
@@ -72,11 +72,11 @@ namespace phantom {
 
     void Particles::createNewParticle() {
         if(currentLifetime < totalLifetime || totalLifetime < -0.9f && totalLifetime > -1.1f) {
-            auto particle = new Particle();
-            particle->position = Vector3(0, 0, 0);
-            particle->color = this->color;
-            particle->lifetime = this->lifetime;
-            particle->scale = this->scale;
+            auto particle       = new Particle();
+            particle->position  = Vector3(0, 0, 0);
+            particle->color     = this->color;
+            particle->lifetime  = this->lifetime;
+            particle->scale     = this->scale;
             _particles.push_back(particle);
         }
     }
