@@ -5,12 +5,14 @@
 
 
 namespace phantom {
-    Particles::Particles(unsigned count, string texturename, Color color, float lifetime, float speed, Vector3 scale, Vector3 direction, float density, unsigned randomness) {
+    Particles::Particles(unsigned count, string texturename, Color color, float lifetime, float totalLifetime, float speed, Vector3 scale, Vector3 direction, float density, unsigned randomness) {
         this->count = count;
         this->scale = scale;
         this->direction = direction;
         this->density = density;
         this->lifetime = lifetime;
+        this->currentLifetime = 0;
+        this->totalLifetime = totalLifetime;
         this->texture = nullptr;
         this->color = color;
         this->speed = speed;
@@ -37,6 +39,8 @@ namespace phantom {
 
     void Particles::update(const phantom::PhantomTime& time) {
         this->_currentdensity -= time.getElapsed();
+        currentLifetime += time.getElapsed();
+
         for(auto particle = _particles.begin(); particle != _particles.end();) {
             (*particle)->lifetime -= time.getElapsed();
             if((*particle)->lifetime < 0.0f) {
@@ -61,14 +65,19 @@ namespace phantom {
             this->_currentdensity = this->density;
             createNewParticle();
         }
+        
+        if(currentLifetime > totalLifetime + lifetime)
+            destroy();
     }
 
     void Particles::createNewParticle() {
-        auto particle = new Particle();
-        particle->position = Vector3(0, 0, 0);
-        particle->color = this->color;
-        particle->lifetime = this->lifetime;
-        particle->scale = this->scale;
-        _particles.push_back(particle);
+        if(currentLifetime < totalLifetime || totalLifetime < -0.9f && totalLifetime > -1.1f) {
+            auto particle = new Particle();
+            particle->position = Vector3(0, 0, 0);
+            particle->color = this->color;
+            particle->lifetime = this->lifetime;
+            particle->scale = this->scale;
+            _particles.push_back(particle);
+        }
     }
 }
