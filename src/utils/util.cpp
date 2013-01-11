@@ -7,7 +7,7 @@ namespace phantom {
 
     void Util::readfile(const char *filename, char **filecontent, unsigned int *length) {
         FILE *fp;
-        unsigned size = 0;
+        size_t size = 0;
         char *content;
 
         if (filename != NULL) {
@@ -29,7 +29,7 @@ namespace phantom {
                 fclose(fp);
             }
         }
-        *length = size;
+        *length = static_cast<unsigned int>(size);
         *filecontent = content;
     }
 

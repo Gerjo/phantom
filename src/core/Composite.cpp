@@ -190,7 +190,7 @@ namespace phantom {
     string Composite::toString(void) {
         stringstream ss;
 
-        const int numChildren = _components.size();
+        const std::vector<Composite*>::size_type numChildren = _components.size();
 
         ss << "[class " << _type << "] ";
 
@@ -202,7 +202,7 @@ namespace phantom {
 
             auto it = _components.begin();
 
-            for (int i = 0; it != _components.end(); ++it, ++i) {
+            for (size_t i = 0; it != _components.end(); ++it, ++i) {
                 ss << (*it)->getType();
 
                 if (i < numChildren - 1) {

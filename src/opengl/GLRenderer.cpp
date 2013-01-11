@@ -349,7 +349,7 @@ namespace phantom {
         destroyShape(shape);
 
         if(_vboSupport) {
-            shape->verticesCount = shape->vertices.size();
+            shape->verticesCount = static_cast<unsigned int>(shape->vertices.size());
 
             Vertice *verticesArray = new Vertice[shape->verticesCount];
             TexCoord *texCoordArray;
@@ -375,7 +375,7 @@ namespace phantom {
             if(shape->isImage || shape->isText)
                 delete [] texCoordArray;
         } else if (!_vboSupport) {
-            shape->verticesCount = shape->vertices.size();
+            shape->verticesCount = static_cast<unsigned int>(shape->vertices.size());
 
             shape->verticesArray = new Vertice[shape->vertices.size()];
             if(shape->isImage || shape->isText)

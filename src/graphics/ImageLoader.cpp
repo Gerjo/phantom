@@ -8,7 +8,8 @@ namespace phantom {
         FILE        *fp;
         png_structp png_ptr;
         png_infop   info_ptr, end_info;
-        int         bit_depth, color_type, rowbytes;
+        int         bit_depth, color_type;
+        size_t      rowbytes;
 
         // Open the file as binary. (Made this an ifdef because fopen_s does not exist on Linux.
         // Other option would be using ifstream.
