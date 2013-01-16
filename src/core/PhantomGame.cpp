@@ -116,9 +116,9 @@ namespace phantom {
 
     void PhantomGame::clearDisposables() {
         if(!_disposables.empty()) {
-            for(Composite* composite : _disposables) {
-                delete composite;
-                composite = nullptr;
+            for(auto composite = _disposables.begin(); composite != _disposables.end(); ++composite) {
+                delete *composite;
+                *composite = nullptr;
             }
 
             _disposables.clear();
@@ -128,10 +128,10 @@ namespace phantom {
     void PhantomGame::exit(int returncode) {
         _running = false;
         vector<Composite*> components = getComponents();
-        for(auto component = components.begin(); component != components.end();) {
+        for(auto component = components.begin(); component != components.end(); ++component) {
             (*component)->destroy();
-            component = components.erase(component);
         }
+        components.clear();
 
         clearDisposables();
 
