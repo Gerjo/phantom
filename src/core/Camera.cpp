@@ -1,5 +1,6 @@
 #include <pch.h>
 #include "Camera.h"
+#include <core/Driver.h>
 
 namespace phantom {
     Camera::Camera(int id) :
@@ -12,6 +13,10 @@ namespace phantom {
     }
 
     Camera::~Camera() {
+        if(_isActive) {
+            vector<Camera*> *cams = getDriver()->getActiveCameras();
+            cams->erase(find(cams->begin(), cams->end(), this));
+        }
     }
 
     int Camera::getCameraID() {

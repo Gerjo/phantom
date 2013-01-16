@@ -26,7 +26,6 @@ namespace phantom {
     public:
         Entity();
         virtual void addComponent(Composite *component);
-        virtual void update(const PhantomTime& time);
 
         // BSP and pathfinding experimental gimmicks:
         unsigned solidState;

@@ -30,11 +30,6 @@ namespace phantom {
         }
     }
 
-    void Entity::update(const PhantomTime& time) {
-        Composite::update(time);
-    }
-
-
     float Entity::distanceTo(Entity* gob) {
         return _position.distanceTo(gob->_position);
     }
