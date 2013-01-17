@@ -3,7 +3,7 @@
 #include <core/Driver.h>
 
 namespace phantom {
-    // As the name assumes, the null driver will do as less as possible.
+    // As the name assumes, the null driver will do as less as possible. Use this driver for servers and such.
     class NullDriver : public Driver {
     public:
         NullDriver(PhantomGame *game) : Driver(game) { }
