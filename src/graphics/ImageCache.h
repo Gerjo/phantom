@@ -29,70 +29,47 @@ namespace phantom {
             return INSTANCE;
         }
 
-        ~ImageCache() {
-            for(map<const string, ImageCacheItem>::iterator it = imageCache.begin(); it != imageCache.end(); ++it) {
-                ImageCacheItem *second = &(*it).second;
-                _renderer->removeTexture(second);
-                delete [] second->imageData;
-                second->imageData = 0;
-                delete [] second->row_pointers;
-                second->row_pointers = 0;
-            }
-            imageCache.clear();
-        };
+        ~ImageCache();
 
-        void setRenderer(Renderer *renderer) {
-            _renderer = renderer;
-        }
+        /**
+        * Sets the renderer for adding and removing textures.
+        *
+        * @param renderer The renderer that's being used in the game.
+        */
+        void setRenderer(Renderer *renderer);
 
-        bool isCached(const string filename) {
-            if(imageCache.find(filename) == imageCache.end())
-                return false;
-            else
-                return true;
-        }
+        /**
+        * Returns true if the image is cached.
+        *
+        * @return Returns true if the image is cached.
+        */
+        bool isCached(const string filename);
 
-        void insertIntoCache(const string filename, ImageCacheItem *item) {
-            _renderer->addTexture(item);
-            delete [] item->imageData;
-            delete [] item->row_pointers;
-            item->imageData = 0;
-            item->row_pointers = 0;
-            imageCache.insert(pair<const string, ImageCacheItem>(filename, *item));
-            delete item;
-            item = 0;
-        }
+        /**
+        * Insert an image into the cache.
+        *
+        * @params filename The location of an image relative to the working directory.
+        * @params item The ImageCacheItem you want to add to the cache.
+        */
+        void insertIntoCache(const string filename, ImageCacheItem *item);
 
-        ImageCacheItem *getFromCache(const string filename) {
-            ImageCacheItem *returnvalue = nullptr;
-            try {
-                returnvalue = &imageCache.at(filename);
-            } catch(out_of_range &e) {
-                Console::log("Is cached is not used for: " + filename + e.what());
-                returnvalue = nullptr;
-            }
-            return returnvalue;
-        }
+        /**
+        * Get an image that's located in the cache.
+        *
+        * @return Returns nullptr if nothing is found, else it returns the item.
+        * @param filename The location relative to the working directory.
+        */
+        ImageCacheItem *getFromCache(const string filename);
 
-        void removeFromCache(const string filename) {
-            ImageCacheItem *item = &imageCache.at(filename);
-            delete [] item->imageData;
-            item->imageData = 0;
-            delete [] item->row_pointers;
-            item->row_pointers = 0;
-            _renderer->removeTexture(item);
-            imageCache.erase(filename);
-        }
+        /**
+        * Remove an image from the cache.
+        *
+        * @param filename The location of the image relative to the working directory.
+        */
+        void removeFromCache(const string filename);
 
     private:
-        ImageCache() : _renderer(nullptr) {
-            std::function<void(string args)> function = [this] (string args) {
-                std::stringstream str;
-                str << "Size of image cache: " << this->imageCache.size();
-                Console::log(str.str());
-            };
-            Console::mapCommand("sizeof(ImageCache)", function);
-        };
+        ImageCache();
 
         map<const string, ImageCacheItem> imageCache;
         Renderer *_renderer;

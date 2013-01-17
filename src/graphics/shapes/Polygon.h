@@ -8,6 +8,12 @@ namespace phantom{
 	public:
 		Polygon();
 
+        /**
+        * Adds a point in the polygon to draw a line next to.
+        *
+        * @param x Location of the next vertex ( X-coordinate ).
+        * @param y Location of the next vertex ( Y-coordinate ).
+        */
         void addPoint(float x, float y);
         vector<Vertice> collection;
 	};

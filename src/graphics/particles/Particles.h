@@ -22,6 +22,20 @@ namespace phantom {
         Color           color;
         ImageCacheItem  *texture;
 
+        /**
+        * This large constructor has to be called to create particles.
+        *
+        * @param count The ammount of particles to be active at most.
+        * @param texturename The image you want the particles to have.
+        * @param color The color you want the particles to have.
+        * @param lifetime The lifetime of each particle.
+        * @param totalLifetime The lifetime of all particles. -1.0f means there is no end of life.
+        * @param speed The movement speed of the particles.
+        * @param scale The scale of the particles.
+        * @param direction The direction the particles should move.
+        * @param density The spread of the particles.
+        * @param randomness How random the particles should act.
+        */
         Particles(unsigned count = 500, 
             string texturename = "",
             Color color = Colors::WHITE,
@@ -36,6 +50,11 @@ namespace phantom {
 
         void update(const phantom::PhantomTime& time);
 
+        /**
+        * Returns the particles that are currently active.
+        *
+        * @return Returns the particles that are currently active.
+        */
         vector<Particle*> *getParticles() { return &_particles; };
     
     private:

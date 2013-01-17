@@ -5,7 +5,7 @@
 
 namespace phantom
 {
-    Image::Image(const std::string filename, float x, float y, float width, float height) {
+    Image::Image(const std::string filelocation, float x, float y, float width, float height) {
         this->x = x;
         this->y = y;
         this->_width = width;
@@ -14,10 +14,10 @@ namespace phantom
 
         ImageCache *imageCache = ImageCache::getInstance();
 
-        if(!imageCache->isCached(filename)) {
-            imageCache->insertIntoCache(filename, ImageLoader::createPNG(filename));
+        if(!imageCache->isCached(filelocation)) {
+            imageCache->insertIntoCache(filelocation, ImageLoader::createPNG(filelocation));
         }
-        _imageItem = imageCache->getFromCache(filename);
+        _imageItem = imageCache->getFromCache(filelocation);
 
         createRectangle();
     }

@@ -73,19 +73,15 @@ namespace phantom {
         return *this;
     }
 
-    Graphics& Graphics::image(const string& fileName, float x, float y, float width, float height) {
-        Image* image = new Image(fileName, x, y, width, height);
+    Graphics& Graphics::image(const string& filelocation, float x, float y, float width, float height) {
+        Image* image = new Image(filelocation, x, y, width, height);
 
         addShape(image);
         return *this;
     }
 
-    Graphics& Graphics::text(float x, float y, unsigned int size, const string& fontname, const string& text) {
-        return this->text(x, y, size, fontname.c_str(), text);
-    }
-
-    Graphics& Graphics::text(float x, float y, unsigned int size, const char* fontname, const string& text) {
-        Text* txt = new Text(x, y, size, fontname, text.c_str());
+    Graphics& Graphics::text(float x, float y, unsigned int size, const string& fontlocation, const string& text) {
+        Text* txt = new Text(x, y, size, fontlocation.c_str(), text.c_str());
         txt->ftfont = _parent->getPhantomGame()->getDriver()->getFontLibrary()->getFont(txt);
 
         addShape(txt);

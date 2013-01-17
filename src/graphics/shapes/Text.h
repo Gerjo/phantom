@@ -17,6 +17,12 @@ namespace phantom{
         unsigned int size;
         Text(float x, float y, unsigned int size, const char *font, const char *text);
 
+        /**
+        * Generate the vertices required for the text.
+        *
+        * @param text The text you want to display.
+        * @param font The font you want to use.
+        */
         void genVertices(const char *text, FreeTypeFont *font);
 	};
 }

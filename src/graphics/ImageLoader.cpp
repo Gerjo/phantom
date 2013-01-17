@@ -109,5 +109,3 @@ namespace phantom {
         return img;
     }
 }
-
-phantom::ImageLoader *phantom::ImageLoader::INSTANCE = 0;

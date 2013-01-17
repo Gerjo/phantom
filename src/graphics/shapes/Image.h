@@ -7,9 +7,13 @@
 namespace phantom {
 	class LIBEXPORT Image : public Shape {
 	public:
-		Image(std::string filename, float x, float y, float width, float height);
+		Image(std::string filelocation, float x, float y, float width, float height);
 		~Image();
 
+        /** Returns the image associated with this shape.
+        *
+        * @return Returns the image associated with this shape.
+        */
         ImageCacheItem *getImage() { return _imageItem; }
 
 	private:
