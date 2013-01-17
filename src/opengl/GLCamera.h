@@ -9,7 +9,10 @@ namespace phantom {
     public:
         GLCamera(int id);
         ~GLCamera();
-
+        
+        /**
+        * Function called by the renderer for setting the display properties.
+        */
         virtual void setParams();
     };
 }
