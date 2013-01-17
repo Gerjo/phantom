@@ -33,7 +33,7 @@ namespace phantom{
     }
 
     void Driver::onRender() {
-        _renderer->renderLoop(&_game->getGameStates());
+        _renderer->renderLoop();
     }
 
     vector<Camera*>* Driver::getActiveCameras() {

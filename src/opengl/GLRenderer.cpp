@@ -307,7 +307,7 @@ namespace phantom {
         }
     }
 
-    void GLRenderer::renderLoop(std::deque<GameState*> *states) {
+    void GLRenderer::renderLoop() {
         glClearColor(0.42f, 0.145f, 0.016f, 1.0f );
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -316,7 +316,7 @@ namespace phantom {
 
         Vector3 initialOffset(0, 0, 0);
 
-        for(GameState* gamestate : *states) {
+        for(GameState* gamestate : _game->getGameStates()) {
             if(gamestate->doRender) {
                 drawLoop(gamestate->getComponents(), initialOffset);
                 for(Camera *camera : *_game->getDriver()->getActiveCameras()) {

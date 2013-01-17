@@ -167,9 +167,9 @@ namespace phantom {
         return _worldSize;
     }
 
-    void PhantomGame::setWorldSize(float x, float y) {
-        _worldSize.x = x;
-        _worldSize.y = y;
+    void PhantomGame::setWorldSize(float width, float height) {
+        _worldSize.x = width;
+        _worldSize.y = height;
     }
 
     void PhantomGame::parseConfigurationFile(const char *configfile) {

@@ -29,8 +29,7 @@ namespace phantom {
         GLRenderer(PhantomGame *game);
         virtual ~GLRenderer();
 
-        virtual void drawLoop(std::vector<Composite*>& components, Vector3& offset);
-        virtual void renderLoop(std::deque<GameState*>* states);
+        virtual void renderLoop();
 
         virtual void buildShape(Shape *shape);
         virtual void destroyShape(Shape *shape);
@@ -49,6 +48,7 @@ namespace phantom {
         bool IsExtensionSupported(string szTargetExtensionString);
         void createVBO(GLuint *buffer, GLuint size, GLvoid *data);
         void destroyVBO(GLuint *buffer);
+        void drawLoop(std::vector<Composite*>& components, Vector3& offset);
         void drawShapes(Composite *composite, const Box3 &cameraBox, float xOffset, float yOffset);
         void drawText(Text *shape, Composite *composite, float xOffset, float yOffset);
         void drawImage(Image *image, Composite *composite, float xOffset, float yOffset);
