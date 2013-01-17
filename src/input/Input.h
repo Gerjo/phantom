@@ -13,13 +13,21 @@ namespace phantom {
     public:
         Input(PhantomGame *game) : _game(game), _keyboardState(nullptr), _mouseState(nullptr) { }
         virtual ~Input() {}
+
+        /**
+        * Retrieve the current KeyboardState.
+        *
+        * @return Returns the current keyboard state.
+        */
         virtual KeyboardState* getKeyboardState() { return _keyboardState; }
+        
+        /**
+        * Retrieve the current MouseState.
+        *
+        * @return Returns the current MouseState.
+        */
         virtual MouseState* getMouseState() { return _mouseState; }
 
-        // *hint* *hint*
-        // virtual void getWiiMoteState(const int index);
-        // virtual void getXboxState(const int index);
-        
     protected:
         PhantomGame *_game;
         KeyboardState *_keyboardState;

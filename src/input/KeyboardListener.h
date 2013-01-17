@@ -16,8 +16,27 @@ namespace phantom {
         ~KeyboardListener();
 
         void update();
+        
+        /**
+        * Locks the keyboard to a certain composite.
+        *
+        * @return Returns the current keyboard state.
+        * @param keycomp The component that owns the listener.
+        */
         static KeyboardState *lock(Composite* keycomp);
-        static KeyboardState *unlock(Composite* keycomp);
+        
+        /**
+        * Unlocks the keyboard to other composites.
+        *
+        * @param keycom The component that owns the listener.
+        */
+        static void unlock(Composite* keycomp);
+
+        /**
+        * Returns if the listener is locked.
+        *
+        * @return Returns true if the listener is locked.
+        */
         bool isLocked() { return _locked; }
 
     private:

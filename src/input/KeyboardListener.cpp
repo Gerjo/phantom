@@ -38,10 +38,9 @@ namespace phantom {
         }
     }
 
-    KeyboardState *KeyboardListener::unlock(Composite* keycomp) {
+    void KeyboardListener::unlock(Composite* keycomp) {
         if(keycomp == INSTANCE->_key) {
             INSTANCE->_locked = false;
         }
-        return nullptr;
     }
 }

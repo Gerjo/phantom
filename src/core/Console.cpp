@@ -59,7 +59,8 @@ namespace phantom {
         if(_keyboard != nullptr) {
             for(char c : *_keyboard->changesUp()) {
                 if(c == 27) {
-                    _keyboard = KeyboardListener::unlock(this);
+                    _keyboard = nullptr;
+                    KeyboardListener::unlock(this);
                     _enabled = false;
                 }
             }
