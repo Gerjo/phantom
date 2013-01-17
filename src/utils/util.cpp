@@ -5,16 +5,16 @@
 namespace phantom {
 
 
-    void Util::readfile(const char *filename, char **filecontent, unsigned int *length) {
+    void Util::readfile(const char *filelocation, char **filecontent, unsigned int *length) {
         FILE *fp;
         size_t size = 0;
         char *content;
 
-        if (filename != NULL) {
+        if (filelocation != NULL) {
 #ifdef WIN32
-            fopen_s(&fp, filename, "rt");
+            fopen_s(&fp, filelocation, "rt");
 #else
-            fp = fopen(filename,"rt");
+            fp = fopen(filelocation,"rt");
 #endif
             if (fp != NULL) {
                 fseek(fp, 0, SEEK_END);

@@ -22,9 +22,21 @@
 namespace phantom{
     class LIBEXPORT Util{
     public:
-        static void     readfile(const char *filename, char **filecontent, unsigned int *length);
+        /**
+        * Read a file into a buffer.
+        *
+        * @param filelocation The location of the file relative to the working directory.
+        * @param filecontent A pointer to the buffer where the content of the file should be written to.
+        * @param lenght A pointer to the buffer where the lenght of the file should be written to.
+        */
+        static void     readfile(const char *filelocation, char **filecontent, unsigned int *length);
+        
+        /**
+        * Returns the time since epoch.
+        *
+        * @return Returns the time since epoch.
+        */
         static double   getTime();
-
     };
 }
 #endif
