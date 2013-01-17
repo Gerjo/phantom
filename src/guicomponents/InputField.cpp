@@ -31,7 +31,7 @@ string& InputField::text() {
     return _text;
 }
 
-void InputField::text(string value) {
+void InputField::text(const string &value) {
     _text = value;
 }
 

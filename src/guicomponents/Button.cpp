@@ -13,7 +13,7 @@ string &Button::text() {
     return _text;
 }
 
-void Button::setText(std::string text) {
+void Button::setText(const std::string &text) {
     _text = text;
 }
 
