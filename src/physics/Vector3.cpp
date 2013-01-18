@@ -53,10 +53,10 @@ namespace phantom{
 
     Vector3 Vector3::operator*(const Vector3& v) const {
         Vector3 multiplied(
-                x * v.x,
-                y * v.y,
-                z * v.z
-        );
+            x * v.x,
+            y * v.y,
+            z * v.z
+            );
 
         return multiplied;
     }
@@ -80,10 +80,10 @@ namespace phantom{
 
     bool Vector3::isFinite(void) const {
         return std::abs(x) != std::numeric_limits<float>::infinity()
-                 &&
-               std::abs(y) != std::numeric_limits<float>::infinity()
-                 &&
-               std::abs(y) != std::numeric_limits<float>::infinity();
+            &&
+            std::abs(y) != std::numeric_limits<float>::infinity()
+            &&
+            std::abs(y) != std::numeric_limits<float>::infinity();
     }
 
     bool Vector3::isInfinite(void) const{
@@ -190,7 +190,7 @@ namespace phantom{
             other.x - x,
             other.y - y,
             other.z - z
-        );
+            );
 
         direction.normalize();
 
@@ -211,6 +211,9 @@ namespace phantom{
         float diffZ = other.z - z;
 
         return diffX * diffX + diffY * diffY + diffZ * diffZ;
+    }
+    float Vector3::distanceToSq(const Vector3* other) const {
+        return distanceToSq(*other);
     }
 
     float Vector3::getLengthSq(void) const {
@@ -236,20 +239,20 @@ namespace phantom{
     Vector3 Vector3::perp(void)const {
         if(this->z != 0) {
             throw PhantomException(
-                    "Vector3::perp: The perpendicular method only works"
-                    " on 2D vectors. Use the cross product with a pane"
-                    " instead for 3D operations. In addition to that, it"
-                    " might also be possible that you're trying to calculate"
-                    " the perp of a nullptr Vector3, GCC let's you do that."
-            );
+                "Vector3::perp: The perpendicular method only works"
+                " on 2D vectors. Use the cross product with a pane"
+                " instead for 3D operations. In addition to that, it"
+                " might also be possible that you're trying to calculate"
+                " the perp of a nullptr Vector3, GCC let's you do that."
+                );
         }
 
         // Left hand side, right hand side... does it really matter?
         Vector3 perp(
             -y,
-             x,
-             0.0f
-        );
+            x,
+            0.0f
+            );
 
         return perp;
     }
@@ -262,7 +265,7 @@ namespace phantom{
             dp / len * b.x,
             dp / len * b.y,
             dp / len * b.z
-        );
+            );
 
         return projection;
     }
@@ -275,7 +278,7 @@ namespace phantom{
             a.y * b.z - a.z * b.y,
             a.z * b.x - a.x * b.z,
             a.x * b.y - a.y * b.x
-        );
+            );
 
         return cross;
     }
