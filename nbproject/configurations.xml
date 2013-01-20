@@ -2,7 +2,17 @@
 <configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="src" displayName="src" projectFiles="true">
+      <logicalFolder name="audio" displayName="audio" projectFiles="true">
+        <itemPath>src/audio/AudioEngine.h</itemPath>
+        <itemPath>src/audio/SoundData.cpp</itemPath>
+        <itemPath>src/audio/SoundData.h</itemPath>
+        <itemPath>src/audio/SoundLoader.cpp</itemPath>
+        <itemPath>src/audio/SoundLoader.h</itemPath>
+        <itemPath>src/audio/Sounds.cpp</itemPath>
+        <itemPath>src/audio/Sounds.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="core" displayName="core" projectFiles="true">
+        <itemPath>src/core/Camera.cpp</itemPath>
         <itemPath>src/core/Camera.h</itemPath>
         <itemPath>src/core/Composite.cpp</itemPath>
         <itemPath>src/core/Composite.h</itemPath>
@@ -71,8 +81,6 @@
         <itemPath>src/input/KeyboardState.h</itemPath>
         <itemPath>src/input/MouseState.cpp</itemPath>
         <itemPath>src/input/MouseState.h</itemPath>
-        <itemPath>src/input/WinInput.cpp</itemPath>
-        <itemPath>src/input/WinInput.h</itemPath>
       </logicalFolder>
       <logicalFolder name="layer" displayName="layer" projectFiles="true">
         <itemPath>src/layer/EntityLayer.cpp</itemPath>
@@ -88,6 +96,10 @@
       </logicalFolder>
       <logicalFolder name="null" displayName="null" projectFiles="true">
         <itemPath>src/null/NullDriver.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="openal" displayName="openal" projectFiles="true">
+        <itemPath>src/openal/OpenALEngine.cpp</itemPath>
+        <itemPath>src/openal/OpenALEngine.h</itemPath>
       </logicalFolder>
       <logicalFolder name="opengl" displayName="opengl" projectFiles="true">
         <itemPath>src/opengl/GLCamera.cpp</itemPath>
@@ -178,7 +190,7 @@
             <pElem>.</pElem>
           </linkerDynSerch>
           <linkerLibItems>
-            <linkerOptionItem>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype</linkerOptionItem>
+            <linkerOptionItem>-Werror -lglut -lGL -lGLU -lpng15 -lfreetype -lopenal -logg -lvorbis -lvorbisfile -lpthread</linkerOptionItem>
           </linkerLibItems>
           <commandLine>-Werror</commandLine>
         </linkerTool>
