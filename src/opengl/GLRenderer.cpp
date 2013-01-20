@@ -37,7 +37,7 @@ namespace phantom {
 
         int i = 0;
         glutInit(&i, 0);
-        glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA);
+        glutInitDisplayMode(GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
         glutInitWindowSize(static_cast<int>(screenSize.x), static_cast<int>(screenSize.y));
 
         if(!game->fullscreen) {
@@ -330,7 +330,7 @@ namespace phantom {
         drawLoop(_game->getComponents(), initialOffset);
 
         glutMainLoopEvent();
-        //glutSwapBuffers();
+        glutSwapBuffers();
         glFlush();
     }
 
