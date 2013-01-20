@@ -44,7 +44,8 @@ namespace phantom {
     }
 
     unsigned int *OpenALEngine::createSource(SoundData *data) {
-        data->sourceID.push_back(unsigned int());
+        unsigned int meh;
+        data->sourceID.push_back(meh);
         alGenSources(1, &(*(data->sourceID.end() - 1)));
         alSourcei(*(data->sourceID.end() - 1), AL_BUFFER, data->bufferID);
 
