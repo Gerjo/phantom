@@ -24,12 +24,6 @@ namespace phantom{
         bool contains(const Vector3& other) const;
         bool contains(const Vector3* other) const;
 
-        // This function is naive b.c. it assumes both boxes are repaired
-        // and actually have an intersection. If neither conditions are met,
-        // then you should not use this, continue with writing a "not so naive"
-        // method to solve this problem. -- Gerjo
-        Box3 getIntersectionNaive(const Box3& other) const;
-
         Vector3 getCenter(void) const;
 
         Vector3 origin;

@@ -131,14 +131,4 @@ namespace phantom{
         ss << ", " << size.x << ", " << size.y << ")";
         return ss.str();
     }
-
-    Box3 Box3::getIntersectionNaive(const Box3& other) const {
-        return Box3(
-            max(origin.x, other.origin.x),
-            max(origin.y, other.origin.y),
-
-            min(size.x, other.size.x),
-            min(size.y, other.size.y)
-        );
-    }
 }
