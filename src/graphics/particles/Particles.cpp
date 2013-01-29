@@ -66,7 +66,7 @@ namespace phantom {
             createNewParticle();
         }
         
-        if(currentLifetime > totalLifetime + lifetime)
+        if(currentLifetime > totalLifetime + lifetime && !(totalLifetime < -0.9f && totalLifetime > -1.1f))
             destroy();
     }
 
