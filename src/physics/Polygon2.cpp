@@ -1,11 +1,12 @@
 #include <pch.h>
 #include "Polygon2.h"
 
-Polygon2::Polygon2() {
+namespace phantom {
+    Polygon2::Polygon2() {
 
+    }
+
+    Polygon2::~Polygon2() {
+
+    }
 }
-
-Polygon2::~Polygon2() {
-
-}
-

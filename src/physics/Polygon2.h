@@ -6,17 +6,18 @@
 
 #include <vector>
 
-using namespace phantom;
 using std::vector;
 
-class Polygon2 {
-public:
-    Polygon2();
-    virtual ~Polygon2();
+namespace phantom {
+    class Polygon2 {
+    public:
+        Polygon2();
+        virtual ~Polygon2();
 
-private:
-    vector<Vector3> _vertices;
-};
+    private:
+        vector<Vector3> _vertices;
+    };
+}
 
 #endif	/* POLYGON2_H */
 
